@@ -26,7 +26,12 @@ class SpecError(ValueError):
 
 @dataclass(frozen=True)
 class ModelSpec:
-    """One generator model as the endpoint serves it."""
+    """One generator model as the endpoint serves it.
+
+    ``base_url`` and ``api_key_env`` name another OpenAI-compatible endpoint for this
+    model (default: the study's); ``extra`` is merged into every request body, e.g. the
+    reasoning setting or a pinned provider.
+    """
 
     key: str
     served_id: str
@@ -35,6 +40,8 @@ class ModelSpec:
     role: str
     max_tokens: int = 16000
     extra: Mapping[str, Any] = field(default_factory=dict)
+    base_url: str | None = None
+    api_key_env: str | None = None
 
 
 @dataclass(frozen=True)
@@ -140,6 +147,8 @@ def load_study(path: str | Path) -> StudySpec:
             role=m.get("role", ""),
             max_tokens=int(m.get("max_tokens", 16000)),
             extra=dict(m.get("extra", {})),
+            base_url=m["base_url"].rstrip("/") if m.get("base_url") else None,
+            api_key_env=m.get("api_key_env"),
         )
         for key, m in raw.get("models", {}).items()
     }

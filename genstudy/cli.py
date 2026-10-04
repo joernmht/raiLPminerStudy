@@ -47,15 +47,29 @@ def _log(msg: str) -> None:
     print(msg, flush=True)
 
 
-def _client(spec: StudySpec) -> ChatClient:
-    key = os.environ.get(spec.api_key_env)
+def endpoint(spec: StudySpec, model: str | None = None) -> tuple[str, str, str]:
+    """(base URL, API-key variable, request-counter file name) for a model, or the study's.
+
+    A model with its own endpoint gets its own daily counter, so another service's
+    requests never use up the ScaDS budget.
+    """
+    m = spec.models.get(model) if model else None
+    if m is not None and m.base_url:
+        host = re.sub(r"[^A-Za-z0-9.-]+", "_", m.base_url.split("//", 1)[-1].split("/", 1)[0])
+        return m.base_url, m.api_key_env or spec.api_key_env, f"requests_per_day.{host}.json"
+    return spec.base_url, spec.api_key_env, "requests_per_day.json"
+
+
+def _client(spec: StudySpec, model: str | None = None) -> ChatClient:
+    base_url, key_env, counter = endpoint(spec, model)
+    key = os.environ.get(key_env)
     if not key:
-        sys.exit(f"{spec.api_key_env} is not set (set -a; . ~/.config/raiLP/secrets.env; set +a)")
+        sys.exit(f"{key_env} is not set (set -a; . ~/.config/raiLP/secrets.env; set +a)")
     return ChatClient(
-        spec.base_url,
+        base_url,
         key,
         pacing=spec.pacing,
-        counter_path=spec.root / "state" / "requests_per_day.json",
+        counter_path=spec.root / "state" / counter,
         on_retry=lambda n, d, why: _log(f"  retry {n} in {d:.0f} s: {why}"),
     )
 
@@ -78,7 +92,6 @@ def cmd_plan(spec: StudySpec, args: argparse.Namespace) -> int:
 
 
 def cmd_probe(spec: StudySpec, args: argparse.Namespace) -> int:
-    client = _client(spec)
     targets = [(k, m.served_id) for k, m in spec.models.items()]
     if spec.grapher:
         targets.append(("grapher", spec.grapher.served_id))
@@ -88,6 +101,8 @@ def cmd_probe(spec: StudySpec, args: argparse.Namespace) -> int:
     out = spec.root / "probe.jsonl"
     prompt = "Write one sentence about a train arriving at a station."
     for key, served in targets:
+        client = _client(spec, key if key in spec.models else None)
+        settings = dict(spec.models[key].extra) if key in spec.models else {}
         bodies = [
             {"temperature": 0.0, "seed": 1},
             {"temperature": 0.0, "seed": 1},
@@ -103,6 +118,7 @@ def cmd_probe(spec: StudySpec, args: argparse.Namespace) -> int:
                     {"role": "user", "content": prompt},
                 ],
                 "max_tokens": 2048,
+                **settings,
                 **extra,
             }
             results.append(client.complete(body, describe=f"probe {key}"))
@@ -132,7 +148,7 @@ def cmd_run(spec: StudySpec, args: argparse.Namespace) -> int:
     summary = execute(
         spec,
         model=args.model,
-        client=_client(spec),
+        client=_client(spec, args.model),
         experiment=args.experiment,
         limit=args.limit,
         provenance=prov,
