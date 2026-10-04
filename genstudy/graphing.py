@@ -28,6 +28,7 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import re
 from dataclasses import dataclass
 from typing import Annotated, Any, Literal
 
@@ -36,7 +37,7 @@ from pydantic import BaseModel, ConfigDict, Field, ValidationError
 from genstudy.config import GrapherSpec
 from genstudy.llm import CallResult, ChatClient
 
-GRAPHER_PROMPT_VERSION = "2026.10.3"
+GRAPHER_PROMPT_VERSION = "2026.10.4"
 
 #: Length caps on every text field. Without them, greedy decoding under the schema
 #: constraint can loop while copying an equation and run into the token limit (17 of
@@ -100,9 +101,13 @@ Text:
 """
 
 
-#: In ``prompt`` mode the schema travels in the prompt instead of the decoder.
-PROMPT_MODE_SUFFIX = (
-    "\n\nReturn only one JSON object that matches this JSON schema, without code fences:\n"
+#: In ``prompt`` mode the schema travels in the prompt instead of the decoder. It comes
+#: before the text and the instruction comes last: with the schema at the end of a long
+#: prompt, the parser returned the schema itself (pilot, 2026-10-04).
+PROMPT_MODE_FORM = "The form, as a JSON schema:\n"
+PROMPT_MODE_FINAL = (
+    "\n\nReturn only the JSON object for the text above, filled in according to the form, "
+    "without code fences."
 )
 
 
@@ -130,7 +135,8 @@ def grapher_fingerprint() -> dict[str, str]:
         "GRAPHER_SYSTEM": GRAPHER_SYSTEM,
         "GRAPHER_TASK": GRAPHER_TASK,
         "MODEL_SCHEMA": json.dumps(MODEL_SCHEMA, sort_keys=True),
-        "PROMPT_MODE_SUFFIX": PROMPT_MODE_SUFFIX,
+        "PROMPT_MODE_FORM": PROMPT_MODE_FORM,
+        "PROMPT_MODE_FINAL": PROMPT_MODE_FINAL,
     }
     out = {k: hashlib.sha256(v.encode("utf-8")).hexdigest() for k, v in texts.items()}
     out["version"] = GRAPHER_PROMPT_VERSION
@@ -157,7 +163,16 @@ def grapher_body(grapher: GrapherSpec, answer: str, *, seed_offset: int = 0) -> 
         if grapher.whitespace_pattern is not None:
             body["guided_whitespace_pattern"] = grapher.whitespace_pattern
     elif grapher.mode == "prompt":
-        body["messages"][1]["content"] = task + PROMPT_MODE_SUFFIX + json.dumps(MODEL_SCHEMA)
+        instructions, text_marker = GRAPHER_TASK.rsplit("Text:", 1)
+        body["messages"][1]["content"] = (
+            instructions
+            + PROMPT_MODE_FORM
+            + json.dumps(MODEL_SCHEMA)
+            + "\n\nText:"
+            + text_marker
+            + answer.strip()
+            + PROMPT_MODE_FINAL
+        )
     else:
         raise ValueError(f"unknown grapher mode {grapher.mode!r}")
     return body
@@ -217,18 +232,40 @@ def normalize_keys(obj: Any, level: str = "model", repairs: list[str] | None = N
     return out
 
 
+#: A formula written without its key: ``"Number": 6, "<formula>", "description"``.
+_MISSING_EQUATION_KEY = re.compile(r'("Number": *-?\d+, *)("(?:[^"\\]|\\.)*")(, *"description")')
+
+
 def parse_reply(content: str, repairs: list[str] | None = None) -> Model:
-    """Validate a grapher reply against the schema (raises ``ValueError``)."""
+    """Validate a grapher reply against the schema (raises ``ValueError``).
+
+    Deterministic repairs, each recorded in ``repairs``: a code fence is removed,
+    text after the first JSON object is ignored, a formula string written without
+    its ``equation`` key is given the key back, and keys are mapped onto the
+    schema's names (:func:`normalize_keys`). A reply that echoes the schema is an
+    error, not something to repair.
+    """
+    log = repairs if repairs is not None else []
     text = content.strip()
     if text.startswith("```"):
         text = text.strip("`")
         text = text[text.find("{") :]
+        log.append("removed code fence")
+    text = text[text.find("{") :] if "{" in text else text
+    fixed = _MISSING_EQUATION_KEY.sub(r'\1"equation": \2\3', text)
+    if fixed != text:
+        log.append("inserted missing equation keys")
+        text = fixed
     try:
-        raw = json.loads(text)
+        raw, end = json.JSONDecoder().raw_decode(text)
     except json.JSONDecodeError as exc:
         raise ValueError(f"reply is not JSON: {exc.msg}") from exc
+    if text[end:].strip():
+        log.append("ignored text after the JSON object")
+    if isinstance(raw, dict) and "properties" in raw and "ContainsFormulation" not in raw:
+        raise ValueError("reply echoes the schema instead of filling it")
     try:
-        return Model.model_validate(normalize_keys(raw, "model", repairs))
+        return Model.model_validate(normalize_keys(raw, "model", log))
     except ValidationError as exc:
         raise ValueError(f"reply does not match the schema: {exc.error_count()} errors") from exc
 

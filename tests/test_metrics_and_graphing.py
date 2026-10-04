@@ -164,9 +164,11 @@ def test_every_text_field_is_length_capped():
 def test_grapher_modes():
     schema_mode = grapher_body(GrapherSpec("g", whitespace_pattern=r"[ \n]?"), "x")
     assert schema_mode["guided_whitespace_pattern"] == r"[ \n]?"
-    prompt_mode = grapher_body(GrapherSpec("g", mode="prompt"), "x")
+    prompt_mode = grapher_body(GrapherSpec("g", mode="prompt"), "THE ANSWER")
+    content = prompt_mode["messages"][1]["content"]
     assert "response_format" not in prompt_mode
-    assert prompt_mode["messages"][1]["content"].endswith(json.dumps(MODEL_SCHEMA))
+    assert content.index(json.dumps(MODEL_SCHEMA)) < content.index("THE ANSWER")
+    assert content.rstrip().endswith("without code fences.")
     with pytest.raises(ValueError):
         grapher_body(GrapherSpec("g", mode="nope"), "x")
 
@@ -193,3 +195,19 @@ def test_key_repair_maps_case_and_drops_schema_keywords():
     assert "renamed equation.variablesIncluded" in repairs
     with pytest.raises(ValueError):
         parse_reply("not json")
+
+
+def test_narrow_repairs_and_schema_echo():
+    m = _model([_var(1)], [_eq(ObjectiveFunction, 0, [1])], [_eq(Constraint, 1, [1])])
+    raw = m.model_dump_json()
+    repairs: list[str] = []
+    assert parse_reply(raw + "\nI hope this helps.", repairs) == m
+    assert repairs == ["ignored text after the JSON object"]
+    no_key = raw.replace('"equation":"",', '"x >= 1",').replace('"equation": "",', '"x >= 1",')
+    no_key = json.dumps(json.loads(raw)).replace('"equation": "", ', '"x >= 1", ')
+    repairs = []
+    fixed = parse_reply(no_key, repairs)
+    assert fixed.constraints[0].equation == "x >= 1"
+    assert "inserted missing equation keys" in repairs
+    with pytest.raises(ValueError, match="echoes the schema"):
+        parse_reply(json.dumps(MODEL_SCHEMA))

@@ -410,6 +410,9 @@ MUTATIONS: tuple[str, ...] = (
     "words_constraint",
 )
 NEGATIVES: tuple[str, ...] = ("prose", "refusal")
+#: Renderings of the unchanged base model that make the answer long and noisy, like real
+#: answers (the pilot's ran to 13,000 characters): the expected structure is the base's.
+LONG_VARIANTS: tuple[str, ...] = ("long",)
 
 
 # ------------------------------------------------------------------ rendering
@@ -433,6 +436,57 @@ def render_formulation(f: Fixture, *, words_for: FEq | None = None) -> str:
     if f.assumptions:
         lines += ["", "### Assumptions"] + [f"- {a}" for a in f.assumptions]
     return "\n".join(lines) + "\n"
+
+
+def render_long(f: Fixture) -> str:
+    """The base model inside a long answer: notation table, explanations, assumptions, code.
+
+    Everything added is a trap for the parser: the notation table lists parameters next to
+    variables, the explanations restate every constraint in words (they must not be counted
+    twice), and the code block repeats the model in Python (it must not be parsed).
+    """
+    table = ["| Symbol | Meaning | Type |", "|---|---|---|"]
+    table += [f"| ${v.symbol}$ | {v.name} | decision variable ({v.domain}) |" for v in f.variables]
+    table += [f"| (see list) | {f.sets_params} | sets and parameters |"]
+    explain = [
+        f"**{c.name}.** This constraint makes sure that {c.words}. It is written for every "
+        "relevant combination of indices and is essential for the operational feasibility of "
+        "the timetable; without it, the model could return schedules that look optimal but "
+        "violate the rules of railway operation."
+        for c in f.constraints
+    ]
+    code = [
+        "```python",
+        "import pyomo.environ as pyo",
+        "m = pyo.ConcreteModel()",
+        *[f"# variable {v.symbol}: {v.name}" for v in f.variables],
+        "m.obj = pyo.Objective(rule=lambda m: total_cost(m), sense=pyo.minimize)",
+        *[
+            f"m.c{i} = pyo.Constraint(rule=rule_{i})  # {c.name}"
+            for i, c in enumerate(f.constraints)
+        ],
+        "pyo.SolverFactory('highs').solve(m)",
+        "```",
+    ]
+    parts = [
+        "Below is a complete mixed-integer linear programming model inspired by the provided "
+        "input. I first introduce the notation, then state the model, explain each element and "
+        "list my assumptions; a short implementation sketch closes the answer.",
+        "### Notation",
+        "\n".join(table),
+        render_formulation(f),
+        "### Explanation of the model",
+        "\n\n".join(explain),
+        "### Assumptions",
+        "- Data on running times, dwell times and headways are deterministic and known.",
+        "- The disruption duration is known at the time of rescheduling.",
+        "- Trains that are not affected keep their planned schedule where possible.",
+        "### Implementation sketch",
+        "\n".join(code),
+        "The model can be solved with any MILP solver; for large instances a rolling horizon "
+        "or a decomposition approach is advisable.",
+    ]
+    return "\n\n".join(parts) + "\n"
 
 
 def render_prose(f: Fixture) -> str:
@@ -486,6 +540,7 @@ def cases() -> Iterator[Case]:
             yield Case(f"{f.key}.{kind}", f.key, kind, text, graph_metrics(mutated.to_model()))
         for kind, renderer in (("prose", render_prose), ("refusal", render_refusal)):
             yield Case(f"{f.key}.{kind}", f.key, kind, renderer(f), graph_metrics(_empty_model()))
+        yield Case(f"{f.key}.long", f.key, "long", render_long(f), graph_metrics(f.to_model()))
 
 
 # ------------------------------------------------------------------ scoring

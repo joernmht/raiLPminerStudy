@@ -12,7 +12,9 @@ def _by_variant():
 
 def test_case_inventory():
     cases = list(instrument.cases())
-    per_fixture = len(instrument.MUTATIONS) + len(instrument.NEGATIVES)
+    per_fixture = (
+        len(instrument.MUTATIONS) + len(instrument.NEGATIVES) + len(instrument.LONG_VARIANTS)
+    )
     assert len(cases) == len(instrument.FIXTURES) * per_fixture
     assert len({c.case_id for c in cases}) == len(cases)
 
@@ -52,6 +54,9 @@ def test_rendering_is_deterministic_and_negatives_carry_no_formulation():
             assert "$" not in c.text and not notation(c.text).passed, c.case_id
         else:
             assert "$$" in c.text, c.case_id
+        if c.variant == "long":
+            assert len(c.text) > 3000 and "```python" in c.text, c.case_id
+            assert c.expected == _by_variant()[f"{c.fixture}.identity"].expected
 
 
 def test_words_constraint_is_in_the_text_but_not_in_the_truth():
