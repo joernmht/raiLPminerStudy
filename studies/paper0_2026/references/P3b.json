@@ -1,0 +1,165 @@
+{
+ "ContainsFormulation": true,
+ "variablesInModel": [
+  {
+   "Number": 1,
+   "Abbreviation": "v_i",
+   "Name": "event time",
+   "Description": "Time of event i in E in minutes, within the horizon [0, D]; R+ by (33). Written v_j or v_i in the constraints.",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 2,
+   "Abbreviation": "q_{i,j}",
+   "Name": "event order",
+   "Description": "0 if event i takes place chronologically before event j, 1 otherwise, for every activity (i,j) in A; binary by (35).",
+   "Domain": "binary"
+  },
+  {
+   "Number": 3,
+   "Abbreviation": "X_n",
+   "Name": "cancellation of a shunting movement",
+   "Description": "1 if shunting movement n in N^S is canceled, 0 otherwise; binary by (36), declared for all n in N and fixed to 0 for passenger trains n in N^T by (32).",
+   "Domain": "binary"
+  },
+  {
+   "Number": 4,
+   "Abbreviation": "d_j",
+   "Name": "event-time deviation",
+   "Description": "Deviation of event time v_j from its original time pi_j, in minutes; free, d_j in R by (34).",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 5,
+   "Abbreviation": "a_j",
+   "Name": "absolute deviation",
+   "Description": "Absolute value of the deviation of event j from the original timetable, modeled by (30)-(31); R+ by (33).",
+   "Domain": "continuous"
+  }
+ ],
+ "objective_functions": [
+  {
+   "Name": "(22) weighted deviation and cancellation cost",
+   "Number": 0,
+   "equation": "\\min \\sum_{j \\in E} w_j^{\\text{deviation}} a_j + \\sum_{n \\in N^S} w_n^{\\text{cancel}} X_n",
+   "description": "Minimize the weighted absolute deviations of event times from the original timetable plus the weighted cancellations of shunting movements; the weights are parameters.",
+   "VariablesIncluded": [
+    3,
+    5
+   ],
+   "Linear": true
+  }
+ ],
+ "constraints": [
+  {
+   "Name": "(23) event time window",
+   "Number": 1,
+   "equation": "0 \\le v_j \\le D(1 - X_n) \\quad \\forall n \\in N, \\forall j \\in E_n",
+   "description": "Event times lie in [0, D]; events of a canceled shunting movement get v_j = 0. One numbered equation with two inequalities, kept as one constraint; D X_n is linear.",
+   "VariablesIncluded": [
+    1,
+    3
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(24) driving and dwelling durations",
+   "Number": 2,
+   "equation": "l_{i,j}(1 - X_n) \\le v_j - v_i \\le u_{i,j}(1 - X_n) \\quad \\forall n \\in N, \\forall (i,j) \\in A_{\\text{drive}}^n \\cup A_{\\text{dwell}}^n",
+   "description": "Driving and dwelling activities respect their lower and upper bounds unless the movement is canceled; l_{i,j} and u_{i,j} are parameters (this u is not a variable).",
+   "VariablesIncluded": [
+    1,
+    3
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(25) shunting (un)couple times",
+   "Number": 3,
+   "equation": "l_{i,j}(1 - X_m - X_n) \\le v_j - v_i + q_{i,j} D \\le u_{i,j}(1 - X_m - X_n) + D(X_m + X_n) \\quad \\forall (i,j) \\in A_{\\text{shunt}}, i \\in E_m, j \\in E_n, m,n \\in N",
+   "description": "Minimum and maximum (un)couple times between a composition's arrival/departure and its shunting movements. Printed over two lines, one constraint; X_m, X_n are family X; q D is linear.",
+   "VariablesIncluded": [
+    1,
+    2,
+    3
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(26) headway on infrastructure points",
+   "Number": 4,
+   "equation": "h_{i,j}(1 - X_m - X_n) \\le v_j - v_i + q_{i,j} D \\le (D - h_{i,j})(1 - X_m - X_n) + D(X_m + X_n) \\quad \\forall p \\in P, (i,j) \\in A_{\\text{headway}}^p, \\ldots",
+   "description": "Minimum headway between trains/shunting movements m, n on the same track or crossing p, in either order via q_{i,j}. Printed over two lines, one constraint; X_m, X_n are family X.",
+   "VariablesIncluded": [
+    1,
+    2,
+    3
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(27) deviation definition",
+   "Number": 5,
+   "equation": "d_j = v_j - \\pi_j(1 - X_n) \\quad \\forall n \\in N, \\forall j \\in E_n",
+   "description": "Deviation of each event time from its original time pi_j (a parameter); the original time drops out for a canceled movement.",
+   "VariablesIncluded": [
+    1,
+    3,
+    4
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(28) deviation bound for passenger trains",
+   "Number": 6,
+   "equation": "0 \\le d_j \\le d_{\\max}^{+} \\quad \\forall n \\in N^T, \\forall j \\in E_n",
+   "description": "Passenger-train events may be delayed by at most d_max^+, not advanced. Kept as a constraint, not a domain declaration: a bound by the model parameter d_max^+ on a subset; d_j's domain is (34).",
+   "VariablesIncluded": [
+    4
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(29) deviation bound for shunting movements",
+   "Number": 7,
+   "equation": "-d_{\\max}^{+} \\le d_j \\le d_{\\max}^{+} \\quad \\forall n \\in N^S, \\forall j \\in E_n",
+   "description": "Shunting-movement events may deviate by at most d_max^+ in either direction. Kept as a constraint for the same reason as (28).",
+   "VariablesIncluded": [
+    4
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(30) absolute deviation, positive part",
+   "Number": 8,
+   "equation": "a_j \\ge d_j \\quad \\forall j \\in E",
+   "description": "With (31), a_j is at least |d_j| (linearized absolute value).",
+   "VariablesIncluded": [
+    4,
+    5
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(31) absolute deviation, negative part",
+   "Number": 9,
+   "equation": "a_j \\ge -d_j \\quad \\forall j \\in E",
+   "description": "With (30), a_j is at least |d_j| (linearized absolute value).",
+   "VariablesIncluded": [
+    4,
+    5
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(32) no cancellation of passenger trains",
+   "Number": 10,
+   "equation": "X_n = 0 \\quad \\forall n \\in N^T",
+   "description": "Passenger trains cannot be canceled. Kept as a constraint: a fixing on the subset N^T that the paper numbers with its constraints, while (33)-(36) are the domains.",
+   "VariablesIncluded": [
+    3
+   ],
+   "Linear": true
+  }
+ ]
+}

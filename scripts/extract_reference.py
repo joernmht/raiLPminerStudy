@@ -73,6 +73,9 @@ def tex(node: etree._Element) -> str:
             return f"{ACCENTS[accent]}{{{tex(kids[0])}}}"
         return rf"\overset{{{tex(kids[1])}}}{{{tex(kids[0])}}}"
     if tag == "mfrac":
+        if (node.get("linethickness") or "").strip() in ("0", "0pt", "0px", "0em"):
+            # a stacked summation condition, not a division
+            return rf"\substack{{{tex(kids[0])} \\ {tex(kids[1])}}}"
         return rf"\frac{{{tex(kids[0])}}}{{{tex(kids[1])}}}"
     if tag == "mfenced":
         open_, close = node.get("open", "("), node.get("close", ")")

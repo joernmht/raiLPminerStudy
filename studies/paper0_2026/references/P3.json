@@ -1,0 +1,255 @@
+{
+ "ContainsFormulation": true,
+ "variablesInModel": [
+  {
+   "Number": 1,
+   "Abbreviation": "x_c^t",
+   "Name": "composition choice",
+   "Description": "1 if composition c in C_t is chosen for trip t, 0 otherwise; c = 0 is the empty composition (trip canceled). Binary by (19).",
+   "Domain": "binary"
+  },
+  {
+   "Number": 2,
+   "Abbreviation": "z_{c,c'}^t",
+   "Name": "composition transition",
+   "Description": "1 if trip t has composition c and its successor trip v(t) has composition c', for (c,c') in Gamma_t; 0 otherwise. Binary by (20).",
+   "Domain": "binary"
+  },
+  {
+   "Number": 3,
+   "Abbreviation": "c_m^t",
+   "Name": "coupled units",
+   "Description": "Number of units of type m coupled to the composition right before trip t. Declared in R+ by (16), hence continuous although it counts units.",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 4,
+   "Abbreviation": "u_m^t",
+   "Name": "uncoupled units",
+   "Description": "Number of units of type m uncoupled from the composition right after trip t. Declared in R+ by (16), hence continuous although it counts units.",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 5,
+   "Abbreviation": "I_m^t",
+   "Name": "inventory after departure",
+   "Description": "Units of type m in inventory at station s_d(t) right after trip t departs; R+ by (16). Own family (indexed by trip), separate from the station inventories I_{m,0}^s, I_{m,end}^s, I_{m,off}^s.",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 6,
+   "Abbreviation": "I_{m,0}^s",
+   "Name": "initial inventory",
+   "Description": "Initial inventory of unit type m at station s; R+ by (17). A decision variable in the paper, fixed to the planned value i_{m,0}^s by (14).",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 7,
+   "Abbreviation": "I_{m,end}^s",
+   "Name": "ending inventory",
+   "Description": "Inventory of unit type m at station s at the end of the day; R+ by (17).",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 8,
+   "Abbreviation": "p_{diff}^t",
+   "Name": "changed-composition indicator",
+   "Description": "1 if trip t is executed with a composition other than the planned composition p_0^t, 0 otherwise. Binary by (21).",
+   "Domain": "binary"
+  },
+  {
+   "Number": 9,
+   "Abbreviation": "nc_t",
+   "Name": "additional coupled units",
+   "Description": "Number of additional coupled units right before trip t (one symbol nc, split as n c_t in the MathML); R+ by (18).",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 10,
+   "Abbreviation": "nu_t",
+   "Name": "additional uncoupled units",
+   "Description": "Number of additional uncoupled units right after trip t (one symbol nu, split as n u_t in the MathML); R+ by (18).",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 11,
+   "Abbreviation": "I_{m,off}^s",
+   "Name": "ending-inventory off-balance",
+   "Description": "Off-balance of the ending inventory of unit type m at station s against the planned ending inventory i_{m,end}^s (absolute value via (12)-(13)); R+ by (17).",
+   "Domain": "continuous"
+  }
+ ],
+ "objective_functions": [
+  {
+   "Name": "(1) weighted rescheduling cost",
+   "Number": 0,
+   "equation": "\\min \\sum_{t,c \\in C_t} w_1 \\mathrm{carr}_c l_t x_c^t+\\sum_{t,c \\in C_t} w_2 \\mathrm{seat}_c^t h_t x_c^t+\\sum_t w_3 x_0^t+\\sum_{s,m} w_4 I_{m,\\text{off}}^s+\\sum_t w_5 \\mathit{nc}_t+\\sum_t w_6 \\mathit{nu}_t+\\sum_t w_7 p_{\\text{diff}}^t",
+   "description": "Weighted carriage-km, seat-shortage hours, cancellations (x_0^t = empty composition c=0, family x), inventory off-balances, additional (un)coupled units, changed compositions; carr, seat, l, h, w_1..w_7 are parameters.",
+   "VariablesIncluded": [
+    1,
+    8,
+    9,
+    10,
+    11
+   ],
+   "Linear": true
+  }
+ ],
+ "constraints": [
+  {
+   "Name": "(2) one composition per trip",
+   "Number": 1,
+   "equation": "\\sum_{c \\in C_t} x_c^t = 1 \\quad \\forall t \\in T",
+   "description": "Exactly one composition, possibly the empty one (c = 0, cancellation), is chosen for each trip.",
+   "VariablesIncluded": [
+    1
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(3) transition link to the successor trip",
+   "Number": 2,
+   "equation": "x_c^t = \\sum_{c' \\in C_{v(t)}: (c,c') \\in \\Gamma_t} z_{c,c'}^t \\quad \\forall t \\in T \\setminus T_1, c \\in C_t",
+   "description": "Composition c is chosen for trip t if and only if an allowed composition change (c, c') to the successor trip v(t) is chosen.",
+   "VariablesIncluded": [
+    1,
+    2
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(4) transition link from the predecessor trip",
+   "Number": 3,
+   "equation": "x_{c'}^{v(t)} = \\sum_{c \\in C_t: (c,c') \\in \\Gamma_t} z_{c,c'}^t \\quad \\forall t \\in T \\setminus T_1, c' \\in C_{v(t)}",
+   "description": "Same link on the successor side; x_{c'}^{v(t)} is the composition variable of trip v(t), i.e. family x.",
+   "VariablesIncluded": [
+    1,
+    2
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(5) coupled units of a transition",
+   "Number": 4,
+   "equation": "c_m^{v(t)} = \\sum_{(c,c') \\in \\Gamma_t} \\beta_{c,c'}^m z_{c,c'}^t \\quad \\forall t \\in T \\setminus T_1, m \\in M",
+   "description": "Units of type m coupled before the successor trip v(t) follow from the chosen transition; beta is a parameter and c_m^{v(t)} belongs to family c_m^t.",
+   "VariablesIncluded": [
+    2,
+    3
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(6) uncoupled units of a transition",
+   "Number": 5,
+   "equation": "u_m^t = \\sum_{(c,c') \\in \\Gamma_t} \\alpha_{c,c'}^m z_{c,c'}^t \\quad \\forall t \\in T \\setminus T_1, m \\in M",
+   "description": "Units of type m uncoupled after trip t follow from the chosen transition; alpha is a parameter.",
+   "VariablesIncluded": [
+    2,
+    4
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(7) inventory after each departure",
+   "Number": 6,
+   "equation": "I_m^t = I_{m,0}^{s_d(t)} - \\sum_{t' \\in T: s_d(t')=s_d(t), \\tau_d(t') \\le \\tau_d(t)} c_m^{t'} + \\sum_{t' \\in T: s_a(t')=s_d(t), \\tau_a(t') \\le \\tau_d(t)-\\rho(s_d(t))} u_m^{t'} \\quad \\forall t, m",
+   "description": "Inventory at s_d(t) after trip t departs: initial inventory there (family I_{m,0}^s) minus earlier couplings plus earlier uncouplings. The fraction under each sum is its index condition, not a division.",
+   "VariablesIncluded": [
+    3,
+    4,
+    5,
+    6
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(8) ending inventory",
+   "Number": 7,
+   "equation": "I_{m,\\text{end}}^s = I_{m,0}^s - \\sum_{t \\in T: s_d(t)=s} c_m^t + \\sum_{t \\in T: s_a(t)=s} u_m^t \\quad \\forall s \\in S, m \\in M",
+   "description": "Ending inventory per unit type and station: initial inventory minus all units coupled plus all units uncoupled at that station.",
+   "VariablesIncluded": [
+    3,
+    4,
+    6,
+    7
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(9) changed-composition indicator",
+   "Number": 8,
+   "equation": "p_{\\text{diff}}^t \\ge \\sum_{c \\in C: c \\neq p_0^t} x_c^t \\quad \\forall t \\in T",
+   "description": "p_diff^t is 1 if trip t gets a composition other than the planned one; p_0^t is a parameter (the planned composition).",
+   "VariablesIncluded": [
+    1,
+    8
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(10) additional coupled units",
+   "Number": 9,
+   "equation": "\\mathit{nc}_t \\ge \\sum_{m \\in M} c_m^t - \\mathit{oc}_t \\quad \\forall t \\in T",
+   "description": "Additional coupled units before trip t. oc_t (oc^t in the text, 'o c_t' in the MathML) is the parameter 'original coupled units', not o times c; variables: nc and c_m^t only.",
+   "VariablesIncluded": [
+    3,
+    9
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(11) additional uncoupled units",
+   "Number": 10,
+   "equation": "\\mathit{nu}_t \\ge \\sum_{m \\in M} u_m^t - \\mathit{ou}_t \\quad \\forall t \\in T",
+   "description": "Additional uncoupled units after trip t. ou_t (ou^t in the text) is the parameter 'original uncoupled units', not o times u; variables: nu and u_m^t only.",
+   "VariablesIncluded": [
+    4,
+    10
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(12) off-balance, surplus side",
+   "Number": 11,
+   "equation": "I_{m,\\text{off}}^s \\ge I_{m,\\text{end}}^s - i_{m,\\text{end}}^s \\quad \\forall s \\in S, m \\in M",
+   "description": "With (13), I_off is at least the absolute difference between actual and planned ending inventory; lower-case i_{m,end}^s is the planned value (parameter).",
+   "VariablesIncluded": [
+    7,
+    11
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(13) off-balance, shortage side",
+   "Number": 12,
+   "equation": "I_{m,\\text{off}}^s \\ge i_{m,\\text{end}}^s - I_{m,\\text{end}}^s \\quad \\forall s \\in S, m \\in M",
+   "description": "Second half of the linearized absolute value of the ending-inventory off-balance; i_{m,end}^s is a parameter.",
+   "VariablesIncluded": [
+    7,
+    11
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(14) initial inventory as planned",
+   "Number": 13,
+   "equation": "I_{m,0}^s = i_{m,0}^s \\quad \\forall s \\in S, m \\in M",
+   "description": "Initial inventories equal the planned ones (parameter i_{m,0}^s). Kept as a constraint: a fixing the paper numbers among its constraints, while (16)-(21) are the domain declarations.",
+   "VariablesIncluded": [
+    6
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(15) fixed compositions before the disruption",
+   "Number": 14,
+   "equation": "x_{p_0^t}^t = 1 \\quad \\forall t \\in T: \\tau_d(t) \\le \\tau_{\\text{disr}}",
+   "description": "Trips departing before the disruption keep their planned composition p_0^t. Kept as a constraint (a fixing on a subset of trips), not a domain declaration.",
+   "VariablesIncluded": [
+    1
+   ],
+   "Linear": true
+  }
+ ]
+}
