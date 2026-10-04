@@ -27,7 +27,7 @@ from typing import Any
 
 from genstudy import instrument
 from genstudy.config import GrapherSpec, StudySpec, load_study
-from genstudy.graphing import graph_answer, grapher_fingerprint
+from genstudy.graphing import graph_answer, grapher_fingerprint, parse_reply
 from genstudy.llm import ChatClient, EndpointError
 from genstudy.metrics import graph_metrics
 from genstudy.notation import notation
@@ -215,11 +215,60 @@ def cmd_validate_grapher(spec: StudySpec, args: argparse.Namespace) -> int:
                     "predicted": asdict(predicted) if predicted else None,
                     "parsed": res.model.model_dump() if res and res.model else None,
                     "error": (res.error if res else error),
+                    "repairs": list(res.repairs) if res else [],
                     "score": instrument.score(case.expected, predicted),
                     "call": res.call.to_record() if res else None,
                 },
             )
             _log(f"{case.case_id} r{rep}: {instrument.score(case.expected, predicted)}")
+    return 0
+
+
+def cmd_grapher_report(spec: StudySpec, args: argparse.Namespace) -> int:
+    """Score every validated grapher configuration from its stored replies (no requests).
+
+    Replies are re-parsed with the current parser, so a change to the parsing
+    step is evaluated on the identical replies.
+    """
+    expected = {c.case_id: c.expected for c in instrument.cases()}
+    report: dict[str, Any] = {}
+    for path in sorted((spec.root / "instrument").glob("*.jsonl")):
+        totals: Counter[str] = Counter()
+        n = 0
+        tokens = 0
+        for row in RunStore(path).records():
+            if row.get("call") is None or row["case_id"] not in expected:
+                continue
+            n += 1
+            tokens += int(row["call"]["response"]["usage"].get("completion_tokens") or 0)
+            try:
+                model = parse_reply(row["call"]["response"]["content"])
+            except ValueError:
+                totals["unparsed"] += 1
+                continue
+            for k, v in instrument.score(expected[row["case_id"]], graph_metrics(model)).items():
+                totals[k] += int(bool(v))
+        if not n:
+            continue
+        report[path.stem] = {
+            "cases": n,
+            "unparsed": totals["unparsed"],
+            "mean_completion_tokens": round(tokens / n),
+            **{k: round(totals[k] / n, 3) for k in ("accepted", *instrument.VERDICTS)},
+            "counts_exact": round(
+                sum(totals[k] for k in instrument.COUNTS) / (len(instrument.COUNTS) * n), 3
+            ),
+        }
+        r = report[path.stem]
+        _log(
+            f"{path.stem:55s} n={n:3d} unparsed={r['unparsed']:3d} accepted={r['accepted']:.2f} "
+            f"formulation={r['contains_formulation']:.2f} complete={r['complete_struct']:.2f} "
+            f"coherent={r['coherent']:.2f} linear={r['linear']:.2f} counts={r['counts_exact']:.2f}"
+        )
+    out = spec.root / "instrument" / "report.json"
+    out.write_text(
+        json.dumps(report, indent=1, sort_keys=True) + "\n", encoding="utf-8", newline="\n"
+    )
     return 0
 
 
@@ -250,6 +299,7 @@ def cmd_graph(spec: StudySpec, args: argparse.Namespace) -> int:
                 row.update(error=str(exc)[:300], parsed=None, metrics=None, call=None)
             else:
                 row.update(
+                    repairs=list(res.repairs),
                     error=res.error,
                     parsed=res.model.model_dump() if res.model else None,
                     metrics=asdict(graph_metrics(res.model)) if res.model else None,
@@ -281,6 +331,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--whitespace-pattern")
     p.add_argument("--repeats", type=int, default=2)
     p.add_argument("--limit", type=int)
+    sub.add_parser("grapher-report")
     p = sub.add_parser("graph")
     p.add_argument("--model", required=True)
     args = ap.parse_args(argv)
@@ -292,6 +343,7 @@ def main(argv: list[str] | None = None) -> int:
         "run": cmd_run,
         "status": cmd_status,
         "validate-grapher": cmd_validate_grapher,
+        "grapher-report": cmd_grapher_report,
         "graph": cmd_graph,
     }
     return commands[args.cmd](spec, args)

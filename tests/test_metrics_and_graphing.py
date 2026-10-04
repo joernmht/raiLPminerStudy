@@ -169,3 +169,27 @@ def test_grapher_modes():
     assert prompt_mode["messages"][1]["content"].endswith(json.dumps(MODEL_SCHEMA))
     with pytest.raises(ValueError):
         grapher_body(GrapherSpec("g", mode="nope"), "x")
+
+
+def test_key_repair_maps_case_and_drops_schema_keywords():
+    reply = {
+        "additionalProperties": False,
+        "ContainsFormulation": True,
+        "linear": True,
+        "objective_functions": [],
+        "constraints": [
+            {"name": "c", "number": 1, "equation": "x >= 1", "description": "",
+             "variablesIncluded": [1], "linear": True}
+        ],
+        "variablesInModel": [
+            {"Number": 1, "abbreviation": "x", "Name": "x", "Description": "", "domain": "binary"}
+        ],
+    }  # fmt: skip
+    repairs: list[str] = []
+    m = parse_reply(json.dumps(reply), repairs)
+    assert m.constraints[0].VariablesIncluded == [1] and m.constraints[0].Linear is True
+    assert m.variablesInModel[0].Domain == "binary"
+    assert "dropped model.additionalProperties" in repairs
+    assert "renamed equation.variablesIncluded" in repairs
+    with pytest.raises(ValueError):
+        parse_reply("not json")

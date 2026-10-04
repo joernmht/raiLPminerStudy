@@ -168,16 +168,67 @@ class GraphingResult:
     model: Model | None
     call: CallResult
     error: str | None
+    repairs: tuple[str, ...] = ()
 
 
-def parse_reply(content: str) -> Model:
+#: Field names per object level, for the key repair in :func:`normalize_keys`.
+_FIELDS: dict[str, tuple[str, ...]] = {
+    "model": tuple(Model.model_fields),
+    "variable": tuple(Variable.model_fields),
+    "equation": tuple(Equation.model_fields),
+}
+_CHILDREN = {
+    "variablesInModel": "variable",
+    "objective_functions": "equation",
+    "constraints": "equation",
+}
+
+
+def _canon(key: str) -> str:
+    return "".join(ch for ch in key.lower() if ch.isalnum())
+
+
+def normalize_keys(obj: Any, level: str = "model", repairs: list[str] | None = None) -> Any:
+    """Map reply keys onto the schema's field names, deterministically.
+
+    The legacy schema mixes ``Name``/``VariablesIncluded`` with ``equation``/
+    ``description``, and parsers answering from a schema in the prompt often
+    normalise the case or copy schema keywords (``additionalProperties``). A key
+    is renamed when it matches a field ignoring case and punctuation, and
+    dropped when it matches none; values are never touched. Every repair is
+    listed in ``repairs``.
+    """
+    if not isinstance(obj, dict):
+        return obj
+    fields = {_canon(f): f for f in _FIELDS[level]}
+    out: dict[str, Any] = {}
+    for key, value in obj.items():
+        target = fields.get(_canon(key))
+        if target is None:
+            if repairs is not None:
+                repairs.append(f"dropped {level}.{key}")
+            continue
+        if target != key and repairs is not None:
+            repairs.append(f"renamed {level}.{key}")
+        child = _CHILDREN.get(target) if level == "model" else None
+        if child and isinstance(value, list):
+            value = [normalize_keys(v, child, repairs) for v in value]
+        out[target] = value
+    return out
+
+
+def parse_reply(content: str, repairs: list[str] | None = None) -> Model:
     """Validate a grapher reply against the schema (raises ``ValueError``)."""
     text = content.strip()
     if text.startswith("```"):
         text = text.strip("`")
         text = text[text.find("{") :]
     try:
-        return Model.model_validate_json(text)
+        raw = json.loads(text)
+    except json.JSONDecodeError as exc:
+        raise ValueError(f"reply is not JSON: {exc.msg}") from exc
+    try:
+        return Model.model_validate(normalize_keys(raw, "model", repairs))
     except ValidationError as exc:
         raise ValueError(f"reply does not match the schema: {exc.error_count()} errors") from exc
 
@@ -189,7 +240,9 @@ def graph_answer(
     call = client.complete(
         grapher_body(grapher, answer, seed_offset=seed_offset), describe="grapher"
     )
+    repairs: list[str] = []
     try:
-        return GraphingResult(model=parse_reply(call.content), call=call, error=None)
+        model = parse_reply(call.content, repairs)
     except ValueError as exc:
-        return GraphingResult(model=None, call=call, error=str(exc))
+        return GraphingResult(model=None, call=call, error=str(exc), repairs=tuple(repairs))
+    return GraphingResult(model=model, call=call, error=None, repairs=tuple(repairs))

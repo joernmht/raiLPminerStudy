@@ -1,0 +1,50 @@
+{
+ "google_gemma-4-26B-A4B-it.prompt": {
+  "accepted": 1.0,
+  "cases": 30,
+  "coherent": 1.0,
+  "complete_struct": 1.0,
+  "contains_formulation": 1.0,
+  "counts_exact": 1.0,
+  "integral": 1.0,
+  "linear": 0.967,
+  "mean_completion_tokens": 348,
+  "unparsed": 0
+ },
+ "google_gemma-4-26B-A4B-it.schema-2026.10.1": {
+  "accepted": 0.561,
+  "cases": 41,
+  "coherent": 0.561,
+  "complete_struct": 0.537,
+  "contains_formulation": 0.561,
+  "counts_exact": 0.553,
+  "integral": 0.561,
+  "linear": 0.561,
+  "mean_completion_tokens": 3767,
+  "unparsed": 18
+ },
+ "google_gemma-4-26B-A4B-it.schema-2026.10.2": {
+  "accepted": 0.6,
+  "cases": 5,
+  "coherent": 0.6,
+  "complete_struct": 0.6,
+  "contains_formulation": 0.6,
+  "counts_exact": 0.6,
+  "integral": 0.6,
+  "linear": 0.6,
+  "mean_completion_tokens": 3545,
+  "unparsed": 2
+ },
+ "google_gemma-4-26B-A4B-it.schema-ws": {
+  "accepted": 0.6,
+  "cases": 5,
+  "coherent": 0.6,
+  "complete_struct": 0.6,
+  "contains_formulation": 0.6,
+  "counts_exact": 0.6,
+  "integral": 0.6,
+  "linear": 0.6,
+  "mean_completion_tokens": 3575,
+  "unparsed": 2
+ }
+}
