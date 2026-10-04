@@ -1,0 +1,117 @@
+# Paper 0 rerun (2026): the complete design. Change nothing here after the first
+# production run without a new study_id; every run record stores this file's SHA-256.
+
+study_id = "paper0-2026"
+base_url = "https://llm.scads.ai/v1"
+api_key_env = "SCADS_API_KEY"
+seed = 20261004
+
+# ScaDS.AI is a shared academic service: one request in flight, a pause between
+# requests, a daily budget (persisted in state/, shared by all processes).
+[pacing]
+min_interval_s = 3.0
+max_requests_per_day = 1500
+request_timeout_s = 900.0
+max_tries = 6
+max_tool_rounds = 4
+max_subcalls = 10
+ps_count_min = 2
+ps_count_max = 5
+
+# Five open-weight generators, one per family, all served by ScaDS (probed 2026-10-04:
+# system prompt, temperature, seed and a forced named tool call are honoured).
+# Roles mirror the 2025 line-up (Gemini 2.5 Pro / Flash, o4-mini, DeepSeek-V3).
+[models.glm]
+served_id = "zai-org/GLM-5.3"
+family = "GLM (Z.ai)"
+licence = "GLM-5.3 model licence (other)"
+role = "strongest open-weight reasoning model (2025 role: Gemini 2.5 Pro)"
+max_tokens = 16000
+
+[models.deepseek]
+served_id = "deepseek-ai/DeepSeek-V4.1-Flash"
+family = "DeepSeek"
+licence = "MIT"
+role = "fast reasoning model, continuity with DeepSeek-V3 (2025)"
+max_tokens = 16000
+
+[models.gptoss]
+served_id = "openai/gpt-oss-120b"
+family = "gpt-oss (OpenAI)"
+licence = "Apache-2.0"
+role = "compact reasoning model (2025 role: o4-mini)"
+max_tokens = 16000
+
+[models.qwen]
+served_id = "Qwen/Qwen3.8-27B"
+family = "Qwen (Alibaba)"
+licence = "Apache-2.0"
+role = "small dense reasoning model (2025 role: Gemini 2.5 Flash)"
+max_tokens = 16000
+
+[models.minimax]
+served_id = "MiniMaxAI/MiniMax-M3"
+family = "MiniMax"
+licence = "MiniMax model licence (other)"
+role = "fifth family"
+max_tokens = 16000
+
+# The parsing model (LP2Graph v2). Provisional: `genstudy validate-grapher` scores the
+# candidates (Gemma-4, Llama-3.3; neither family generates) and the better one is fixed here.
+[grapher]
+served_id = "google/gemma-4-26B-A4B-it"
+temperature = 0.0
+seed = 7
+max_tokens = 8000
+
+# Input papers: open access under CC BY, chosen by the rule in docs/adr/0002.
+# Placeholders until the selection is confirmed; `run` refuses while an input is missing.
+[papers.P1]
+doi = "TBD"
+title = "TBD"
+licence = "TBD"
+input = "inputs/P1.md"
+
+[papers.P2]
+doi = "TBD"
+title = "TBD"
+licence = "TBD"
+input = "inputs/P2.md"
+
+[papers.P3]
+doi = "TBD"
+title = "TBD"
+licence = "TBD"
+input = "inputs/P3.md"
+
+[papers.P4]
+doi = "TBD"
+title = "TBD"
+licence = "TBD"
+input = "inputs/P4.md"
+
+[papers.P5]
+doi = "TBD"
+title = "TBD"
+licence = "TBD"
+input = "inputs/P5.md"
+
+# Experiment 1: the full factorial on the anchor paper (2025: 4 x 4 x 3, >= 14 replicates).
+[[experiments]]
+name = "exp1"
+papers = ["P1"]
+models = ["glm", "deepseek", "gptoss", "qwen", "minimax"]
+workflows = ["ZS", "CFC", "OE", "PS"]
+temperatures = [0.2, 0.6, 1.0]
+replicates = 15
+
+# Experiment 2: the other four papers, Zero-Shot at temperature 0.6, every model.
+# Pre-registered here (2025 picked its setting after seeing experiment 1). The anchor
+# paper's baseline for this comparison is exp1's ZS / 0.6 cell of the same model.
+[[experiments]]
+name = "exp2"
+papers = ["P2", "P3", "P4", "P5"]
+models = ["glm", "deepseek", "gptoss", "qwen", "minimax"]
+workflows = ["ZS"]
+temperatures = [0.6]
+replicates = 15

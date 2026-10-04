@@ -1,0 +1,144 @@
+"""Metrics on hand-built structures, the parser schema, and the notation gate."""
+
+from __future__ import annotations
+
+import json
+
+import pytest
+
+from genstudy.config import GrapherSpec
+from genstudy.graphing import (
+    MODEL_SCHEMA,
+    Constraint,
+    Model,
+    ObjectiveFunction,
+    Variable,
+    grapher_body,
+    parse_reply,
+)
+from genstudy.metrics import graph_metrics
+from genstudy.notation import notation
+
+
+def _var(n, domain="continuous"):
+    return Variable(Number=n, Abbreviation=f"v{n}", Name="", Description="", Domain=domain)
+
+
+def _eq(cls, n, refs, linear=True):
+    return cls(
+        Name="", Number=n, equation="", description="", VariablesIncluded=refs, Linear=linear
+    )
+
+
+def _model(variables, objectives, constraints, contains=True):
+    return Model(
+        ContainsFormulation=contains,
+        variablesInModel=variables,
+        objective_functions=objectives,
+        constraints=constraints,
+    )
+
+
+def test_complete_coherent_model():
+    m = _model(
+        [_var(1), _var(2, "binary")],
+        [_eq(ObjectiveFunction, 0, [1])],
+        [_eq(Constraint, 1, [1, 2]), _eq(Constraint, 2, [2])],
+    )
+    g = graph_metrics(m)
+    assert (g.complete_struct, g.coherent, g.linear, g.integral) == (True, True, True, True)
+    assert (g.n_objectives, g.n_variables, g.n_constraints) == (1, 2, 2)
+    assert g.minimal_size == 4
+    assert g.cv_ratio == 1.0
+    assert g.diameter == 4
+
+
+def test_variable_in_one_equation_is_incomplete():
+    m = _model([_var(1), _var(2)], [_eq(ObjectiveFunction, 0, [1])], [_eq(Constraint, 1, [1, 2])])
+    g = graph_metrics(m)
+    assert g.complete_struct is False
+    assert g.low_degree_variables == (2,)
+    assert g.coherent is True
+
+
+def test_missing_objective_is_incomplete_and_observable():
+    m = _model([_var(1)], [], [_eq(Constraint, 1, [1]), _eq(Constraint, 2, [1])])
+    g = graph_metrics(m)
+    assert g.n_objectives == 0
+    assert g.complete_struct is False
+
+
+def test_disconnected_block_is_incoherent_without_a_diameter():
+    m = _model(
+        [_var(1), _var(2)],
+        [_eq(ObjectiveFunction, 0, [1])],
+        [_eq(Constraint, 1, [1]), _eq(Constraint, 2, [2]), _eq(Constraint, 3, [2])],
+    )
+    g = graph_metrics(m)
+    assert g.complete_struct is True
+    assert g.coherent is False
+    assert g.diameter is None
+
+
+def test_nonlinear_equation_and_dangling_reference():
+    m = _model(
+        [_var(1)],
+        [_eq(ObjectiveFunction, 0, [1, 9], linear=False)],
+        [_eq(Constraint, 1, [1])],
+    )
+    g = graph_metrics(m)
+    assert g.linear is False
+    assert g.dangling_references == 1
+    assert g.integral is False
+
+
+def test_empty_model():
+    g = graph_metrics(_model([], [], [], contains=False))
+    assert (g.contains_formulation, g.complete_struct, g.coherent) == (False, False, False)
+    assert g.minimal_size == 1
+
+
+def test_schema_has_no_refs_and_requires_the_exit_field():
+    text = json.dumps(MODEL_SCHEMA)
+    assert "$ref" not in text and "$defs" not in text
+    assert "ContainsFormulation" in MODEL_SCHEMA["required"]
+
+
+def test_parse_reply_accepts_valid_and_fenced_json_and_rejects_the_rest():
+    m = _model([_var(1)], [_eq(ObjectiveFunction, 0, [1])], [_eq(Constraint, 1, [1])])
+    raw = m.model_dump_json()
+    assert parse_reply(raw) == m
+    assert parse_reply("```json\n" + raw + "\n```") == m
+    with pytest.raises(ValueError):
+        parse_reply('{"ContainsFormulation": true}')
+
+
+def test_grapher_body_is_deterministic_and_schema_constrained():
+    g = GrapherSpec("org/grapher", temperature=0.0, seed=7, max_tokens=99)
+    body = grapher_body(g, "  answer  ")
+    assert body["temperature"] == 0.0 and body["seed"] == 7
+    assert body["response_format"]["json_schema"]["schema"] == MODEL_SCHEMA
+    assert body["messages"][1]["content"].endswith("answer")
+    assert grapher_body(g, "x", seed_offset=1)["seed"] == 8
+
+
+@pytest.mark.parametrize(
+    ("text", "groups"),
+    [
+        (
+            r"$$\min \sum_i x_i$$ s.t. $x_i \le 1 \;\forall i$, $y \ge 0$",
+            ("le", "ge", "sum", "forall", "st"),
+        ),
+        (r"$t_j \ge t_i + h$ and $x \leq 1$ for all trains", ("le", "ge", "forall")),
+        ("x <= 5, y >= 2, subject to", ("le", "ge", "st")),
+        ("The model decides the order of trains and minimizes delay.", ()),
+    ],
+)
+def test_notation_groups(text, groups):
+    assert notation(text).groups == groups
+
+
+def test_notation_threshold_is_more_than_half():
+    assert notation(r"$x \le 1$, $y \ge 0$, $\sum_i z_i$").passed is True
+    assert notation(r"$x \le 1$, $y \ge 0$").passed is False
+    assert notation(r"\left| x \right|").passed is False

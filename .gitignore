@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+.env
+.env.*
+# Per-machine request counters (fair-use budget), never data.
+studies/*/state/
+# Scratch for a run in flight is the .jsonl itself; nothing else is generated here.
