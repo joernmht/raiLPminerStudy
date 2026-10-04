@@ -1,0 +1,61 @@
+# Choosing the fifth generator before the production runs (Joern, 2026-10-04: Kimi replaces
+# GLM-5.3, "I am open to experiments if [GLM-5.3-Flash] works better than kimi"). Both
+# candidates run every workflow at the two extreme temperatures on one production input.
+# The choice uses operational criteria only, stated before the runs: complete answers
+# (finish=stop, non-empty), tool calls answered by the sub-agents, answers that pass the
+# notation gate and parse, time and cost per run. Acceptance (completeness, coherence) is
+# the study's outcome and is not used. Data stay out of paper0_2026.
+study_id = "pilot-2026-fifth-model"
+base_url = "https://llm.scads.ai/v1"
+api_key_env = "SCADS_API_KEY"
+seed = 2
+
+[pacing]
+min_interval_s = 3.0
+max_requests_per_day = 1500
+request_timeout_s = 900.0
+max_tries = 6
+max_tool_rounds = 4
+max_subcalls = 10
+ps_count_min = 2
+ps_count_max = 5
+
+# Reasoning: as little as each model allows (decision of 2026-10-04, docs/adr/0003).
+[models.kimi]
+served_id = "moonshotai/kimi-k3"
+family = "Kimi (Moonshot AI)"
+licence = "Kimi K3 model licence (other), open weights"
+role = "candidate fifth model"
+max_tokens = 16000
+base_url = "https://openrouter.ai/api/v1"
+api_key_env = "OPENROUTER_API_KEY"
+extra = { reasoning = { enabled = false }, provider = { order = ["deepinfra"], allow_fallbacks = false }, usage = { include = true } }
+
+[models.glmflash]
+served_id = "zai-org/GLM-5.3-Flash"
+family = "GLM (Z.ai)"
+licence = "MIT"
+role = "candidate fifth model"
+max_tokens = 16000
+extra = { reasoning_effort = "low" }
+
+[grapher]
+served_id = "google/gemma-4-26B-A4B-it"
+mode = "template"
+temperature = 0.0
+seed = 7
+max_tokens = 8000
+
+[papers.P2]
+doi = "10.1080/23249935.2025.2592225"
+title = "Conflict detection and resolution for distance-to-go railway signalling"
+licence = "CC BY 4.0"
+input = "../paper0_2026/inputs/P2.md"
+
+[[experiments]]
+name = "fifth"
+papers = ["P2"]
+models = ["kimi", "glmflash"]
+workflows = ["ZS", "CFC", "OE", "PS"]
+temperatures = [0.2, 1.0]
+replicates = 1
