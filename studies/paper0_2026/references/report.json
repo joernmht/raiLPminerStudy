@@ -1,0 +1,356 @@
+{
+ "google_gemma-4-26B-A4B-it.prompt": {
+  "all_verdicts_right": 4,
+  "parsed": 6,
+  "per_reference": {
+   "P2": [
+    {
+     "error": "reply echoes the schema instead of filling it"
+    },
+    {
+     "constraints": "16/16",
+     "edges": "50/50",
+     "repairs": [
+      "skipped an echoed schema"
+     ],
+     "score": {
+      "accepted": true,
+      "coherent": true,
+      "complete_struct": true,
+      "contains_formulation": true,
+      "integral": true,
+      "linear": true,
+      "n_constraints": true,
+      "n_objectives": true,
+      "n_variables": true,
+      "parsed": true
+     },
+     "variables": "10/10"
+    }
+   ],
+   "P3": [
+    {
+     "constraints": "14/14",
+     "edges": "28/34",
+     "repairs": [
+      "cut 1 over-long text fields"
+     ],
+     "score": {
+      "accepted": true,
+      "coherent": false,
+      "complete_struct": true,
+      "contains_formulation": true,
+      "integral": true,
+      "linear": true,
+      "n_constraints": true,
+      "n_objectives": true,
+      "n_variables": false,
+      "parsed": true
+     },
+     "variables": "9/11"
+    },
+    {
+     "constraints": "14/14",
+     "edges": "31/34",
+     "repairs": [
+      "cut 1 over-long text fields"
+     ],
+     "score": {
+      "accepted": true,
+      "coherent": false,
+      "complete_struct": true,
+      "contains_formulation": true,
+      "integral": true,
+      "linear": true,
+      "n_constraints": true,
+      "n_objectives": true,
+      "n_variables": false,
+      "parsed": true
+     },
+     "variables": "10/11"
+    }
+   ],
+   "P3b": [
+    {
+     "constraints": "10/10",
+     "edges": "22/22",
+     "repairs": [],
+     "score": {
+      "accepted": true,
+      "coherent": true,
+      "complete_struct": true,
+      "contains_formulation": true,
+      "integral": true,
+      "linear": true,
+      "n_constraints": true,
+      "n_objectives": true,
+      "n_variables": true,
+      "parsed": true
+     },
+     "variables": "5/5"
+    },
+    {
+     "constraints": "10/10",
+     "edges": "22/22",
+     "repairs": [],
+     "score": {
+      "accepted": true,
+      "coherent": true,
+      "complete_struct": true,
+      "contains_formulation": true,
+      "integral": true,
+      "linear": true,
+      "n_constraints": true,
+      "n_objectives": true,
+      "n_variables": true,
+      "parsed": true
+     },
+     "variables": "5/5"
+    }
+   ],
+   "P4": [
+    {
+     "error": "reply echoes the schema instead of filling it"
+    },
+    {
+     "error": "reply echoes the schema instead of filling it"
+    }
+   ],
+   "P5": [
+    {
+     "constraints": "26/26",
+     "edges": "71/71",
+     "repairs": [],
+     "score": {
+      "accepted": true,
+      "coherent": true,
+      "complete_struct": true,
+      "contains_formulation": true,
+      "integral": true,
+      "linear": true,
+      "n_constraints": true,
+      "n_objectives": true,
+      "n_variables": true,
+      "parsed": true
+     },
+     "variables": "12/12"
+    },
+    {
+     "error": "reply echoes the schema instead of filling it"
+    }
+   ]
+  },
+  "replies": 10
+ },
+ "google_gemma-4-26B-A4B-it.template": {
+  "all_verdicts_right": 6,
+  "parsed": 10,
+  "per_reference": {
+   "P2": [
+    {
+     "constraints": "16/16",
+     "edges": "50/50",
+     "repairs": [
+      "escaped stray backslashes"
+     ],
+     "score": {
+      "accepted": true,
+      "coherent": true,
+      "complete_struct": true,
+      "contains_formulation": true,
+      "integral": true,
+      "linear": true,
+      "n_constraints": true,
+      "n_objectives": true,
+      "n_variables": true,
+      "parsed": true
+     },
+     "variables": "10/10"
+    },
+    {
+     "constraints": "16/16",
+     "edges": "50/50",
+     "repairs": [
+      "escaped stray backslashes",
+      "ignored text after the JSON object"
+     ],
+     "score": {
+      "accepted": true,
+      "coherent": true,
+      "complete_struct": true,
+      "contains_formulation": true,
+      "integral": true,
+      "linear": true,
+      "n_constraints": true,
+      "n_objectives": true,
+      "n_variables": true,
+      "parsed": true
+     },
+     "variables": "10/10"
+    }
+   ],
+   "P3": [
+    {
+     "constraints": "14/14",
+     "edges": "31/34",
+     "repairs": [],
+     "score": {
+      "accepted": true,
+      "coherent": false,
+      "complete_struct": true,
+      "contains_formulation": true,
+      "integral": true,
+      "linear": true,
+      "n_constraints": true,
+      "n_objectives": true,
+      "n_variables": false,
+      "parsed": true
+     },
+     "variables": "10/11"
+    },
+    {
+     "constraints": "14/14",
+     "edges": "31/34",
+     "repairs": [],
+     "score": {
+      "accepted": true,
+      "coherent": false,
+      "complete_struct": true,
+      "contains_formulation": true,
+      "integral": true,
+      "linear": true,
+      "n_constraints": true,
+      "n_objectives": true,
+      "n_variables": false,
+      "parsed": true
+     },
+     "variables": "10/11"
+    }
+   ],
+   "P3b": [
+    {
+     "constraints": "10/10",
+     "edges": "22/22",
+     "repairs": [],
+     "score": {
+      "accepted": true,
+      "coherent": true,
+      "complete_struct": true,
+      "contains_formulation": true,
+      "integral": true,
+      "linear": true,
+      "n_constraints": true,
+      "n_objectives": true,
+      "n_variables": true,
+      "parsed": true
+     },
+     "variables": "5/5"
+    },
+    {
+     "constraints": "10/10",
+     "edges": "22/22",
+     "repairs": [],
+     "score": {
+      "accepted": true,
+      "coherent": true,
+      "complete_struct": true,
+      "contains_formulation": true,
+      "integral": true,
+      "linear": true,
+      "n_constraints": true,
+      "n_objectives": true,
+      "n_variables": true,
+      "parsed": true
+     },
+     "variables": "5/5"
+    }
+   ],
+   "P4": [
+    {
+     "constraints": "24/24",
+     "edges": "56/56",
+     "repairs": [
+      "dropped letters from equation numbers"
+     ],
+     "score": {
+      "accepted": true,
+      "coherent": false,
+      "complete_struct": true,
+      "contains_formulation": true,
+      "integral": true,
+      "linear": true,
+      "n_constraints": true,
+      "n_objectives": true,
+      "n_variables": true,
+      "parsed": true
+     },
+     "variables": "20/20"
+    },
+    {
+     "constraints": "26/24",
+     "edges": "58/56",
+     "repairs": [
+      "dropped letters from equation numbers",
+      "escaped stray backslashes"
+     ],
+     "score": {
+      "accepted": false,
+      "coherent": true,
+      "complete_struct": false,
+      "contains_formulation": true,
+      "integral": true,
+      "linear": true,
+      "n_constraints": false,
+      "n_objectives": true,
+      "n_variables": false,
+      "parsed": true
+     },
+     "variables": "19/20"
+    }
+   ],
+   "P5": [
+    {
+     "constraints": "26/26",
+     "edges": "71/71",
+     "repairs": [
+      "escaped stray backslashes"
+     ],
+     "score": {
+      "accepted": true,
+      "coherent": true,
+      "complete_struct": true,
+      "contains_formulation": true,
+      "integral": true,
+      "linear": true,
+      "n_constraints": true,
+      "n_objectives": true,
+      "n_variables": true,
+      "parsed": true
+     },
+     "variables": "12/12"
+    },
+    {
+     "constraints": "26/26",
+     "edges": "70/71",
+     "repairs": [
+      "escaped stray backslashes"
+     ],
+     "score": {
+      "accepted": true,
+      "coherent": true,
+      "complete_struct": true,
+      "contains_formulation": true,
+      "integral": true,
+      "linear": true,
+      "n_constraints": true,
+      "n_objectives": true,
+      "n_variables": true,
+      "parsed": true
+     },
+     "variables": "12/12"
+    }
+   ]
+  },
+  "replies": 10
+ }
+}
