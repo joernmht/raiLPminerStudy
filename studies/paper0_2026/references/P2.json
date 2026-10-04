@@ -1,0 +1,282 @@
+{
+ "ContainsFormulation": true,
+ "variablesInModel": [
+  {
+   "Number": 1,
+   "Abbreviation": "y_{t,t',l}",
+   "Name": "passing order of trains t and t' at a location",
+   "Description": "= 1 if train t blocks location l in L_t ∩ L_t' before train t' (Table A1); defined for one representative location per \\hat{L}_{t,t',l} set, written y_{t,t',\\hat{l}} in (17)-(18).",
+   "Domain": "binary"
+  },
+  {
+   "Number": 2,
+   "Abbreviation": "x_{t,r}",
+   "Name": "route assignment",
+   "Description": "= 1 if train t uses route r in R_t.",
+   "Domain": "binary"
+  },
+  {
+   "Number": 3,
+   "Abbreviation": "v^{\\mathrm{s}}_{t,r,l}",
+   "Name": "scheduled speed profile assignment",
+   "Description": "= 1 if train t runs according to the scheduled speed profile over speed assignment location l in P^r along route r in R_t (new in this paper).",
+   "Domain": "binary"
+  },
+  {
+   "Number": 4,
+   "Abbreviation": "v^{\\mathrm{m}}_{t,r,l}",
+   "Name": "maximum speed profile assignment",
+   "Description": "= 1 if train t runs according to the maximum speed profile over speed assignment location l in P^r along route r in R_t (new in this paper).",
+   "Domain": "binary"
+  },
+  {
+   "Number": 5,
+   "Abbreviation": "o_{t,r,l}",
+   "Name": "occupation starting time",
+   "Description": "Occupation starting time of train t on location l in L^r along route r in R_t; also used at parameter-given locations (sigma_{r,l}, ref^s, ref^m, l_inf), same family.",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 6,
+   "Abbreviation": "o^{+}_{t,r,l}",
+   "Name": "extended occupation time",
+   "Description": "Extended occupation time of train t between l and sigma_{r,l} along route r (dwell time, delay); the paper calls it an auxiliary timing variable, counted here as a decision-variable family.",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 7,
+   "Abbreviation": "b^{\\mathrm{s}}_{t,l}",
+   "Name": "blocking starting time",
+   "Description": "Time at which train t starts blocking location l in L_t (auxiliary timing variable). Table A1 lists b^s and b^e on one line; counted as two families.",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 8,
+   "Abbreviation": "b^{\\mathrm{e}}_{t,l}",
+   "Name": "blocking ending time",
+   "Description": "Time at which train t ends blocking location l in L_t (auxiliary timing variable).",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 9,
+   "Abbreviation": "z_t",
+   "Name": "final delay",
+   "Description": "Delay of train t when exiting the infrastructure and/or arriving at destination; a separate family from z_{t,s} (different index set and meaning).",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 10,
+   "Abbreviation": "z_{t,s}",
+   "Name": "delay at a scheduled stop",
+   "Description": "Delay of train t when stopping at station s in S_t.",
+   "Domain": "continuous"
+  }
+ ],
+ "objective_functions": [
+  {
+   "Name": "(2) weighted total delay plus speed penalty",
+   "Number": 0,
+   "equation": "\\text{minimise} \\quad \\sum_{t \\in T} \\big( w_t (z_t + \\sum_{s \\in S_t} z_{t,s}) + w \\sum_{\\substack{r \\in R_t: \\\\ l \\in \\mathrm{P}^r}} v^{\\mathrm{m}}_{t,r,l} \\big).",
+   "description": "Weighted delays at scheduled stops (z_{t,s}) and at exit (z_t), w_t per train, plus w times the number of maximum speed profiles assigned (v^m). Weights are parameters, so linear.",
+   "VariablesIncluded": [
+    4,
+    9,
+    10
+   ],
+   "Linear": true
+  }
+ ],
+ "constraints": [
+  {
+   "Name": "(3) start no earlier than the initial entry time on the assigned route",
+   "Number": 1,
+   "equation": "o_{t,r,l} \\ge \\mathit{init}_t \\, x_{t,r} \\qquad \\forall t \\in T,\\ r \\in R_t,\\ l \\in L^r,",
+   "description": "Occupation starting time o at least init_t on the route with x_{t,r} = 1; parameter times binary, linear.",
+   "VariablesIncluded": [
+    2,
+    5
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(4) zero occupation times on unassigned routes",
+   "Number": 2,
+   "equation": "o_{t,r,l} \\le M \\, x_{t,r} \\qquad \\forall t \\in T,\\ r \\in R_t,\\ l \\in L^r,",
+   "description": "Big-M bound: o is zero on routes not assigned to train t; linear.",
+   "VariablesIncluded": [
+    2,
+    5
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(5) one route per train",
+   "Number": 3,
+   "equation": "\\sum_{r \\in R_t} x_{t,r} = 1 \\qquad \\forall t \\in T,",
+   "description": "Exactly one route in R_t is assigned to each train.",
+   "VariablesIncluded": [
+    2
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(6) one speed profile per speed assignment location",
+   "Number": 4,
+   "equation": "v^{\\mathrm{m}}_{t,r,l} + v^{\\mathrm{s}}_{t,r,l} = x_{t,r} \\qquad \\forall t \\in T,\\ r \\in R_t,\\ l \\in \\mathrm{P}^r,",
+   "description": "Maximum or scheduled speed profile on each speed assignment location of the assigned route, none on unassigned routes.",
+   "VariablesIncluded": [
+    2,
+    3,
+    4
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(7) occupation starting time of the succeeding location",
+   "Number": 5,
+   "equation": "o_{t,r,\\sigma_{r,l}} = o_{t,r,l} + o^{+}_{t,r,l} + \\mathit{rt}_{t,r,l} \\, x_{t,r} + \\mathit{\\Delta rt}_{t,r,l} v^{\\mathrm{s}}_{t,r,\\rho_{r,l}} \\qquad \\forall t \\in T,\\ r \\in R_t,\\ l \\in L^r,",
+   "description": "o at sigma_{r,l} = o at l + extended occupation o^+ + running time, plus the additional running time when v^s at rho_{r,l} is 1. Both o terms are family 5.",
+   "VariablesIncluded": [
+    2,
+    3,
+    5,
+    6
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(8) dwell time in the extended occupation time",
+   "Number": 6,
+   "equation": "o^{+}_{t,r,l} \\ge \\sum_{\\substack{s \\in S_t: \\\\ l \\in S_{t,s} \\cap L^r}} \\mathit{dw}_{t,s} \\, x_{t,r} \\qquad \\forall t \\in T,\\ r \\in R_t,\\ l \\in \\bigcup_{s \\in S_t} L_{t,s},",
+   "description": "o^+ covers the minimum dwell time at scheduled stops. The sum's condition is printed l in S_{t,s} ∩ L^r (L_{t,s} in (9)); kept as printed, no effect on structure.",
+   "VariablesIncluded": [
+    2,
+    6
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(9) no departure before the scheduled departure time",
+   "Number": 7,
+   "equation": "o_{t,r,\\sigma_{r,l}} \\ge \\sum_{\\substack{s \\in S_t: \\\\ l \\in L_{t,s} \\cap L^r}} d_{t,s} \\, x_{t,r} \\qquad \\forall t \\in T,\\ r \\in R_t,\\ l \\in \\bigcup_{s \\in S_t} L_{t,s},",
+   "description": "o at the succeeding location sigma_{r,l} is at least the scheduled departure d_{t,s} on the assigned route.",
+   "VariablesIncluded": [
+    2,
+    5
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(10) delay at scheduled stops",
+   "Number": 8,
+   "equation": "z_{t,s} \\ge \\sum_{r \\in R_t} \\sum_{l \\in L^r \\cap L_{t,s}} \\big( o_{t,r,l} + \\mathit{rt}_{r,t,l} x_{t,r} + \\mathit{\\Delta rt}_{t,r,l} v^{\\mathrm{s}}_{t,r,\\rho_{r,l}} \\big) - a_{t,s} \\qquad \\forall t \\in T, s \\in S_t,",
+   "description": "z_{t,s} at least arrival at the stopping location (o + running time, DTG term with v^s) minus a_{t,s}. Printed rt_{r,t,l} (index order differs from rt_{t,r,l}); kept as printed.",
+   "VariablesIncluded": [
+    2,
+    3,
+    5,
+    10
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(11) delay at exit or destination",
+   "Number": 9,
+   "equation": "z_t \\ge \\sum_{r \\in R_t} o_{t,r,l_{\\infty}} - \\mathit{sched}_t \\qquad \\forall t \\in T,",
+   "description": "z_t at least the occupation starting time at the dummy destination l_inf minus sched_t.",
+   "VariablesIncluded": [
+    5,
+    9
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(12) blocking start of track or first switch locations, scheduled-speed braking point",
+   "Number": 10,
+   "equation": "b^s_{t,l} \\le \\sum_{r \\in R_t: l \\in L^r} (o_{t,r,ref^s_{t,r,l}} + (lag^s_{t,r,l} - for_{r,l}) x_{t,r}) \\quad \\forall t \\in T, l \\in L_t: s_l = 0 \\lor \\nexists r \\in R_t: s_{\\pi_{r,l}} = 1",
+   "description": "b^s at most o at the reference location ref^s (a parameter index of o, still family 5) plus (lag^s - for) on the assigned route.",
+   "VariablesIncluded": [
+    2,
+    5,
+    7
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(13) blocking start of track or first switch locations, maximum-speed braking point",
+   "Number": 11,
+   "equation": "b^s_{t,l} \\le \\sum_{r \\in R_t: l \\in L^r} (o_{t,r,ref^m_{t,r,l}} + (lag^m_{t,r,l} - for_{r,l}) x_{t,r} + M v^s_{t,r,\\rho_{r,ref^s_{t,r,l}}}) \\quad \\forall t \\in T, l \\in L_t: s_l = 0 \\lor ...",
+   "description": "As (12) with ref^m and lag^m, plus big-M term M v^s (linear). Nested ref^s printed with an italic s. Quantifier abbreviated in this field.",
+   "VariablesIncluded": [
+    2,
+    3,
+    5,
+    7
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(14) blocking start of other switch locations, scheduled-speed braking point",
+   "Number": 12,
+   "equation": "b^s_{t,l} \\le \\sum_{r \\in R_t: l \\in L^r} (o_{t,r,ref^s_{t,r,\\pi_{r,l}}} + (lag^s_{t,r,\\pi_{r,l}} - for_{r,\\pi_{r,l}}) x_{t,r} \\quad \\forall t \\in T, l \\in L_t: s_l = 1 \\land \\exists r \\in R_t: s_{\\pi_{r,l}} = 1",
+   "description": "(12) for the preceding location pi_{r,l}. The closing big parenthesis is missing in the paper; transcribed as printed.",
+   "VariablesIncluded": [
+    2,
+    5,
+    7
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(15) blocking start of other switch locations, maximum-speed braking point",
+   "Number": 13,
+   "equation": "b^s_{t,l} \\le \\sum_{r \\in R_t: l \\in L^r} (o_{t,r,ref^m_{t,r,\\pi_{r,l}}} + (lag^m_{t,r,\\pi_{r,l}} - for_{r,\\pi_{r,l}}) x_{t,r} + M v^s_{t,r,\\rho_{r,ref^s_{t,r,\\pi_{r,l}}}}) \\quad \\forall t, l: s_l = 1 \\land ...",
+   "description": "(13) for the preceding location pi_{r,l}; big-M term M v^s (linear). Quantifier abbreviated in this field.",
+   "VariablesIncluded": [
+    2,
+    3,
+    5,
+    7
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(16) blocking end time",
+   "Number": 14,
+   "equation": "b^e_{t,l} = \\sum_{r \\in R_t: l \\in L^r} (o_{t,r,\\sigma_{r,l}} + (ct_{t,r,l} + rel_{r,l}) x_{t,r} + \\Delta ct_{t,r,l} v^s_{t,r,\\rho_{r,l}} + \\sum_{l' \\in L^r: l' \\in OL_{t,r,l}} o^+_{t,r,l'}) \\quad \\forall t \\in T, l \\in L_t",
+   "description": "b^e = o at sigma_{r,l} + (ct + rel) x + DTG clearing term with v^s + o^+ over OL_{t,r,l}. Printed ct_{t,r,l}; Sect. 4.2.1 names it cl_{t,r,l}.",
+   "VariablesIncluded": [
+    2,
+    3,
+    5,
+    6,
+    8
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(17) no overlap of blocking times, t before t'",
+   "Number": 15,
+   "equation": "b^{\\mathrm{e}}_{t,l} - M \\, (1 - y_{t,t',\\hat{l}}) \\le b^{\\mathrm{s}}_{t',l} \\qquad \\forall t, t' \\in T, \\text{index}\\ t < \\text{index}\\ t',\\ l, \\hat{l} \\in L_t \\cap L_{t'} : l \\in \\hat{L}_{t,t',\\hat{l}},",
+   "description": "Disjunctive big-M: with y = 1 the blocking of t ends before t' starts. y is written with the representative location \\hat{l}; same family as y_{t,t',l}.",
+   "VariablesIncluded": [
+    1,
+    7,
+    8
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(18) no overlap of blocking times, t' before t",
+   "Number": 16,
+   "equation": "b^{\\mathrm{e}}_{t',l} - M \\, y_{t,t',\\hat{l}} \\le b^{\\mathrm{s}}_{t,l} \\qquad \\forall t, t' \\in T, \\text{index}\\ t < \\text{index}\\ t',\\ l, \\hat{l} \\in L_t \\cap L_{t'} : l \\in \\hat{L}_{t,t',\\hat{l}}.",
+   "description": "Disjunctive big-M counterpart of (17) for y = 0.",
+   "VariablesIncluded": [
+    1,
+    7,
+    8
+   ],
+   "Linear": true
+  }
+ ]
+}
