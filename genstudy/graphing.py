@@ -36,7 +36,7 @@ from pydantic import BaseModel, ConfigDict, Field, ValidationError
 from genstudy.config import GrapherSpec
 from genstudy.llm import CallResult, ChatClient
 
-GRAPHER_PROMPT_VERSION = "2026.10.2"
+GRAPHER_PROMPT_VERSION = "2026.10.3"
 
 #: Length caps on every text field. Without them, greedy decoding under the schema
 #: constraint can loop while copying an equation and run into the token limit (17 of
@@ -100,6 +100,12 @@ Text:
 """
 
 
+#: In ``prompt`` mode the schema travels in the prompt instead of the decoder.
+PROMPT_MODE_SUFFIX = (
+    "\n\nReturn only one JSON object that matches this JSON schema, without code fences:\n"
+)
+
+
 def _inline_refs(schema: dict[str, Any]) -> dict[str, Any]:
     """Replace ``$ref``s by their definitions (some guided decoders reject ``$defs``)."""
     defs = schema.get("$defs", {})
@@ -124,6 +130,7 @@ def grapher_fingerprint() -> dict[str, str]:
         "GRAPHER_SYSTEM": GRAPHER_SYSTEM,
         "GRAPHER_TASK": GRAPHER_TASK,
         "MODEL_SCHEMA": json.dumps(MODEL_SCHEMA, sort_keys=True),
+        "PROMPT_MODE_SUFFIX": PROMPT_MODE_SUFFIX,
     }
     out = {k: hashlib.sha256(v.encode("utf-8")).hexdigest() for k, v in texts.items()}
     out["version"] = GRAPHER_PROMPT_VERSION
@@ -131,20 +138,29 @@ def grapher_fingerprint() -> dict[str, str]:
 
 
 def grapher_body(grapher: GrapherSpec, answer: str, *, seed_offset: int = 0) -> dict[str, Any]:
-    return {
+    task = GRAPHER_TASK + answer.strip()
+    body: dict[str, Any] = {
         "model": grapher.served_id,
         "messages": [
             {"role": "system", "content": GRAPHER_SYSTEM},
-            {"role": "user", "content": GRAPHER_TASK + answer.strip()},
+            {"role": "user", "content": task},
         ],
         "temperature": grapher.temperature,
         "seed": grapher.seed + seed_offset,
         "max_tokens": grapher.max_tokens,
-        "response_format": {
+    }
+    if grapher.mode == "schema":
+        body["response_format"] = {
             "type": "json_schema",
             "json_schema": {"name": "lp2graph_model", "schema": MODEL_SCHEMA, "strict": True},
-        },
-    }
+        }
+        if grapher.whitespace_pattern is not None:
+            body["guided_whitespace_pattern"] = grapher.whitespace_pattern
+    elif grapher.mode == "prompt":
+        body["messages"][1]["content"] = task + PROMPT_MODE_SUFFIX + json.dumps(MODEL_SCHEMA)
+    else:
+        raise ValueError(f"unknown grapher mode {grapher.mode!r}")
+    return body
 
 
 @dataclass(frozen=True)

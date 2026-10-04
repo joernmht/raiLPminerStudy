@@ -82,12 +82,21 @@ class PacingSpec:
 
 @dataclass(frozen=True)
 class GrapherSpec:
-    """The model that turns a generated answer into a structure (validated separately)."""
+    """The model that turns a generated answer into a structure (validated separately).
+
+    ``mode`` is how the reply is constrained: ``schema`` (server-side JSON-schema
+    decoding, optionally with a ``whitespace_pattern`` for the decoder) or ``prompt``
+    (the schema is stated in the prompt; the reply is validated here). Greedy
+    schema-constrained decoding can loop on whitespace, so the mode is chosen on
+    the validation cases like the model.
+    """
 
     served_id: str
     temperature: float = 0.0
     seed: int = 7
     max_tokens: int = 8000
+    mode: str = "schema"
+    whitespace_pattern: str | None = None
 
 
 @dataclass(frozen=True)

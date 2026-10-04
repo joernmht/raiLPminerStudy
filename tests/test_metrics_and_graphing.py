@@ -159,3 +159,13 @@ def test_every_text_field_is_length_capped():
 
     found = list(strings(MODEL_SCHEMA))
     assert found and all("maxLength" in s for s in found)
+
+
+def test_grapher_modes():
+    schema_mode = grapher_body(GrapherSpec("g", whitespace_pattern=r"[ \n]?"), "x")
+    assert schema_mode["guided_whitespace_pattern"] == r"[ \n]?"
+    prompt_mode = grapher_body(GrapherSpec("g", mode="prompt"), "x")
+    assert "response_format" not in prompt_mode
+    assert prompt_mode["messages"][1]["content"].endswith(json.dumps(MODEL_SCHEMA))
+    with pytest.raises(ValueError):
+        grapher_body(GrapherSpec("g", mode="nope"), "x")

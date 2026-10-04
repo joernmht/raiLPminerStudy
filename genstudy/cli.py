@@ -155,10 +155,19 @@ def cmd_status(spec: StudySpec, args: argparse.Namespace) -> int:
     return 0
 
 
-def _grapher(spec: StudySpec, served_id: str | None) -> GrapherSpec:
+def _grapher(
+    spec: StudySpec, served_id: str | None, mode: str | None = None, ws: str | None = None
+) -> GrapherSpec:
     if served_id:
         base = spec.grapher or GrapherSpec(served_id=served_id)
-        return GrapherSpec(served_id, base.temperature, base.seed, base.max_tokens)
+        return GrapherSpec(
+            served_id,
+            base.temperature,
+            base.seed,
+            base.max_tokens,
+            mode or base.mode,
+            ws if ws is not None else base.whitespace_pattern,
+        )
     if spec.grapher is None:
         sys.exit("no [grapher] in the study spec and no --served-id given")
     return spec.grapher
@@ -171,9 +180,10 @@ def _append(path: Path, record: dict[str, Any]) -> None:
 
 
 def cmd_validate_grapher(spec: StudySpec, args: argparse.Namespace) -> int:
-    grapher = _grapher(spec, args.served_id)
+    grapher = _grapher(spec, args.served_id, args.mode, args.whitespace_pattern)
     client = _client(spec)
-    out = spec.root / "instrument" / f"{_slug(grapher.served_id)}.jsonl"
+    config = f"{grapher.mode}{'-ws' if grapher.whitespace_pattern is not None else ''}"
+    out = spec.root / "instrument" / f"{_slug(grapher.served_id)}.{config}.jsonl"
     done = {(r["case_id"], r["repeat"]) for r in RunStore(out).records()}
     cases = list(instrument.cases())[: args.limit] if args.limit else list(instrument.cases())
     for case in cases:
@@ -197,6 +207,8 @@ def cmd_validate_grapher(spec: StudySpec, args: argparse.Namespace) -> int:
                     "variant": case.variant,
                     "repeat": rep,
                     "grapher": grapher.served_id,
+                    "grapher_mode": grapher.mode,
+                    "grapher_whitespace_pattern": grapher.whitespace_pattern,
                     "grapher_prompts": grapher_fingerprint(),
                     "gate_passed": notation(case.text).passed,
                     "expected": asdict(case.expected),
@@ -265,6 +277,8 @@ def main(argv: list[str] | None = None) -> int:
     sub.add_parser("status")
     p = sub.add_parser("validate-grapher")
     p.add_argument("--served-id")
+    p.add_argument("--mode", choices=["schema", "prompt"])
+    p.add_argument("--whitespace-pattern")
     p.add_argument("--repeats", type=int, default=2)
     p.add_argument("--limit", type=int)
     p = sub.add_parser("graph")
