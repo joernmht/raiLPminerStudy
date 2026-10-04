@@ -1,0 +1,44 @@
+# End-to-end pilot of the harness before the production runs: one model, every workflow,
+# one temperature, one replicate, on a production input. Data stay out of paper0_2026.
+study_id = "pilot-2026"
+base_url = "https://llm.scads.ai/v1"
+api_key_env = "SCADS_API_KEY"
+seed = 1
+
+[pacing]
+min_interval_s = 3.0
+max_requests_per_day = 1500
+request_timeout_s = 900.0
+max_tries = 6
+max_tool_rounds = 4
+max_subcalls = 10
+ps_count_min = 2
+ps_count_max = 5
+
+[models.gptoss]
+served_id = "openai/gpt-oss-120b"
+family = "gpt-oss (OpenAI)"
+licence = "Apache-2.0"
+role = "pilot"
+max_tokens = 16000
+
+[grapher]
+served_id = "google/gemma-4-26B-A4B-it"
+mode = "prompt"
+temperature = 0.0
+seed = 7
+max_tokens = 8000
+
+[papers.P2]
+doi = "10.1080/23249935.2025.2592225"
+title = "Conflict detection and resolution for distance-to-go railway signalling"
+licence = "CC BY 4.0"
+input = "../paper0_2026/inputs/P2.md"
+
+[[experiments]]
+name = "pilot"
+papers = ["P2"]
+models = ["gptoss"]
+workflows = ["ZS", "CFC", "OE", "PS"]
+temperatures = [0.6]
+replicates = 1

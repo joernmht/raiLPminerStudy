@@ -67,36 +67,37 @@ temperature = 0.0
 seed = 7
 max_tokens = 8000
 
-# Input papers: open access under CC BY, chosen by the rule in docs/adr/0002.
-# Placeholders until the selection is confirmed; `run` refuses while an input is missing.
+# Input papers: open access under a Creative Commons licence, not MDPI, chosen by the rule in
+# docs/adr/0002; attribution in inputs/README.md. `run` refuses while an input is missing.
 [papers.P1]
-doi = "TBD"
-title = "TBD"
-licence = "TBD"
+# Anchor if its MILP is confirmed (Joern checks the Bath accepted manuscript); fallback anchor: P2.
+doi = "10.1287/trsc.2025.0137"
+title = "Integrated optimization of train rescheduling and speed management during partial blockages: a decomposition approach"
+licence = "CC BY (accepted manuscript)"
 input = "inputs/P1.md"
 
 [papers.P2]
-doi = "TBD"
-title = "TBD"
-licence = "TBD"
+doi = "10.1080/23249935.2025.2592225"
+title = "Conflict detection and resolution for distance-to-go railway signalling"
+licence = "CC BY 4.0"
 input = "inputs/P2.md"
 
 [papers.P3]
-doi = "TBD"
-title = "TBD"
-licence = "TBD"
+doi = "10.1016/j.trb.2025.103189"
+title = "An exact and heuristic framework for rolling stock rescheduling with railway infrastructure availability constraints"
+licence = "CC BY 4.0"
 input = "inputs/P3.md"
 
 [papers.P4]
-doi = "TBD"
-title = "TBD"
-licence = "TBD"
+doi = "10.1016/j.trc.2026.105841"
+title = "Learning-based model predictive control for passenger-oriented train rescheduling with flexible train composition"
+licence = "CC BY 4.0"
 input = "inputs/P4.md"
 
 [papers.P5]
-doi = "TBD"
-title = "TBD"
-licence = "TBD"
+doi = "10.1016/j.jrtpm.2024.100496"
+title = "Efficient real-time rail traffic optimization: decomposition of rerouting, reordering, and rescheduling problems"
+licence = "CC BY-NC 4.0"
 input = "inputs/P5.md"
 
 # Experiment 1: the full factorial on the anchor paper (2025: 4 x 4 x 3, >= 14 replicates).
