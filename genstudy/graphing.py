@@ -29,14 +29,21 @@ import copy
 import hashlib
 import json
 from dataclasses import dataclass
-from typing import Any, Literal
+from typing import Annotated, Any, Literal
 
-from pydantic import BaseModel, ConfigDict, ValidationError
+from pydantic import BaseModel, ConfigDict, Field, ValidationError
 
 from genstudy.config import GrapherSpec
 from genstudy.llm import CallResult, ChatClient
 
-GRAPHER_PROMPT_VERSION = "2026.10.1"
+GRAPHER_PROMPT_VERSION = "2026.10.2"
+
+#: Length caps on every text field. Without them, greedy decoding under the schema
+#: constraint can loop while copying an equation and run into the token limit (17 of
+#: the first 40 validation parses with Gemma-4 did, schema 2026.10.1); the cap lets the
+#: decoder close the string. The metrics use none of these texts.
+ShortText = Annotated[str, Field(max_length=120)]
+LongText = Annotated[str, Field(max_length=240)]
 
 
 class _Strict(BaseModel):
@@ -45,17 +52,17 @@ class _Strict(BaseModel):
 
 class Variable(_Strict):
     Number: int
-    Abbreviation: str
-    Name: str
-    Description: str
+    Abbreviation: ShortText
+    Name: ShortText
+    Description: LongText
     Domain: Literal["binary", "integer", "continuous", "unknown"]
 
 
 class Equation(_Strict):
-    Name: str
+    Name: ShortText
     Number: int
-    equation: str
-    description: str
+    equation: LongText
+    description: LongText
     VariablesIncluded: list[int]
     Linear: bool
 

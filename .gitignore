@@ -10,3 +10,5 @@ dist/
 # Per-machine request counters (fair-use budget), never data.
 studies/*/state/
 # Scratch for a run in flight is the .jsonl itself; nothing else is generated here.
+# Console logs of detached runs (the records are the data, the logs are not).
+studies/*/logs/

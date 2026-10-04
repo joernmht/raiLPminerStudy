@@ -142,3 +142,20 @@ def test_notation_threshold_is_more_than_half():
     assert notation(r"$x \le 1$, $y \ge 0$, $\sum_i z_i$").passed is True
     assert notation(r"$x \le 1$, $y \ge 0$").passed is False
     assert notation(r"\left| x \right|").passed is False
+
+
+def test_every_text_field_is_length_capped():
+    """Runaway strings were the grapher's failure mode; the decoder must be able to stop."""
+
+    def strings(node):
+        if isinstance(node, dict):
+            if node.get("type") == "string" and "enum" not in node:
+                yield node
+            for v in node.values():
+                yield from strings(v)
+        elif isinstance(node, list):
+            for v in node:
+                yield from strings(v)
+
+    found = list(strings(MODEL_SCHEMA))
+    assert found and all("maxLength" in s for s in found)
