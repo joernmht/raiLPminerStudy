@@ -2,7 +2,8 @@
 
 The 2026 rerun of the **raiLPminer** experiment: large language models generate
 mixed-integer linear programming (MILP) formulations for railway rescheduling from
-the abstract and introduction of a research paper, in four workflows
+the introduction of a research paper (the 2025 pilot also sent the abstract), in four
+workflows
 (Zero-Shot, Code-First-Chain, Operator-Expert, Parallelization-Selection) and at
 three temperatures. Each answer is turned into a variable-equation graph
 (LP2Graph), filtered on completeness and coherence, and measured on size,

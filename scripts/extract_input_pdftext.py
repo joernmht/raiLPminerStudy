@@ -1,18 +1,17 @@
-"""Extract a paper's input text (abstract + introduction) from PDF text.
+"""Extract a paper's input text (its introduction) from PDF text.
 
     python3 scripts/extract_input_pdftext.py <text.txt> <out.md> \
-        --abstract-start '^Abstract$' --abstract-end '^Keywords' \
         --intro-start '^Introduction$' --intro-end '^Conflict detection and resolution modelling$' \
         [--drop '^Running header of the paper']
 
 For papers without publisher XML. The text comes from a PDF extraction with page
 markers (``=== PAGE n ===``); the script keeps the lines between the markers (and
-the rest of the start line, as in ``Abstract. Text...``), drops page markers, lone
-page and section numbers, citation footers and every line matching a ``--drop``
-pattern (running headers name the title and authors, which must not reach the
-model), mends hyphenation at line ends and rebuilds paragraphs (a line that ends
-a sentence and is clearly shorter than the text width ends a paragraph). The
-output format is that of scripts/extract_input.py.
+the rest of the start line, should text follow the marker on it), drops page
+markers, lone page and section numbers, citation footers and every line matching
+a ``--drop`` pattern (running headers name the title and authors, which must not
+reach the model), mends hyphenation at line ends and rebuilds paragraphs (a line
+that ends a sentence and is clearly shorter than the text width ends a
+paragraph). The output format is that of scripts/extract_input.py.
 """
 
 from __future__ import annotations
@@ -121,8 +120,6 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("text", type=Path)
     ap.add_argument("out", type=Path)
-    ap.add_argument("--abstract-start", required=True)
-    ap.add_argument("--abstract-end", required=True)
     ap.add_argument("--intro-start", required=True)
     ap.add_argument("--intro-end", required=True)
     ap.add_argument("--drop", action="append", default=[], help="drop lines matching this")
@@ -130,11 +127,8 @@ def main() -> int:
     lines = args.text.read_text(encoding="utf-8").splitlines()
     drop = tuple(args.drop)
     vocab = vocabulary(_clean(lines, drop))
-    abstract = " ".join(
-        _paragraphs(_clean(_between(lines, args.abstract_start, args.abstract_end), drop), vocab)
-    )
     intro = _paragraphs(_clean(_between(lines, args.intro_start, args.intro_end), drop), vocab)
-    text = abstract + "\n\nIntroduction\n\n" + "\n\n".join(intro) + "\n"
+    text = "Introduction\n\n" + "\n\n".join(intro) + "\n"
     args.out.write_text(text, encoding="utf-8", newline="\n")
     print(f"{len(text.split())} words, {len(intro)} paragraphs written to {args.out}")
     return 0

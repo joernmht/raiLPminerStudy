@@ -41,9 +41,16 @@ disruptions). One paper is the anchor of experiment 1.
 
 ## The input text
 
-`inputs/Pn.md` holds exactly the text that is sent: the abstract, a blank line, the word
-"Introduction" and the introduction, with citation markers kept as in the pilot and
-extraction artifacts removed. Title and authors are not part of the input (they would cue
+`inputs/Pn.md` holds exactly the text that is sent: the word "Introduction" and the
+paper's introduction, with citation markers kept as in the pilot and extraction artifacts
+removed. The pilot also sent the abstract; the rerun does not (Joern, 2026-10-04: "throw
+out the abstract. I think introduction only is perfectly fine, I can't argue the
+abstract"). An abstract summarises the paper's own model and solution approach (P1: "A
+mixed-integer linear programming model is formulated to simultaneously optimize train
+times, orders, routes and speed profiles"), which steers a model towards reproducing it;
+the introduction carries the problem and its context with less of that. Introductions
+can still describe the contribution (P1 lists its MILP among its contributions), so the
+input is less leading, not free of the paper's approach. Title and authors are not part of the input (they would cue
 recall); the attribution lives in `study.toml` and `inputs/README.md`. The reference
 formulation is kept in `references/Pn.md` with its annotated structure in
 `references/Pn.json` (the LP2Graph v2 schema), which also serve as realistic parser test

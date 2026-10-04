@@ -75,6 +75,8 @@ DEPARTURES: tuple[str, ...] = (
     "instances, each with FACTORY_CALL (one model per instance).",
     "The 2025 table shows the operator's system prompt and call prompt run together; the "
     "rerun sends them as two messages (OPERATOR_SYSTEM, OPERATOR_CALL).",
+    "The input is the paper's introduction; the 2025 run also sent the abstract, which "
+    "summarises the paper's own model and solution approach (docs/adr/0002).",
 )
 
 

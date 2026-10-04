@@ -3,7 +3,7 @@
 Paper 0 (*raiLPminer: LLM-driven optimization model mining for railway
 rescheduling and the case for deterministic structural validation*) generates
 MILP formulations from the abstract and introduction of railway rescheduling
-papers with four workflows (Zero-Shot, Code-First-Chain, Operator-Expert,
+papers (the rerun sends the introduction only, docs/adr/0002) with four workflows (Zero-Shot, Code-First-Chain, Operator-Expert,
 Parallelization-Selection), turns each answer into a variable-equation graph
 (LP2Graph) and filters and selects on structural metrics.
 
