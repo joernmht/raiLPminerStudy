@@ -7,7 +7,7 @@ the rolling-stock MILP of Sect. 4.1 and `P3b` the timetable MILP of Sect. 4.2.
 
 | Key | Text source | How |
 |---|---|---|
-| P1 | pending (MILP of the accepted manuscript to be confirmed) | |
+| P1 | CC BY accepted manuscript (University of Bath repository) | transcribed by hand from 400-600 dpi crops: Tables A.1-A.2, model (13) of Appendix D, Sections 4.1-4.4 and Section 4.5 from (6g) to (6q) with their prose; objective (1), which (13) restates linearly, and the dynamics (6a)-(6f) left out; checked by compiling and against the PDF's text layer |
 | P2 | CC BY PDF (authors' HAL deposit of the article) | transcribed by hand: Sect. 4.2.1 notation, objective (2), constraints (3)-(18) with their explanations; every equation checked against the page |
 | P3, P3b | Elsevier XML (CC BY 4.0) | `scripts/extract_reference.py --section 4.1` (and `4.2`) |
 | P4 | Elsevier XML (CC BY 4.0) | `scripts/extract_reference.py`: notation Tables 2-4 and the formulas of the MILP-based MPC, numbered as in the paper |
@@ -33,20 +33,24 @@ The structural rules of the study, applied to the published models:
 
 | Key | Variables | Objectives | Constraints | Complete | Coherent | Linear |
 |---|---|---|---|---|---|---|
+| P1 | 22 | 1 | 38 | no: `delta`, `z` occur only in (6j) | yes | yes |
 | P2 | 10 | 1 | 16 | yes | yes | yes |
 | P3 | 11 | 1 | 14 | no: `I_m^t` occurs only in (7) | yes | yes |
 | P3b | 5 | 1 | 10 | yes | yes | yes |
 | P4 | 20 | 1 | 24 | no: `gamma` occurs only in (27) | yes | no: (15), (29) |
 | P5 | 12 | 1 | 26 | no: `d` occurs only in (5) | yes | yes |
 
-Three of the five annotated models (P3, P4, P5) fail the completeness rule (every
-variable in at least two equations), for three different reasons, none of which makes the
-model wrong:
-in P3 the inventory `I_m^t` is defined by (7) and constrained by its non-negative domain,
+Four of the six annotated models (P1, P3, P4, P5) fail the completeness rule (every
+variable in at least two equations), each for a reason that lies in how the model is
+written rather than in what it models. In P1 the variables of the piecewise-affine time
+approximation (`delta`, `z`) enter only (6j), through the definition (6h) of G, because the
+constraints that tie them to the kinetic energy, (12d)-(12g), sit in Appendix C outside the
+constraint list of model (13); in P3 the inventory `I_m^t` is defined by (7) and constrained by its non-negative domain,
 which is not an equation; in P4 the sign selector `gamma` belongs to a linearisation that
 the paper numbers as one equation; in P5 the delay `d` is defined by (5) and reported but
 not used. P4 is labelled an MILP but, as printed, multiplies the binary `xi` with `y` in
-(15) and with `a` in (29). The completeness rule therefore measures how a formulation is
+(15) and with `a` in (29); P1 states its objective (1) with absolute values and a maximum
+and gives the linear model (13) only in an appendix. The completeness rule therefore measures how a formulation is
 written, not whether it is correct.
 
 ## The parser check

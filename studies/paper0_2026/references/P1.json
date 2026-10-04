@@ -1,0 +1,606 @@
+{
+ "ContainsFormulation": true,
+ "variablesInModel": [
+  {
+   "Number": 1,
+   "Abbreviation": "a_{i,n}",
+   "Name": "arrival time",
+   "Description": "Arrival time of train i at the station n (Table A.2); also written a_{i,n+1} and a_{j,n}.",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 2,
+   "Abbreviation": "d_{i,n}",
+   "Name": "departure time",
+   "Description": "Departure time of train i from station n (Table A.2). Judgement: d_{i,p} at block section p ((3c), (6o)) counts here: Table A.2 defines no separate variable and (6o) calls it the departure time from block section p.",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 3,
+   "Abbreviation": "r_{i,n}",
+   "Name": "running time",
+   "Description": "Running time of train i between stations n and n+1 (Table A.2). r_{i,n,n'} in (6p)-(6q) is defined in Sect. 4.5 as the sum of r_{i,\\tilde{n}} for \\tilde{n} = n..n'-1: same family.",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 4,
+   "Abbreviation": "E_{i,n,n',k}",
+   "Name": "kinetic energy per mass unit",
+   "Description": "Kinetic energy per mass unit of train i in the k-th cell between consecutive stops n and n' (Table A.2).",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 5,
+   "Abbreviation": "u_{i,n,n',k}",
+   "Name": "traction or braking force",
+   "Description": "Traction or braking force of train i in the k-th cell between consecutive stops n and n' (Table A.2); printed u_{i,n,n'k} in line 6 of (13), same family.",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 6,
+   "Abbreviation": "t_{i,n,n',k}",
+   "Name": "arrival time at a cell",
+   "Description": "Arrival time of train i at the k-th discrete cell between consecutive stops n and n'. Table A.2 prints t_{i,n,n'k} (comma before k missing); the equations write t_{i,n,n',k}.",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 7,
+   "Abbreviation": "\\lambda_{i,j,n}",
+   "Name": "departure order at a station",
+   "Description": "Binary, 1 if train i leaves station n earlier than train j, for i, j in I_s (same direction) (Table A.2).",
+   "Domain": "binary"
+  },
+  {
+   "Number": 8,
+   "Abbreviation": "\\gamma_{i,j,n}",
+   "Name": "order on the unblocked track",
+   "Description": "Binary, 1 if train i in I_b uses the unblocked track between stations n and n+1 earlier than train j in I \\ I_b (Table A.2).",
+   "Domain": "binary"
+  },
+  {
+   "Number": 9,
+   "Abbreviation": "\\pi_{i,n}",
+   "Name": "rerouting to the unblocked track",
+   "Description": "Binary, 1 if train i from the blocked track is rerouted to the unblocked track between stations n and n+1 (Table A.2). The prose of Sect. 4.4 once writes pi_i.",
+   "Domain": "binary"
+  },
+  {
+   "Number": 10,
+   "Abbreviation": "\\Omega^{\\mathrm{d}}_{i,n,1}",
+   "Name": "departure after W_1",
+   "Description": "Binary, 1 if train i departs from station n after W_1 (Table A.2, auxiliary variable).",
+   "Domain": "binary"
+  },
+  {
+   "Number": 11,
+   "Abbreviation": "\\Omega^{\\mathrm{d}}_{i,n,2}",
+   "Name": "departure before W_2",
+   "Description": "Binary, 1 if train i departs from station n before W_2 (Table A.2, auxiliary variable).",
+   "Domain": "binary"
+  },
+  {
+   "Number": 12,
+   "Abbreviation": "\\Omega^{\\mathrm{d}}_{i,n,3}",
+   "Name": "departure inside the disruption window",
+   "Description": "Binary, 1 if Omega^d_{i,n,1} = 1 and Omega^d_{i,n,2} = 1 (Table A.2, auxiliary variable).",
+   "Domain": "binary"
+  },
+  {
+   "Number": 13,
+   "Abbreviation": "\\Omega^{\\mathrm{a}}_{i,n+1,1}",
+   "Name": "arrival after W_1",
+   "Description": "Binary, 1 if train i arrives at station n+1 after W_1 (Table A.2, auxiliary variable).",
+   "Domain": "binary"
+  },
+  {
+   "Number": 14,
+   "Abbreviation": "\\Omega^{\\mathrm{a}}_{i,n+1,2}",
+   "Name": "arrival before W_2",
+   "Description": "Binary, 1 if train i arrives at station n+1 before W_2 (Table A.2, auxiliary variable).",
+   "Domain": "binary"
+  },
+  {
+   "Number": 15,
+   "Abbreviation": "\\Omega^{\\mathrm{a}}_{i,n+1,3}",
+   "Name": "arrival inside the disruption window",
+   "Description": "Binary, 1 if Omega^a_{i,n+1,1} = 1 and Omega^a_{i,n+1,2} = 1 (Table A.2, auxiliary variable).",
+   "Domain": "binary"
+  },
+  {
+   "Number": 16,
+   "Abbreviation": "\\Omega^{\\mathrm{s}}_i",
+   "Name": "train spans the disruption window",
+   "Description": "Binary, 1 if Omega^d_{i,n,1} = 0 and Omega^a_{i,n+1,2} = 0 (Table A.2, auxiliary variable). Indexed by i only, although (4g)-(4i) are written for every n.",
+   "Domain": "binary"
+  },
+  {
+   "Number": 17,
+   "Abbreviation": "\\tilde{d}_{i,n}",
+   "Name": "absolute departure deviation",
+   "Description": "Auxiliary variable of Appendix D, \\tilde{d}_{i,n} = |d_{i,n} - \\overline{d}_{i,n}|, linearized by lines 1-2 of (13).",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 18,
+   "Abbreviation": "\\tilde{a}_{i,n}",
+   "Name": "absolute arrival deviation",
+   "Description": "Auxiliary variable of Appendix D, \\tilde{a}_{i,n} = |a_{i,n} - \\overline{a}_{i,n}|, linearized by lines 3-4 of (13).",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 19,
+   "Abbreviation": "\\tilde{u}_{i,n,n',k}",
+   "Name": "positive part of the force",
+   "Description": "Auxiliary variable of Appendix D, max(0, u); introduced there as \\tilde{u}_{i,k} = max(0, u_{i,k}), written \\tilde{u}_{i,n,n',k} in (13). Linearized by lines 7-10 of (13).",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 20,
+   "Abbreviation": "\\phi_{i,n,n',k}",
+   "Name": "sign indicator of the force",
+   "Description": "Binary variable of Appendix D indicating whether u_{i,n,n',k} is greater than 0 (lines 5-10 of (13)).",
+   "Domain": "binary"
+  },
+  {
+   "Number": 21,
+   "Abbreviation": "\\delta_k",
+   "Name": "segment indicators of the PWA time approximation",
+   "Description": "delta_k = [delta^1_k delta^2_k delta^3_k]^T, auxiliary binaries of Appendix C; enter (6j) through G = (6h). (12d)-(12g), which tie them to E, are not listed in (13), so delta occurs only in (6j).",
+   "Domain": "binary"
+  },
+  {
+   "Number": 22,
+   "Abbreviation": "z_k",
+   "Name": "products of the PWA time approximation",
+   "Description": "z_k = [z^1_k z^2_k z^3_k]^T, real-valued z^m_k = delta^m_k E_k of Appendix C; enter (6j) through G = (6h). (12g), which defines them, is not listed in (13), so z occurs only in (6j).",
+   "Domain": "continuous"
+  }
+ ],
+ "objective_functions": [
+  {
+   "Name": "(13) objective: weighted absolute timetable deviations plus traction energy",
+   "Number": 0,
+   "equation": "\\min w_1 \\sum_{i\\in\\mathcal{I}} \\sum_{n\\in\\mathcal{N}_i^{stop}} (\\tilde{d}_{i,n} + \\tilde{a}_{i,n}) + w_2 \\sum_{i\\in\\mathcal{I}} \\sum_{n,n'\\in\\mathcal{N}_i^{stop}} \\sum_{k\\in\\mathcal{K}_{i,n,n'}} \\tilde{u}_{i,n,n',k} \\times \\Delta s",
+   "description": "Linear form of objective (1): \\tilde{d}, \\tilde{a} stand for |d - \\overline{d}|, |a - \\overline{a}| and \\tilde{u} for max(0, u) (Appendix D). w_1, w_2 and Delta s are parameters, so linear. Compact form in this field.",
+   "VariablesIncluded": [
+    17,
+    18,
+    19
+   ],
+   "Linear": true
+  }
+ ],
+ "constraints": [
+  {
+   "Name": "(13) line 1: departure deviation at least d - dbar",
+   "Number": 1,
+   "equation": "\\tilde{d}_{i,n} \\ge d_{i,n} - \\overline{d}_{i,n}, \\qquad \\forall i \\in \\mathcal{I}, n \\in \\mathcal{N}_i^{\\text{stop}}",
+   "description": "First line of (13); the ten lines are unnumbered in the paper. With line 2, \\tilde{d}_{i,n} \\ge |d_{i,n} - \\overline{d}_{i,n}| (Appendix D). Linear.",
+   "VariablesIncluded": [
+    2,
+    17
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(13) line 2: departure deviation at least dbar - d",
+   "Number": 2,
+   "equation": "\\tilde{d}_{i,n} \\ge -d_{i,n} + \\overline{d}_{i,n}, \\qquad \\forall i \\in \\mathcal{I}, n \\in \\mathcal{N}_i^{\\text{stop}}",
+   "description": "Second half of the absolute-value linearization of the departure deviation. Linear.",
+   "VariablesIncluded": [
+    2,
+    17
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(13) line 3: arrival deviation at least a - abar",
+   "Number": 3,
+   "equation": "\\tilde{a}_{i,n} \\ge a_{i,n} - \\overline{a}_{i,n}, \\qquad \\forall i \\in \\mathcal{I}, n \\in \\mathcal{N}_i^{\\text{stop}}",
+   "description": "With line 4, \\tilde{a}_{i,n} \\ge |a_{i,n} - \\overline{a}_{i,n}| (Appendix D). Linear.",
+   "VariablesIncluded": [
+    1,
+    18
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(13) line 4: arrival deviation at least abar - a",
+   "Number": 4,
+   "equation": "\\tilde{a}_{i,n} \\ge -a_{i,n} + \\overline{a}_{i,n}, \\qquad \\forall i \\in \\mathcal{I}, n \\in \\mathcal{N}_i^{\\text{stop}}",
+   "description": "Second half of the absolute-value linearization of the arrival deviation. Linear.",
+   "VariablesIncluded": [
+    1,
+    18
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(13) line 5: phi = 1 forces a non-negative force u",
+   "Number": 5,
+   "equation": "u_{i,n,n',k} \\ge -M(1 - \\phi_{i,n,n',k}), \\qquad \\forall i \\in \\mathcal{I}, k \\in \\mathcal{K}_{i,n}, n, n' \\in \\mathcal{N}_i^{\\text{stop}}",
+   "description": "Big-M, linear. The quantifier is printed k \\in K_{i,n} (not K_{i,n,n'}); kept as printed.",
+   "VariablesIncluded": [
+    5,
+    20
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(13) line 6: phi = 0 forces a non-positive force u",
+   "Number": 6,
+   "equation": "u_{i,n,n'k} \\le M \\cdot \\phi_{i,n,n',k} \\ , \\qquad \\forall i \\in \\mathcal{I}, k \\in \\mathcal{K}_{i,n}, n, n' \\in \\mathcal{N}_i^{\\text{stop}}",
+   "description": "Big-M, linear. Printed u_{i,n,n'k} (comma before k missing) and k \\in K_{i,n}; kept as printed, same family u.",
+   "VariablesIncluded": [
+    5,
+    20
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(13) line 7: positive part at most u when phi = 1",
+   "Number": 7,
+   "equation": "\\tilde{u}_{i,n,n',k} \\le u_{i,n,n',k} + M(1 - \\phi_{i,n,n',k}) \\ , \\qquad \\forall i \\in \\mathcal{I}, k \\in \\mathcal{K}_{i,n,n'}, n, n' \\in \\mathcal{N}_i^{\\text{stop}}",
+   "description": "\\tilde{u} \\le u when phi = 1, relaxed by big-M when phi = 0. Linear.",
+   "VariablesIncluded": [
+    5,
+    19,
+    20
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(13) line 8: positive part at least u when phi = 1",
+   "Number": 8,
+   "equation": "\\tilde{u}_{i,n,n',k} \\ge u_{i,n,n',k} - M(1 - \\phi_{i,n,n',k}) \\ , \\qquad \\forall i \\in \\mathcal{I}, k \\in \\mathcal{K}_{i,n,n'}, n, n' \\in \\mathcal{N}_i^{\\text{stop}}",
+   "description": "\\tilde{u} \\ge u when phi = 1; with line 7, \\tilde{u} = u = max(0, u). Linear.",
+   "VariablesIncluded": [
+    5,
+    19,
+    20
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(13) line 9: positive part at most 0 when phi = 0",
+   "Number": 9,
+   "equation": "\\tilde{u}_{i,n,n',k} \\le M \\cdot \\phi_{i,n,n',k} \\ , \\qquad \\forall i \\in \\mathcal{I}, k \\in \\mathcal{K}_{i,n,n'}, n, n' \\in \\mathcal{N}_i^{\\text{stop}}",
+   "description": "\\tilde{u} \\le M phi: zero when phi = 0. Linear.",
+   "VariablesIncluded": [
+    19,
+    20
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(13) line 10: positive part at least 0 when phi = 0",
+   "Number": 10,
+   "equation": "\\tilde{u}_{i,n,n',k} \\ge -M \\cdot \\phi_{i,n,n',k} \\ , \\qquad \\forall i \\in \\mathcal{I}, k \\in \\mathcal{K}_{i,n,n'}, n, n' \\in \\mathcal{N}_i^{\\text{stop}}",
+   "description": "\\tilde{u} \\ge -M phi; with line 9, \\tilde{u} = 0 when phi = 0. Linear.",
+   "VariablesIncluded": [
+    19,
+    20
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(2a) running time between consecutive stations",
+   "Number": 11,
+   "equation": "r_{i,n} = a_{i,n+1} - d_{i,n}, \\qquad \\forall i \\in \\mathcal{I}, n, n+1 \\in \\mathcal{N}_i",
+   "description": "The running time r_{i,n} equals the arrival at station n+1 minus the departure from station n.",
+   "VariablesIncluded": [
+    1,
+    2,
+    3
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(2b) no departure before the planned departure time",
+   "Number": 12,
+   "equation": "d_{i,n} \\ge \\overline{d}_{i,n}, \\qquad \\forall i \\in \\mathcal{I}, n \\in \\mathcal{N}_i",
+   "description": "Departure time at least the planned departure time \\overline{d}_{i,n} (a parameter). A bound, kept as a numbered constraint.",
+   "VariablesIncluded": [
+    2
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(2c) minimum dwell time",
+   "Number": 13,
+   "equation": "d_{i,n} - a_{i,n} \\ge \\overline{p}_{i,n}, \\qquad \\forall i \\in \\mathcal{I}, n \\in \\mathcal{N}_i",
+   "description": "Departure minus arrival at least the planned dwell time \\overline{p}_{i,n}.",
+   "VariablesIncluded": [
+    1,
+    2
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(2d) minimum running time",
+   "Number": 14,
+   "equation": "r_{i,n} \\ge r_{i,n}^{\\min}, \\qquad \\forall i \\in \\mathcal{I}, n \\in \\mathcal{N}_i.",
+   "description": "Running time at least r^{min}_{i,n}, a parameter that Table A.1 does not list. A bound, kept as a numbered constraint.",
+   "VariablesIncluded": [
+    3
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(3a) arrival headway between same-direction trains",
+   "Number": 15,
+   "equation": "a_{j,n} - a_{i,n} \\ge h_a - M(1 - \\lambda_{i,j,n-1}), \\qquad \\forall i, j \\in \\mathcal{I}_s, i \\ne j, n-1, n \\in \\mathcal{N}_i \\cap \\mathcal{N}_j",
+   "description": "Arrival headway h_a, relaxed by big-M unless train i precedes train j at the previous station n-1 (lambda_{i,j,n-1}). Linear.",
+   "VariablesIncluded": [
+    1,
+    7
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(3b) departure headway at stations",
+   "Number": 16,
+   "equation": "d_{j,n} - d_{i,n} \\ge h_d - M(1 - \\lambda_{i,j,n}), \\qquad \\forall i, j \\in \\mathcal{I}_s, i \\ne j, n \\in \\mathcal{N}_i \\cap \\mathcal{N}_j",
+   "description": "Departure headway h_d at station n, big-M on lambda_{i,j,n}. Linear.",
+   "VariablesIncluded": [
+    2,
+    7
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(3c) departure headway at block sections",
+   "Number": 17,
+   "equation": "d_{j,p} - d_{i,p} \\ge h_s - M(1 - \\lambda_{i,j,n}), \\qquad \\forall i, j \\in \\mathcal{I}_s, i \\ne j, p \\in \\mathcal{P}_{n,n+1}, n, n+1 \\in \\mathcal{N}_i \\cap \\mathcal{N}_j",
+   "description": "Headway h_s at every block section p between n and n+1, order lambda_{i,j,n}. d_{j,p}, d_{i,p} are departure times at block sections, counted in family d. Linear.",
+   "VariablesIncluded": [
+    2,
+    7
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(3d) one of two trains departs first",
+   "Number": 18,
+   "equation": "\\lambda_{i,j,n} + \\lambda_{j,i,n} = 1, \\qquad \\forall i, j \\in \\mathcal{I}_s, i \\ne j, n \\in \\mathcal{N}_i \\cap \\mathcal{N}_j.",
+   "description": "Exactly one of lambda_{i,j,n} and lambda_{j,i,n} is 1.",
+   "VariablesIncluded": [
+    7
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(4a) departure after W_1 indicator",
+   "Number": 19,
+   "equation": "\\frac{d_{i,n} - W_1}{M} \\le \\Omega^{\\mathrm{d}}_{i,n,1} \\le \\frac{d_{i,n} - W_1}{M} + 1, \\qquad \\forall i \\in \\mathcal{I}_b, n \\in \\mathcal{N}_i \\cap \\overline{\\mathcal{N}}",
+   "description": "Omega^d_{i,n,1} = 1 iff d_{i,n} \\ge W_1. A double inequality, one constraint; division by the constant M, so linear.",
+   "VariablesIncluded": [
+    2,
+    10
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(4b) departure before W_2 indicator",
+   "Number": 20,
+   "equation": "\\frac{W_2 - d_{i,n}}{M} \\le \\Omega^{\\mathrm{d}}_{i,n,2} \\le \\frac{W_2 - d_{i,n}}{M} + 1, \\qquad \\forall i \\in \\mathcal{I}_b, n \\in \\mathcal{N}_i \\cap \\overline{\\mathcal{N}}",
+   "description": "Omega^d_{i,n,2} = 1 iff d_{i,n} \\le W_2. Double inequality, one constraint; linear.",
+   "VariablesIncluded": [
+    2,
+    11
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(4c) departure inside the disruption window",
+   "Number": 21,
+   "equation": "\\Omega^d_{i,n,3} \\le \\Omega^d_{i,n,1}, \\Omega^d_{i,n,3} \\le \\Omega^d_{i,n,2}, \\Omega^d_{i,n,1} + \\Omega^d_{i,n,2} - \\Omega^d_{i,n,3} \\le 1, \\quad \\forall i \\in \\mathcal{I}_b, n \\in \\mathcal{N}_i \\cap \\overline{\\mathcal{N}}.",
+   "description": "Omega^d_{i,n,3} = Omega^d_{i,n,1} AND Omega^d_{i,n,2}. One number for a system of three inequalities, counted once. Compact form in this field.",
+   "VariablesIncluded": [
+    10,
+    11,
+    12
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(4d) arrival after W_1 indicator",
+   "Number": 22,
+   "equation": "\\frac{a_{i,n+1} - W_1}{M} \\le \\Omega^{\\mathrm{a}}_{i,n+1,1} \\le \\frac{a_{i,n+1} - W_1}{M} + 1, \\qquad \\forall i \\in \\mathcal{I}_b, n+1 \\in \\mathcal{N}_i \\cap \\overline{\\mathcal{N}}",
+   "description": "Arrival counterpart of (4a): Omega^a_{i,n+1,1} = 1 iff a_{i,n+1} \\ge W_1. Linear.",
+   "VariablesIncluded": [
+    1,
+    13
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(4e) arrival before W_2 indicator",
+   "Number": 23,
+   "equation": "\\frac{W_2 - a_{i,n+1}}{M} \\le \\Omega^{\\mathrm{a}}_{i,n+1,2} \\le \\frac{W_2 - a_{i,n+1}}{M} + 1, \\qquad \\forall i \\in \\mathcal{I}_b, n+1 \\in \\mathcal{N}_i \\cap \\overline{\\mathcal{N}}",
+   "description": "Arrival counterpart of (4b): Omega^a_{i,n+1,2} = 1 iff a_{i,n+1} \\le W_2. Linear.",
+   "VariablesIncluded": [
+    1,
+    14
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(4f) arrival inside the disruption window",
+   "Number": 24,
+   "equation": "\\Omega^a_{i,n+1,3} \\le \\Omega^a_{i,n+1,1}, \\Omega^a_{i,n+1,3} \\le \\Omega^a_{i,n+1,2}, \\Omega^a_{i,n+1,1} + \\Omega^a_{i,n+1,2} - \\Omega^a_{i,n+1,3} \\le 1, \\quad \\forall i \\in \\mathcal{I}_b, n+1 \\in \\mathcal{N}_i \\cap \\overline{\\mathcal{N}}.",
+   "description": "Omega^a_{i,n+1,3} = Omega^a_{i,n+1,1} AND Omega^a_{i,n+1,2}. Three inequalities under one number, counted once. Compact form in this field.",
+   "VariablesIncluded": [
+    13,
+    14,
+    15
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(4g) train spans the disruption window",
+   "Number": 25,
+   "equation": "\\Omega^s_i \\le 1 - \\Omega^d_{i,n,1}, \\Omega^s_i \\le 1 - \\Omega^a_{i,n+1,2}, \\Omega^d_{i,n,1} + \\Omega^a_{i,n+1,2} + \\Omega^s_i \\ge 1, \\quad \\forall i \\in \\mathcal{I}_b, n, n+1 \\in \\mathcal{N}_i \\cap \\overline{\\mathcal{N}}.",
+   "description": "Omega^s_i = 1 iff Omega^d_{i,n,1} = 0 and Omega^a_{i,n+1,2} = 0. Three inequalities under one number, counted once. Compact form in this field.",
+   "VariablesIncluded": [
+    10,
+    14,
+    16
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(4h) rerouting when a disruption indicator is active",
+   "Number": 26,
+   "equation": "\\Omega^{\\mathrm{d}}_{i,n,3} + \\Omega^{\\mathrm{a}}_{i,n+1,3} + \\Omega^{\\mathrm{s}}_i \\le M \\cdot \\pi_{i,n}, \\qquad \\forall i \\in \\mathcal{I}_b, n, n+1 \\in \\mathcal{N}_i \\cap \\overline{\\mathcal{N}}",
+   "description": "pi_{i,n} = 1 if any of Omega^d_{i,n,3}, Omega^a_{i,n+1,3}, Omega^s_i is 1. M times a binary, linear.",
+   "VariablesIncluded": [
+    9,
+    12,
+    15,
+    16
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(4i) rerouting only if a disruption indicator is active",
+   "Number": 27,
+   "equation": "\\pi_{i,n} \\le M(\\Omega^{\\mathrm{d}}_{i,n,3} + \\Omega^{\\mathrm{a}}_{i,n+1,3} + \\Omega^{\\mathrm{s}}_i), \\qquad \\forall i \\in \\mathcal{I}_b, n, n+1 \\in \\mathcal{N}_i \\cap \\overline{\\mathcal{N}}.",
+   "description": "pi_{i,n} can be 1 only if at least one of the three indicators is 1. Linear.",
+   "VariablesIncluded": [
+    9,
+    12,
+    15,
+    16
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(5a) single-track headway at station n+1",
+   "Number": 28,
+   "equation": "d_{j,n+1} - a_{i,n+1} \\ge h_{ad} - M(2 - \\gamma_{i,j,n} - \\pi_{i,n}), \\qquad \\forall i \\in \\mathcal{I}_b, j \\in \\mathcal{I} \\setminus \\mathcal{I}_b, n, n+1 \\in \\mathcal{N}_i \\cap \\mathcal{N}_j \\cap \\overline{\\mathcal{N}}",
+   "description": "Headway h_ad between the arrival of blocked-track train i and the departure of opposite train j at n+1, enforced when gamma_{i,j,n} = pi_{i,n} = 1. Big-M, linear.",
+   "VariablesIncluded": [
+    1,
+    2,
+    8,
+    9
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(5b) single-track headway at station n",
+   "Number": 29,
+   "equation": "d_{i,n} - a_{j,n} \\ge h_{ad} - M(1 + \\gamma_{i,j,n} - \\pi_{i,n}), \\qquad \\forall i \\in \\mathcal{I}_b, j \\in \\mathcal{I} \\setminus \\mathcal{I}_b, n, n+1 \\in \\mathcal{N}_i \\cap \\mathcal{N}_j \\cap \\overline{\\mathcal{N}}.",
+   "description": "Headway h_ad between the arrival of train j and the departure of train i at station n, enforced when gamma_{i,j,n} = 0 and pi_{i,n} = 1. Big-M, linear.",
+   "VariablesIncluded": [
+    1,
+    2,
+    8,
+    9
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(6i) kinetic energy of the next cell",
+   "Number": 30,
+   "equation": "E_{i,n,n',k+1} = \\varphi_1 E_{i,n,n',k} + \\varphi_2 u_{i,n,n',k} + \\varphi_{3,k}, \\qquad \\forall i \\in \\mathcal{I}, k \\in \\mathcal{K}_{i,n,n'}, n, n' \\in \\mathcal{N}_i^{\\text{stop}}",
+   "description": "Printed E_{k+1} = H(E_k, u_k). H is the mapping (6g), substituted here; varphi_1, varphi_2, varphi_{3,k} are coefficients (Appendix B). (6g) is not among the constraints (13) lists. Linear.",
+   "VariablesIncluded": [
+    4,
+    5
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(6j) arrival time at the next cell",
+   "Number": 31,
+   "equation": "t_{i,n,n',k+1} = t_{i,n,n',k} + A E_{i,n,n',k} + B u_{i,n,n',k} + C\\delta_k + C\\delta_{k+1} + D z_k + D z_{k+1} + e, \\qquad \\forall i \\in \\mathcal{I}, k \\in \\mathcal{K}_{i,n,n'}, n, n' \\in \\mathcal{N}_i^{\\text{stop}}.",
+   "description": "Printed t_{k+1} = G(t, E, u); G is (6h), substituted, although its printed arguments omit delta and z. A, B, e and vectors C, D are coefficients (App. C): linear. (12d)-(12g), which tie delta, z to E, are not listed in (13).",
+   "VariablesIncluded": [
+    4,
+    5,
+    6,
+    21,
+    22
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(6k) minimum kinetic energy in the first and last cell",
+   "Number": 32,
+   "equation": "E_{i,n,n',k} = E_{\\min}, \\qquad \\forall i \\in \\mathcal{I}, k \\in \\mathcal{K}^1_{i,n,n'} \\cup \\mathcal{K}^2_{i,n,n'}, n, n' \\in \\mathcal{N}_i^{\\text{stop}}",
+   "description": "Kinetic energy equals E_min at the start and end positions of the cell set between stops n and n'. A bound, kept as a numbered constraint.",
+   "VariablesIncluded": [
+    4
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(6l) kinetic energy bounds",
+   "Number": 33,
+   "equation": "E_{\\min} \\le E_{i,n,n',k} \\le E_{\\max}, \\qquad \\forall i \\in \\mathcal{I}, k \\in \\mathcal{K}_{i,n,n'}, n, n' \\in \\mathcal{N}_i^{\\text{stop}}",
+   "description": "E_min \\le E \\le E_max; parameter bounds, kept as a numbered constraint.",
+   "VariablesIncluded": [
+    4
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(6m) traction and braking force bounds",
+   "Number": 34,
+   "equation": "u_{\\min} \\le u_{i,n,n',k} \\le u_{\\max}, \\qquad \\forall i \\in \\mathcal{I}, k \\in \\mathcal{K}_{i,n,n'}, n, n' \\in \\mathcal{N}_i^{\\text{stop}}.",
+   "description": "u_min \\le u \\le u_max; parameter bounds, kept as a numbered constraint.",
+   "VariablesIncluded": [
+    5
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(6n) time at the first cell equals the departure time",
+   "Number": 35,
+   "equation": "t_{i,n,n',k} = d_{i,n}, \\qquad \\forall i \\in \\mathcal{I}, k \\in \\mathcal{K}^1_{i,n,n'}, n, n' \\in \\mathcal{N}_i^{\\text{stop}}",
+   "description": "Couples the cell times to the departure time d_{i,n} from station n.",
+   "VariablesIncluded": [
+    2,
+    6
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(6o) departure time at a block section",
+   "Number": 36,
+   "equation": "d_{i,p} = d_{i,n} + t_{i,n,n',k}, \\qquad \\forall i \\in \\mathcal{I}, p \\in \\mathcal{P}_{n,n'}, p = \\mu \\times k, k \\in \\mathcal{K}^1_{i,n,n'}, n, n' \\in \\mathcal{N}_i^{\\text{stop}}",
+   "description": "d_{i,p} at block section p = mu x k equals d_{i,n} plus the cell time. Printed k \\in K^1_{i,n,n'} (starting position) and P_{n,n'}; kept as printed. d_{i,p} counted in family d.",
+   "VariablesIncluded": [
+    2,
+    6
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(6p) time at the last cell equals departure plus running time",
+   "Number": 37,
+   "equation": "t_{i,n,n',k} = d_{i,n} + r_{i,n,n'}, \\qquad \\forall i \\in \\mathcal{I}, k \\in \\mathcal{K}^2_{i,n,n'}, n, n' \\in \\mathcal{N}_i^{\\text{stop}}",
+   "description": "t at the end position equals d_{i,n} + r_{i,n,n'}; r_{i,n,n'} is the sum of r_{i,\\tilde{n}} over the stations from n to n'-1 (Sect. 4.5), family r.",
+   "VariablesIncluded": [
+    2,
+    3,
+    6
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(6q) cell times within the running time window",
+   "Number": 38,
+   "equation": "d_{i,n} \\le t_{i,n,n',k} \\le d_{i,n} + r_{i,n,n'}, \\qquad \\forall i \\in \\mathcal{I}, k \\in \\mathcal{K}_{i,n,n'}, n, n' \\in \\mathcal{N}_i^{\\text{stop}}.",
+   "description": "Every cell time lies between the departure d_{i,n} and d_{i,n} + r_{i,n,n'}. Double inequality, one constraint; linear.",
+   "VariablesIncluded": [
+    2,
+    3,
+    6
+   ],
+   "Linear": true
+  }
+ ]
+}
