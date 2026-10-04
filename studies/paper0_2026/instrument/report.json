@@ -47,6 +47,18 @@
   "mean_completion_tokens": 3575,
   "unparsed": 2
  },
+ "meta-llama_Llama-3.3-70B-Instruct.prompt": {
+  "accepted": 0.938,
+  "cases": 48,
+  "coherent": 0.958,
+  "complete_struct": 0.938,
+  "contains_formulation": 0.958,
+  "counts_exact": 0.931,
+  "integral": 0.958,
+  "linear": 0.542,
+  "mean_completion_tokens": 314,
+  "unparsed": 2
+ },
  "meta-llama_Llama-3.3-70B-Instruct.schema-ws": {
   "accepted": 0.812,
   "cases": 48,

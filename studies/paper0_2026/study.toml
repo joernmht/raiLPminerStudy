@@ -56,10 +56,13 @@ licence = "MiniMax model licence (other)"
 role = "fifth family"
 max_tokens = 16000
 
-# The parsing model (LP2Graph v2). Provisional: `genstudy validate-grapher` scores the
-# candidates (Gemma-4, Llama-3.3; neither family generates) and the better one is fixed here.
+# The parsing model (LP2Graph v2), chosen on the 48 validation cases (instrument/report.json,
+# 2026-10-04): Gemma-4 with the schema in the prompt parsed 48/48 with every acceptance verdict
+# right (linearity 0.98, counts 0.99); Llama-3.3 prompt 0.94, Llama-3.3 schema 0.81; Gemma
+# with server-side schema decoding looped on 2 of 5. Neither family generates.
 [grapher]
 served_id = "google/gemma-4-26B-A4B-it"
+mode = "prompt"
 temperature = 0.0
 seed = 7
 max_tokens = 8000
