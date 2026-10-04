@@ -1,0 +1,407 @@
+{
+ "ContainsFormulation": true,
+ "variablesInModel": [
+  {
+   "Number": 1,
+   "Abbreviation": "e_{r,tc}^{t}",
+   "Name": "entry time of train t into track circuit tc along route r",
+   "Description": "Time when train t enters track circuit tc along route r (Table 2). Judgement: e_{tc_\\infty}^{t} in (4),(6) (entry into the dummy exit circuit tc_\\infty = exit time) is counted here; Table 2 defines no separate variable.",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 2,
+   "Abbreviation": "d_{r,tc}^{t}",
+   "Name": "local delay of train t at track circuit tc on route r",
+   "Description": "Delay assigned to train t at track circuit tc on route r (Table 2), set at signals by (5). Not the parameter ds (duration of stay). Appears only in (5), not in the objective (72).",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 3,
+   "Abbreviation": "D^{t}",
+   "Name": "total delay of train t",
+   "Description": "Overall delay of train t within the control area (Table 2); bounded in (6) by actual minus scheduled exit time; weighted by w^t in the objective (72).",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 4,
+   "Abbreviation": "sR_{tc}^{t}",
+   "Name": "start of reservation of track circuit tc by train t",
+   "Description": "Time when train t starts reserving track circuit tc (Table 2; listed in one row with eR, annotated as a family of its own).",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 5,
+   "Abbreviation": "eR_{tc}^{t}",
+   "Name": "release of reservation of track circuit tc by train t",
+   "Description": "Time when train t releases track circuit tc (Table 2).",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 6,
+   "Abbreviation": "sO_{tc}^{t}",
+   "Name": "start of overlap reservation of track circuit tc by train t",
+   "Description": "Time when train t starts reserving track circuit tc due to overlap (Table 2; listed in one row with eO, annotated as a family of its own).",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 7,
+   "Abbreviation": "eO_{tc}^{t}",
+   "Name": "end of overlap reservation of track circuit tc by train t",
+   "Description": "Time when train t finishes reserving track circuit tc due to overlap (Table 2).",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 8,
+   "Abbreviation": "x_{r}^{t}",
+   "Name": "route indicator",
+   "Description": "Binary route indicator, 1 if train t travels along route r, 0 otherwise (Table 2).",
+   "Domain": "binary"
+  },
+  {
+   "Number": 9,
+   "Abbreviation": "z_{tc}^{t}",
+   "Name": "stop indicator",
+   "Description": "Binary stop indicator, 1 if the overlap time over allocated for safe stopping expires before train t can utilize track circuit tc, 0 otherwise (Table 2).",
+   "Domain": "binary"
+  },
+  {
+   "Number": 10,
+   "Abbreviation": "c_{t',tc}^{t}",
+   "Name": "conflict indicator",
+   "Description": "Binary, 1 if trains t and t' would be in conflict at track circuit tc without delaying one of them, i.e. they move toward each other at tc (Table 2). Not the parameter cl (clearing time).",
+   "Domain": "binary"
+  },
+  {
+   "Number": 11,
+   "Abbreviation": "y_{t',tc}^{t}",
+   "Name": "precedence indicator",
+   "Description": "Binary precedence indicator, 1 if train t utilizes track circuit tc before train t' (Table 2).",
+   "Domain": "binary"
+  },
+  {
+   "Number": 12,
+   "Abbreviation": "yO_{t',tc}^{t}",
+   "Name": "overlap precedence indicator",
+   "Description": "Binary, 1 if train t reserves track circuit tc due to overlap before train t' (Table 2). A family of its own, distinct from y.",
+   "Domain": "binary"
+  }
+ ],
+ "objective_functions": [
+  {
+   "Name": "(72) weighted total delay",
+   "Number": 0,
+   "equation": "f(X) = \\sum_{\\forall t \\in T} w^{t} D^{t}",
+   "description": "Minimized (Sect. 2: minimize train delays, D^t is the basis of the objective); written as eq. (72) in Sect. 4. w^t = priority weight (parameter, Table 1); X = state vector of all variables, not a family.",
+   "VariablesIncluded": [
+    3
+   ],
+   "Linear": true
+  }
+ ],
+ "constraints": [
+  {
+   "Name": "(1) zero entry times on unused routes",
+   "Number": 1,
+   "equation": "e_{r,tc}^{t} \\le M x_{r}^{t} \\quad \\forall t \\in T, r \\in R^{t}, tc \\in TC_{r}",
+   "description": "Time constraint (big-M): entry times along routes not used by train t (x=0) are set to zero.",
+   "VariablesIncluded": [
+    1,
+    8
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(2) entry after the preceding track circuit",
+   "Number": 2,
+   "equation": "e_{r,tc}^{t} \\ge e_{r,p_{r,tc}}^{t} + ds_{r,p_{r,tc}}^{t}\\, x_{r}^{t} \\quad \\forall t \\in T, r \\in R^{t}, tc \\in TC_{r}",
+   "description": "Time constraint: entry into tc no earlier than entry into the preceding circuit p plus the planned stay ds on it (ds = parameter, not the delay variable d).",
+   "VariablesIncluded": [
+    1,
+    8
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(3) scheduled entry into the control area",
+   "Number": 3,
+   "equation": "e_{r,tc}^{t} = init^{t}\\, x_{r}^{t} \\quad \\forall t \\in T, r \\in R^{t}, tc \\in TC_{r} : p_{r,tc} = tc_{0}",
+   "description": "Time constraint: entry into the first track circuit (preceded by dummy tc_0) equals the scheduled entry time init^t (parameter) on the used route.",
+   "VariablesIncluded": [
+    1,
+    8
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(4) exit time from the control area",
+   "Number": 4,
+   "equation": "e_{tc_{\\infty}}^{t} = \\sum_{\\forall r \\in R^{t}} e_{r,tc}^{t} + ds_{r,tc}^{t}\\, x_{r}^{t} \\quad \\forall t \\in T, tc \\in TC_{r} : s_{r,tc} = tc_{\\infty}",
+   "description": "Time constraint: exit time = entry into the last circuit plus its stay, summed over routes. Judgement: e_{tc_\\infty}^t counted in the e family (entry into dummy exit circuit), not a new variable.",
+   "VariablesIncluded": [
+    1,
+    8
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(5) local delay at signals",
+   "Number": 5,
+   "equation": "d_{r,tc}^{t} = e_{r,s_{r,tc}}^{t} - e_{r,tc}^{t} - ds_{r,tc}^{t}\\, x_{r}^{t} \\quad \\forall t \\in T, r \\in R^{t}, tc \\in TC_{r} : bs_{r,tc} \\neq bs_{r,s_{r,tc}}",
+   "description": "Delay constraint: local delay at a block-section boundary = actual minus planned entry into the next circuit s. ds (stay) and bs (block section) are parameters.",
+   "VariablesIncluded": [
+    1,
+    2,
+    8
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(6) total delay of a train",
+   "Number": 6,
+   "equation": "D^{t} \\ge e_{tc_{\\infty}}^{t} - exit^{t} \\quad \\forall t \\in T",
+   "description": "Delay constraint: total delay bounded by actual minus scheduled exit time (exit^t = parameter). e_{tc_\\infty}^t counted in the e family, as in (4).",
+   "VariablesIncluded": [
+    1,
+    3
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(7) exactly one route per train",
+   "Number": 7,
+   "equation": "\\sum_{\\forall r \\in R^{t}} x_{r}^{t} = 1 \\quad \\forall t \\in T",
+   "description": "Capacity constraint: every train uses exactly one route.",
+   "VariablesIncluded": [
+    8
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(8) start of track-circuit reservation",
+   "Number": 8,
+   "equation": "sR_{tc}^{t} = \\sum_{r \\in R^{t} : tc \\in TC_{r}} e_{r,ref_{r,tc}}^{t} - for\\, x_{r}^{t} \\quad \\forall t \\in T, tc \\in TC^{t}",
+   "description": "Reservation of tc starts the formation time for (parameter) before entry into the reference track circuit ref (first circuit of the block section; parameter index).",
+   "VariablesIncluded": [
+    1,
+    4,
+    8
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(9) release of track-circuit reservation",
+   "Number": 9,
+   "equation": "eR_{tc}^{t} = \\sum_{r \\in R^{t} : tc \\in TC_{r}} e_{r,s_{r,tc}}^{t} + (cl_{r,tc}^{t} + rel)\\, x_{r}^{t} \\quad \\forall t \\in T, tc \\in TC^{t}",
+   "description": "Reservation of tc released after clearing time cl plus release time rel (parameters; cl is not the conflict variable c), counted from entry into the next circuit.",
+   "VariablesIncluded": [
+    1,
+    5,
+    8
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(10) precedence of a train pair",
+   "Number": 10,
+   "equation": "y_{t',tc}^{t} + y_{t,tc}^{t'} = 1 \\quad \\forall \\{t,t'\\} \\in T, tc \\in TC^{t} \\cap TC^{t'}",
+   "description": "Capacity constraint: for two trains sharing tc, exactly one of them uses it first.",
+   "VariablesIncluded": [
+    11
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(11) reservation order, t' before t",
+   "Number": 11,
+   "equation": "sR_{tc}^{t} \\ge eR_{tc}^{t'} - M\\, y_{t',tc}^{t} \\quad \\forall \\{t,t'\\} \\in T, tc \\in TC^{t} \\cap TC^{t'}",
+   "description": "Big-M: if t' goes first (y=0), t starts reserving tc only after t' released it.",
+   "VariablesIncluded": [
+    4,
+    5,
+    11
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(12) reservation order, t before t'",
+   "Number": 12,
+   "equation": "sR_{tc}^{t'} \\ge eR_{tc}^{t} - M (1 - y_{t',tc}^{t}) \\quad \\forall \\{t,t'\\} \\in T, tc \\in TC^{t} \\cap TC^{t'}",
+   "description": "Big-M: if t goes first (y=1), t' starts reserving tc only after t released it.",
+   "VariablesIncluded": [
+    4,
+    5,
+    11
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(13) start of overlap reservation",
+   "Number": 13,
+   "equation": "sO_{tc}^{t} = \\sum_{r \\in R^{t} : tc \\in TC_{r}} e_{r,ref_{r,p_{r,tc}}}^{t} - for\\, x_{r}^{t} \\quad \\forall t \\in T, tc \\in TC^{t} : \\exists r \\in R^{t} : bs_{r,tc} \\neq bs_{r,p_{r,tc}}",
+   "description": "Overlap constraint: the first circuit after the signal ending a block section is reserved together with that section (for, ref, bs, p are parameters).",
+   "VariablesIncluded": [
+    1,
+    6,
+    8
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(14) stop indicator",
+   "Number": 14,
+   "equation": "z_{tc}^{t} \\ge \\frac{1}{M} ( sR_{tc}^{t} - \\sum_{r \\in R^{t} : tc \\in TC_{r}} e_{r,p_{r,tc}}^{t} + over\\, x_{r}^{t} ) \\quad \\forall t \\in T, tc \\in TC^{t} : \\exists r \\in R^{t} : bs_{r,tc} \\neq bs_{r,p_{r,tc}}",
+   "description": "z=1 if the overlap time over expires before t can use tc. 1/M is a constant, so linear. Sign/scope of the over x term kept as printed (no structural effect).",
+   "VariablesIncluded": [
+    1,
+    4,
+    8,
+    9
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(15) overlap reservation lasts the overlap time if the train stops",
+   "Number": 15,
+   "equation": "eO_{tc}^{t} \\ge \\sum_{r \\in R^{t} : tc \\in TC_{r}} e_{r,p_{r,tc}}^{t} + over\\, x_{r}^{t} - M (1 - z_{tc}^{t}) \\quad \\forall t \\in T, tc \\in TC^{t} : \\exists r \\in R^{t} : bs_{r,tc} \\neq bs_{r,p_{r,tc}}",
+   "description": "Big-M: if the train stops (z=1), the overlap reservation of tc lasts until entry into the preceding circuit plus the overlap time over (parameter).",
+   "VariablesIncluded": [
+    1,
+    7,
+    8,
+    9
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(16) overlap reservation ends by the overlap time",
+   "Number": 16,
+   "equation": "eO_{tc}^{t} \\le \\sum_{r \\in R^{t} : tc \\in TC_{r}} e_{r,p_{r,tc}}^{t} + over\\, x_{r}^{t} \\quad \\forall t \\in T, tc \\in TC^{t} : \\exists r \\in R^{t} : bs_{r,tc} \\neq bs_{r,p_{r,tc}}",
+   "description": "The overlap reservation of tc ends no later than entry into the preceding circuit plus the overlap time over.",
+   "VariablesIncluded": [
+    1,
+    7,
+    8
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(17) overlap end if the train does not stop (lower bound)",
+   "Number": 17,
+   "equation": "eO_{tc}^{t} \\ge sR_{tc}^{t} - M\\, z_{tc}^{t} \\quad \\forall t \\in T, tc \\in TC^{t} : \\exists r \\in R^{t} : bs_{r,tc} \\neq bs_{r,p_{r,tc}}",
+   "description": "Big-M: if the train does not stop (z=0), the overlap reservation ends no earlier than the regular reservation start sR.",
+   "VariablesIncluded": [
+    4,
+    7,
+    9
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(18) overlap end if the train does not stop (upper bound)",
+   "Number": 18,
+   "equation": "eO_{tc}^{t} \\le sR_{tc}^{t} \\quad \\forall t \\in T, tc \\in TC^{t} : \\exists r \\in R^{t} : bs_{r,tc} \\neq bs_{r,p_{r,tc}}",
+   "description": "The overlap reservation of tc ends no later than the regular reservation start sR.",
+   "VariablesIncluded": [
+    4,
+    7
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(19) symmetric conflict indicator",
+   "Number": 19,
+   "equation": "c_{t',tc}^{t} = c_{t,tc}^{t'} \\quad \\forall \\{t,t'\\} \\in T, tc \\in TC^{t} \\cap TC^{t'}",
+   "description": "The conflict indicator of a train pair at tc is symmetric.",
+   "VariablesIncluded": [
+    10
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(20) overlap of t' vs reservation of t (conflict, t first)",
+   "Number": 20,
+   "equation": "eO_{tc}^{t'} - M (2 - c_{t',tc}^{t} - y_{t',tc}^{t}) \\le sR_{tc}^{t} \\quad \\forall \\{t,t'\\} \\in T, tc \\in TC^{t} \\cap TC^{t'} : \\exists r \\in R^{t'} : bs_{r,tc} \\neq bs_{r,p_{r,tc}}",
+   "description": "Big-M, active for c=1 and y=1: the overlap reservation of t' at tc ends before t starts reserving tc.",
+   "VariablesIncluded": [
+    4,
+    7,
+    10,
+    11
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(21) overlap of t vs reservation of t' (conflict, t' first)",
+   "Number": 21,
+   "equation": "eO_{tc}^{t} - M (1 - c_{t',tc}^{t} + y_{t',tc}^{t}) \\le sR_{tc}^{t'} \\quad \\forall \\{t,t'\\} \\in T, tc \\in TC^{t} \\cap TC^{t'} : \\exists r \\in R^{t} : bs_{r,tc} \\neq bs_{r,p_{r,tc}}",
+   "description": "Big-M, active for c=1 and y=0: the overlap reservation of t at tc ends before t' starts reserving tc.",
+   "VariablesIncluded": [
+    4,
+    7,
+    10,
+    11
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(22) reservation of t vs overlap of t' (no conflict, t first)",
+   "Number": 22,
+   "equation": "eR_{tc}^{t} - M (c_{t',tc}^{t} + 1 - y_{t',tc}^{t}) \\le sO_{tc}^{t'} \\quad \\forall \\{t,t'\\} \\in T, tc \\in TC^{t} \\cap TC^{t'} : \\exists r \\in R^{t'} : bs_{r,tc} \\neq bs_{r,p_{r,tc}}",
+   "description": "Big-M, active for c=0 and y=1: t releases tc before t' starts reserving it due to overlap.",
+   "VariablesIncluded": [
+    5,
+    6,
+    10,
+    11
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(23) reservation of t' vs overlap of t (no conflict, t' first)",
+   "Number": 23,
+   "equation": "eR_{tc}^{t'} - M (c_{t',tc}^{t} + y_{t',tc}^{t}) \\le sO_{tc}^{t} \\quad \\forall \\{t,t'\\} \\in T, tc \\in TC^{t} \\cap TC^{t'} : \\exists r \\in R^{t} : bs_{r,tc} \\neq bs_{r,p_{r,tc}}",
+   "description": "Big-M, active for c=0 and y=0: t' releases tc before t starts reserving it due to overlap.",
+   "VariablesIncluded": [
+    5,
+    6,
+    10,
+    11
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(24) overlap precedence of a train pair",
+   "Number": 24,
+   "equation": "yO_{t',tc}^{t} + yO_{t,tc}^{t'} = 1 \\quad \\forall \\{t,t'\\} \\in T, tc \\in TC^{t} \\cap TC^{t'}",
+   "description": "For two trains sharing tc, exactly one reserves it first due to overlap.",
+   "VariablesIncluded": [
+    12
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(25) overlap reservation order, t' before t",
+   "Number": 25,
+   "equation": "sO_{tc}^{t} \\ge eO_{tc}^{t'} - M\\, yO_{t',tc}^{t} \\quad \\forall \\{t,t'\\} \\in T, tc \\in TC^{t} \\cap TC^{t'} : \\exists r \\in R^{t} : bs_{r,tc} \\neq bs_{r,p_{r,tc}}",
+   "description": "Big-M: if t' goes first by overlap (yO=0), t starts its overlap reservation of tc after that of t' ended.",
+   "VariablesIncluded": [
+    6,
+    7,
+    12
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(26) overlap reservation order, t before t'",
+   "Number": 26,
+   "equation": "sO_{tc}^{t'} \\ge eO_{tc}^{t} - M (1 - yO_{t',tc}^{t}) \\quad \\forall \\{t,t'\\} \\in T, tc \\in TC^{t} \\cap TC^{t'} : \\exists r \\in R^{t'} : bs_{r,tc} \\neq bs_{r,p_{r,tc}}",
+   "description": "Big-M: if t goes first by overlap (yO=1), t' starts after t. Judgement: the printed subscript t'0 of yO is read as t' (typo).",
+   "VariablesIncluded": [
+    6,
+    7,
+    12
+   ],
+   "Linear": true
+  }
+ ]
+}

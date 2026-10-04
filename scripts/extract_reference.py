@@ -145,11 +145,45 @@ def _section_text(section: etree._Element) -> str:
     return "\n\n".join(p.strip() for p in out if p.strip())
 
 
+def _table(root: etree._Element, number: str) -> str:
+    """Table ``number`` (its label "Table N") as a markdown table, inline math as $...$."""
+    for t in root.iter(f"{CE}table"):
+        if (t.findtext(f"{CE}label") or "").strip() == f"Table {number}":
+            caption = t.find(f"{CE}caption")
+            title = " ".join(_para(caption).split()) if caption is not None else ""
+            rows = [
+                e for e in t.iter() if isinstance(e.tag, str) and etree.QName(e).localname == "row"
+            ]
+            lines = [f"**Table {number}.** {title}", ""]
+            for i, row in enumerate(rows):
+                cells = [
+                    " ".join(_para(c).split()).replace("|", "\\|")
+                    for c in row
+                    if isinstance(c.tag, str) and etree.QName(c).localname == "entry"
+                ]
+                lines.append("| " + " | ".join(cells) + " |")
+                if i == 0:
+                    lines.append("|" + "---|" * len(cells))
+            return "\n".join(lines)
+    raise SystemExit(f"Table {number} not found")
+
+
+def _formula(root: etree._Element, label: str) -> str:
+    """A numbered formula from anywhere in the paper, e.g. an objective stated later."""
+    for f in root.iter(f"{CE}formula"):
+        if (f.findtext(f"{CE}label") or "").strip() == f"({label})":
+            math = f.find(f"{MML}math")
+            return f"$$ {_clean_tex(tex(math))}  \\tag{{{label}}} $$"
+    raise SystemExit(f"formula ({label}) not found")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("xml", type=Path)
     ap.add_argument("out", type=Path)
     ap.add_argument("--section", action="append", required=True)
+    ap.add_argument("--table", action="append", default=[], help="append Table N (notation)")
+    ap.add_argument("--formula", action="append", default=[], help="append formula (N)")
     args = ap.parse_args()
     root = etree.parse(str(args.xml)).getroot()
     chosen = []
@@ -166,7 +200,12 @@ def main() -> int:
                 break
         else:
             raise SystemExit(f"section {want!r} not found")
-    text = "\n\n".join(_section_text(s) for s in chosen) + "\n"
+    parts = [_table(root, n) for n in args.table]
+    parts += [_section_text(s) for s in chosen]
+    if args.formula:
+        parts.append("Formulas stated elsewhere in the paper:")
+        parts += [_formula(root, n) for n in args.formula]
+    text = "\n\n".join(parts) + "\n"
     args.out.write_text(text, encoding="utf-8", newline="\n")
     print(f"{len(chosen)} sections, {text.count('$$') // 2} display formulas -> {args.out}")
     return 0
