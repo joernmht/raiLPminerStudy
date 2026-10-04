@@ -144,8 +144,50 @@
  },
  "google_gemma-4-26B-A4B-it.template": {
   "all_verdicts_right": 6,
-  "parsed": 10,
+  "parsed": 12,
   "per_reference": {
+   "P1": [
+    {
+     "constraints": "40/38",
+     "edges": "94/92",
+     "repairs": [
+      "ignored text after the JSON object"
+     ],
+     "score": {
+      "accepted": false,
+      "coherent": true,
+      "complete_struct": false,
+      "contains_formulation": true,
+      "integral": true,
+      "linear": false,
+      "n_constraints": false,
+      "n_objectives": true,
+      "n_variables": false,
+      "parsed": true
+     },
+     "variables": "20/22"
+    },
+    {
+     "constraints": "38/38",
+     "edges": "90/92",
+     "repairs": [
+      "ignored text after the JSON object"
+     ],
+     "score": {
+      "accepted": false,
+      "coherent": true,
+      "complete_struct": false,
+      "contains_formulation": true,
+      "integral": true,
+      "linear": false,
+      "n_constraints": true,
+      "n_objectives": true,
+      "n_variables": false,
+      "parsed": true
+     },
+     "variables": "20/22"
+    }
+   ],
    "P2": [
     {
      "constraints": "16/16",
@@ -351,6 +393,6 @@
     }
    ]
   },
-  "replies": 10
+  "replies": 12
  }
 }
