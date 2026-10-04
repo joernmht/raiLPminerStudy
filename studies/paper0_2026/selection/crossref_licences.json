@@ -1,0 +1,910 @@
+{
+ "10.1007/s10479-026-07077-1": {
+  "article_number": null,
+  "container": "Annals of Operations Research",
+  "license": [
+   [
+    "https://www.springernature.com/gp/researchers/text-and-data-mining",
+    "tdm",
+    "2026-02-09"
+   ],
+   [
+    "https://www.springernature.com/gp/researchers/text-and-data-mining",
+    "vor",
+    "2026-02-09"
+   ]
+  ],
+  "page": null,
+  "published": [
+   2026,
+   2,
+   9
+  ],
+  "published_online": [
+   2026,
+   2,
+   9
+  ],
+  "volume": null,
+  "xref_cites": 1
+ },
+ "10.1007/s40534-025-00383-7": {
+  "article_number": null,
+  "container": "Railway Engineering Science",
+  "license": [
+   [
+    "https://creativecommons.org/licenses/by/4.0",
+    "tdm",
+    "2025-09-27"
+   ],
+   [
+    "https://creativecommons.org/licenses/by/4.0",
+    "vor",
+    "2025-09-27"
+   ]
+  ],
+  "page": "385-406",
+  "published": [
+   2025,
+   9,
+   27
+  ],
+  "published_online": [
+   2025,
+   9,
+   27
+  ],
+  "volume": "34",
+  "xref_cites": 6
+ },
+ "10.1016/j.cor.2024.106679": {
+  "license": [
+   [
+    "https://www.elsevier.com/tdm/userlicense/1.0/",
+    "tdm",
+    "2024-07-01",
+    0
+   ],
+   [
+    "https://www.elsevier.com/legal/tdmrep-license",
+    "tdm",
+    "2024-07-01",
+    0
+   ],
+   [
+    "http://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "vor",
+    "2024-04-23",
+    0
+   ]
+  ],
+  "published": [
+   2024,
+   7
+  ],
+  "xref_cites": 12
+ },
+ "10.1016/j.ijtst.2024.09.001": {
+  "license": [
+   [
+    "https://www.elsevier.com/tdm/userlicense/1.0/",
+    "tdm",
+    "2025-09-01",
+    0
+   ],
+   [
+    "https://www.elsevier.com/legal/tdmrep-license",
+    "tdm",
+    "2025-09-01",
+    0
+   ],
+   [
+    "http://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "vor",
+    "2024-09-04",
+    0
+   ]
+  ],
+  "published": [
+   2025,
+   9
+  ],
+  "xref_cites": 5
+ },
+ "10.1016/j.jrtpm.2023.100427": {
+  "license": [
+   [
+    "https://www.elsevier.com/tdm/userlicense/1.0/",
+    "tdm",
+    "2024-03-01",
+    0
+   ],
+   [
+    "https://www.elsevier.com/legal/tdmrep-license",
+    "tdm",
+    "2024-03-01",
+    0
+   ],
+   [
+    "https://doi.org/10.15223/policy-017",
+    "stm-asf",
+    "2024-03-01",
+    0
+   ],
+   [
+    "https://doi.org/10.15223/policy-037",
+    "stm-asf",
+    "2024-03-01",
+    0
+   ],
+   [
+    "https://doi.org/10.15223/policy-012",
+    "stm-asf",
+    "2024-03-01",
+    0
+   ],
+   [
+    "https://doi.org/10.15223/policy-029",
+    "stm-asf",
+    "2024-03-01",
+    0
+   ],
+   [
+    "https://doi.org/10.15223/policy-004",
+    "stm-asf",
+    "2024-03-01",
+    0
+   ]
+  ],
+  "published": [
+   2024,
+   3
+  ],
+  "xref_cites": 5
+ },
+ "10.1016/j.jrtpm.2024.100460": {
+  "license": [
+   [
+    "https://www.elsevier.com/tdm/userlicense/1.0/",
+    "tdm",
+    "2024-09-01",
+    0
+   ],
+   [
+    "https://www.elsevier.com/legal/tdmrep-license",
+    "tdm",
+    "2024-09-01",
+    0
+   ],
+   [
+    "https://doi.org/10.15223/policy-017",
+    "stm-asf",
+    "2024-09-01",
+    0
+   ],
+   [
+    "https://doi.org/10.15223/policy-037",
+    "stm-asf",
+    "2024-09-01",
+    0
+   ],
+   [
+    "https://doi.org/10.15223/policy-012",
+    "stm-asf",
+    "2024-09-01",
+    0
+   ],
+   [
+    "https://doi.org/10.15223/policy-029",
+    "stm-asf",
+    "2024-09-01",
+    0
+   ],
+   [
+    "https://doi.org/10.15223/policy-004",
+    "stm-asf",
+    "2024-09-01",
+    0
+   ]
+  ],
+  "published": [
+   2024,
+   9
+  ],
+  "xref_cites": 6
+ },
+ "10.1016/j.jrtpm.2024.100496": {
+  "license": [
+   [
+    "https://www.elsevier.com/tdm/userlicense/1.0/",
+    "tdm",
+    "2025-03-01",
+    0
+   ],
+   [
+    "https://www.elsevier.com/legal/tdmrep-license",
+    "tdm",
+    "2025-03-01",
+    0
+   ],
+   [
+    "http://creativecommons.org/licenses/by-nc/4.0/",
+    "vor",
+    "2024-12-04",
+    0
+   ]
+  ],
+  "published": [
+   2025,
+   3
+  ],
+  "xref_cites": 3
+ },
+ "10.1016/j.jrtpm.2025.100533": {
+  "article_number": "100533",
+  "container": "Journal of Rail Transport Planning &amp; Management",
+  "license": [
+   [
+    "https://www.elsevier.com/tdm/userlicense/1.0/",
+    "tdm",
+    "2025-09-01"
+   ],
+   [
+    "https://www.elsevier.com/legal/tdmrep-license",
+    "tdm",
+    "2025-09-01"
+   ],
+   [
+    "http://creativecommons.org/licenses/by/4.0/",
+    "vor",
+    "2025-07-02"
+   ]
+  ],
+  "page": "100533",
+  "published": [
+   2025,
+   9
+  ],
+  "published_online": [
+   null
+  ],
+  "volume": "35",
+  "xref_cites": 1
+ },
+ "10.1016/j.jrtpm.2025.100535": {
+  "article_number": "100535",
+  "container": "Journal of Rail Transport Planning &amp; Management",
+  "license": [
+   [
+    "https://www.elsevier.com/tdm/userlicense/1.0/",
+    "tdm",
+    "2025-09-01"
+   ],
+   [
+    "https://www.elsevier.com/legal/tdmrep-license",
+    "tdm",
+    "2025-09-01"
+   ],
+   [
+    "http://creativecommons.org/licenses/by/4.0/",
+    "vor",
+    "2025-08-02"
+   ]
+  ],
+  "page": "100535",
+  "published": [
+   2025,
+   9
+  ],
+  "published_online": [
+   null
+  ],
+  "volume": "35",
+  "xref_cites": 0
+ },
+ "10.1016/j.trb.2025.103189": {
+  "article_number": "103189",
+  "container": "Transportation Research Part B: Methodological",
+  "license": [
+   [
+    "https://www.elsevier.com/tdm/userlicense/1.0/",
+    "tdm",
+    "2025-05-01"
+   ],
+   [
+    "https://www.elsevier.com/legal/tdmrep-license",
+    "tdm",
+    "2025-05-01"
+   ],
+   [
+    "http://creativecommons.org/licenses/by/4.0/",
+    "vor",
+    "2025-03-03"
+   ]
+  ],
+  "page": "103189",
+  "published": [
+   2025,
+   5
+  ],
+  "published_online": [
+   null
+  ],
+  "volume": "195",
+  "xref_cites": 7
+ },
+ "10.1016/j.trb.2026.103603": {
+  "license": [
+   [
+    "https://www.elsevier.com/tdm/userlicense/1.0/",
+    "tdm",
+    "2026-12-01",
+    0
+   ],
+   [
+    "https://www.elsevier.com/legal/tdmrep-license",
+    "tdm",
+    "2026-12-01",
+    0
+   ],
+   [
+    "https://doi.org/10.15223/policy-017",
+    "stm-asf",
+    "2026-12-01",
+    0
+   ],
+   [
+    "https://doi.org/10.15223/policy-037",
+    "stm-asf",
+    "2026-12-01",
+    0
+   ],
+   [
+    "https://doi.org/10.15223/policy-012",
+    "stm-asf",
+    "2026-12-01",
+    0
+   ],
+   [
+    "https://doi.org/10.15223/policy-029",
+    "stm-asf",
+    "2026-12-01",
+    0
+   ],
+   [
+    "https://doi.org/10.15223/policy-004",
+    "stm-asf",
+    "2026-12-01",
+    0
+   ]
+  ],
+  "published": [
+   2026,
+   12
+  ],
+  "xref_cites": 0
+ },
+ "10.1016/j.trb.2026.103606": {
+  "license": [
+   [
+    "https://www.elsevier.com/tdm/userlicense/1.0/",
+    "tdm",
+    "2026-12-01",
+    0
+   ],
+   [
+    "https://www.elsevier.com/legal/tdmrep-license",
+    "tdm",
+    "2026-12-01",
+    0
+   ],
+   [
+    "https://doi.org/10.15223/policy-017",
+    "stm-asf",
+    "2026-12-01",
+    0
+   ],
+   [
+    "https://doi.org/10.15223/policy-037",
+    "stm-asf",
+    "2026-12-01",
+    0
+   ],
+   [
+    "https://doi.org/10.15223/policy-012",
+    "stm-asf",
+    "2026-12-01",
+    0
+   ],
+   [
+    "https://doi.org/10.15223/policy-029",
+    "stm-asf",
+    "2026-12-01",
+    0
+   ],
+   [
+    "https://doi.org/10.15223/policy-004",
+    "stm-asf",
+    "2026-12-01",
+    0
+   ]
+  ],
+  "published": [
+   2026,
+   12
+  ],
+  "xref_cites": 0
+ },
+ "10.1016/j.trc.2025.105076": {
+  "article_number": "105076",
+  "container": "Transportation Research Part C: Emerging Technologies",
+  "license": [
+   [
+    "https://www.elsevier.com/tdm/userlicense/1.0/",
+    "tdm",
+    "2025-05-01"
+   ],
+   [
+    "https://www.elsevier.com/legal/tdmrep-license",
+    "tdm",
+    "2025-05-01"
+   ],
+   [
+    "http://creativecommons.org/licenses/by/4.0/",
+    "vor",
+    "2025-07-09"
+   ]
+  ],
+  "page": "105076",
+  "published": [
+   2025,
+   5
+  ],
+  "published_online": [
+   null
+  ],
+  "volume": "174",
+  "xref_cites": 12
+ },
+ "10.1016/j.trc.2026.105841": {
+  "article_number": "105841",
+  "container": "Transportation Research Part C: Emerging Technologies",
+  "license": [
+   [
+    "https://www.elsevier.com/tdm/userlicense/1.0/",
+    "tdm",
+    "2026-10-01"
+   ],
+   [
+    "https://www.elsevier.com/legal/tdmrep-license",
+    "tdm",
+    "2026-10-01"
+   ],
+   [
+    "http://creativecommons.org/licenses/by/4.0/",
+    "vor",
+    "2026-06-29"
+   ]
+  ],
+  "page": "105841",
+  "published": [
+   2026,
+   10
+  ],
+  "published_online": [
+   null
+  ],
+  "volume": "191",
+  "xref_cites": 2
+ },
+ "10.1016/j.trpro.2026.02.058": {
+  "license": [
+   [
+    "https://www.elsevier.com/tdm/userlicense/1.0/",
+    "tdm",
+    "2026-01-01",
+    0
+   ],
+   [
+    "https://www.elsevier.com/legal/tdmrep-license",
+    "tdm",
+    "2026-01-01",
+    0
+   ],
+   [
+    "http://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "vor",
+    "2026-02-13",
+    43
+   ]
+  ],
+  "published": [
+   2026
+  ],
+  "xref_cites": 0
+ },
+ "10.1049/itr2.12557": {
+  "license": [
+   [
+    "http://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "vor",
+    "2024-09-07",
+    0
+   ]
+  ],
+  "published": [
+   2024,
+   9,
+   7
+  ],
+  "xref_cites": 1
+ },
+ "10.1049/itr2.12610": {
+  "license": [
+   [
+    "http://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "vor",
+    "2025-01-08",
+    7
+   ],
+   [
+    "http://doi.wiley.com/10.1002/tdm_license_1.1",
+    "tdm",
+    "2025-01-01",
+    0
+   ]
+  ],
+  "published": [
+   2025,
+   1
+  ],
+  "xref_cites": 6
+ },
+ "10.1080/23249935.2025.2592225": {
+  "article_number": null,
+  "container": "Transportmetrica A: Transport Science",
+  "license": [
+   [
+    "http://creativecommons.org/licenses/by/4.0/",
+    "vor",
+    "2025-12-08"
+   ]
+  ],
+  "page": "1-33",
+  "published": [
+   2025,
+   12,
+   8
+  ],
+  "published_online": [
+   2025,
+   12,
+   8
+  ],
+  "volume": null,
+  "xref_cites": 0
+ },
+ "10.1109/access.2024.3409183": {
+  "license": [
+   [
+    "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "vor",
+    "2024-01-01",
+    0
+   ]
+  ],
+  "published": [
+   2024
+  ],
+  "xref_cites": 6
+ },
+ "10.1109/tits.2026.3704682": {
+  "license": [
+   [
+    "https://ieeexplore.ieee.org/Xplorehelp/downloads/license-information/IEEE.html",
+    "vor",
+    "2026-01-01",
+    0
+   ],
+   [
+    "https://doi.org/10.15223/policy-029",
+    "stm-asf",
+    "2026-01-01",
+    0
+   ],
+   [
+    "https://doi.org/10.15223/policy-037",
+    "stm-asf",
+    "2026-01-01",
+    0
+   ]
+  ],
+  "published": [
+   2026
+  ],
+  "xref_cites": 1
+ },
+ "10.1155/2024/9961840": {
+  "article_number": "9961840",
+  "container": "Journal of Advanced Transportation",
+  "license": [
+   [
+    "http://creativecommons.org/licenses/by/4.0/",
+    "vor",
+    "2024-05-29"
+   ]
+  ],
+  "page": null,
+  "published": [
+   2024,
+   1
+  ],
+  "published_online": [
+   2024,
+   5,
+   29
+  ],
+  "volume": "2024",
+  "xref_cites": 0
+ },
+ "10.1177/03611981251414099": {
+  "license": [
+   [
+    "https://creativecommons.org/licenses/by-nc/4.0/",
+    "vor",
+    "2026-01-27",
+    0
+   ],
+   [
+    "https://journals.sagepub.com/page/policies/text-and-data-mining-license",
+    "tdm",
+    "2026-01-27",
+    0
+   ]
+  ],
+  "published": [
+   2026,
+   1,
+   27
+  ],
+  "xref_cites": 1
+ },
+ "10.1287/trsc.2023.0215": {
+  "article_number": null,
+  "container": "Transportation Science",
+  "license": [],
+  "page": "587-602",
+  "published": [
+   2025,
+   5
+  ],
+  "published_online": [
+   null
+  ],
+  "volume": "59",
+  "xref_cites": 4
+ },
+ "10.1287/trsc.2025.0137": {
+  "article_number": null,
+  "container": "Transportation Science",
+  "license": [],
+  "page": "484-507",
+  "published": [
+   2026,
+   5
+  ],
+  "published_online": [
+   null
+  ],
+  "volume": "60",
+  "xref_cites": 1
+ },
+ "10.1371/journal.pone.0296018": {
+  "article_number": null,
+  "container": "PLOS ONE",
+  "license": [
+   [
+    "http://creativecommons.org/licenses/by/4.0/",
+    "vor",
+    "2024-01-02"
+   ]
+  ],
+  "page": "e0296018",
+  "published": [
+   2024,
+   1,
+   2
+  ],
+  "published_online": [
+   2024,
+   1,
+   2
+  ],
+  "volume": "19",
+  "xref_cites": 4
+ },
+ "10.3390/app13020696": {
+  "article_number": null,
+  "container": "Applied Sciences",
+  "license": [
+   [
+    "https://creativecommons.org/licenses/by/4.0/",
+    "vor",
+    "2023-01-04"
+   ]
+  ],
+  "page": "696",
+  "published": [
+   2023,
+   1,
+   4
+  ],
+  "published_online": [
+   2023,
+   1,
+   4
+  ],
+  "volume": "13",
+  "xref_cites": 8
+ },
+ "10.3390/app131910695": {
+  "article_number": null,
+  "container": "Applied Sciences",
+  "license": [
+   [
+    "https://creativecommons.org/licenses/by/4.0/",
+    "vor",
+    "2023-09-26"
+   ]
+  ],
+  "page": "10695",
+  "published": [
+   2023,
+   9,
+   26
+  ],
+  "published_online": [
+   2023,
+   9,
+   26
+  ],
+  "volume": "13",
+  "xref_cites": 3
+ },
+ "10.3390/app15147996": {
+  "article_number": null,
+  "container": "Applied Sciences",
+  "license": [
+   [
+    "https://creativecommons.org/licenses/by/4.0/",
+    "vor",
+    "2025-07-17"
+   ]
+  ],
+  "page": "7996",
+  "published": [
+   2025,
+   7,
+   17
+  ],
+  "published_online": [
+   2025,
+   7,
+   17
+  ],
+  "volume": "15",
+  "xref_cites": 6
+ },
+ "10.3390/electronics15051056": {
+  "article_number": null,
+  "container": "Electronics",
+  "license": [
+   [
+    "https://creativecommons.org/licenses/by/4.0/",
+    "vor",
+    "2026-03-03"
+   ]
+  ],
+  "page": "1056",
+  "published": [
+   2026,
+   3,
+   3
+  ],
+  "published_online": [
+   2026,
+   3,
+   3
+  ],
+  "volume": "15",
+  "xref_cites": 0
+ },
+ "10.3390/math11122659": {
+  "article_number": null,
+  "container": "Mathematics",
+  "license": [
+   [
+    "https://creativecommons.org/licenses/by/4.0/",
+    "vor",
+    "2023-06-11"
+   ]
+  ],
+  "page": "2659",
+  "published": [
+   2023,
+   6,
+   11
+  ],
+  "published_online": [
+   2023,
+   6,
+   11
+  ],
+  "volume": "11",
+  "xref_cites": 4
+ },
+ "10.3390/su151713040": {
+  "article_number": null,
+  "container": "Sustainability",
+  "license": [
+   [
+    "https://creativecommons.org/licenses/by/4.0/",
+    "vor",
+    "2023-08-29"
+   ]
+  ],
+  "page": "13040",
+  "published": [
+   2023,
+   8,
+   29
+  ],
+  "published_online": [
+   2023,
+   8,
+   29
+  ],
+  "volume": "15",
+  "xref_cites": 5
+ },
+ "10.3390/su17125624": {
+  "article_number": null,
+  "container": "Sustainability",
+  "license": [
+   [
+    "https://creativecommons.org/licenses/by/4.0/",
+    "vor",
+    "2025-06-18"
+   ]
+  ],
+  "page": "5624",
+  "published": [
+   2025,
+   6,
+   18
+  ],
+  "published_online": [
+   2025,
+   6,
+   18
+  ],
+  "volume": "17",
+  "xref_cites": 7
+ },
+ "10.7307/ptt.v38i1.1035": {
+  "license": [
+   [
+    "https://creativecommons.org/licenses/by-nc/4.0",
+    "unspecified",
+    "2026-01-29",
+    0
+   ]
+  ],
+  "published": [
+   2026,
+   1,
+   29
+  ],
+  "xref_cites": 0
+ }
+}

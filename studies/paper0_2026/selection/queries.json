@@ -1,0 +1,472 @@
+{
+ "queries": [
+  {
+   "field": "title_and_abstract",
+   "query": "\"real-time train scheduling\"",
+   "openalex_count": 4,
+   "harvested": 4
+  },
+  {
+   "field": "fulltext",
+   "query": "\"train dispatching\"",
+   "openalex_count": 469,
+   "harvested": 469
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"rescheduling\" \"alternative graph\"",
+   "openalex_count": 2,
+   "harvested": 2
+  },
+  {
+   "field": "fulltext",
+   "query": "\"railway traffic management\"",
+   "openalex_count": 269,
+   "harvested": 269
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"delay management\" railway",
+   "openalex_count": 2,
+   "harvested": 2
+  },
+  {
+   "field": "fulltext",
+   "query": "\"disruption management\" railway",
+   "openalex_count": 253,
+   "harvested": 253
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"conflict resolution\" railway",
+   "openalex_count": 16,
+   "harvested": 16
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"partial blockage\" railway",
+   "openalex_count": 1,
+   "harvested": 1
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"metro rescheduling\"",
+   "openalex_count": 0,
+   "harvested": 0
+  },
+  {
+   "field": "fulltext",
+   "query": "\"real-time traffic management\" railway",
+   "openalex_count": 153,
+   "harvested": 153
+  },
+  {
+   "field": "fulltext",
+   "query": "\"metro rescheduling\"",
+   "openalex_count": 9,
+   "harvested": 9
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"rescheduling\" \"railway network\"",
+   "openalex_count": 22,
+   "harvested": 22
+  },
+  {
+   "field": "fulltext",
+   "query": "\"train rescheduling\"",
+   "openalex_count": 272,
+   "harvested": 273
+  },
+  {
+   "field": "fulltext",
+   "query": "\"railway dispatching\"",
+   "openalex_count": 202,
+   "harvested": 202
+  },
+  {
+   "field": "fulltext",
+   "query": "\"railway disruption management\"",
+   "openalex_count": 36,
+   "harvested": 36
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"rerouting and rescheduling\"",
+   "openalex_count": 1,
+   "harvested": 1
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"train timetable rescheduling\"",
+   "openalex_count": 5,
+   "harvested": 5
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"conflict detection and resolution\" train",
+   "openalex_count": 6,
+   "harvested": 6
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"railway disruption management\"",
+   "openalex_count": 0,
+   "harvested": 0
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"subway\" rescheduling",
+   "openalex_count": 1,
+   "harvested": 1
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"dispatching\" \"mixed integer linear\" railway",
+   "openalex_count": 5,
+   "harvested": 5
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"railway rescheduling\" \"mixed integer\"",
+   "openalex_count": 2,
+   "harvested": 2
+  },
+  {
+   "field": "fulltext",
+   "query": "\"train rescheduling\" \"mixed integer\"",
+   "openalex_count": 142,
+   "harvested": 142
+  },
+  {
+   "field": "fulltext",
+   "query": "\"high-speed railway\" rescheduling",
+   "openalex_count": 313,
+   "harvested": 313
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"train rescheduling\" blockage",
+   "openalex_count": 3,
+   "harvested": 3
+  },
+  {
+   "field": "fulltext",
+   "query": "\"high-speed train rescheduling\"",
+   "openalex_count": 35,
+   "harvested": 35
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"railway traffic rescheduling\"",
+   "openalex_count": 0,
+   "harvested": 0
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"disruption management\" railway",
+   "openalex_count": 11,
+   "harvested": 11
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"rescheduling\" train \"mixed integer\"",
+   "openalex_count": 20,
+   "harvested": 20
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"urban rail transit\" rescheduling",
+   "openalex_count": 14,
+   "harvested": 14
+  },
+  {
+   "field": "fulltext",
+   "query": "\"railway rescheduling\" \"mixed integer\"",
+   "openalex_count": 61,
+   "harvested": 61
+  },
+  {
+   "field": "fulltext",
+   "query": "\"dispatching\" \"mixed integer linear\" railway",
+   "openalex_count": 360,
+   "harvested": 360
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"railway traffic control\"",
+   "openalex_count": 32,
+   "harvested": 32
+  },
+  {
+   "field": "fulltext",
+   "query": "\"real-time train rescheduling\"",
+   "openalex_count": 36,
+   "harvested": 36
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"railway dispatching\"",
+   "openalex_count": 9,
+   "harvested": 9
+  },
+  {
+   "field": "fulltext",
+   "query": "\"metro train rescheduling\"",
+   "openalex_count": 28,
+   "harvested": 28
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"conflict detection and resolution\" railway",
+   "openalex_count": 3,
+   "harvested": 3
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"train scheduling\" disruption",
+   "openalex_count": 15,
+   "harvested": 15
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"real-time train rescheduling\"",
+   "openalex_count": 5,
+   "harvested": 5
+  },
+  {
+   "field": "fulltext",
+   "query": "\"delay management\" railway",
+   "openalex_count": 115,
+   "harvested": 115
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"train rescheduling\" \"mixed integer\"",
+   "openalex_count": 9,
+   "harvested": 9
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"metro train rescheduling\"",
+   "openalex_count": 0,
+   "harvested": 0
+  },
+  {
+   "field": "fulltext",
+   "query": "\"rerouting and rescheduling\"",
+   "openalex_count": 66,
+   "harvested": 66
+  },
+  {
+   "field": "fulltext",
+   "query": "\"train conflict resolution\"",
+   "openalex_count": 11,
+   "harvested": 11
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"high-speed train rescheduling\"",
+   "openalex_count": 1,
+   "harvested": 1
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"high-speed\" rescheduling train",
+   "openalex_count": 17,
+   "harvested": 17
+  },
+  {
+   "field": "fulltext",
+   "query": "\"train rerouting\"",
+   "openalex_count": 43,
+   "harvested": 43
+  },
+  {
+   "field": "fulltext",
+   "query": "\"timetable rescheduling\"",
+   "openalex_count": 204,
+   "harvested": 204
+  },
+  {
+   "field": "fulltext",
+   "query": "\"real-time railway traffic management\"",
+   "openalex_count": 56,
+   "harvested": 56
+  },
+  {
+   "field": "fulltext",
+   "query": "\"urban rail transit\" rescheduling",
+   "openalex_count": 277,
+   "harvested": 277
+  },
+  {
+   "field": "fulltext",
+   "query": "\"rescheduling\" \"alternative graph\"",
+   "openalex_count": 31,
+   "harvested": 31
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"train dispatching\"",
+   "openalex_count": 44,
+   "harvested": 44
+  },
+  {
+   "field": "fulltext",
+   "query": "\"rail rescheduling\"",
+   "openalex_count": 0,
+   "harvested": 0
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"dispatching\" railway \"mixed integer\"",
+   "openalex_count": 6,
+   "harvested": 6
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"timetable rescheduling\"",
+   "openalex_count": 14,
+   "harvested": 14
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"railway disruption\"",
+   "openalex_count": 8,
+   "harvested": 8
+  },
+  {
+   "field": "fulltext",
+   "query": "\"train timetable rescheduling\"",
+   "openalex_count": 93,
+   "harvested": 93
+  },
+  {
+   "field": "fulltext",
+   "query": "\"subway train rescheduling\"",
+   "openalex_count": 2,
+   "harvested": 2
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"train timetable adjustment\"",
+   "openalex_count": 0,
+   "harvested": 0
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "blockage railway timetable",
+   "openalex_count": 1,
+   "harvested": 1
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"train rerouting\"",
+   "openalex_count": 5,
+   "harvested": 5
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"train conflict resolution\"",
+   "openalex_count": 1,
+   "harvested": 1
+  },
+  {
+   "field": "fulltext",
+   "query": "\"conflict detection and resolution\" railway",
+   "openalex_count": 42,
+   "harvested": 42
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"train rescheduling\"",
+   "openalex_count": 33,
+   "harvested": 33
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"real-time traffic management\" railway",
+   "openalex_count": 4,
+   "harvested": 4
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"urban rail\" rescheduling",
+   "openalex_count": 14,
+   "harvested": 14
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"subway train rescheduling\"",
+   "openalex_count": 0,
+   "harvested": 0
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"railway traffic management\"",
+   "openalex_count": 41,
+   "harvested": 41
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"rail rescheduling\"",
+   "openalex_count": 0,
+   "harvested": 0
+  },
+  {
+   "field": "fulltext",
+   "query": "\"railway rescheduling\"",
+   "openalex_count": 102,
+   "harvested": 102
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"real-time railway traffic management\"",
+   "openalex_count": 12,
+   "harvested": 12
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"rescheduling\" train \"integer programming\"",
+   "openalex_count": 8,
+   "harvested": 8
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"rail disruption\"",
+   "openalex_count": 9,
+   "harvested": 9
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"metro\" rescheduling",
+   "openalex_count": 10,
+   "harvested": 10
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"high-speed railway\" rescheduling",
+   "openalex_count": 14,
+   "harvested": 14
+  },
+  {
+   "field": "fulltext",
+   "query": "\"train timetable adjustment\"",
+   "openalex_count": 17,
+   "harvested": 17
+  },
+  {
+   "field": "fulltext",
+   "query": "\"railway traffic rescheduling\"",
+   "openalex_count": 7,
+   "harvested": 7
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"railway rescheduling\"",
+   "openalex_count": 7,
+   "harvested": 7
+  }
+ ]
+}

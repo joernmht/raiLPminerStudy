@@ -1,0 +1,470 @@
+{
+ "round": 2,
+ "prepared": "2026-10-04",
+ "final_rule": {
+  "licences_allowed": [
+   "CC BY",
+   "CC BY-SA",
+   "CC BY-NC",
+   "CC BY-NC-ND"
+  ],
+  "licences_preferred_at_equal_fit": [
+   "CC BY",
+   "CC BY-SA"
+  ],
+  "excluded": [
+   "no licence",
+   "publisher-specific licences",
+   "all MDPI journals",
+   "co-authored by Besinovic or Maurischat"
+  ],
+  "other": "<=10 OpenAlex citations on 2026-10-04; 2024-2026; explicit MILP/ILP outside abstract+introduction; established author; at most one paper per research group across the final five"
+ },
+ "shi_verification": {
+  "result": "no other legitimate open copy found; MILP not verifiable from this machine",
+  "searched": [
+   "arXiv API (title/abstract/author queries)",
+   "site-restricted web search: arxiv.org, ssrn.com, optimization-online.org, cirrelt.ca, gerad.ca, hal.science",
+   "GERAD paper search page",
+   "OpenAlex and Unpaywall location lists (only the Univ. of Bath Pure accepted manuscript, CC BY)"
+  ],
+  "only_open_copy": "Univ. of Bath Pure, accepted author manuscript 'TS-2025-0137', Licence: CC BY (repository record); scripted downloads return HTTP 403",
+  "evidence_so_far": "abstract: 'A mixed-integer linear programming model is formulated to simultaneously optimize train times, orders, routes and speed profiles'; keyword 'mixed-integer linear programming'",
+  "manual_check_needed": "MILP section, objective equation number, number of constraint groups"
+ },
+ "licence_corrections": "OpenAlex marks W7212466594 (Jiang 2026), W7213830453 (Liu/Corman 2026) and W4399662708 (Pascariu 2024) as CC BY-NC-ND, but Crossref lists only Elsevier TDM/STM licences and the Elsevier API returns openaccess=0; W7213830453 nevertheless has a CC BY 4.0 accepted manuscript on White Rose",
+ "slot_a_urban": [
+  {
+   "openalex_id": "W7167252848",
+   "doi": "10.1016/j.trc.2026.105841",
+   "title": "Learning-based model predictive control for passenger-oriented train rescheduling with flexible train composition",
+   "authors_openalex": [
+    "Xiaoyu Liu",
+    "Caio Fabio Oliveira da Silva",
+    "Azita Dabiri",
+    "Yihui Wang",
+    "Bart De Schutter"
+   ],
+   "venue": "Transportation Research Part C Emerging Technologies",
+   "publication_date_openalex": "2026-07-03",
+   "cited_by_count": 1,
+   "cited_by_count_read_on": "2026-10-04",
+   "rank": 1,
+   "decision": "recommended for (a): keep",
+   "licence": "CC BY 4.0, version of record (Elsevier XML + Crossref vor) and arXiv 2502.15544",
+   "family": "real-time urban rail rescheduling, 3 Beijing lines, time-varying demand",
+   "formulation": "Sect. 3 constraints (1)-(23); objective (24)-(26); MILP-based MPC Sect. 4.3 (31)-(32) with linearisations (27)-(29); state-space notation",
+   "input_clean": "yes",
+   "established": "Bart De Schutter (lab corpus 6; 8 own entries in references), Yihui Wang (lab corpus 11)",
+   "caveats": "demand perturbation, not infrastructure disruption; MILP is the MPC baseline; preprint public since 2025-02-21; TU Delft (DCSC) and BJTU co-authors are different groups from #1 (TU Delft Transport & Planning) and the anchor (BJTU systems science)"
+  },
+  {
+   "openalex_id": "W4402335348",
+   "doi": "10.1016/j.ijtst.2024.09.001",
+   "title": "Collaborative rescheduling of train timetables to relieve passenger congestions in an urban rail transit network: a rolling horizon approach",
+   "authors_openalex": [
+    "Fangsheng Wang",
+    "Pengling Wang",
+    "Xiaoyu Hao",
+    "Rudong Yang",
+    "Ruihua Xu"
+   ],
+   "venue": "International Journal of Transportation Science and Technology",
+   "publication_date_openalex": "2024-09-07",
+   "cited_by_count": 9,
+   "cited_by_count_read_on": "2026-10-04",
+   "rank": 2,
+   "decision": "alternate for (a)",
+   "licence": "CC BY-NC-ND 4.0, version of record (Elsevier XML openaccessUserLicense; Crossref vor 2024-09-04)",
+   "family": "urban rail network timetable rescheduling and coordination under large-passenger-flow events (Xi'an Metro)",
+   "formulation": "Sect. 3 'Modelling formulation': constraints (1)-(24) [order (1)-(3), operation (4)-(10), transfer (11)-(16), flow propagation (17)-(24)], objectives (25)-(29), reformulation (30)-(35); authors: 'The proposed optimization models are MINLP problems', linearised partly by reference to Wang et al. 2018, 2024",
+   "input_clean": "yes (Introduction 1,124 words, no math)",
+   "established": "Pengling Wang (Tongji; formerly with Goverde, 3 Goverde entries in references; lab corpus 1), Ruihua Xu (Tongji)",
+   "caveats": "same weaknesses as Liu (demand perturbation, MINLP reformulated) plus NC-ND licence and 9 citations: not better than Liu"
+  },
+  {
+   "openalex_id": "W7212466594",
+   "doi": "10.1016/j.trb.2026.103603",
+   "title": "Integrated metro train timetable and rolling stock rescheduling with passenger rerouting under multi-location disturbances",
+   "authors_openalex": [
+    "Shan Jiang",
+    "Jiateng Yin",
+    "Yongxiang Zhang",
+    "Andrea D’Ariano",
+    "Xinyue Hu",
+    "Qiyuan Peng"
+   ],
+   "venue": "Transportation Research Part B Methodological",
+   "publication_date_openalex": "2026-09-14",
+   "cited_by_count": 0,
+   "cited_by_count_read_on": "2026-10-04",
+   "rank": 3,
+   "decision": "not eligible (no open licence)",
+   "licence": "NOT open access: Crossref lists Elsevier TDM/STM licences only; Elsevier API openaccess=0; OpenAlex's cc-by-nc-nd flag is unsupported",
+   "family": "metro timetable + rolling stock rescheduling with passenger rerouting under multi-location disturbances (ideal fit)",
+   "formulation": "not read (closed)",
+   "input_clean": "n/a",
+   "established": "Andrea D'Ariano (lab corpus 27), Jiateng Yin (lab corpus 15), Qiyuan Peng (lab corpus 11)",
+   "caveats": "would be the first choice for (a) if an openly licensed copy existed"
+  },
+  {
+   "openalex_id": "W7125905854",
+   "doi": "10.1177/03611981251414099",
+   "title": "Headway Management Strategies for High-Frequency Urban Rail Transit: Dynamic Approach to Real-Time Train Holding in Metro Systems",
+   "authors_openalex": [
+    "Mojtaba Yousefi",
+    "Muhammad Usama",
+    "Haris N. Koutsopoulos"
+   ],
+   "venue": "Transportation Research Record Journal of the Transportation Research Board",
+   "publication_date_openalex": "2026-01-27",
+   "cited_by_count": 1,
+   "cited_by_count_read_on": "2026-10-04",
+   "rank": 4,
+   "decision": "out (no MILP)",
+   "licence": "CC BY-NC 4.0 version of record (Crossref vor)",
+   "family": "real-time train holding in a high-frequency metro",
+   "formulation": "abstract: real-time heuristic + predictive model, evaluated in microscopic simulation; full text blocked (SAGE 403)",
+   "input_clean": "n/a",
+   "established": "Haris N. Koutsopoulos (Northeastern)",
+   "caveats": ""
+  },
+  {
+   "openalex_id": "W4404360789",
+   "doi": "10.1049/itr2.12582",
+   "title": "Development of optimal real‐time metro operation strategy minimizing total passenger travel time and train energy consumption",
+   "authors_openalex": [
+    "Yoonseok Oh",
+    "Ho-Chan Kwak",
+    "Seungmo Kang"
+   ],
+   "venue": "IET Intelligent Transport Systems",
+   "publication_date_openalex": "2024-11-14",
+   "cited_by_count": 2,
+   "cited_by_count_read_on": "2026-10-04",
+   "rank": 5,
+   "decision": "out (no MILP)",
+   "licence": "CC BY-NC-ND 4.0 version of record (Crossref vor)",
+   "family": "real-time metro operation strategy",
+   "formulation": "recurrent neural network model (abstract)",
+   "input_clean": "n/a",
+   "established": "not evidenced",
+   "caveats": "found only by a broader urban sweep (title uses a Unicode hyphen in 'real-time')"
+  },
+  {
+   "rank": 6,
+   "decision": "not advised",
+   "title": "Integrated optimization of train timetables rescheduling and response vehicles on a disrupted metro line",
+   "arxiv": "2212.05715",
+   "journal_doi": "10.1016/j.trc.2025.105078",
+   "licence": "CC BY 4.0 on arXiv preprint (v1 Dec 2022); journal version closed (Crossref: no CC licence)",
+   "authors_arxiv": [
+    "Hui Wang",
+    "Jialin Liu",
+    "Feng Li",
+    "Hao Ji",
+    "Bin Jia",
+    "Ziyou Gao"
+   ],
+   "caveats": "preprint public since Dec 2022 (likely in training data); Ziyou Gao's BJTU systems-science group overlaps the anchor's (Sun, Yang); formulation not verified"
+  },
+  {
+   "rank": 7,
+   "decision": "out (MINLP)",
+   "openalex_id": "W4390496027",
+   "title": "Rescheduling trains by crossover tracks to promote service quality of urban rail transit under partial blockages",
+   "note": "see round 1"
+  },
+  {
+   "rank": null,
+   "decision": "out (MDPI rule)",
+   "openalex_ids": [
+    "W7133314969",
+    "W7164854361"
+   ],
+   "note": "Huang et al. 2026 Electronics; Hu et al. 2026 Applied Sciences"
+  }
+ ],
+ "slot_b_realtime_traffic_management": [
+  {
+   "openalex_id": "W4405267377",
+   "doi": "10.1016/j.jrtpm.2024.100496",
+   "title": "Efficient real-time rail traffic optimization: Decomposition of rerouting, reordering, and rescheduling problems",
+   "authors_openalex": [
+    "István Ferenc Lövétei",
+    "László Lindenmaier",
+    "Szilárd Aradi"
+   ],
+   "venue": "Journal of Rail Transport Planning & Management",
+   "publication_date_openalex": "2024-12-12",
+   "cited_by_count": 3,
+   "cited_by_count_read_on": "2026-10-04",
+   "rank": 1,
+   "decision": "recommended for (b), with caveats",
+   "licence": "CC BY-NC 4.0, version of record (Elsevier XML openaccessUserLicense; Crossref vor 2024-12-04)",
+   "family": "real-time railway traffic management: rerouting, reordering, rescheduling (rtRTMP) in a control area; exact D'Ariano-2008 slot",
+   "formulation": "Sect. 2 'Reference model formulation': MILP with constraints (1)-(26) [time (1)-(4), delay (5)-(6), route choice and track-circuit reservation (7)-(12), overlap constraints (13)-(26)] = 26 groups; objective 'minimizing train delays' stated in Sect. 2 and written as f(X) = sum_t w^t D^t, eq. (72); decomposition models Sect. 3.1 (27)-(42, objective (31)) and Sect. 3.3 (53)-(69)",
+   "input_clean": "yes (Introduction 1,292 words, no math)",
+   "established": "weak to moderate: the BME group's own prior rtRTMP papers are Lindenmaier, Lovetei, Lukacs, Aradi 2021 (Periodica Polytechnica) and Lindenmaier, Aradi, Becsi, Lovetei 2022 (IEEE conference); OpenAlex pool 1 work each; lab corpus 0",
+   "caveats": "RECIFE-MILP lineage ('aligning with Pellegrini et al., 2014, 2015'; 11 Pellegrini entries in references) like #1 Versluis and the excluded Pellegrini 2014; arXiv preprint 2209.12689 public since 2022-09-22 (arXiv non-exclusive licence)"
+  },
+  {
+   "openalex_id": "W4395664348",
+   "doi": "10.1016/j.cor.2024.106679",
+   "title": "A MaxSAT approach for solving a new Dynamic Discretization Discovery model for train rescheduling problems",
+   "authors_openalex": [
+    "Anna Livia Croella",
+    "Bjørnar Luteberget",
+    "Carlo Mannino",
+    "Paolo Ventura"
+   ],
+   "venue": "Computers & Operations Research",
+   "publication_date_openalex": "2024-04-26",
+   "cited_by_count": 10,
+   "cited_by_count_read_on": "2026-10-04",
+   "rank": 2,
+   "decision": "alternate for (b)",
+   "licence": "CC BY-NC-ND 4.0, version of record (Elsevier XML; Crossref vor 2024-04-23); Sapienza IRIS submitted version also CC BY-NC-ND",
+   "family": "real-time train re-scheduling (dispatching) on two Norwegian lines; rail paths fixed (retiming/reordering, no rerouting)",
+   "formulation": "Sect. 2.2 'A full TI formulation' (TI): objective min sum c(p) x + (1) one entry time per train and track segment + (2) pairwise incompatibility packing + binaries = 2 constraint groups; Sect. 3.2 0-1 LP (IAP) of the same form; the Big-M comparison model is not written out",
+   "input_clean": "NO: the Introduction (1,923 words) shows the packing constraint (1) x_p^{ir} + x_q^{jr} <= 1 and describes the Big-M disjunction",
+   "established": "strong: Carlo Mannino (named list; 8 own entries in references incl. Lamorgese & Mannino 2015 Oper. Res., Mannino & Nakkerud 2023 Omega; lab corpus 6), Bjornar Luteberget (SINTEF)",
+   "caveats": "10 citations (at the threshold); very compact model"
+  },
+  {
+   "rank": 3,
+   "decision": "alternate for (b)",
+   "openalex_id": "W4407913914",
+   "title": "Solving the Real-Time Train Dispatching Problem by Column Generation",
+   "note": "see round 1: CC BY-SA 4.0 arXiv preprint only (since 2023-06-23); compact path-based IP (7)-(10) + MIP pricing; TU Dresden (institutional proximity); 4 citations"
+  },
+  {
+   "openalex_id": "W7213830453",
+   "doi": "10.1016/j.trb.2026.103606",
+   "title": "An online approach for integrated railway schedule replanning and passenger reassignment with unknown passenger reactions under hub disruptions",
+   "authors_openalex": [
+    "Enze Liu",
+    "Zhiyuan Lin",
+    "J.Y.T. Wang",
+    "Shuguang Zhan",
+    "Francesco Corman"
+   ],
+   "venue": "Transportation Research Part B Methodological",
+   "publication_date_openalex": "2026-09-22",
+   "cited_by_count": 0,
+   "cited_by_count_read_on": "2026-10-04",
+   "rank": 4,
+   "decision": "considered, not recommended",
+   "licence": "CC BY 4.0 on the accepted manuscript (White Rose eprint 245570, 'made available via the University of Leeds Research Outputs Policy'); version of record not OA (Crossref TDM; Elsevier API openaccess=0)",
+   "family": "online schedule replanning and passenger reassignment after a hub disruption (flood); rolling-stock dispatching and rerouting stop plans",
+   "formulation": "main method is a hierarchical deep-RL MDP; the MILP is an offline full-information benchmark in Appendix C ('Conversion of the online model into an MILP counterpart'), partly in prose, labelled constraints about (47)-(49)",
+   "input_clean": "not checked in detail",
+   "established": "Francesco Corman (named list; lab corpus 13), Shuguang Zhan (lab corpus 11)",
+   "caveats": "wrong sub-family for (b) (network hub disruption) and the MILP is not the paper's model"
+  },
+  {
+   "openalex_id": "W4406166154",
+   "doi": "10.1049/itr2.12610",
+   "title": "Formulation and solution framework for real‐time railway traffic management with demand prediction",
+   "authors_openalex": [
+    "Bianca Pascariu",
+    "Johan Victor Flensburg",
+    "Paola Pellegrini",
+    "Carlos Lima Azevedo"
+   ],
+   "venue": "IET Intelligent Transport Systems",
+   "publication_date_openalex": "2025-01-01",
+   "cited_by_count": 5,
+   "cited_by_count_read_on": "2026-10-04",
+   "rank": 5,
+   "decision": "out: group conflict with #1 (unverified)",
+   "licence": "CC BY-NC-ND 4.0, version of record (Crossref vor)",
+   "family": "rtRTMP with demand prediction",
+   "formulation": "not verifiable here (Wiley 403; DTU Orbit file 403; HAL bot wall)",
+   "input_clean": "n/a",
+   "established": "Paola Pellegrini",
+   "caveats": "same group as #1 Versluis"
+  },
+  {
+   "openalex_id": "W7138405875",
+   "doi": "10.1016/j.trpro.2026.02.058",
+   "title": "Real-time Rail traffic Management in Closed-loop: Assessment of Alternative Train Route Selection",
+   "authors_openalex": [
+    "Bishal Sharma",
+    "Bianca Pascariu",
+    "Paola Pellegrini",
+    "Joaquin Rodriguez"
+   ],
+   "venue": "Transportation research procedia",
+   "publication_date_openalex": "2026-01-01",
+   "cited_by_count": 0,
+   "cited_by_count_read_on": "2026-10-04",
+   "rank": 6,
+   "decision": "out: no formulation + group",
+   "licence": "CC BY-NC-ND 4.0 (Elsevier XML; Crossref vor)",
+   "family": "closed-loop rtRTMP, alternative route selection",
+   "formulation": "no display formulas in the full text",
+   "input_clean": "n/a",
+   "established": "Pellegrini, Rodriguez",
+   "caveats": "same group as #1"
+  },
+  {
+   "openalex_id": "W4399662708",
+   "doi": "10.1016/j.jrtpm.2024.100460",
+   "title": "Formulation of train routing selection problem for different real-time traffic management objectives",
+   "authors_openalex": [
+    "Bianca Pascariu",
+    "Marcella Samà",
+    "Paola Pellegrini",
+    "Andrea D’Ariano",
+    "Joaquín Rodríguez",
+    "Dario Pacciarelli"
+   ],
+   "venue": "Journal of Rail Transport Planning & Management",
+   "publication_date_openalex": "2024-06-14",
+   "cited_by_count": 5,
+   "cited_by_count_read_on": "2026-10-04",
+   "rank": 7,
+   "decision": "out: not open access + group",
+   "licence": "Crossref: Elsevier TDM only; Elsevier API openaccess=0; HAL copy without licence",
+   "family": "train routing selection for rtRTMP objectives",
+   "formulation": "not read",
+   "input_clean": "n/a",
+   "established": "Pellegrini, D'Ariano, Samà, Pacciarelli",
+   "caveats": "OpenAlex cc-by-nc-nd flag unsupported"
+  },
+  {
+   "openalex_id": "W4399310926",
+   "doi": "10.1109/access.2024.3409183",
+   "title": "A Real-Time Railway Traffic Management Approach Preserving Passenger Connections",
+   "authors_openalex": [
+    "Bishal Sharma",
+    "Bianca Pascariu",
+    "Paola Pellegrini",
+    "Joaquín Rodríguez",
+    "Neeraj Chaudhary"
+   ],
+   "venue": "IEEE Access",
+   "publication_date_openalex": "2024-01-01",
+   "cited_by_count": 5,
+   "cited_by_count_read_on": "2026-10-04",
+   "rank": 8,
+   "decision": "out: group",
+   "licence": "CC BY-NC-ND (Crossref vor)",
+   "family": "rtRTMP preserving passenger connections",
+   "formulation": "not checked",
+   "input_clean": "n/a",
+   "established": "Pellegrini, Rodriguez",
+   "caveats": "same group as #1"
+  },
+  {
+   "openalex_id": "W4402333294",
+   "doi": "10.1049/itr2.12557",
+   "title": "Optimization for route selection under the integration of dispatching and control at the railway station: A 0‐1 programming model and a two‐stage solution algorithm",
+   "authors_openalex": [
+    "Liang Ma",
+    "Kun Yang",
+    "Jin Guo",
+    "Yuanli Bao",
+    "Wenqing Wu"
+   ],
+   "venue": "IET Intelligent Transport Systems",
+   "publication_date_openalex": "2024-09-07",
+   "cited_by_count": 1,
+   "cited_by_count_read_on": "2026-10-04",
+   "rank": 9,
+   "decision": "unverified",
+   "licence": "CC BY-NC-ND 4.0 (Crossref vor)",
+   "family": "station route selection integrating dispatching and control (0-1 programming per title)",
+   "formulation": "full text blocked (Wiley 403)",
+   "input_clean": "n/a",
+   "established": "not evidenced",
+   "caveats": ""
+  },
+  {
+   "openalex_id": "W7126099024",
+   "doi": "10.7307/ptt.v38i1.1035",
+   "title": "A Novel Integrated Model of Train Rescheduling and Station Track Usage Planning Based on Harris Hawks Optimisation Algorithm",
+   "authors_openalex": [
+    "Xuelei MENG",
+    "Qian KANG",
+    "Xiaoqing CHENG",
+    "Ruhu Gao"
+   ],
+   "venue": "PROMET - Traffic&Transportation",
+   "publication_date_openalex": "2026-01-29",
+   "cited_by_count": 0,
+   "cited_by_count_read_on": "2026-10-04",
+   "rank": 10,
+   "decision": "unverified",
+   "licence": "CC BY-NC (OpenAlex; Crossref 'unspecified' content version)",
+   "family": "integrated train rescheduling + station track usage (Harris Hawks optimiser)",
+   "formulation": "PROMET server unreachable from this machine",
+   "input_clean": "n/a",
+   "established": "Xuelei Meng (not evidenced here)",
+   "caveats": ""
+  },
+  {
+   "rank": 11,
+   "decision": "out: group",
+   "openalex_ids": [
+    "W4390597577",
+    "W7167251429"
+   ],
+   "note": "D'Amato et al. 2024 JRTPM (concept/framework) and Naldini et al. 2026 IEEE T-ITS (self-organising); Pellegrini group; versions of record not CC"
+  }
+ ],
+ "recommended_final_five": [
+  {
+   "role": "anchor (experiment 1)",
+   "openalex_id": "W7135176935",
+   "doi": "10.1287/trsc.2025.0137",
+   "licence": "CC BY (Bath accepted manuscript)",
+   "cited_by_count": 1,
+   "status": "pending manual MILP check"
+  },
+  {
+   "role": "junction routing and scheduling (keep)",
+   "openalex_id": "W4417119897",
+   "doi": "10.1080/23249935.2025.2592225",
+   "licence": "CC BY 4.0",
+   "cited_by_count": 0
+  },
+  {
+   "role": "network-wide disruption (keep)",
+   "openalex_id": "W4408180338",
+   "doi": "10.1016/j.trb.2025.103189",
+   "licence": "CC BY 4.0",
+   "cited_by_count": 7
+  },
+  {
+   "role": "(a) urban/metro (kept: no better candidate under the new rules)",
+   "openalex_id": "W7167252848",
+   "doi": "10.1016/j.trc.2026.105841",
+   "licence": "CC BY 4.0",
+   "cited_by_count": 1
+  },
+  {
+   "role": "(b) real-time reordering/rerouting (new)",
+   "openalex_id": "W4405267377",
+   "doi": "10.1016/j.jrtpm.2024.100496",
+   "licence": "CC BY-NC 4.0",
+   "cited_by_count": 3
+  }
+ ],
+ "funnel_final_rule": {
+  "unique_works": 1918,
+  "title_screen": 257,
+  "allowed_cc_licence_non_doaj": 208,
+  "cited_le_10": 178,
+  "years_2024_2026": 132,
+  "non_mdpi": 98,
+  "in_family_optimisation_papers_after_manual_screen": 26,
+  "note": "26 = 12 from the round-1 screen (non-MDPI) + 14 among the 39 works newly admitted by the NC rule; per-work decisions in screen_manual.json and round2/screen_manual_round2_new39.json"
+ },
+ "process_notes": [
+  "round 2 used default clients only (curl default user agent, WebSearch/WebFetch); no fresh OpenAlex queries (budget resets 00:00 UTC); all OpenAlex fields come from the cache read 2026-10-04",
+  "Elsevier Article Retrieval API used for open-access articles only; three responses with openaccess=0 were deleted unread",
+  "disclosure: round 1's fetch script sent a browser-like User-Agent string; it unlocked nothing (every site that blocked stayed blocked; the successful fetches were arXiv, PLOS and public repository record pages)"
+ ]
+}

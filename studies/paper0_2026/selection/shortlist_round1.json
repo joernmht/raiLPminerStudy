@@ -1,0 +1,1771 @@
+{
+ "title": "Paper 0 rerun: shortlist of replacement input papers",
+ "prepared": "2026-10-04",
+ "openalex_cited_by_count_read_on": "2026-10-04",
+ "selection_rule": [
+  "1 public access, CC BY (or CC BY-SA) on an openly accessible version",
+  "2 problem family: real-time/operational train rescheduling or dispatching under disruptions/perturbations",
+  "3 at least one established railway rescheduling/timetabling author; no paper co-authored by N. Besinovic or J. Maurischat",
+  "4 low OpenAlex cited_by_count (<= 10), recent (2024-2026 preferred)",
+  "5 explicit MILP/ILP written out in the full text; abstract + introduction free of formulation"
+ ],
+ "recommended_five": [
+  {
+   "rank": 1,
+   "openalex_id": "W4417119897",
+   "slot_2025": "station/junction routing and scheduling (replaces Pellegrini et al. 2014)"
+  },
+  {
+   "rank": 2,
+   "openalex_id": "W7135176935",
+   "slot_2025": "line/segment blockage (replaces Zhan et al. 2016)",
+   "condition": "confirm MILP section and constraint count in the Bath AAM by hand; fallback Xiu et al. 2025 (W4408706372) or Liao 2023 (W4380358029)"
+  },
+  {
+   "rank": 3,
+   "openalex_id": "W4408180338",
+   "slot_2025": "network-wide/large-scale disruption (replaces Zhang et al. 2023)"
+  },
+  {
+   "rank": 4,
+   "openalex_id": "W7167252848",
+   "slot_2025": "urban/metro network (replaces Koniorczyk et al. 2025)"
+  },
+  {
+   "rank": 5,
+   "openalex_id": "W4413061238",
+   "slot_2025": "real-time reordering/rerouting in a large network (replaces D'Ariano et al. 2008)"
+  }
+ ],
+ "funnel": {
+  "openalex_queries": 78,
+  "openalex_queries_by_field": {
+   "title_and_abstract.search": 48,
+   "fulltext.search": 30
+  },
+  "unique_works": 1918,
+  "title_screen_pass": 257,
+  "cc_by_or_by_sa_non_doaj_location": 150,
+  "cited_by_count_le_10": 128,
+  "published_2024_2026": 93,
+  "manual_screen_of_93": {
+   "out_topic": 62,
+   "out_method_no_optimisation_model": 11,
+   "out_excluded_input_or_coi": 2,
+   "in_family_with_model": 18
+  },
+  "full_text_check_of_18": {
+   "table": 12,
+   "out_no_explicit_milp": 2,
+   "out_no_established_author_evidenced": 4
+  },
+  "reserve_2023_added_to_table": 3
+ },
+ "recall_checks": {
+  "crossref": "12 queries, filter type=journal-article, from-pub-date 2024-01-01, licence URL CC BY 4.0: no additional in-family candidate not already in the OpenAlex pool",
+  "arxiv_api": "10 abstract-phrase queries, submissions since 2024-01-01: 15 hits; only W7167252848 (already in table) qualifies"
+ },
+ "limitations": [
+  "OpenAlex free daily budget (shared per IP, no API key on this machine) was exhausted after 78 list queries; four planned full-text phrase queries were not run ('\"partial blockage\" railway', '\"track blockage\"', '\"line blockage\" railway', '\"railway traffic control\" rescheduling'); a Crossref 'partial blockage railway' query found nothing new",
+  "per-author OpenAlex topic counts (all years) were not queried for the same reason; author evidence = named group + works in the harvested OpenAlex pool + papers in the lab's curated railway-optimisation corpus (OpenAlex metadata of 2026-06-21) + prior topical works in the paper's own reference list",
+  "publisher sites (MDPI, Springer, T&F, INFORMS, ScienceDirect web, HAL, PMC, Pure file links) block scripted downloads from this machine; full texts came from arXiv, the Elsevier Article Retrieval API (CC BY articles), Europe PMC, and Internet Archive copies of CC BY pages",
+  "OpenAlex DOAJ locations carry the DOAJ metadata licence (CC BY-SA), not the article licence; they were ignored in the licence filter"
+ ],
+ "notable_licence_exclusions": [
+  {
+   "title": "Real-time Rail traffic Management in Closed-loop: Assessment of Alternative Train Route Selection",
+   "openalex_id": "W7138405875",
+   "licence": "cc-by-nc-nd"
+  },
+  {
+   "title": "An online approach for integrated railway schedule replanning and passenger reassignment with unknown passenger reaction",
+   "openalex_id": "W7213830453",
+   "licence": "cc-by-nc-nd"
+  },
+  {
+   "title": "Integrated metro train timetable and rolling stock rescheduling with passenger rerouting under multi-location disturbances",
+   "openalex_id": "W7212466594",
+   "licence": "cc-by-nc-nd"
+  },
+  {
+   "title": "Formulation and solution framework for real-time railway traffic management with demand prediction",
+   "openalex_id": "W4406166154",
+   "licence": "cc-by-nc-nd"
+  },
+  {
+   "title": "Efficient real-time rail traffic optimization: Decomposition of rerouting, reordering, and rescheduling problems",
+   "openalex_id": "W4405267377",
+   "licence": "cc-by-nc"
+  },
+  {
+   "title": "A MaxSAT approach for solving a new Dynamic Discretization Discovery model for train rescheduling problems",
+   "openalex_id": "W4395664348",
+   "licence": "cc-by-nc-nd"
+  },
+  {
+   "title": "Self-Organizing Railway Traffic Management",
+   "openalex_id": "W7167251429",
+   "licence": "other-oa"
+  }
+ ],
+ "candidates": [
+  {
+   "openalex_id": "W4417119897",
+   "doi": "10.1080/23249935.2025.2592225",
+   "title": "Conflict detection and resolution for distance-to-go railway signalling",
+   "authors_openalex": [
+    "Nina D. Versluis",
+    "Paola Pellegrini",
+    "Egidio Quaglietta",
+    "Rob M.P. Goverde",
+    "Joaquín Rodríguez"
+   ],
+   "year": 2025,
+   "publication_date_openalex": "2025-12-08",
+   "venue": "Transportmetrica A Transport Science",
+   "cited_by_count": 0,
+   "cited_by_count_read_on": "2026-10-04",
+   "licence_openalex_best_oa": "cc-by",
+   "best_oa_version": "publishedVersion",
+   "best_oa_host": "Transportmetrica A Transport Science",
+   "publisher_location_is_oa": true,
+   "rank": 1,
+   "status": "recommended",
+   "slot_2025": "station/junction routing and scheduling (replaces Pellegrini et al. 2014)",
+   "first_author": "Nina D. Versluis",
+   "established_authors": [
+    "Paola Pellegrini (Univ. Gustave Eiffel)",
+    "Joaquín Rodríguez (Univ. Gustave Eiffel)",
+    "Rob M.P. Goverde (TU Delft)",
+    "Egidio Quaglietta (TU Delft)"
+   ],
+   "licence_used_and_evidence": "CC BY 4.0 on the publisher version (OpenAlex: publisher location cc-by; Crossref vor licence CC BY 4.0 from 2025-12-08). Text read from the authors' HAL deposit 'as published with citation' (retrieved through the Internet Archive; HAL itself blocks scripted access)",
+   "licence_crossref_vor": "http://creativecommons.org/licenses/by/4.0/",
+   "problem_subfamily": "Real-time conflict detection and resolution (train routing, reordering, retiming) at track-circuit level under ETCS Level 2 distance-to-go signalling; Gonesse junction and Rosny-St-Etienne corridor (France)",
+   "formulation": {
+    "present": "yes (verified)",
+    "section": "Sect. 4.2 'MILP formulation for distance-to-go conflict detection and resolution' (4.2.1 sets/parameters/variables, 4.2.2 objective, 4.2.3 constraints) + appendix table of notation",
+    "approx_constraints": "objective (2) + constraint groups (3)-(18) = 16",
+    "type": "MILP (RECIFE-MILP extended to distance-to-go signalling)",
+    "verified_from": "author version PDF (HAL hal-05406349, 30 pp.)"
+   },
+   "abstract_intro_formulation_free": "yes: Introduction ~820 words, no math",
+   "notes": "Extends RECIFE-MILP, the model of the excluded Pellegrini 2014 (same Gonesse junction). New/changed constraints (6),(7),(10),(12)-(16), but the base model is well known.",
+   "author_evidence": {
+    "in_named_list_of_task": [
+     "Joaquín Rodríguez",
+     "Paola Pellegrini",
+     "Rob M.P. Goverde"
+    ],
+    "openalex_pool_counts": [
+     {
+      "name": "Nina D. Versluis",
+      "openalex_author_id": "A5093417510",
+      "works_in_pool": 3,
+      "topical_titles_in_pool": 3
+     },
+     {
+      "name": "Paola Pellegrini",
+      "openalex_author_id": "A5030744697",
+      "works_in_pool": 13,
+      "topical_titles_in_pool": 13
+     },
+     {
+      "name": "Egidio Quaglietta",
+      "openalex_author_id": "A5039361726",
+      "works_in_pool": 4,
+      "topical_titles_in_pool": 3
+     },
+     {
+      "name": "Rob M.P. Goverde",
+      "openalex_author_id": "A5060145801",
+      "works_in_pool": 7,
+      "topical_titles_in_pool": 3
+     },
+     {
+      "name": "Joaquín Rodríguez",
+      "openalex_author_id": "A5071099756",
+      "works_in_pool": 9,
+      "topical_titles_in_pool": 9
+     }
+    ],
+    "lab_corpus_counts": {
+     "Paola Pellegrini": 2,
+     "Joaquín Rodríguez": 2,
+     "Rob M.P. Goverde": 14,
+     "Egidio Quaglietta": 1
+    },
+    "reference_list_name_occurrences": {
+     "Pellegrini": 8,
+     "Goverde": 2,
+     "Rodriguez": 6,
+     "Quaglietta": 3,
+     "Versluis": 1
+    }
+   }
+  },
+  {
+   "openalex_id": "W7135176935",
+   "doi": "10.1287/trsc.2025.0137",
+   "title": "Integrated Optimization of Train Rescheduling and Speed Management During Partial Blockages: A Decomposition Approach",
+   "authors_openalex": [
+    "Lingyuan Shi",
+    "X G H Miley Yang",
+    "Wei Zhang",
+    "Huijun Sun",
+    "Gilbert Laporte"
+   ],
+   "year": 2026,
+   "publication_date_openalex": "2026-03-13",
+   "venue": "Transportation Science",
+   "cited_by_count": 1,
+   "cited_by_count_read_on": "2026-10-04",
+   "licence_openalex_best_oa": "cc-by",
+   "best_oa_version": "publishedVersion",
+   "best_oa_host": "Pure (University of Bath)",
+   "publisher_location_is_oa": false,
+   "rank": 2,
+   "status": "recommended (pending one manual check)",
+   "slot_2025": "line/segment blockage (replaces Zhan et al. 2016)",
+   "first_author": "Lingyuan Shi",
+   "established_authors": [
+    "Gilbert Laporte (HEC Montréal, per OpenAlex)",
+    "Huijun Sun (Beijing Jiaotong Univ.)",
+    "Xin Yang (Beijing Jiaotong Univ.)"
+   ],
+   "licence_used_and_evidence": "CC BY on the accepted author manuscript in the Univ. of Bath Pure repository (record states 'Licence: CC BY'); publisher version (INFORMS) not OA: Crossref lists no licence, OpenAlex publisher location is_oa=false",
+   "licence_crossref_vor": null,
+   "problem_subfamily": "High-speed rail train rescheduling + speed management under partial segment blockages; trains may switch to the opposite track to bypass the blockage",
+   "formulation": {
+    "present": "declared, NOT verified",
+    "section": "unknown (full text not retrievable from this machine)",
+    "approx_constraints": null,
+    "type": "MILP (abstract: 'A mixed-integer linear programming model is formulated to simultaneously optimize train times, orders, routes and speed profiles'; keyword 'mixed-integer linear programming'), decomposed into a reformulated IP",
+    "verified_from": "abstract + keywords on the Bath Pure record only"
+   },
+   "abstract_intro_formulation_free": "not checked (no full text)",
+   "notes": "Best family fit of all candidates (direct analogue of Zhan 2016) and latest date. Needs a one-minute manual check: open the Bath Pure PDF in a browser and record the MILP section and constraint count; scripted download returned HTTP 403. OpenAlex display name 'X G H Miley Yang' = Xin Yang per the repository record. Fallbacks if the check fails: Xiu et al. 2025 (MINLP) or Liao 2023 (ILP).",
+   "author_evidence": {
+    "in_named_list_of_task": [],
+    "openalex_pool_counts": [
+     {
+      "name": "Lingyuan Shi",
+      "openalex_author_id": "A5002444199",
+      "works_in_pool": 1,
+      "topical_titles_in_pool": 1
+     },
+     {
+      "name": "X G H Miley Yang",
+      "openalex_author_id": "A5108963166",
+      "works_in_pool": 1,
+      "topical_titles_in_pool": 1
+     },
+     {
+      "name": "Wei Zhang",
+      "openalex_author_id": "A5100725724",
+      "works_in_pool": 1,
+      "topical_titles_in_pool": 1
+     },
+     {
+      "name": "Huijun Sun",
+      "openalex_author_id": "A5001122871",
+      "works_in_pool": 2,
+      "topical_titles_in_pool": 2
+     },
+     {
+      "name": "Gilbert Laporte",
+      "openalex_author_id": "A5076313841",
+      "works_in_pool": 2,
+      "topical_titles_in_pool": 1
+     }
+    ],
+    "lab_corpus_counts": {
+     "Gilbert Laporte": 2,
+     "Huijun Sun": 6,
+     "Xin Yang": 1
+    },
+    "reference_list_name_occurrences": null
+   }
+  },
+  {
+   "openalex_id": "W4408180338",
+   "doi": "10.1016/j.trb.2025.103189",
+   "title": "An exact and heuristic framework for rolling stock rescheduling with railway infrastructure availability constraints",
+   "authors_openalex": [
+    "Jia Hui Zhu",
+    "Twan Dollevoet",
+    "Dennis Huisman"
+   ],
+   "year": 2025,
+   "publication_date_openalex": "2025-03-06",
+   "venue": "Transportation Research Part B Methodological",
+   "cited_by_count": 7,
+   "cited_by_count_read_on": "2026-10-04",
+   "licence_openalex_best_oa": "cc-by",
+   "best_oa_version": "publishedVersion",
+   "best_oa_host": "Transportation Research Part B Methodological",
+   "publisher_location_is_oa": true,
+   "rank": 3,
+   "status": "recommended",
+   "slot_2025": "network-wide/large-scale disruption (replaces Zhang et al. 2023)",
+   "first_author": "Jia Hui Zhu",
+   "established_authors": [
+    "Dennis Huisman (Erasmus Univ. Rotterdam / NS)",
+    "Twan Dollevoet (Erasmus Univ. Rotterdam)"
+   ],
+   "licence_used_and_evidence": "CC BY 4.0 on the publisher version (Elsevier openaccessUserLicense = CC BY 4.0; Crossref vor CC BY 4.0 from 2025-03-03; also EUR repository)",
+   "licence_crossref_vor": "http://creativecommons.org/licenses/by/4.0/",
+   "problem_subfamily": "Rolling-stock rescheduling during complete blockages on the Dutch network, with an infrastructure (timetable-feasibility) model that retimes events at Utrecht Centraal and Rotterdam Centraal",
+   "formulation": {
+    "present": "yes (verified)",
+    "section": "Sect. 4.1 composition model + Sect. 4.2 infrastructure model",
+    "approx_constraints": "MILP 1: objective (1) + (2)-(21) [20 incl. domains]; MILP 2: objective (22) + (23)-(36) [14 incl. domains]",
+    "type": "two MILPs, iterated (exact algorithm + heuristic)",
+    "verified_from": "Elsevier full-text XML (CC BY; the lab corpus copy was read in place)"
+   },
+   "abstract_intro_formulation_free": "yes: Introduction ~1,540 words, no math",
+   "notes": "Criterion 2 only partly met: the disruption is network-wide (complete blockages), but the decision object is rolling stock (with event retiming), not the train timetable alone. The paper is already in the Paper-1 lab corpus. Swap for Schälicke & Nachtigall 2025 if a strict train-dispatching fit is preferred.",
+   "author_evidence": {
+    "in_named_list_of_task": [
+     "Dennis Huisman",
+     "Twan Dollevoet"
+    ],
+    "openalex_pool_counts": [
+     {
+      "name": "Jia Hui Zhu",
+      "openalex_author_id": "",
+      "works_in_pool": 0,
+      "topical_titles_in_pool": 0
+     },
+     {
+      "name": "Twan Dollevoet",
+      "openalex_author_id": "A5043642198",
+      "works_in_pool": 1,
+      "topical_titles_in_pool": 1
+     },
+     {
+      "name": "Dennis Huisman",
+      "openalex_author_id": "A5004204400",
+      "works_in_pool": 4,
+      "topical_titles_in_pool": 2
+     }
+    ],
+    "lab_corpus_counts": {
+     "Dennis Huisman": 5,
+     "Twan Dollevoet": 2
+    },
+    "reference_list_name_occurrences": {
+     "Huisman": 4,
+     "Dollevoet": 2
+    }
+   }
+  },
+  {
+   "openalex_id": "W7167252848",
+   "doi": "10.1016/j.trc.2026.105841",
+   "title": "Learning-based model predictive control for passenger-oriented train rescheduling with flexible train composition",
+   "authors_openalex": [
+    "Xiaoyu Liu",
+    "Caio Fabio Oliveira da Silva",
+    "Azita Dabiri",
+    "Yihui Wang",
+    "Bart De Schutter"
+   ],
+   "year": 2026,
+   "publication_date_openalex": "2026-07-03",
+   "venue": "Transportation Research Part C Emerging Technologies",
+   "cited_by_count": 1,
+   "cited_by_count_read_on": "2026-10-04",
+   "licence_openalex_best_oa": "cc-by",
+   "best_oa_version": "publishedVersion",
+   "best_oa_host": "Transportation Research Part C Emerging Technologies",
+   "publisher_location_is_oa": true,
+   "rank": 4,
+   "status": "recommended",
+   "slot_2025": "urban/metro network (replaces Koniorczyk et al. 2025)",
+   "first_author": "Xiaoyu Liu",
+   "established_authors": [
+    "Bart De Schutter (TU Delft)",
+    "Yihui Wang (Beijing Jiaotong Univ.)",
+    "Azita Dabiri (TU Delft)"
+   ],
+   "licence_used_and_evidence": "CC BY 4.0 on the publisher version (Elsevier full-text XML openaccessUserLicense = CC BY 4.0; Crossref vor CC BY 4.0 from 2026-06-29); arXiv 2502.15544 also CC BY 4.0 (v1 2025-02-21)",
+   "licence_crossref_vor": "http://creativecommons.org/licenses/by/4.0/",
+   "problem_subfamily": "Passenger-oriented real-time train rescheduling with flexible train composition and rolling-stock circulation in an urban rail network (3 Beijing lines, 45 stations) under time-varying demand",
+   "formulation": {
+    "present": "yes (verified), MPC form",
+    "section": "Sect. 3 'Mathematical formulation for passenger-oriented train rescheduling' (3.1 notation, constraints (1)-(23)); Sect. 4.1 objective (24)-(26); Sect. 4.2 MINLP-based MPC (27)-(30c); Sect. 4.3 MILP-based MPC (31)-(32)",
+    "approx_constraints": "~25 constraint equations (1)-(23) incl. (18a,b), plus linearisations (27)-(29)",
+    "type": "MINLP model with a MILP reformulation inside model predictive control (compact state-space/matrix notation)",
+    "verified_from": "Elsevier full-text XML (CC BY, retrieved via the Elsevier Article Retrieval API) + arXiv PDF"
+   },
+   "abstract_intro_formulation_free": "yes: Introduction ~2,290 words (incl. literature subsections 1.1-1.4), no math",
+   "notes": "Criterion 5 only partly met: the main method is learning-based MPC; the MILP is the MPC baseline and is written in MPC/state-space notation. Public since Feb 2025 as an arXiv preprint (earlier exposure than the 2026 journal date). The perturbation is demand-driven, not an infrastructure disruption.",
+   "author_evidence": {
+    "in_named_list_of_task": [],
+    "openalex_pool_counts": [
+     {
+      "name": "Xiaoyu Liu",
+      "openalex_author_id": "A5057961560",
+      "works_in_pool": 4,
+      "topical_titles_in_pool": 4
+     },
+     {
+      "name": "Caio Fabio Oliveira da Silva",
+      "openalex_author_id": "A5084608423",
+      "works_in_pool": 2,
+      "topical_titles_in_pool": 2
+     },
+     {
+      "name": "Azita Dabiri",
+      "openalex_author_id": "A5022595935",
+      "works_in_pool": 2,
+      "topical_titles_in_pool": 2
+     },
+     {
+      "name": "Yihui Wang",
+      "openalex_author_id": "A5100324205",
+      "works_in_pool": 3,
+      "topical_titles_in_pool": 2
+     },
+     {
+      "name": "Bart De Schutter",
+      "openalex_author_id": "A5026547410",
+      "works_in_pool": 7,
+      "topical_titles_in_pool": 5
+     }
+    ],
+    "lab_corpus_counts": {
+     "Bart De Schutter": 6,
+     "Yihui Wang": 11,
+     "Azita Dabiri": 1
+    },
+    "reference_list_name_occurrences": {
+     "De Schutter": 8,
+     "Wang": 12,
+     "Dabiri": 4,
+     "Liu": 4
+    }
+   }
+  },
+  {
+   "openalex_id": "W4413061238",
+   "doi": "10.3390/app15147996",
+   "title": "A Novel Multi-Agent-Based Approach for Train Rescheduling in Large-Scale Railway Networks",
+   "authors_openalex": [
+    "Liu Jin",
+    "Lei Chen",
+    "Zhongbei Tian",
+    "Ning Zhao",
+    "Clive Roberts"
+   ],
+   "year": 2025,
+   "publication_date_openalex": "2025-07-17",
+   "venue": "Applied Sciences",
+   "cited_by_count": 3,
+   "cited_by_count_read_on": "2026-10-04",
+   "licence_openalex_best_oa": "cc-by",
+   "best_oa_version": "publishedVersion",
+   "best_oa_host": "Applied Sciences",
+   "publisher_location_is_oa": true,
+   "rank": 5,
+   "status": "recommended",
+   "slot_2025": "real-time reordering/rerouting in a large network (replaces D'Ariano et al. 2008)",
+   "first_author": "Liu Jin",
+   "established_authors": [
+    "Clive Roberts (Univ. of Birmingham)",
+    "Lei Chen (Univ. of Birmingham)"
+   ],
+   "licence_used_and_evidence": "CC BY 4.0 on the publisher version (MDPI licence statement; Crossref vor CC BY 4.0)",
+   "licence_crossref_vor": "https://creativecommons.org/licenses/by/4.0/",
+   "problem_subfamily": "Real-time train rescheduling (passing sequences and routing at junctions, dwell and connection times) in a large-scale British network, decomposed by a multi-agent system",
+   "formulation": {
+    "present": "yes (verified), stylised",
+    "section": "Sect. 3 'Problem Statement' (notation in the back-matter 'Abbreviations' list)",
+    "approx_constraints": "objective (1) + constraints (2)-(12) = 11 (incl. binary domains)",
+    "type": "labelled MILP by the authors, but written with max(), headway/routing functions f(.) and products of binaries, so not linear as written",
+    "verified_from": "MDPI full-text HTML (Internet Archive copy of the article page, 2025-07-17)"
+   },
+   "abstract_intro_formulation_free": "yes: Introduction ~800 words, no math",
+   "notes": "Criterion 5 partly met (stylised formulation). The established-author evidence comes from the paper's own references: Chen, Roberts et al. 2015 IEEE T-ITS and Liu, Chen, Roberts et al. 2019 IET ITS on real-time rescheduling in bottleneck sections.",
+   "author_evidence": {
+    "in_named_list_of_task": [],
+    "openalex_pool_counts": [
+     {
+      "name": "Liu Jin",
+      "openalex_author_id": "A5023845665",
+      "works_in_pool": 4,
+      "topical_titles_in_pool": 3
+     },
+     {
+      "name": "Lei Chen",
+      "openalex_author_id": "A5100756829",
+      "works_in_pool": 1,
+      "topical_titles_in_pool": 1
+     },
+     {
+      "name": "Zhongbei Tian",
+      "openalex_author_id": "A5080737022",
+      "works_in_pool": 7,
+      "topical_titles_in_pool": 2
+     },
+     {
+      "name": "Ning Zhao",
+      "openalex_author_id": "A5037987331",
+      "works_in_pool": 3,
+      "topical_titles_in_pool": 1
+     },
+     {
+      "name": "Clive Roberts",
+      "openalex_author_id": "A5114375483",
+      "works_in_pool": 1,
+      "topical_titles_in_pool": 1
+     }
+    ],
+    "lab_corpus_counts": {
+     "Clive Roberts": 0,
+     "Lei Chen": 0
+    },
+    "reference_list_name_occurrences": {
+     "Roberts": 11,
+     "Chen, L": 7,
+     "Tian, Z": 4,
+     "Jin, L": 2,
+     "Zhao, N": 4
+    }
+   }
+  },
+  {
+   "openalex_id": "W4407913914",
+   "doi": "10.1287/trsc.2023.0215",
+   "title": "Solving the Real-Time Train Dispatching Problem by Column Generation",
+   "authors_openalex": [
+    "Maik Schälicke",
+    "Karl Nachtigall"
+   ],
+   "year": 2025,
+   "publication_date_openalex": "2025-02-25",
+   "venue": "Transportation Science",
+   "cited_by_count": 4,
+   "cited_by_count_read_on": "2026-10-04",
+   "licence_openalex_best_oa": "cc-by-sa",
+   "best_oa_version": "submittedVersion",
+   "best_oa_host": "arXiv (Cornell University)",
+   "publisher_location_is_oa": false,
+   "rank": 6,
+   "status": "alternate",
+   "slot_2025": "real-time train dispatching (swap-in for #4 or #5)",
+   "first_author": "Maik Schälicke",
+   "established_authors": [
+    "Karl Nachtigall (TU Dresden)"
+   ],
+   "licence_used_and_evidence": "CC BY-SA 4.0 on the arXiv preprint 2306.13431 (v1 2023-06-23); journal version (INFORMS) not OA: Crossref lists no licence",
+   "licence_crossref_vor": null,
+   "problem_subfamily": "Real-time train dispatching problem (conflict-free train paths built from speed profiles; minimum delay); German dispatching area",
+   "formulation": {
+    "present": "yes (verified)",
+    "section": "Sect. 3.2.1 'Path-oriented IP Formulation' + Sect. 3.2.3 'MIP Subproblem'",
+    "approx_constraints": "master IP: objective (7) + (8)-(10); pricing MIP about (15)-(29)",
+    "type": "binary set-packing IP with maximal-clique conflict constraints (column generation) + MIP pricing",
+    "verified_from": "arXiv v2 PDF"
+   },
+   "abstract_intro_formulation_free": "yes: Introduction ~260 words, no math",
+   "notes": "Flags: share-alike licence and the text is the preprint, not the version of record; public since June 2023 (likely in pre-2025 training data); TU Dresden, the study's own university (no co-authorship conflict under the rule); master model very compact.",
+   "author_evidence": {
+    "in_named_list_of_task": [],
+    "openalex_pool_counts": [
+     {
+      "name": "Maik Schälicke",
+      "openalex_author_id": "A5092270745",
+      "works_in_pool": 1,
+      "topical_titles_in_pool": 1
+     },
+     {
+      "name": "Karl Nachtigall",
+      "openalex_author_id": "A5062603662",
+      "works_in_pool": 1,
+      "topical_titles_in_pool": 1
+     }
+    ],
+    "lab_corpus_counts": {
+     "Karl Nachtigall": 3
+    },
+    "reference_list_name_occurrences": {
+     "Nachtigall": 1,
+     "Schälicke": 0
+    }
+   }
+  },
+  {
+   "openalex_id": "W4412107257",
+   "doi": "10.1016/j.jrtpm.2025.100533",
+   "title": "Impact of track discretisation on conflict detection and resolution under ETCS with onboard train integrity monitoring",
+   "authors_openalex": [
+    "Nina D. Versluis",
+    "Paola Pellegrini",
+    "Egidio Quaglietta",
+    "Rob M.P. Goverde",
+    "Joaquín Rodríguez"
+   ],
+   "year": 2025,
+   "publication_date_openalex": "2025-07-08",
+   "venue": "Journal of Rail Transport Planning & Management",
+   "cited_by_count": 1,
+   "cited_by_count_read_on": "2026-10-04",
+   "licence_openalex_best_oa": "cc-by",
+   "best_oa_version": "publishedVersion",
+   "best_oa_host": "Journal of Rail Transport Planning & Management",
+   "publisher_location_is_oa": true,
+   "rank": 7,
+   "status": "alternate",
+   "slot_2025": "station/junction routing and scheduling (same group as #2)",
+   "first_author": "Nina D. Versluis",
+   "established_authors": [
+    "Paola Pellegrini",
+    "Joaquín Rodríguez",
+    "Rob M.P. Goverde",
+    "Egidio Quaglietta"
+   ],
+   "licence_used_and_evidence": "CC BY 4.0 on the publisher version (Elsevier XML; Crossref vor CC BY 4.0 from 2025-07-02)",
+   "licence_crossref_vor": "http://creativecommons.org/licenses/by/4.0/",
+   "problem_subfamily": "Real-time conflict detection and resolution under ETCS L2 with on-board train integrity monitoring; track discretisation; junction and corridor case studies",
+   "formulation": {
+    "present": "yes (verified)",
+    "section": "Sect. 3.3 (sets, constraints (1)-(9), objective) + Appendix A 'MILP formulation for distance-to-go conflict detection and resolution'",
+    "approx_constraints": "Appendix A: objective (A.1) + (A.2)-(A.17), several with sub-rows (~20)",
+    "type": "MILP (RECIFE-MILP lineage)",
+    "verified_from": "Elsevier full-text XML (CC BY)"
+   },
+   "abstract_intro_formulation_free": "yes: Introduction ~1,200 words, no math",
+   "notes": "Interchangeable with #2 (choose one); full model only in the appendix.",
+   "author_evidence": {
+    "in_named_list_of_task": [
+     "Joaquín Rodríguez",
+     "Paola Pellegrini",
+     "Rob M.P. Goverde"
+    ],
+    "openalex_pool_counts": [
+     {
+      "name": "Nina D. Versluis",
+      "openalex_author_id": "A5093417510",
+      "works_in_pool": 3,
+      "topical_titles_in_pool": 3
+     },
+     {
+      "name": "Paola Pellegrini",
+      "openalex_author_id": "A5030744697",
+      "works_in_pool": 13,
+      "topical_titles_in_pool": 13
+     },
+     {
+      "name": "Egidio Quaglietta",
+      "openalex_author_id": "A5039361726",
+      "works_in_pool": 4,
+      "topical_titles_in_pool": 3
+     },
+     {
+      "name": "Rob M.P. Goverde",
+      "openalex_author_id": "A5060145801",
+      "works_in_pool": 7,
+      "topical_titles_in_pool": 3
+     },
+     {
+      "name": "Joaquín Rodríguez",
+      "openalex_author_id": "A5071099756",
+      "works_in_pool": 9,
+      "topical_titles_in_pool": 9
+     }
+    ],
+    "lab_corpus_counts": {
+     "Paola Pellegrini": 2,
+     "Joaquín Rodríguez": 2,
+     "Rob M.P. Goverde": 14,
+     "Egidio Quaglietta": 1
+    },
+    "reference_list_name_occurrences": {
+     "Pellegrini": 6,
+     "Goverde": 2,
+     "Rodriguez": 7,
+     "Quaglietta": 2,
+     "Versluis": 2
+    }
+   }
+  },
+  {
+   "openalex_id": "W4408706372",
+   "doi": "10.1016/j.trc.2025.105076",
+   "title": "Integrated train rescheduling and speed management in a railway network: A meso-micro approach based on direct multiple shooting and alternating direction method of multipliers",
+   "authors_openalex": [
+    "Cong Xiu",
+    "Jinyi Pan",
+    "Andrea D’Ariano",
+    "Shuguang Zhan",
+    "Tao Feng",
+    "Qiyuan Peng"
+   ],
+   "year": 2025,
+   "publication_date_openalex": "2025-03-21",
+   "venue": "Transportation Research Part C Emerging Technologies",
+   "cited_by_count": 10,
+   "cited_by_count_read_on": "2026-10-04",
+   "licence_openalex_best_oa": "cc-by",
+   "best_oa_version": "publishedVersion",
+   "best_oa_host": "Transportation Research Part C Emerging Technologies",
+   "publisher_location_is_oa": true,
+   "rank": 8,
+   "status": "alternate",
+   "slot_2025": "line/segment blockage (fallback for #1)",
+   "first_author": "Cong Xiu",
+   "established_authors": [
+    "Andrea D’Ariano (Roma Tre Univ.)",
+    "Qiyuan Peng (Southwest Jiaotong Univ.)",
+    "Shuguang Zhan"
+   ],
+   "licence_used_and_evidence": "CC BY 4.0 on the publisher version (Elsevier XML; Crossref vor CC BY 4.0 from 2025-07-09)",
+   "licence_crossref_vor": "http://creativecommons.org/licenses/by/4.0/",
+   "problem_subfamily": "Integrated train rescheduling + speed management on a bidirectional HSR network under severe disruptions (complete section blockage, temporary speed restriction), incl. rerouting and power-supply limits",
+   "formulation": {
+    "present": "yes (verified), but MINLP",
+    "section": "Sect. 4 'Mathematical formulation' (4.1 variables; 4.2 constraints (2)-(14); 4.3 speed management (15)-(25); 4.4 objective (26)-(28))",
+    "approx_constraints": "~24",
+    "type": "self-described MINLP (binary space-time-state arc selection + continuous optimal-control speed constraints)",
+    "verified_from": "Elsevier full-text XML (CC BY; the lab corpus copy was read in place)"
+   },
+   "abstract_intro_formulation_free": "yes: Introduction ~810 words, no math",
+   "notes": "Criteria 4 and 5 only partly met: citations at the threshold (10; Crossref 12) and not a pure MILP. In the Paper-1 lab corpus.",
+   "author_evidence": {
+    "in_named_list_of_task": [
+     "Andrea D'Ariano"
+    ],
+    "openalex_pool_counts": [
+     {
+      "name": "Cong Xiu",
+      "openalex_author_id": "A5012050038",
+      "works_in_pool": 2,
+      "topical_titles_in_pool": 2
+     },
+     {
+      "name": "Jinyi Pan",
+      "openalex_author_id": "",
+      "works_in_pool": 0,
+      "topical_titles_in_pool": 0
+     },
+     {
+      "name": "Andrea D’Ariano",
+      "openalex_author_id": "A5021742676",
+      "works_in_pool": 10,
+      "topical_titles_in_pool": 5
+     },
+     {
+      "name": "Shuguang Zhan",
+      "openalex_author_id": "A5083213576",
+      "works_in_pool": 4,
+      "topical_titles_in_pool": 4
+     },
+     {
+      "name": "Tao Feng",
+      "openalex_author_id": "A5100678141",
+      "works_in_pool": 1,
+      "topical_titles_in_pool": 1
+     },
+     {
+      "name": "Qiyuan Peng",
+      "openalex_author_id": "A5090122632",
+      "works_in_pool": 6,
+      "topical_titles_in_pool": 4
+     }
+    ],
+    "lab_corpus_counts": {
+     "Andrea D'Ariano": 27,
+     "Qiyuan Peng": 11,
+     "Shuguang Zhan": 11
+    },
+    "reference_list_name_occurrences": {
+     "D’Ariano": 16,
+     "D'Ariano": 16,
+     "Peng": 6,
+     "Zhan": 10,
+     "Xiu": 1
+    }
+   }
+  },
+  {
+   "openalex_id": "W4413237638",
+   "doi": "10.1016/j.jrtpm.2025.100535",
+   "title": "Studies on the impact of the fixed-speed approximation for the real time Railway Traffic Management Problem",
+   "authors_openalex": [
+    "Pierre Hosteins",
+    "Paola Pellegrini",
+    "Grégory Marlière",
+    "Joaquín Rodríguez"
+   ],
+   "year": 2025,
+   "publication_date_openalex": "2025-08-09",
+   "venue": "Journal of Rail Transport Planning & Management",
+   "cited_by_count": 0,
+   "cited_by_count_read_on": "2026-10-04",
+   "licence_openalex_best_oa": "cc-by",
+   "best_oa_version": "publishedVersion",
+   "best_oa_host": "Journal of Rail Transport Planning & Management",
+   "publisher_location_is_oa": true,
+   "rank": 9,
+   "status": "alternate (not advised)",
+   "slot_2025": "station/junction routing and scheduling",
+   "first_author": "Pierre Hosteins",
+   "established_authors": [
+    "Paola Pellegrini",
+    "Joaquín Rodríguez",
+    "Grégory Marlière"
+   ],
+   "licence_used_and_evidence": "CC BY 4.0 on the publisher version (Elsevier XML; Crossref vor CC BY 4.0 from 2025-08-02)",
+   "licence_crossref_vor": "http://creativecommons.org/licenses/by/4.0/",
+   "problem_subfamily": "Real-time Railway Traffic Management Problem (routing + scheduling); study of the fixed-speed approximation; Pierrefitte-Gonesse junction, St. Lazare station, Mantes-la-Jolie-Rouen line",
+   "formulation": {
+    "present": "yes (verified)",
+    "section": "Sect. 2 (2.2 adds (1)-(2)) + Appendix A 'MILP formulation for the rtRTMP'",
+    "approx_constraints": "(3)-(15) = 13 groups + four alternative objectives (16),(18),(21),(23) with linking constraints (17),(19),(20),(22),(24)",
+    "type": "MILP (RECIFE-MILP)",
+    "verified_from": "Elsevier full-text XML (CC BY)"
+   },
+   "abstract_intro_formulation_free": "yes: Introduction ~2,470 words, only inline symbols",
+   "notes": "The reference model is the RECIFE-MILP of the excluded Pellegrini 2014/2015 and the paper is an approximation-assessment study, so it is effectively a re-use of an excluded input's model.",
+   "author_evidence": {
+    "in_named_list_of_task": [
+     "Grégory Marlière",
+     "Joaquín Rodríguez",
+     "Paola Pellegrini"
+    ],
+    "openalex_pool_counts": [
+     {
+      "name": "Pierre Hosteins",
+      "openalex_author_id": "A5050703116",
+      "works_in_pool": 1,
+      "topical_titles_in_pool": 1
+     },
+     {
+      "name": "Paola Pellegrini",
+      "openalex_author_id": "A5030744697",
+      "works_in_pool": 13,
+      "topical_titles_in_pool": 13
+     },
+     {
+      "name": "Grégory Marlière",
+      "openalex_author_id": "A5037185260",
+      "works_in_pool": 4,
+      "topical_titles_in_pool": 4
+     },
+     {
+      "name": "Joaquín Rodríguez",
+      "openalex_author_id": "A5071099756",
+      "works_in_pool": 9,
+      "topical_titles_in_pool": 9
+     }
+    ],
+    "lab_corpus_counts": {
+     "Paola Pellegrini": 2,
+     "Joaquín Rodríguez": 2,
+     "Grégory Marlière": 1
+    },
+    "reference_list_name_occurrences": {
+     "Pellegrini": 4,
+     "Rodriguez": 5,
+     "Marlière": 2,
+     "Marliere": 0,
+     "Hosteins": 0
+    }
+   }
+  },
+  {
+   "openalex_id": "W4313588426",
+   "doi": "10.3390/app13020696",
+   "title": "A Mixed Integer Linear Programming Model with Heuristic Improvements for Single-Track Railway Rescheduling Problem",
+   "authors_openalex": [
+    "Gökçe Aydın",
+    "İsmail Şahin"
+   ],
+   "year": 2023,
+   "publication_date_openalex": "2023-01-04",
+   "venue": "Applied Sciences",
+   "cited_by_count": 8,
+   "cited_by_count_read_on": "2026-10-04",
+   "licence_openalex_best_oa": "cc-by",
+   "best_oa_version": "publishedVersion",
+   "best_oa_host": "Applied Sciences",
+   "publisher_location_is_oa": true,
+   "rank": 10,
+   "status": "reserve (2023)",
+   "slot_2025": "real-time reordering on a single-track line",
+   "first_author": "Gökçe Aydın",
+   "established_authors": [
+    "İsmail Şahin (Yildiz Technical Univ.)"
+   ],
+   "licence_used_and_evidence": "CC BY 4.0 on the publisher version (MDPI; Crossref vor CC BY 4.0)",
+   "licence_crossref_vor": "https://creativecommons.org/licenses/by/4.0/",
+   "problem_subfamily": "Single-track railway rescheduling (meets, followings, overtakes) after entrance delays",
+   "formulation": {
+    "present": "yes (verified)",
+    "section": "Sect. 3.1 'The Mathematical Model'",
+    "approx_constraints": "84 numbered equations in Sect. 3.1",
+    "type": "MILP",
+    "verified_from": "MDPI full-text HTML (Internet Archive copy)"
+   },
+   "abstract_intro_formulation_free": "yes",
+   "notes": "Published January 2023, so likely inside model training data (recency criterion weak). Şahin's TR-B 1999 conflict-management paper is in the lab corpus.",
+   "author_evidence": {
+    "in_named_list_of_task": [],
+    "openalex_pool_counts": [
+     {
+      "name": "Gökçe Aydın",
+      "openalex_author_id": "A5000841863",
+      "works_in_pool": 1,
+      "topical_titles_in_pool": 1
+     },
+     {
+      "name": "İsmail Şahin",
+      "openalex_author_id": "A5049592383",
+      "works_in_pool": 2,
+      "topical_titles_in_pool": 1
+     }
+    ],
+    "lab_corpus_counts": {
+     "Ismail Sahin": 1
+    },
+    "reference_list_name_occurrences": null
+   }
+  },
+  {
+   "openalex_id": "W4380358029",
+   "doi": "10.3390/math11122659",
+   "title": "Rescheduling Out-of-Gauge Trains with Speed Restrictions and Temporal Blockades on the Opposite-Direction Track",
+   "authors_openalex": [
+    "Zhengwen Liao"
+   ],
+   "year": 2023,
+   "publication_date_openalex": "2023-06-11",
+   "venue": "Mathematics",
+   "cited_by_count": 4,
+   "cited_by_count_read_on": "2026-10-04",
+   "licence_openalex_best_oa": "cc-by",
+   "best_oa_version": "publishedVersion",
+   "best_oa_host": "Mathematics",
+   "publisher_location_is_oa": true,
+   "rank": 11,
+   "status": "reserve (2023)",
+   "slot_2025": "blockage (temporal blockades)",
+   "first_author": "Zhengwen Liao",
+   "established_authors": [
+    "Zhengwen Liao (Beijing Jiaotong Univ.; single author)"
+   ],
+   "licence_used_and_evidence": "CC BY 4.0 on the publisher version (MDPI; Crossref vor CC BY 4.0)",
+   "licence_crossref_vor": "https://creativecommons.org/licenses/by/4.0/",
+   "problem_subfamily": "Rescheduling with out-of-gauge trains, speed restrictions and temporal blockades on the opposite-direction track",
+   "formulation": {
+    "present": "yes (verified)",
+    "section": "Sect. 3.5 'Optimization Model' (notation 3.1, time-space network 3.2-3.4)",
+    "approx_constraints": "objective (1) + (2)-(6) = 5",
+    "type": "binary ILP on a time-space network",
+    "verified_from": "MDPI full-text HTML (Internet Archive copy)"
+   },
+   "abstract_intro_formulation_free": "yes",
+   "notes": "2023, single author, compact model.",
+   "author_evidence": {
+    "in_named_list_of_task": [],
+    "openalex_pool_counts": [
+     {
+      "name": "Zhengwen Liao",
+      "openalex_author_id": "A5021190484",
+      "works_in_pool": 5,
+      "topical_titles_in_pool": 3
+     }
+    ],
+    "lab_corpus_counts": {
+     "Zhengwen Liao": 1
+    },
+    "reference_list_name_occurrences": null
+   }
+  },
+  {
+   "openalex_id": "W4386303456",
+   "doi": "10.3390/su151713040",
+   "title": "An Integrated Strategy for Rescheduling High-Speed Train Operation under Single-Direction Disruption",
+   "authors_openalex": [
+    "Chang Han",
+    "Leishan Zhou",
+    "Bin Guo",
+    "Yixiang Yue",
+    "Wenqiang Zhao",
+    "Zeyu Wang",
+    "Hanxiao Zhou"
+   ],
+   "year": 2023,
+   "publication_date_openalex": "2023-08-29",
+   "venue": "Sustainability",
+   "cited_by_count": 6,
+   "cited_by_count_read_on": "2026-10-04",
+   "licence_openalex_best_oa": "cc-by",
+   "best_oa_version": "publishedVersion",
+   "best_oa_host": "Sustainability",
+   "publisher_location_is_oa": true,
+   "rank": 12,
+   "status": "reserve (2023)",
+   "slot_2025": "single-direction HSR disruption",
+   "first_author": "Chang Han",
+   "established_authors": [
+    "Leishan Zhou (Beijing Jiaotong Univ.)"
+   ],
+   "licence_used_and_evidence": "CC BY 4.0 on the publisher version (MDPI; Crossref vor CC BY 4.0)",
+   "licence_crossref_vor": "https://creativecommons.org/licenses/by/4.0/",
+   "problem_subfamily": "Integrated rescheduling of HSR train operation (standby rolling stock, coupling, cancellations, passenger assignment) under a single-direction disruption",
+   "formulation": {
+    "present": "yes (verified)",
+    "section": "Sect. 3 'Model Formulation' (3.2 symbols, 3.3 objective, 3.4.1-3.4.7 constraints)",
+    "approx_constraints": "43 numbered equations in Sect. 3",
+    "type": "integer (linear) programming model, solved by a genetic algorithm",
+    "verified_from": "MDPI full-text HTML (Internet Archive copy)"
+   },
+   "abstract_intro_formulation_free": "yes",
+   "notes": "2023 (recency weak).",
+   "author_evidence": {
+    "in_named_list_of_task": [],
+    "openalex_pool_counts": [
+     {
+      "name": "Chang Han",
+      "openalex_author_id": "A5100712965",
+      "works_in_pool": 4,
+      "topical_titles_in_pool": 4
+     },
+     {
+      "name": "Leishan Zhou",
+      "openalex_author_id": "A5084597521",
+      "works_in_pool": 5,
+      "topical_titles_in_pool": 5
+     },
+     {
+      "name": "Bin Guo",
+      "openalex_author_id": "",
+      "works_in_pool": 0,
+      "topical_titles_in_pool": 0
+     },
+     {
+      "name": "Yixiang Yue",
+      "openalex_author_id": "A5054072040",
+      "works_in_pool": 5,
+      "topical_titles_in_pool": 3
+     },
+     {
+      "name": "Wenqiang Zhao",
+      "openalex_author_id": "A5070171682",
+      "works_in_pool": 1,
+      "topical_titles_in_pool": 1
+     },
+     {
+      "name": "Zeyu Wang",
+      "openalex_author_id": "A5041725087",
+      "works_in_pool": 2,
+      "topical_titles_in_pool": 2
+     },
+     {
+      "name": "Hanxiao Zhou",
+      "openalex_author_id": "A5016497105",
+      "works_in_pool": 1,
+      "topical_titles_in_pool": 1
+     }
+    ],
+    "lab_corpus_counts": {
+     "Leishan Zhou": 1
+    },
+    "reference_list_name_occurrences": null
+   }
+  },
+  {
+   "openalex_id": "W7133314969",
+   "doi": "10.3390/electronics15051056",
+   "title": "Virtual Coupling-Enabled Rescheduling Strategies for Urban Rail Transit During Single-Line Service Disruption",
+   "authors_openalex": [
+    "Siqi Huang",
+    "Fang Lu",
+    "W Zhou",
+    "Sha Li",
+    "Jiayi Li"
+   ],
+   "year": 2026,
+   "publication_date_openalex": "2026-03-03",
+   "venue": "Electronics",
+   "cited_by_count": 0,
+   "cited_by_count_read_on": "2026-10-04",
+   "licence_openalex_best_oa": "cc-by",
+   "best_oa_version": "publishedVersion",
+   "best_oa_host": "Electronics",
+   "publisher_location_is_oa": true,
+   "rank": 13,
+   "status": "not advised",
+   "slot_2025": "urban rail single-line disruption",
+   "first_author": "Siqi Huang",
+   "established_authors": [
+    "no clearly established rescheduling author (OpenAlex pool counts <= 2)"
+   ],
+   "licence_used_and_evidence": "CC BY 4.0 on the publisher version (MDPI; Crossref vor CC BY 4.0)",
+   "licence_crossref_vor": "https://creativecommons.org/licenses/by/4.0/",
+   "problem_subfamily": "Urban rail rescheduling with virtual coupling during a single-line service interruption",
+   "formulation": {
+    "present": "yes (verified), ambiguous type",
+    "section": "Sect. 4 'Mathematical Model'",
+    "approx_constraints": "(1)-(28)",
+    "type": "authors write 'linearized ... mixed-integer nonlinear programming (MILP)'",
+    "verified_from": "MDPI PDF (Internet Archive copy)"
+   },
+   "abstract_intro_formulation_free": "yes",
+   "notes": "Fails criterion 3 (author establishment); model type stated inconsistently.",
+   "author_evidence": {
+    "in_named_list_of_task": [],
+    "openalex_pool_counts": [
+     {
+      "name": "Siqi Huang",
+      "openalex_author_id": "A5101699079",
+      "works_in_pool": 2,
+      "topical_titles_in_pool": 1
+     },
+     {
+      "name": "Fang Lu",
+      "openalex_author_id": "A5127939185",
+      "works_in_pool": 1,
+      "topical_titles_in_pool": 1
+     },
+     {
+      "name": "W Zhou",
+      "openalex_author_id": "A5069342118",
+      "works_in_pool": 1,
+      "topical_titles_in_pool": 1
+     },
+     {
+      "name": "Sha Li",
+      "openalex_author_id": "A5127898973",
+      "works_in_pool": 1,
+      "topical_titles_in_pool": 1
+     },
+     {
+      "name": "Jiayi Li",
+      "openalex_author_id": "",
+      "works_in_pool": 0,
+      "topical_titles_in_pool": 0
+     }
+    ],
+    "lab_corpus_counts": {},
+    "reference_list_name_occurrences": null
+   }
+  },
+  {
+   "openalex_id": "W7128388098",
+   "doi": "10.1007/s10479-026-07077-1",
+   "title": "A Rolling-Horizon Framework for Integrated Freight Train Rescheduling and Track Assignment under Disruptions in Large-Scale Networks",
+   "authors_openalex": [
+    "Md Tabish Haque",
+    "Faiz Hamid",
+    "Atanu Chaudhuri"
+   ],
+   "year": 2026,
+   "publication_date_openalex": "2026-02-09",
+   "venue": "Annals of Operations Research",
+   "cited_by_count": 1,
+   "cited_by_count_read_on": "2026-10-04",
+   "licence_openalex_best_oa": "cc-by",
+   "best_oa_version": "submittedVersion",
+   "best_oa_host": "Durham Research Online (Durham University)",
+   "publisher_location_is_oa": false,
+   "rank": 14,
+   "status": "unverified",
+   "slot_2025": "large-scale freight network disruption",
+   "first_author": "Md Tabish Haque",
+   "established_authors": [
+    "Faiz Hamid",
+    "Atanu Chaudhuri (Durham Univ.)"
+   ],
+   "licence_used_and_evidence": "OpenAlex: CC BY on the Durham Research Online accepted version; publisher version not CC (Crossref: Springer TDM licence only)",
+   "licence_crossref_vor": null,
+   "problem_subfamily": "Integrated freight train rescheduling and track assignment under disruptions, rolling horizon, large-scale network",
+   "formulation": {
+    "present": "unknown",
+    "section": "full text not retrievable (Durham 403; Springer blocked)",
+    "approx_constraints": null,
+    "type": "unknown",
+    "verified_from": "none"
+   },
+   "abstract_intro_formulation_free": "not checked",
+   "notes": "OpenAlex lists the first author at TU Dresden (institutional proximity); author establishment and formulation unverified.",
+   "author_evidence": {
+    "in_named_list_of_task": [],
+    "openalex_pool_counts": [
+     {
+      "name": "Md Tabish Haque",
+      "openalex_author_id": "A5079220531",
+      "works_in_pool": 1,
+      "topical_titles_in_pool": 1
+     },
+     {
+      "name": "Faiz Hamid",
+      "openalex_author_id": "A5071520733",
+      "works_in_pool": 1,
+      "topical_titles_in_pool": 1
+     },
+     {
+      "name": "Atanu Chaudhuri",
+      "openalex_author_id": "A5086852391",
+      "works_in_pool": 1,
+      "topical_titles_in_pool": 1
+     }
+    ],
+    "lab_corpus_counts": {},
+    "reference_list_name_occurrences": null
+   }
+  },
+  {
+   "openalex_id": "W4390496027",
+   "doi": "10.1371/journal.pone.0296018",
+   "title": "Rescheduling trains by crossover tracks to promote service quality of urban rail transit under partial blockages",
+   "authors_openalex": [
+    "Yuxuan Long",
+    "Baoming Han",
+    "Weiteng Zhou",
+    "Zebin Chen",
+    "Ruixia Yang"
+   ],
+   "year": 2024,
+   "publication_date_openalex": "2024-01-02",
+   "venue": "PLoS ONE",
+   "cited_by_count": 4,
+   "cited_by_count_read_on": "2026-10-04",
+   "licence_openalex_best_oa": "cc-by",
+   "best_oa_version": "publishedVersion",
+   "best_oa_host": "PLoS ONE",
+   "publisher_location_is_oa": true,
+   "rank": 15,
+   "status": "rejected",
+   "slot_2025": "urban rail partial blockage",
+   "first_author": "Yuxuan Long",
+   "established_authors": [
+    "Baoming Han (Beijing Jiaotong Univ.)"
+   ],
+   "licence_used_and_evidence": "CC BY 4.0 on the publisher version (PLOS; Crossref vor CC BY 4.0)",
+   "licence_crossref_vor": "http://creativecommons.org/licenses/by/4.0/",
+   "problem_subfamily": "Urban rail rescheduling via crossover tracks under partial blockages, dynamic passenger flows",
+   "formulation": {
+    "present": "no MILP",
+    "section": "'Mathematical model' section",
+    "approx_constraints": "~45 equations",
+    "type": "MINLP solved by a customised genetic algorithm",
+    "verified_from": "Europe PMC full-text XML + PLOS PDF"
+   },
+   "abstract_intro_formulation_free": "yes",
+   "notes": "Fails criterion 5 (MINLP, not MILP/ILP).",
+   "author_evidence": {
+    "in_named_list_of_task": [],
+    "openalex_pool_counts": [
+     {
+      "name": "Yuxuan Long",
+      "openalex_author_id": "A5001162249",
+      "works_in_pool": 1,
+      "topical_titles_in_pool": 1
+     },
+     {
+      "name": "Baoming Han",
+      "openalex_author_id": "A5017857593",
+      "works_in_pool": 1,
+      "topical_titles_in_pool": 1
+     },
+     {
+      "name": "Weiteng Zhou",
+      "openalex_author_id": "A5060250831",
+      "works_in_pool": 1,
+      "topical_titles_in_pool": 1
+     },
+     {
+      "name": "Zebin Chen",
+      "openalex_author_id": "A5070561472",
+      "works_in_pool": 1,
+      "topical_titles_in_pool": 1
+     },
+     {
+      "name": "Ruixia Yang",
+      "openalex_author_id": "A5013631283",
+      "works_in_pool": 1,
+      "topical_titles_in_pool": 1
+     }
+    ],
+    "lab_corpus_counts": {
+     "Baoming Han": 0
+    },
+    "reference_list_name_occurrences": null
+   }
+  }
+ ],
+ "queries": [
+  {
+   "field": "title_and_abstract",
+   "query": "\"real-time train scheduling\"",
+   "openalex_count": 4,
+   "harvested": 4
+  },
+  {
+   "field": "fulltext",
+   "query": "\"train dispatching\"",
+   "openalex_count": 469,
+   "harvested": 469
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"rescheduling\" \"alternative graph\"",
+   "openalex_count": 2,
+   "harvested": 2
+  },
+  {
+   "field": "fulltext",
+   "query": "\"railway traffic management\"",
+   "openalex_count": 269,
+   "harvested": 269
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"delay management\" railway",
+   "openalex_count": 2,
+   "harvested": 2
+  },
+  {
+   "field": "fulltext",
+   "query": "\"disruption management\" railway",
+   "openalex_count": 253,
+   "harvested": 253
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"conflict resolution\" railway",
+   "openalex_count": 16,
+   "harvested": 16
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"partial blockage\" railway",
+   "openalex_count": 1,
+   "harvested": 1
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"metro rescheduling\"",
+   "openalex_count": 0,
+   "harvested": 0
+  },
+  {
+   "field": "fulltext",
+   "query": "\"real-time traffic management\" railway",
+   "openalex_count": 153,
+   "harvested": 153
+  },
+  {
+   "field": "fulltext",
+   "query": "\"metro rescheduling\"",
+   "openalex_count": 9,
+   "harvested": 9
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"rescheduling\" \"railway network\"",
+   "openalex_count": 22,
+   "harvested": 22
+  },
+  {
+   "field": "fulltext",
+   "query": "\"train rescheduling\"",
+   "openalex_count": 272,
+   "harvested": 273
+  },
+  {
+   "field": "fulltext",
+   "query": "\"railway dispatching\"",
+   "openalex_count": 202,
+   "harvested": 202
+  },
+  {
+   "field": "fulltext",
+   "query": "\"railway disruption management\"",
+   "openalex_count": 36,
+   "harvested": 36
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"rerouting and rescheduling\"",
+   "openalex_count": 1,
+   "harvested": 1
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"train timetable rescheduling\"",
+   "openalex_count": 5,
+   "harvested": 5
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"conflict detection and resolution\" train",
+   "openalex_count": 6,
+   "harvested": 6
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"railway disruption management\"",
+   "openalex_count": 0,
+   "harvested": 0
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"subway\" rescheduling",
+   "openalex_count": 1,
+   "harvested": 1
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"dispatching\" \"mixed integer linear\" railway",
+   "openalex_count": 5,
+   "harvested": 5
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"railway rescheduling\" \"mixed integer\"",
+   "openalex_count": 2,
+   "harvested": 2
+  },
+  {
+   "field": "fulltext",
+   "query": "\"train rescheduling\" \"mixed integer\"",
+   "openalex_count": 142,
+   "harvested": 142
+  },
+  {
+   "field": "fulltext",
+   "query": "\"high-speed railway\" rescheduling",
+   "openalex_count": 313,
+   "harvested": 313
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"train rescheduling\" blockage",
+   "openalex_count": 3,
+   "harvested": 3
+  },
+  {
+   "field": "fulltext",
+   "query": "\"high-speed train rescheduling\"",
+   "openalex_count": 35,
+   "harvested": 35
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"railway traffic rescheduling\"",
+   "openalex_count": 0,
+   "harvested": 0
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"disruption management\" railway",
+   "openalex_count": 11,
+   "harvested": 11
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"rescheduling\" train \"mixed integer\"",
+   "openalex_count": 20,
+   "harvested": 20
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"urban rail transit\" rescheduling",
+   "openalex_count": 14,
+   "harvested": 14
+  },
+  {
+   "field": "fulltext",
+   "query": "\"railway rescheduling\" \"mixed integer\"",
+   "openalex_count": 61,
+   "harvested": 61
+  },
+  {
+   "field": "fulltext",
+   "query": "\"dispatching\" \"mixed integer linear\" railway",
+   "openalex_count": 360,
+   "harvested": 360
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"railway traffic control\"",
+   "openalex_count": 32,
+   "harvested": 32
+  },
+  {
+   "field": "fulltext",
+   "query": "\"real-time train rescheduling\"",
+   "openalex_count": 36,
+   "harvested": 36
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"railway dispatching\"",
+   "openalex_count": 9,
+   "harvested": 9
+  },
+  {
+   "field": "fulltext",
+   "query": "\"metro train rescheduling\"",
+   "openalex_count": 28,
+   "harvested": 28
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"conflict detection and resolution\" railway",
+   "openalex_count": 3,
+   "harvested": 3
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"train scheduling\" disruption",
+   "openalex_count": 15,
+   "harvested": 15
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"real-time train rescheduling\"",
+   "openalex_count": 5,
+   "harvested": 5
+  },
+  {
+   "field": "fulltext",
+   "query": "\"delay management\" railway",
+   "openalex_count": 115,
+   "harvested": 115
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"train rescheduling\" \"mixed integer\"",
+   "openalex_count": 9,
+   "harvested": 9
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"metro train rescheduling\"",
+   "openalex_count": 0,
+   "harvested": 0
+  },
+  {
+   "field": "fulltext",
+   "query": "\"rerouting and rescheduling\"",
+   "openalex_count": 66,
+   "harvested": 66
+  },
+  {
+   "field": "fulltext",
+   "query": "\"train conflict resolution\"",
+   "openalex_count": 11,
+   "harvested": 11
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"high-speed train rescheduling\"",
+   "openalex_count": 1,
+   "harvested": 1
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"high-speed\" rescheduling train",
+   "openalex_count": 17,
+   "harvested": 17
+  },
+  {
+   "field": "fulltext",
+   "query": "\"train rerouting\"",
+   "openalex_count": 43,
+   "harvested": 43
+  },
+  {
+   "field": "fulltext",
+   "query": "\"timetable rescheduling\"",
+   "openalex_count": 204,
+   "harvested": 204
+  },
+  {
+   "field": "fulltext",
+   "query": "\"real-time railway traffic management\"",
+   "openalex_count": 56,
+   "harvested": 56
+  },
+  {
+   "field": "fulltext",
+   "query": "\"urban rail transit\" rescheduling",
+   "openalex_count": 277,
+   "harvested": 277
+  },
+  {
+   "field": "fulltext",
+   "query": "\"rescheduling\" \"alternative graph\"",
+   "openalex_count": 31,
+   "harvested": 31
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"train dispatching\"",
+   "openalex_count": 44,
+   "harvested": 44
+  },
+  {
+   "field": "fulltext",
+   "query": "\"rail rescheduling\"",
+   "openalex_count": 0,
+   "harvested": 0
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"dispatching\" railway \"mixed integer\"",
+   "openalex_count": 6,
+   "harvested": 6
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"timetable rescheduling\"",
+   "openalex_count": 14,
+   "harvested": 14
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"railway disruption\"",
+   "openalex_count": 8,
+   "harvested": 8
+  },
+  {
+   "field": "fulltext",
+   "query": "\"train timetable rescheduling\"",
+   "openalex_count": 93,
+   "harvested": 93
+  },
+  {
+   "field": "fulltext",
+   "query": "\"subway train rescheduling\"",
+   "openalex_count": 2,
+   "harvested": 2
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"train timetable adjustment\"",
+   "openalex_count": 0,
+   "harvested": 0
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "blockage railway timetable",
+   "openalex_count": 1,
+   "harvested": 1
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"train rerouting\"",
+   "openalex_count": 5,
+   "harvested": 5
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"train conflict resolution\"",
+   "openalex_count": 1,
+   "harvested": 1
+  },
+  {
+   "field": "fulltext",
+   "query": "\"conflict detection and resolution\" railway",
+   "openalex_count": 42,
+   "harvested": 42
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"train rescheduling\"",
+   "openalex_count": 33,
+   "harvested": 33
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"real-time traffic management\" railway",
+   "openalex_count": 4,
+   "harvested": 4
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"urban rail\" rescheduling",
+   "openalex_count": 14,
+   "harvested": 14
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"subway train rescheduling\"",
+   "openalex_count": 0,
+   "harvested": 0
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"railway traffic management\"",
+   "openalex_count": 41,
+   "harvested": 41
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"rail rescheduling\"",
+   "openalex_count": 0,
+   "harvested": 0
+  },
+  {
+   "field": "fulltext",
+   "query": "\"railway rescheduling\"",
+   "openalex_count": 102,
+   "harvested": 102
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"real-time railway traffic management\"",
+   "openalex_count": 12,
+   "harvested": 12
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"rescheduling\" train \"integer programming\"",
+   "openalex_count": 8,
+   "harvested": 8
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"rail disruption\"",
+   "openalex_count": 9,
+   "harvested": 9
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"metro\" rescheduling",
+   "openalex_count": 10,
+   "harvested": 10
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"high-speed railway\" rescheduling",
+   "openalex_count": 14,
+   "harvested": 14
+  },
+  {
+   "field": "fulltext",
+   "query": "\"train timetable adjustment\"",
+   "openalex_count": 17,
+   "harvested": 17
+  },
+  {
+   "field": "fulltext",
+   "query": "\"railway traffic rescheduling\"",
+   "openalex_count": 7,
+   "harvested": 7
+  },
+  {
+   "field": "title_and_abstract",
+   "query": "\"railway rescheduling\"",
+   "openalex_count": 7,
+   "harvested": 7
+  }
+ ]
+}

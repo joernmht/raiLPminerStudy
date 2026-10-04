@@ -1,0 +1,746 @@
+[
+ {
+  "openalex_id": "W4390496027",
+  "year": 2024,
+  "cited_by_count": 4,
+  "title": "Rescheduling trains by crossover tracks to promote service quality of urban rail transit under partial blockages",
+  "decision": "table",
+  "reason": "in family; MINLP verified -> fails MILP criterion"
+ },
+ {
+  "openalex_id": "W4391843358",
+  "year": 2024,
+  "cited_by_count": 3,
+  "title": "Real-Time Adjustment Method for Metro Systems with Train Delays Based on Improved Q-Learning",
+  "decision": "out: method",
+  "reason": "Q-learning, no MILP"
+ },
+ {
+  "openalex_id": "W4393452896",
+  "year": 2024,
+  "cited_by_count": 7,
+  "title": "Iterative Train Scheduling under Disruption with Maximum Satisfiability",
+  "decision": "out: method",
+  "reason": "MaxSAT, no MILP"
+ },
+ {
+  "openalex_id": "W4393527211",
+  "year": 2024,
+  "cited_by_count": 2,
+  "title": "SDN-Based Secure Common Emergency Service for Railway and Road Co-Existence Scenarios",
+  "decision": "out: topic",
+  "reason": "safety/signalling/power technology"
+ },
+ {
+  "openalex_id": "W4394062680",
+  "year": 2024,
+  "cited_by_count": 1,
+  "title": "Train Delay Analysis Using Logistic Regression Approach",
+  "decision": "out: topic",
+  "reason": "delay prediction/analysis"
+ },
+ {
+  "openalex_id": "W4394692522",
+  "year": 2024,
+  "cited_by_count": 2,
+  "title": "Measuring high-speed train delay severity: Static and dynamic analysis",
+  "decision": "out: topic",
+  "reason": "delay prediction/analysis"
+ },
+ {
+  "openalex_id": "W4394840718",
+  "year": 2024,
+  "cited_by_count": 0,
+  "title": "Computational Model for Evaluating the Effectiveness of Electromagnetic Field Protection: Case Study of a Train Dispatcher’s Workplace",
+  "decision": "out: topic",
+  "reason": "crew/staff/human factors"
+ },
+ {
+  "openalex_id": "W4398783982",
+  "year": 2024,
+  "cited_by_count": 8,
+  "title": "Electromagnetic Impact of Overhead High-Voltage Lines during Power Transmission on Buried Signaling Cables of the Traffic Control Systems in Modernized Railway Lines",
+  "decision": "out: topic",
+  "reason": "safety/signalling/power technology"
+ },
+ {
+  "openalex_id": "W4399194677",
+  "year": 2024,
+  "cited_by_count": 0,
+  "title": "Propagation‐Based Train Rescheduling under Recoverable Delay Disturbances",
+  "decision": "out: model",
+  "reason": "in family; full text: multi-objective combinatorial model solved by DFS pruning, no explicit MILP"
+ },
+ {
+  "openalex_id": "W4399893317",
+  "year": 2024,
+  "cited_by_count": 0,
+  "title": "Train dispatching program for high-speed railway station based on genetic algorithm",
+  "decision": "out: method",
+  "reason": "genetic-algorithm program, compromised combinatorial model; single author"
+ },
+ {
+  "openalex_id": "W4400135943",
+  "year": 2024,
+  "cited_by_count": 2,
+  "title": "Short-term train arrival delay prediction: a data-driven approach",
+  "decision": "out: topic",
+  "reason": "delay prediction/analysis"
+ },
+ {
+  "openalex_id": "W4400871633",
+  "year": 2024,
+  "cited_by_count": 9,
+  "title": "The Management of Railway Operations during the Planned Interruption of Railway Infrastructure",
+  "decision": "out: topic",
+  "reason": "other/out of scope"
+ },
+ {
+  "openalex_id": "W4405527815",
+  "year": 2024,
+  "cited_by_count": 3,
+  "title": "Constant Companionship Without Disturbances: Enhancing Transparency to Improve Automated Tasks in Urban Rail Transit Driving",
+  "decision": "out: topic",
+  "reason": "crew/staff/human factors"
+ },
+ {
+  "openalex_id": "W4405558973",
+  "year": 2024,
+  "cited_by_count": 0,
+  "title": "Analysis of the effectiveness of the regulatory act \"Regulations on the Railway Transport Safety Management System\"",
+  "decision": "out: topic",
+  "reason": "safety/signalling/power technology"
+ },
+ {
+  "openalex_id": "W4405944220",
+  "year": 2024,
+  "cited_by_count": 1,
+  "title": "Real-Time Control System for Model Railway Based on SIMIS W Interlocking System",
+  "decision": "out: topic",
+  "reason": "safety/signalling/power technology"
+ },
+ {
+  "openalex_id": "W4405992857",
+  "year": 2025,
+  "cited_by_count": 9,
+  "title": "Implementation of Global Navigation Satellite Systems in Railway Traffic Control Systems: Overview of Navigation Systems, Application Areas, and Implementation Plans",
+  "decision": "out: topic",
+  "reason": "safety/signalling/power technology"
+ },
+ {
+  "openalex_id": "W4406195344",
+  "year": 2025,
+  "cited_by_count": 1,
+  "title": "Real-time High-Speed Train Delay Prediction using Seemingly Unrelated Regression Models",
+  "decision": "out: topic",
+  "reason": "delay prediction/analysis"
+ },
+ {
+  "openalex_id": "W4406706803",
+  "year": 2025,
+  "cited_by_count": 10,
+  "title": "Enhancing High-Speed Railway Timetable Resilience: A Two-Level Spatiotemporal Network Model Focused on Disturbance Absorption",
+  "decision": "out: topic",
+  "reason": "timetable planning for resilience"
+ },
+ {
+  "openalex_id": "W4407360697",
+  "year": 2025,
+  "cited_by_count": 2,
+  "title": "A study of high-speed train delays and relevant propagation influence characteristics",
+  "decision": "out: topic",
+  "reason": "delay prediction/analysis"
+ },
+ {
+  "openalex_id": "W4407399672",
+  "year": 2025,
+  "cited_by_count": 2,
+  "title": "High-speed rail’s impact on athlete mobility, event management, and tourism: Enhancing recovery, accessibility, and experience",
+  "decision": "out: topic",
+  "reason": "other/out of scope"
+ },
+ {
+  "openalex_id": "W4407410363",
+  "year": 2025,
+  "cited_by_count": 1,
+  "title": "Data-driven insights to reduce uncertainty from disruptive events in passenger railways",
+  "decision": "out: topic",
+  "reason": "delay prediction/analysis"
+ },
+ {
+  "openalex_id": "W4407913914",
+  "year": 2025,
+  "cited_by_count": 4,
+  "title": "Solving the Real-Time Train Dispatching Problem by Column Generation",
+  "decision": "table",
+  "reason": "in family; IP verified (arXiv CC BY-SA)"
+ },
+ {
+  "openalex_id": "W4408180338",
+  "year": 2025,
+  "cited_by_count": 7,
+  "title": "An exact and heuristic framework for rolling stock rescheduling with railway infrastructure availability constraints",
+  "decision": "table",
+  "reason": "adjacent family (rolling stock under complete blockages); MILPs verified"
+ },
+ {
+  "openalex_id": "W4408706372",
+  "year": 2025,
+  "cited_by_count": 10,
+  "title": "Integrated train rescheduling and speed management in a railway network: A meso-micro approach based on direct multiple shooting and alternating direction method of multipliers",
+  "decision": "table",
+  "reason": "in family; MINLP verified"
+ },
+ {
+  "openalex_id": "W4408889281",
+  "year": 2025,
+  "cited_by_count": 2,
+  "title": "Resilience Assessment and Recovery Strategy for High‐Speed Railway Networks Considering Spatiotemporal Dynamic Characteristics",
+  "decision": "out: topic",
+  "reason": "network resilience assessment"
+ },
+ {
+  "openalex_id": "W4408915335",
+  "year": 2025,
+  "cited_by_count": 1,
+  "title": "A Two‐Step Method for the Operation Rescheduling Problem at the Railway Marshalling Station",
+  "decision": "out: topic",
+  "reason": "marshalling-yard operation rescheduling, not train rescheduling"
+ },
+ {
+  "openalex_id": "W4409059764",
+  "year": 2025,
+  "cited_by_count": 1,
+  "title": "Trust in the Automatic Train Supervision System and Its Effects on Subway Dispatchers’ Operational Behavior",
+  "decision": "out: topic",
+  "reason": "crew/staff/human factors"
+ },
+ {
+  "openalex_id": "W4409108038",
+  "year": 2025,
+  "cited_by_count": 3,
+  "title": "Stochastic Optimal Scheduling of Flexible Traction Power Supply System for Heavy Haul Railway Considering the Online Degradation of Energy Storage",
+  "decision": "out: topic",
+  "reason": "safety/signalling/power technology"
+ },
+ {
+  "openalex_id": "W4409722715",
+  "year": 2025,
+  "cited_by_count": 0,
+  "title": "Design and Presentation of an Approach to Improve the Tehran Metro Comprehensive Traffic System and Retrieve Timetables in the Disturbance Conditions Using a Robust Optimization Method",
+  "decision": "out: author",
+  "reason": "in family (Tehran metro disruption, event-activity network); no established author evidenced; full text not retrieved"
+ },
+ {
+  "openalex_id": "W4409753414",
+  "year": 2025,
+  "cited_by_count": 6,
+  "title": "Analysis of the impact of climate-driven extreme weather events (EWEs) on the UK train delays: A data-driven BN approach",
+  "decision": "out: topic",
+  "reason": "delay prediction/analysis"
+ },
+ {
+  "openalex_id": "W4410360698",
+  "year": 2025,
+  "cited_by_count": 3,
+  "title": "Late Train-Crew Rescheduling—a Model and a Heuristic Approach",
+  "decision": "out: topic",
+  "reason": "crew/staff/human factors"
+ },
+ {
+  "openalex_id": "W4410457091",
+  "year": 2025,
+  "cited_by_count": 4,
+  "title": "Solving rescheduling problems in heterogeneous urban railway networks using hybrid quantum–classical approach",
+  "decision": "out: excluded",
+  "reason": "2025 input paper (Koniorczyk et al.) and co-authored by N. Besinovic"
+ },
+ {
+  "openalex_id": "W4410762655",
+  "year": 2025,
+  "cited_by_count": 1,
+  "title": "Defining Railway Traffic Conflicts and Optimising Their Resolution: A Machine Learning Perspective",
+  "decision": "out: method",
+  "reason": "machine-learning perspective"
+ },
+ {
+  "openalex_id": "W4410906203",
+  "year": 2025,
+  "cited_by_count": 0,
+  "title": "Short-Term Arrival Delay Time Prediction In Freight Rail Operations Using Data-Driven Models",
+  "decision": "out: topic",
+  "reason": "delay prediction/analysis"
+ },
+ {
+  "openalex_id": "W4411456695",
+  "year": 2025,
+  "cited_by_count": 5,
+  "title": "Passenger-Centric Integrated Timetable Rescheduling for High-Speed Railways Under Multiple Disruptions",
+  "decision": "out: author",
+  "reason": "in family; MILP stated in abstract; no established author evidenced (OpenAlex pool counts 1 each); full text not retrieved"
+ },
+ {
+  "openalex_id": "W4411619100",
+  "year": 2025,
+  "cited_by_count": 4,
+  "title": "The Nonlinear Causal Effect Estimation of the Built Environment on Urban Rail Transit Station Flow Under Emergency",
+  "decision": "out: topic",
+  "reason": "passenger/emergency logistics"
+ },
+ {
+  "openalex_id": "W4411782314",
+  "year": 2025,
+  "cited_by_count": 5,
+  "title": "Energy-Efficient Optimization Method for Timetable Adjusting in Urban Rail Transit",
+  "decision": "out: topic",
+  "reason": "energy-efficient timetable adjustment, not disruption-driven"
+ },
+ {
+  "openalex_id": "W4412107257",
+  "year": 2025,
+  "cited_by_count": 1,
+  "title": "Impact of track discretisation on conflict detection and resolution under ETCS with onboard train integrity monitoring",
+  "decision": "table",
+  "reason": "in family; MILP verified (appendix)"
+ },
+ {
+  "openalex_id": "W4412513863",
+  "year": 2025,
+  "cited_by_count": 4,
+  "title": "Assessment of the Risk of Failure in Electric Power Supply Systems for Railway Traffic Control Devices",
+  "decision": "out: topic",
+  "reason": "safety/signalling/power technology"
+ },
+ {
+  "openalex_id": "W4412530065",
+  "year": 2025,
+  "cited_by_count": 0,
+  "title": "Collaborative decision-making for localized emergency response in major railroad projects",
+  "decision": "out: topic",
+  "reason": "passenger/emergency logistics"
+ },
+ {
+  "openalex_id": "W4412750857",
+  "year": 2025,
+  "cited_by_count": 2,
+  "title": "Optimization of Passenger Train Line Planning Adjustments Based on Minimizing Systematic Costs",
+  "decision": "out: topic",
+  "reason": "other/out of scope"
+ },
+ {
+  "openalex_id": "W4413061238",
+  "year": 2025,
+  "cited_by_count": 3,
+  "title": "A Novel Multi-Agent-Based Approach for Train Rescheduling in Large-Scale Railway Networks",
+  "decision": "table",
+  "reason": "in family; stylised MILP verified"
+ },
+ {
+  "openalex_id": "W4413095879",
+  "year": 2025,
+  "cited_by_count": 0,
+  "title": "System for the Acquisition and Analysis of Maintenance Data of Railway Traffic Control Devices",
+  "decision": "out: topic",
+  "reason": "safety/signalling/power technology"
+ },
+ {
+  "openalex_id": "W4413237638",
+  "year": 2025,
+  "cited_by_count": 0,
+  "title": "Studies on the impact of the fixed-speed approximation for the real time Railway Traffic Management Problem",
+  "decision": "table",
+  "reason": "in family; RECIFE-MILP verified (appendix) = excluded model lineage"
+ },
+ {
+  "openalex_id": "W4413955331",
+  "year": 2025,
+  "cited_by_count": 0,
+  "title": "Risk Mapping for Daily High‐Speed Railway Disturbances Based on Operation Loss",
+  "decision": "out: topic",
+  "reason": "delay prediction/analysis"
+ },
+ {
+  "openalex_id": "W4414564669",
+  "year": 2025,
+  "cited_by_count": 5,
+  "title": "Solving the railway timetable rescheduling problem with graph neural networks",
+  "decision": "out: method",
+  "reason": "graph neural network predictor, no optimisation model"
+ },
+ {
+  "openalex_id": "W4414615371",
+  "year": 2025,
+  "cited_by_count": 0,
+  "title": "Deep Learning-Based Compliance Assessment for Chinese Rail Transit Dispatch Speech",
+  "decision": "out: topic",
+  "reason": "crew/staff/human factors"
+ },
+ {
+  "openalex_id": "W4414785497",
+  "year": 2025,
+  "cited_by_count": 0,
+  "title": "Urban rail transit disruption management: a decade of research on network resilience, internal, and external strategies",
+  "decision": "out: topic",
+  "reason": "other/out of scope"
+ },
+ {
+  "openalex_id": "W4414836243",
+  "year": 2025,
+  "cited_by_count": 1,
+  "title": "Improvement of train passage technology with automation of dispatching management",
+  "decision": "out: topic",
+  "reason": "other/out of scope"
+ },
+ {
+  "openalex_id": "W4414851716",
+  "year": 2026,
+  "cited_by_count": 1,
+  "title": "Optimization of train real-time dynamic scheduling under unexpected events in high-speed railway based on MAPPO",
+  "decision": "out: method",
+  "reason": "multi-agent RL (MAPPO)"
+ },
+ {
+  "openalex_id": "W4414894817",
+  "year": 2025,
+  "cited_by_count": 0,
+  "title": "Defects of railway traffic control devices on a selected railway route",
+  "decision": "out: topic",
+  "reason": "safety/signalling/power technology"
+ },
+ {
+  "openalex_id": "W4414898286",
+  "year": 2025,
+  "cited_by_count": 1,
+  "title": "Optimal bus bridging service for urban rail transit disruptions with stochastic passenger demand",
+  "decision": "out: topic",
+  "reason": "passenger/emergency logistics"
+ },
+ {
+  "openalex_id": "W4415185001",
+  "year": 2025,
+  "cited_by_count": 0,
+  "title": "Analysis of Planning to Increase the Coverage of Traindispatching Signals on the Line Divre III Palembang",
+  "decision": "out: topic",
+  "reason": "safety/signalling/power technology"
+ },
+ {
+  "openalex_id": "W4415601827",
+  "year": 2025,
+  "cited_by_count": 1,
+  "title": "A multiscale-based model for train delay prediction considering spatio-temporal correlations",
+  "decision": "out: topic",
+  "reason": "delay prediction/analysis"
+ },
+ {
+  "openalex_id": "W4416021583",
+  "year": 2025,
+  "cited_by_count": 0,
+  "title": "AI-Powered Train Delay Prediction and Minimization in Cloud-Based Precision Dispatch System",
+  "decision": "out: topic",
+  "reason": "delay prediction/analysis"
+ },
+ {
+  "openalex_id": "W4416192752",
+  "year": 2025,
+  "cited_by_count": 1,
+  "title": "Dynamic Scheduling Fusion Model for Railway Hazardous Chemical Transportation Emergency Supplies Based on DBSCAN–Bayesian Network",
+  "decision": "out: topic",
+  "reason": "passenger/emergency logistics"
+ },
+ {
+  "openalex_id": "W4416916818",
+  "year": 2025,
+  "cited_by_count": 0,
+  "title": "The Problem of Resolving Train Movement Conflicts in a Traffic Management System",
+  "decision": "out: model",
+  "reason": "in family; full text: no MILP written out"
+ },
+ {
+  "openalex_id": "W4417119897",
+  "year": 2025,
+  "cited_by_count": 0,
+  "title": "Conflict detection and resolution for distance-to-go railway signalling",
+  "decision": "table",
+  "reason": "in family; MILP verified"
+ },
+ {
+  "openalex_id": "W7117717595",
+  "year": 2025,
+  "cited_by_count": 1,
+  "title": "Enhancing Fairness in High-Speed Railway Crew Scheduling: A Two-Stage Heuristic Optimization Framework Under Daily-Adjusted Timetables",
+  "decision": "out: topic",
+  "reason": "crew/staff/human factors"
+ },
+ {
+  "openalex_id": "W7124890732",
+  "year": 2026,
+  "cited_by_count": 1,
+  "title": "Quantum computing for railway rescheduling: Literature review and future directions",
+  "decision": "out: excluded",
+  "reason": "literature review; co-authored by N. Besinovic"
+ },
+ {
+  "openalex_id": "W7125760071",
+  "year": 2026,
+  "cited_by_count": 0,
+  "title": "FI-TW: An open train–weather dataset for railway delay analysis in Finland",
+  "decision": "out: topic",
+  "reason": "delay prediction/analysis"
+ },
+ {
+  "openalex_id": "W7128003381",
+  "year": 2026,
+  "cited_by_count": 0,
+  "title": "Dependency-Constrained Cascading Rescheduling: Network Evolution and Long-Term Adaptation",
+  "decision": "out: topic",
+  "reason": "generic scheduling theory, not railway-specific"
+ },
+ {
+  "openalex_id": "W7128388098",
+  "year": 2026,
+  "cited_by_count": 1,
+  "title": "A Rolling-Horizon Framework for Integrated Freight Train Rescheduling and Track Assignment under Disruptions in Large-Scale Networks",
+  "decision": "table",
+  "reason": "in family; full text not retrievable; TU Dresden first author"
+ },
+ {
+  "openalex_id": "W7128407399",
+  "year": 2026,
+  "cited_by_count": 2,
+  "title": "Real-Time Dynamic Train Dispatching for Sustainable and Energy-Efficient Operations: An Automata-Based Receding Horizon Control Framework",
+  "decision": "out: topic",
+  "reason": "regenerative-energy dispatching in urban rail, not disruption-driven"
+ },
+ {
+  "openalex_id": "W7133314969",
+  "year": 2026,
+  "cited_by_count": 0,
+  "title": "Virtual Coupling-Enabled Rescheduling Strategies for Urban Rail Transit During Single-Line Service Disruption",
+  "decision": "table",
+  "reason": "in family; model verified (MINLP/MILP ambiguous); authors not established"
+ },
+ {
+  "openalex_id": "W7133360486",
+  "year": 2026,
+  "cited_by_count": 0,
+  "title": "Digitalization of Railway Traffic Dispatching Systems: From Legacy Infrastructure to a Software-Centric Platform",
+  "decision": "out: topic",
+  "reason": "other/out of scope"
+ },
+ {
+  "openalex_id": "W7134266097",
+  "year": 2026,
+  "cited_by_count": 0,
+  "title": "Bi-Level Simulation-Driven Optimization for Route Guidance in Disrupted Metro Networks via Hybrid Swarm Intelligence",
+  "decision": "out: topic",
+  "reason": "passenger/emergency logistics"
+ },
+ {
+  "openalex_id": "W7135024569",
+  "year": 2026,
+  "cited_by_count": 1,
+  "title": "A Simulation-Based Greedy Search Algorithm for Real-Time Mitigation of Power Peaks in Railway Networks",
+  "decision": "out: topic",
+  "reason": "safety/signalling/power technology"
+ },
+ {
+  "openalex_id": "W7135176935",
+  "year": 2026,
+  "cited_by_count": 1,
+  "title": "Integrated Optimization of Train Rescheduling and Speed Management During Partial Blockages: A Decomposition Approach",
+  "decision": "table",
+  "reason": "in family; MILP declared; full text not retrievable"
+ },
+ {
+  "openalex_id": "W7136871100",
+  "year": 2026,
+  "cited_by_count": 0,
+  "title": "A simulation-based greedy search algorithm for real-time mitigation of power peaks in railway networks",
+  "decision": "out: topic",
+  "reason": "safety/signalling/power technology"
+ },
+ {
+  "openalex_id": "W7140177262",
+  "year": 2026,
+  "cited_by_count": 0,
+  "title": "Reducing the number of shunt movements by rescheduling trains",
+  "decision": "out: topic",
+  "reason": "planning-level retiming to reduce shunting"
+ },
+ {
+  "openalex_id": "W7140298710",
+  "year": 2026,
+  "cited_by_count": 0,
+  "title": "An Integrated Mathematical Model for Ensuring Train Traffic Safety in a Centralised Dispatching System Based on Control Theory, Based on Finite-State Automata",
+  "decision": "out: topic",
+  "reason": "safety/signalling/power technology"
+ },
+ {
+  "openalex_id": "W7143343047",
+  "year": 2026,
+  "cited_by_count": 0,
+  "title": "Large-Scale Metro Train Timetable Rescheduling via Multi-Agent Deep Reinforcement Learning: A High-Dimensional Optimization Approach in Flatland Environment",
+  "decision": "out: method",
+  "reason": "multi-agent deep RL"
+ },
+ {
+  "openalex_id": "W7147253219",
+  "year": 2025,
+  "cited_by_count": 0,
+  "title": "Development and Implementation of Real-Time Railway Traffic Control Systems Utilizing RF Technology",
+  "decision": "out: topic",
+  "reason": "safety/signalling/power technology"
+ },
+ {
+  "openalex_id": "W7147714754",
+  "year": 2025,
+  "cited_by_count": 0,
+  "title": "Development and Implementation of Real-Time Railway Traffic Control Systems Utilizing RF Technology",
+  "decision": "out: topic",
+  "reason": "safety/signalling/power technology"
+ },
+ {
+  "openalex_id": "W7149932842",
+  "year": 2026,
+  "cited_by_count": 0,
+  "title": "Time-weighted ensemble long–short-term memory for delay prediction in railway systems",
+  "decision": "out: topic",
+  "reason": "delay prediction/analysis"
+ },
+ {
+  "openalex_id": "W7153970443",
+  "year": 2026,
+  "cited_by_count": 0,
+  "title": "Stage-Coupled Failure in Metro Station Emergency Management Under Compound Hazards: Implications for Urban Infrastructure Resilience",
+  "decision": "out: topic",
+  "reason": "passenger/emergency logistics"
+ },
+ {
+  "openalex_id": "W7155166981",
+  "year": 2026,
+  "cited_by_count": 0,
+  "title": "Emergency call training in primary school children: effects of instruction format and dispatcher influence",
+  "decision": "out: topic",
+  "reason": "passenger/emergency logistics"
+ },
+ {
+  "openalex_id": "W7157775703",
+  "year": 2026,
+  "cited_by_count": 0,
+  "title": "Research on emergency truck dispatching scheme for the high speed railway freight interruption",
+  "decision": "out: topic",
+  "reason": "passenger/emergency logistics"
+ },
+ {
+  "openalex_id": "W7160017238",
+  "year": 2025,
+  "cited_by_count": 0,
+  "title": "A Review of AI-Driven Railway Traffic Management Using Digital Twin Technology",
+  "decision": "out: topic",
+  "reason": "review"
+ },
+ {
+  "openalex_id": "W7160509488",
+  "year": 2026,
+  "cited_by_count": 1,
+  "title": "An Integer Linear Programming Model for the Crew Re-Scheduling Problem Under Crew Unavailability in Urban Rail Transit",
+  "decision": "out: topic",
+  "reason": "crew/staff/human factors"
+ },
+ {
+  "openalex_id": "W7160990317",
+  "year": 2026,
+  "cited_by_count": 0,
+  "title": "A Delayed Feedback Evolution Game Model of High-Speed Train Scheduling Under Incomplete Information",
+  "decision": "out: method",
+  "reason": "evolutionary game model"
+ },
+ {
+  "openalex_id": "W7161801345",
+  "year": 2026,
+  "cited_by_count": 0,
+  "title": "Stranded Passenger Mode Choice Under Metro Disruptions: A Cumulative Prospect Theory Model with Stated-Preference Evidence",
+  "decision": "out: topic",
+  "reason": "passenger/emergency logistics"
+ },
+ {
+  "openalex_id": "W7164854361",
+  "year": 2026,
+  "cited_by_count": 0,
+  "title": "Fault Recovery Strategy for Urban Rail Transit Considering Train Operation Intersections",
+  "decision": "out: author",
+  "reason": "partly in family (urban rail recovery with repair teams); establishment not evidenced"
+ },
+ {
+  "openalex_id": "W7165426116",
+  "year": 2025,
+  "cited_by_count": 0,
+  "title": "Impact of changes on the conformity of type devices used for railway traffic management with applicable requirements",
+  "decision": "out: topic",
+  "reason": "safety/signalling/power technology"
+ },
+ {
+  "openalex_id": "W7165945162",
+  "year": 2026,
+  "cited_by_count": 0,
+  "title": "Scheduling working shifts of train dispatchers considering workers’ preferences",
+  "decision": "out: topic",
+  "reason": "crew/staff/human factors"
+ },
+ {
+  "openalex_id": "W7167252848",
+  "year": 2026,
+  "cited_by_count": 1,
+  "title": "Learning-based model predictive control for passenger-oriented train rescheduling with flexible train composition",
+  "decision": "table",
+  "reason": "in family (urban, demand perturbation); MILP-based MPC verified"
+ },
+ {
+  "openalex_id": "W7171661759",
+  "year": 2026,
+  "cited_by_count": 0,
+  "title": "Agrarian Conflict During the Administrative Process of Urban Spatial Planning in the Tegal Railway Station Area",
+  "decision": "out: topic",
+  "reason": "other/out of scope"
+ },
+ {
+  "openalex_id": "W7197021870",
+  "year": 2026,
+  "cited_by_count": 0,
+  "title": "LLM-Driven Multi-Agent Coordinated Control for Urban Rail Transit Disruption Response",
+  "decision": "out: method",
+  "reason": "LLM multi-agent control"
+ },
+ {
+  "openalex_id": "W7204092587",
+  "year": 2026,
+  "cited_by_count": 0,
+  "title": "Integrated Freight Train Rescheduling and Dynamic Railcar Flow Rerouting Under Unexpected Events",
+  "decision": "out: author",
+  "reason": "in family (freight rescheduling, multi-objective space-time network); single author, establishment not evidenced; full text not retrieved"
+ },
+ {
+  "openalex_id": "W7204488810",
+  "year": 2026,
+  "cited_by_count": 0,
+  "title": "An intelligent railway safety framework for collision avoidance and dynamic train rerouting",
+  "decision": "out: topic",
+  "reason": "safety/signalling/power technology"
+ },
+ {
+  "openalex_id": "W7208748905",
+  "year": 2026,
+  "cited_by_count": 0,
+  "title": "Engineering Decision-Support Framework with an AI Advisory Layer for Operating-Cost Optimisation Under Railway Disruptions",
+  "decision": "out: method",
+  "reason": "decision-support framework with AI advisory layer"
+ },
+ {
+  "openalex_id": "W7211972008",
+  "year": 2026,
+  "cited_by_count": 0,
+  "title": "Dynamic route optimization in disrupted heterogeneous railway systems via temporal planning",
+  "decision": "out: method",
+  "reason": "AI temporal planning"
+ }
+]

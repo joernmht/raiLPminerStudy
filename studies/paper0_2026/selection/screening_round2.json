@@ -1,0 +1,314 @@
+[
+ {
+  "openalex_id": "W4390597577",
+  "year": 2024,
+  "cited_by_count": 7,
+  "title": "Towards self-organizing railway traffic management: concept and framework",
+  "decision": "out: group + licence",
+  "reason": "Pellegrini group; concept/framework paper; version of record not open access"
+ },
+ {
+  "openalex_id": "W4392007252",
+  "year": 2024,
+  "cited_by_count": 4,
+  "title": "Reschedule the Shunting and Service Scheduling Plan After Disturbances at a Chinese High-Speed Railway Depot",
+  "decision": "out: topic",
+  "reason": "depot shunting rescheduling"
+ },
+ {
+  "openalex_id": "W4394784782",
+  "year": 2024,
+  "cited_by_count": 5,
+  "title": "Flexible optimal bus‐schedule bridging for metro operation‐interruption",
+  "decision": "out: topic",
+  "reason": "bus bridging"
+ },
+ {
+  "openalex_id": "W4395664348",
+  "year": 2024,
+  "cited_by_count": 10,
+  "title": "A MaxSAT approach for solving a new Dynamic Discretization Discovery model for train rescheduling problems",
+  "decision": "alternate (b)",
+  "reason": "in family (real-time dispatching, fixed paths); compact time-indexed ILP verified; Introduction contains the packing constraint"
+ },
+ {
+  "openalex_id": "W4399310926",
+  "year": 2024,
+  "cited_by_count": 5,
+  "title": "A Real-Time Railway Traffic Management Approach Preserving Passenger Connections",
+  "decision": "out: group",
+  "reason": "Pellegrini group (conflicts with #1)"
+ },
+ {
+  "openalex_id": "W4399662708",
+  "year": 2024,
+  "cited_by_count": 5,
+  "title": "Formulation of train routing selection problem for different real-time traffic management objectives",
+  "decision": "out: licence + group",
+  "reason": "NOT open access at publisher (Crossref TDM only; Elsevier API openaccess=0); HAL copy without licence; Pellegrini/D'Ariano group"
+ },
+ {
+  "openalex_id": "W4401080182",
+  "year": 2024,
+  "cited_by_count": 2,
+  "title": "Improving attractiveness of working shifts for train dispatchers",
+  "decision": "out: topic",
+  "reason": "dispatcher shift scheduling"
+ },
+ {
+  "openalex_id": "W4401482687",
+  "year": 2024,
+  "cited_by_count": 5,
+  "title": "Developing a Questionnaire to Investigate Monthly Human Errors Among Railway Traffic Control Room Employees",
+  "decision": "out: topic",
+  "reason": "human factors"
+ },
+ {
+  "openalex_id": "W4402333294",
+  "year": 2024,
+  "cited_by_count": 1,
+  "title": "Optimization for route selection under the integration of dispatching and control at the railway station: A 0‐1 programming model and a two‐stage solution algorithm",
+  "decision": "unverified",
+  "reason": "in family (station route selection, 0-1 programming); full text blocked (Wiley 403); established author not evidenced"
+ },
+ {
+  "openalex_id": "W4402335348",
+  "year": 2024,
+  "cited_by_count": 9,
+  "title": "Collaborative rescheduling of train timetables to relieve passenger congestions in an urban rail transit network: a rolling horizon approach",
+  "decision": "alternate (a)",
+  "reason": "in family (urban network under large-passenger-flow events); model verified but self-declared MINLP with partial linearisation by reference"
+ },
+ {
+  "openalex_id": "W4402983169",
+  "year": 2024,
+  "cited_by_count": 0,
+  "title": "Negotiating Safety by Movements: Articulation, Alignment and Separation between Train Driving and Railway Traffic Controlling Activities",
+  "decision": "out: topic",
+  "reason": "human factors"
+ },
+ {
+  "openalex_id": "W4403545930",
+  "year": 2024,
+  "cited_by_count": 3,
+  "title": "Enhancing freight train delay prediction with simulation‐assisted machine learning",
+  "decision": "out: topic",
+  "reason": "delay prediction"
+ },
+ {
+  "openalex_id": "W4405245861",
+  "year": 2024,
+  "cited_by_count": 1,
+  "title": "Systemic risk approach to mitigate delay cascading in railway networks",
+  "decision": "out: method",
+  "reason": "systemic-risk analysis"
+ },
+ {
+  "openalex_id": "W4405267377",
+  "year": 2024,
+  "cited_by_count": 3,
+  "title": "Efficient real-time rail traffic optimization: Decomposition of rerouting, reordering, and rescheduling problems",
+  "decision": "recommended (b)",
+  "reason": "in family; MILP verified (Sect. 2, constraints (1)-(26)); CC BY-NC version of record"
+ },
+ {
+  "openalex_id": "W4405655855",
+  "year": 2024,
+  "cited_by_count": 1,
+  "title": "Online Model Predictive Control for Energy-saving Train Operation in Passenger-Freight Mixed Lines",
+  "decision": "out: topic",
+  "reason": "energy-saving train control"
+ },
+ {
+  "openalex_id": "W4406166154",
+  "year": 2025,
+  "cited_by_count": 5,
+  "title": "Formulation and solution framework for real‐time railway traffic management with demand prediction",
+  "decision": "out: group (unverified)",
+  "reason": "in family (rtRTMP with demand prediction); Pellegrini group (conflicts with #1); full text not retrievable (Wiley 403, DTU Orbit file 403, HAL bot wall)"
+ },
+ {
+  "openalex_id": "W4408609812",
+  "year": 2025,
+  "cited_by_count": 5,
+  "title": "A simulation approach for analyzing metro resilience under operational incidents",
+  "decision": "out: method",
+  "reason": "simulation"
+ },
+ {
+  "openalex_id": "W4409338504",
+  "year": 2025,
+  "cited_by_count": 0,
+  "title": "Deciphering the Dynamics of Bus Rapid Transit Delays: A Decision Trees and Bayesian Networks Approach for Istanbul's Metrobus System",
+  "decision": "out: topic",
+  "reason": "bus rapid transit delays"
+ },
+ {
+  "openalex_id": "W4411857702",
+  "year": 2025,
+  "cited_by_count": 1,
+  "title": "Detection of obvious death by clinically trained emergency medical dispatchers in a criteria-based dispatch system",
+  "decision": "out: topic",
+  "reason": "not transport"
+ },
+ {
+  "openalex_id": "W4412996703",
+  "year": 2026,
+  "cited_by_count": 1,
+  "title": "Assessing rail freight reliability under mixed-traffic conditions: The role of capacity allocation and traffic management policy",
+  "decision": "out: topic",
+  "reason": "freight reliability assessment"
+ },
+ {
+  "openalex_id": "W7117297167",
+  "year": 2025,
+  "cited_by_count": 1,
+  "title": "Real-Time delay prediction for single-track intercity railways",
+  "decision": "out: topic",
+  "reason": "delay prediction"
+ },
+ {
+  "openalex_id": "W7117541221",
+  "year": 2025,
+  "cited_by_count": 1,
+  "title": "ETCS/ERTMS – a unified railway traffic control system affecting railway line capacity",
+  "decision": "out: topic",
+  "reason": "ETCS capacity"
+ },
+ {
+  "openalex_id": "W7125905854",
+  "year": 2026,
+  "cited_by_count": 1,
+  "title": "Headway Management Strategies for High-Frequency Urban Rail Transit: Dynamic Approach to Real-Time Train Holding in Metro Systems",
+  "decision": "out: method",
+  "reason": "urban real-time holding; abstract: real-time heuristic + predictive model evaluated by simulation; full text blocked (SAGE 403)"
+ },
+ {
+  "openalex_id": "W7126099024",
+  "year": 2026,
+  "cited_by_count": 0,
+  "title": "A Novel Integrated Model of Train Rescheduling and Station Track Usage Planning Based on Harris Hawks Optimisation Algorithm",
+  "decision": "unverified",
+  "reason": "in family (integrated rescheduling + station track usage, Harris Hawks optimiser); PROMET server unreachable from this machine"
+ },
+ {
+  "openalex_id": "W7127708191",
+  "year": 2025,
+  "cited_by_count": 0,
+  "title": "The use of simulation experimental research in different areas concerning railway traffic control issues",
+  "decision": "out: topic",
+  "reason": "simulation research overview"
+ },
+ {
+  "openalex_id": "W7137985184",
+  "year": 2026,
+  "cited_by_count": 0,
+  "title": "Hybrid decision support systems for predicting train delay codes in a socio-techno-economic system",
+  "decision": "out: topic",
+  "reason": "delay-code prediction"
+ },
+ {
+  "openalex_id": "W7138405875",
+  "year": 2026,
+  "cited_by_count": 0,
+  "title": "Real-time Rail traffic Management in Closed-loop: Assessment of Alternative Train Route Selection",
+  "decision": "out: model + group",
+  "reason": "in family; Pellegrini group (conflicts with #1); full text has no written-out formulation (0 display formulas)"
+ },
+ {
+  "openalex_id": "W7138921979",
+  "year": 2026,
+  "cited_by_count": 1,
+  "title": "Integrated air-rail multimodal strategy for aircraft and passenger recovery",
+  "decision": "out: topic",
+  "reason": "air-rail recovery"
+ },
+ {
+  "openalex_id": "W7154565309",
+  "year": 2025,
+  "cited_by_count": 0,
+  "title": "PARALLEL DATA PROCESSING IN AUTOMATED RAILWAY TRANSPORT DISPATCHING SYSTEM",
+  "decision": "out: topic",
+  "reason": "data processing"
+ },
+ {
+  "openalex_id": "W7154588297",
+  "year": 2025,
+  "cited_by_count": 0,
+  "title": "COMPUTER SUPPORT FOR RESPONDING TO RAILWAY EMERGENCIES",
+  "decision": "out: topic",
+  "reason": "emergency IT support"
+ },
+ {
+  "openalex_id": "W7160188354",
+  "year": 2026,
+  "cited_by_count": 0,
+  "title": "Fuzzy States to Enhance Train Delay Prediction of Markov Chains",
+  "decision": "out: topic",
+  "reason": "delay prediction"
+ },
+ {
+  "openalex_id": "W7161495794",
+  "year": 2025,
+  "cited_by_count": 0,
+  "title": "Effectiveness of Power Dynamics Awareness Training (PDAT) on Improving Marital Equality and Conflict Resolution Married Couples",
+  "decision": "out: topic",
+  "reason": "not transport"
+ },
+ {
+  "openalex_id": "W7167251429",
+  "year": 2026,
+  "cited_by_count": 1,
+  "title": "Self-Organizing Railway Traffic Management",
+  "decision": "out: group + method",
+  "reason": "Pellegrini group; self-organising multi-agent traffic management; version of record not CC (IEEE licence)"
+ },
+ {
+  "openalex_id": "W7203493524",
+  "year": 2025,
+  "cited_by_count": 0,
+  "title": "Comparison of Train Delay Prediction Models",
+  "decision": "out: topic",
+  "reason": "delay prediction"
+ },
+ {
+  "openalex_id": "W7203531893",
+  "year": 2026,
+  "cited_by_count": 0,
+  "title": "Revealing theme–stakeholder associations in urban metro disruptions for enhanced emergency planning",
+  "decision": "out: topic",
+  "reason": "stakeholder analysis"
+ },
+ {
+  "openalex_id": "W7204620854",
+  "year": 2026,
+  "cited_by_count": 0,
+  "title": "Multi-task deep reinforcement learning for service-oriented post-flood recovery scheduling of large urban metro systems",
+  "decision": "out: method",
+  "reason": "deep reinforcement learning"
+ },
+ {
+  "openalex_id": "W7212466594",
+  "year": 2026,
+  "cited_by_count": 0,
+  "title": "Integrated metro train timetable and rolling stock rescheduling with passenger rerouting under multi-location disturbances",
+  "decision": "out: licence",
+  "reason": "in family (metro, multi-location disturbances); NOT open access: Crossref lists Elsevier TDM/STM licences only, Elsevier API openaccess=0; OpenAlex CC BY-NC-ND flag unsupported"
+ },
+ {
+  "openalex_id": "W7213830453",
+  "year": 2026,
+  "cited_by_count": 0,
+  "title": "An online approach for integrated railway schedule replanning and passenger reassignment with unknown passenger reactions under hub disruptions",
+  "decision": "considered, not recommended",
+  "reason": "network hub disruption; CC BY 4.0 accepted manuscript (White Rose); main method hierarchical DRL, MILP only as offline benchmark in Appendix C; fits network-wide slot, not (b)"
+ },
+ {
+  "openalex_id": "W7215451080",
+  "year": 2024,
+  "cited_by_count": 0,
+  "title": "10.21 THE USE OF ARTIFICIAL INTELLIGENCE IN TRAIN TRAFFIC MANAGEMENT TASKS",
+  "decision": "out: topic",
+  "reason": "AI overview"
+ }
+]
