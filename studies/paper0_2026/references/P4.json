@@ -1,0 +1,430 @@
+{
+ "ContainsFormulation": true,
+ "variablesInModel": [
+  {
+   "Number": 1,
+   "Abbreviation": "d_p(k_p)",
+   "Name": "departure time",
+   "Description": "Actual departure time of train service k_p at platform p (Table 3 decision variable). Continuous: Sect. 4.2 lists y, l, xi, gamma, eta as the only integer variables.",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 2,
+   "Abbreviation": "a_p(k_p)",
+   "Name": "arrival time",
+   "Description": "Arrival time of train service k_p at platform p (Table 3 decision variable). Continuous (not among the integer variables listed in Sect. 4.2).",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 3,
+   "Abbreviation": "\\ell_p(k_p)",
+   "Name": "number of train units",
+   "Description": "Number of train units composing train service k_p at platform p (Table 3 decision variable), declared \\ell_p(k_p) \\in Z_+.",
+   "Domain": "integer"
+  },
+  {
+   "Number": 4,
+   "Abbreviation": "\\xi_{k_p,k_{p'},p,p'}",
+   "Name": "train-unit availability (ordering) indicator",
+   "Description": "Binary (Table 3): 1 if train units of service k_{p'} at platform p' can be reused for service k_p at platform p of the same depot; defined by (14), linearized by (29).",
+   "Domain": "binary"
+  },
+  {
+   "Number": 5,
+   "Abbreviation": "\\eta_{k_p,p}",
+   "Name": "composition-change indicator",
+   "Description": "Binary (Table 3): 1 if the composition of service k_p is changed at platform p; defined by (11) as |y_p(k_p)| > 0, linearized by (27)-(28).",
+   "Domain": "binary"
+  },
+  {
+   "Number": 6,
+   "Abbreviation": "\\tau_p(k_p)",
+   "Name": "dwell time",
+   "Description": "Dwell time of train service k_p at platform p. Judgement: Table 4 calls it an output variable; output variables are unknowns of problem (26)/(30) (counted in Table 5), so they are annotated as variables. Continuous.",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 7,
+   "Abbreviation": "h_p(k_p)",
+   "Name": "headway",
+   "Description": "Departure-arrival headway between services k_p and k_p+1 at platform p (Table 4 output variable, an unknown of problem (26)/(30), not given data). Continuous.",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 8,
+   "Abbreviation": "r_p(k_p)",
+   "Name": "running time",
+   "Description": "Running time of service k_p from platform p to its successor s^{pla}(p) (Table 4 output variable, an unknown of problem (26)/(30), not given data). Continuous.",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 9,
+   "Abbreviation": "r^{turn}_p(k_p)",
+   "Name": "turnaround time",
+   "Description": "Turnaround time of service k_p at terminal platform p (Table 4 output variable, an unknown of problem (26)/(30), not given data). Continuous.",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 10,
+   "Abbreviation": "\\tau^{add}_p(k_p)",
+   "Name": "additional dwell time for a composition change",
+   "Description": "Additional time for changing the composition of service k_p at platform p, set by (13) (Table 4 output variable, an unknown of problem (26)/(30), not given data). Continuous.",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 11,
+   "Abbreviation": "y_p(k_p)",
+   "Name": "train units to/from the depot",
+   "Description": "Train units coming from (>0) or returning to (<0) the depot for service k_p at platform p (Table 4); declared y_p(k_p) in Z and named an integer variable in Sect. 4.2.",
+   "Domain": "integer"
+  },
+  {
+   "Number": 12,
+   "Abbreviation": "n_p(k_p)",
+   "Name": "passengers waiting at the predetermined departure",
+   "Description": "Passengers waiting at platform p just before d^{pre}_p(k_p) (Table 4). Judgement: a queue state, but its values over the horizon are predicted by (16) and are unknowns; only the measured initial state is given. Continuous.",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 13,
+   "Abbreviation": "n^{trans}_p(k_p)",
+   "Name": "transfer passengers",
+   "Description": "Transfer passengers arriving at platform p for service k_p, set by (21) (Table 4 output variable, an unknown of problem (26)/(30), not given data). Continuous.",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 14,
+   "Abbreviation": "n^{depart}_p(k_p)",
+   "Name": "departing passengers",
+   "Description": "Passengers departing from platform p with service k_p, bounded by (18a)-(18b) (Table 4 output variable, an unknown of problem (26)/(30), not given data). Continuous.",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 15,
+   "Abbreviation": "n^{arrive}_p(k_p)",
+   "Name": "arriving passengers",
+   "Description": "Passengers arriving at platform p with service k_p from the predecessor platform p^{pla}(p), set by (20) (Table 4 output variable, an unknown of problem (26)/(30), not given data). Continuous.",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 16,
+   "Abbreviation": "n^{before}_p(k_p)",
+   "Name": "passengers waiting before departure",
+   "Description": "Passengers waiting at platform p immediately before the departure of service k_p, set by (17) (Table 4 output variable, an unknown of problem (26)/(30), not given data). Continuous.",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 17,
+   "Abbreviation": "C_p(k_p)",
+   "Name": "capacity of the train service",
+   "Description": "Total capacity of service k_p at platform p, C_p(k_p) = \\ell_p(k_p) C_{max} by (19) (Table 4). Domain not declared; Judgement: continuous (not among the integer variables of Sect. 4.2).",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 18,
+   "Abbreviation": "n^{after}_p(k_p)",
+   "Name": "passengers waiting after departure",
+   "Description": "Passengers left waiting at platform p immediately after service k_p departs, set by (23) (Table 4 output variable, an unknown of problem (26)/(30), not given data). Continuous.",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 19,
+   "Abbreviation": "o_{k_p,p}",
+   "Name": "absolute value of y (auxiliary)",
+   "Description": "Auxiliary continuous variable of Transformation property 4.1 with o_{k_p,p} = |y_p(k_p)|, enforced by (27).",
+   "Domain": "continuous"
+  },
+  {
+   "Number": 20,
+   "Abbreviation": "\\gamma_{k_p,p}",
+   "Name": "sign indicator of y (auxiliary)",
+   "Description": "Auxiliary binary variable of Transformation property 4.1: 1 if o_{k_p,p} = y_p(k_p), 0 if o_{k_p,p} = -y_p(k_p); it appears only in (27).",
+   "Domain": "binary"
+  }
+ ],
+ "objective_functions": [
+  {
+   "Name": "(26) with (31) and (25): weighted passenger delay and operational cost",
+   "Number": 0,
+   "equation": "\\min_{g(\\kappa_0)}\\sum_{p\\in P}\\sum_{k_p\\in N_p(\\kappa_0)}(w_1[w_3 n_p(k_p)(d^{pre}_p(k_p+1)-d^{pre}_p(k_p))+n^{after}_p(k_p)(d^{pre}_p(k_p+1)-d^{pre}_p(k_p))]+w_2[\\ell_p(k_p)E^{energy}_p+\\eta_{k_p,p}E^{add}_p])",
+   "description": "Judgement: one weighted-sum objective, (26) with the nonlinear (24) replaced by its linear approximation (31) (Sect. 4.3) and (25) substituted; w_1, w_2, w_3 (32) and d^{pre} are parameters, the J terms are not variables.",
+   "VariablesIncluded": [
+    3,
+    5,
+    12,
+    18
+   ],
+   "Linear": true
+  }
+ ],
+ "constraints": [
+  {
+   "Name": "(1) departure time window, one departure per cycle",
+   "Number": 1,
+   "equation": "d^{pre}_p(k_p) \\le d_p(k_p) < d^{pre}_p(k_p+1)",
+   "description": "No early departure and exactly one departure per cycle. Judgement: the bounds are timetable parameters, so this is kept as a constraint, not a domain declaration; strict < as written.",
+   "VariablesIncluded": [
+    1
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(2) departure equals arrival plus dwell",
+   "Number": 2,
+   "equation": "d_p(k_p) = a_p(k_p) + \\tau_p(k_p)",
+   "description": "Departure time of service k_p at platform p equals its arrival time plus its dwell time.",
+   "VariablesIncluded": [
+    1,
+    2,
+    6
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(3) headway",
+   "Number": 3,
+   "equation": "a_p(k_p+1) = d_p(k_p) + h_p(k_p)",
+   "description": "The next service arrives at platform p one headway h_p(k_p) after the departure of service k_p.",
+   "VariablesIncluded": [
+    1,
+    2,
+    7
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(4) minimum headway",
+   "Number": 4,
+   "equation": "h_p(k_p) \\ge h^{min}_p",
+   "description": "Safety headway. A bound by a parameter (h^{min}_p), kept as a numbered constraint: it is not a pure domain declaration.",
+   "VariablesIncluded": [
+    7
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(5) arrival at the successor platform",
+   "Number": 5,
+   "equation": "a_{s^{pla}(p)}(k_p) = d_p(k_p) + r_p(k_p)",
+   "description": "Arrival of service k_p at the successor platform s^{pla}(p) equals its departure at p plus the running time.",
+   "VariablesIncluded": [
+    1,
+    2,
+    8
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(6) running time bounds",
+   "Number": 6,
+   "equation": "r^{min}_p \\le r_p(k_p) \\le r^{max}_p",
+   "description": "Running time between its minimum and maximum; parameter bounds, kept as a numbered constraint.",
+   "VariablesIncluded": [
+    8
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(7) turnaround at the terminal",
+   "Number": 7,
+   "equation": "a_{s^{pla}(p)}(k_{s^{pla}(p)}) = d_p(k_p) + r^{turn}_p(k_p)",
+   "description": "Turnaround at the terminal station: the continuing service k_{s^{pla}(p)} arrives at the successor platform one turnaround time after service k_p departs from p.",
+   "VariablesIncluded": [
+    1,
+    2,
+    9
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(8) turnaround time bounds",
+   "Number": 8,
+   "equation": "r^{turn,min}_p \\le r^{turn}_p(k_p) \\le r^{turn,max}_p",
+   "description": "Turnaround time between its minimum and maximum; parameter bounds, kept as a numbered constraint.",
+   "VariablesIncluded": [
+    9
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(9) train composition update",
+   "Number": 9,
+   "equation": "\\ell_p(k_p) = \\ell_{p^{pla}(p)}(k_p) + \\sigma_p y_p(k_p)",
+   "description": "Units on service k_p equal those from the predecessor platform plus the units added from or returned to the depot where adjustment is allowed (sigma_p is a 0/1 parameter).",
+   "VariablesIncluded": [
+    3,
+    11
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(10) train length bounds",
+   "Number": 10,
+   "equation": "\\ell_{min} \\le \\ell_p(k_p) \\le \\ell_{max}",
+   "description": "Minimum and maximum number of train units per service; parameter bounds, kept as a numbered constraint.",
+   "VariablesIncluded": [
+    3
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(12) minimum dwell time",
+   "Number": 11,
+   "equation": "\\tau_p(k_p) \\ge \\tau^{min}_p + \\sigma_p \\tau^{add}_p(k_p)",
+   "description": "Dwell time covers the minimum dwell time plus the extra time for a composition change (sigma_p is a parameter).",
+   "VariablesIncluded": [
+    6,
+    10
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(13) additional dwell time for a composition change",
+   "Number": 12,
+   "equation": "\\tau^{add}_p(k_p) = \\eta_{k_p,p} \\cdot t^{comp}_p",
+   "description": "The additional dwell time is t^{comp}_p when the composition changes; a binary variable times a parameter, so linear.",
+   "VariablesIncluded": [
+    5,
+    10
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(15) rolling-stock circulation, depot inventory",
+   "Number": 13,
+   "equation": "\\sum_{k'_p\\in I_p(k_p)} y_p(k'_p) + \\sum_{p'\\in dep(z)\\setminus\\{p\\}}\\sum_{k_{p'}\\in I_{p'}} \\xi_{k_p,k_{p'},p,p'} y_{p'}(k_{p'}) \\le N^{train}_z",
+   "description": "Depot inventory stays feasible. Judgement: as written the binary variable xi multiplies the integer variable y (bilinear); the paper calls the Sect. 4.3 model an MILP but states no linearization of this product, so Linear=false.",
+   "VariablesIncluded": [
+    4,
+    11
+   ],
+   "Linear": false
+  },
+  {
+   "Name": "(16) passenger queue update",
+   "Number": 14,
+   "equation": "n_p(k_p+1) = n_p(k_p) + \\rho_p(k_p+1)(d^{pre}_p(k_p+1)-d^{pre}_p(k_p)) + n^{trans}_p(k_p) - n^{depart}_p(k_p)",
+   "description": "Queue at the next predetermined departure: passengers carried over plus arrivals (a parameter term) plus transfers minus departures.",
+   "VariablesIncluded": [
+    12,
+    13,
+    14
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(17) passengers waiting before departure",
+   "Number": 15,
+   "equation": "n^{before}_p(k_p) = n_p(k_p) + \\rho_p(k_p+1)(d_p(k_p)-d^{pre}_p(k_p)) + n^{trans}_p(k_p)",
+   "description": "Passengers waiting at the actual departure. The arrival rate rho is a parameter, so the term in d_p(k_p) is linear.",
+   "VariablesIncluded": [
+    1,
+    12,
+    13,
+    16
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(18a) boarding limited by waiting passengers",
+   "Number": 16,
+   "equation": "n^{depart}_p(k_p) \\le n^{before}_p(k_p)",
+   "description": "Judgement: (18a) and (18b) carry separate tags and are counted as two constraints; together they are the paper's linear approximation of n^{depart} = min{n^{before}, C}.",
+   "VariablesIncluded": [
+    14,
+    16
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(18b) boarding limited by capacity",
+   "Number": 17,
+   "equation": "n^{depart}_p(k_p) \\le C_p(k_p)",
+   "description": "Departing passengers do not exceed the capacity of the service (second half of (18)).",
+   "VariablesIncluded": [
+    14,
+    17
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(19) capacity of the train service",
+   "Number": 18,
+   "equation": "C_p(k_p) = \\ell_p(k_p) C_{max}",
+   "description": "Capacity equals the number of train units times the unit capacity C_{max} (a parameter).",
+   "VariablesIncluded": [
+    3,
+    17
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(20) passengers arriving from the predecessor platform",
+   "Number": 19,
+   "equation": "n^{arrive}_p(k_p) = n^{depart}_{p^{pla}(p)}(k_p)",
+   "description": "Passengers arriving at platform p with service k_p equal those departing from the predecessor platform.",
+   "VariablesIncluded": [
+    14,
+    15
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(21) transfer passengers",
+   "Number": 20,
+   "equation": "n^{trans}_p(k_p) = \\sum_{q\\in pla(p)}\\sum_{k_q\\in I_q} \\chi_{k_q,q,k_p,p} \\beta_{q,p} n^{arrive}_q(k_q)",
+   "description": "Transfers from the other platforms of the station. chi (binary parameter fixed by the timetable via (22)) and beta are parameters, so linear.",
+   "VariablesIncluded": [
+    13,
+    15
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(23) passengers waiting after departure",
+   "Number": 21,
+   "equation": "n^{after}_p(k_p) = n^{before}_p(k_p) - n^{depart}_p(k_p)",
+   "description": "Passengers left behind by service k_p.",
+   "VariablesIncluded": [
+    14,
+    16,
+    18
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(27) absolute value of y (Transformation property 4.1)",
+   "Number": 22,
+   "equation": "o_{k_p,p}-y_p(k_p)\\ge 0, o_{k_p,p}-y_p(k_p)\\le 2Y_{max}(1-\\gamma_{k_p,p}), o_{k_p,p}+y_p(k_p)\\ge 0, o_{k_p,p}+y_p(k_p)\\le 2Y_{max}\\gamma_{k_p,p}",
+   "description": "Big-M system making o = |y|; with (28) it replaces the if-then definition (11) in the MILP. One numbered system of four inequalities, counted once.",
+   "VariablesIncluded": [
+    11,
+    19,
+    20
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(28) composition-change indicator (Transformation property 4.2)",
+   "Number": 23,
+   "equation": "o_{k_p,p} \\le \\eta_{k_p,p} O_{max}, o_{k_p,p} \\ge \\epsilon + (1-\\eta_{k_p,p})(O_{min}-\\epsilon)",
+   "description": "eta = 1 if and only if o > 0; with (27) it replaces (11). One numbered system of two inequalities, counted once.",
+   "VariablesIncluded": [
+    5,
+    19
+   ],
+   "Linear": true
+  },
+  {
+   "Name": "(29) train-unit availability indicator (Transformation property 4.3)",
+   "Number": 24,
+   "equation": "a_{p'}(k_{p'})-a_p(k_p) \\le (1-\\xi_{k_{p'},k_p,p',p})(M_a-a_p(k_p)), a_{p'}(k_{p'})-a_p(k_p) \\ge \\varepsilon+\\xi_{k_p,k_{p'},p,p'}(m_a-a_p(k_p)-\\varepsilon)",
+   "description": "Replaces (14). Judgement: as written it uses arrival times a (not d, no t^{roll} as in (14)) and xi multiplies a_p(k_p) in both lines: bilinear as written, so Linear=false despite the paper's MILP claim.",
+   "VariablesIncluded": [
+    2,
+    4
+   ],
+   "Linear": false
+  }
+ ]
+}

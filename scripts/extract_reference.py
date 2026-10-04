@@ -181,7 +181,7 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("xml", type=Path)
     ap.add_argument("out", type=Path)
-    ap.add_argument("--section", action="append", required=True)
+    ap.add_argument("--section", action="append", default=[])
     ap.add_argument("--table", action="append", default=[], help="append Table N (notation)")
     ap.add_argument("--formula", action="append", default=[], help="append formula (N)")
     args = ap.parse_args()
@@ -203,11 +203,17 @@ def main() -> int:
     parts = [_table(root, n) for n in args.table]
     parts += [_section_text(s) for s in chosen]
     if args.formula:
-        parts.append("Formulas stated elsewhere in the paper:")
+        lead = (
+            "Formulas stated elsewhere in the paper:"
+            if chosen
+            else ("The model (equations numbered as in the paper):")
+        )
+        parts.append(lead)
         parts += [_formula(root, n) for n in args.formula]
     text = "\n\n".join(parts) + "\n"
     args.out.write_text(text, encoding="utf-8", newline="\n")
-    print(f"{len(chosen)} sections, {text.count('$$') // 2} display formulas -> {args.out}")
+    n = text.count("$$") // 2
+    print(f"{len(chosen)} sections, {len(args.table)} tables, {n} display formulas -> {args.out}")
     return 0
 
 
