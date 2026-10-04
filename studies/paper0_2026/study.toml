@@ -18,36 +18,42 @@ max_subcalls = 10
 ps_count_min = 2
 ps_count_max = 5
 
-# Five open-weight generators, one per family, all served by ScaDS (probed 2026-10-04:
-# system prompt, temperature, seed and a forced named tool call are honoured).
-# Roles mirror the 2025 line-up (Gemini 2.5 Pro / Flash, o4-mini, DeepSeek-V3).
-[models.glm]
-served_id = "zai-org/GLM-5.3"
+# Five open-weight generators, one per family (probed 2026-10-04: system prompt,
+# temperature, seed and a forced named tool call are honoured). Roles mirror the 2025
+# line-up (Gemini 2.5 Pro / Flash, o4-mini, DeepSeek-V3). Every model reasons as little
+# as it allows (docs/adr/0003): thinking off where the switch works, else the lowest
+# effort; GLM-5.3 was replaced after it spent 16,000 tokens on reasoning per call.
+[models.glmflash]
+served_id = "zai-org/GLM-5.3-Flash"
 family = "GLM (Z.ai)"
-licence = "GLM-5.3 model licence (other)"
-role = "strongest open-weight reasoning model (2025 role: Gemini 2.5 Pro)"
+licence = "MIT"
+role = "GLM family, replaces GLM-5.3 (2025 role: Gemini 2.5 Pro)"
 max_tokens = 16000
+extra = { reasoning_effort = "low" }
 
 [models.deepseek]
 served_id = "deepseek-ai/DeepSeek-V4.1-Flash"
 family = "DeepSeek"
 licence = "MIT"
-role = "fast reasoning model, continuity with DeepSeek-V3 (2025)"
+role = "fast model, continuity with DeepSeek-V3 (2025)"
 max_tokens = 16000
+extra = { chat_template_kwargs = { thinking = false } }
 
 [models.gptoss]
 served_id = "openai/gpt-oss-120b"
 family = "gpt-oss (OpenAI)"
 licence = "Apache-2.0"
-role = "compact reasoning model (2025 role: o4-mini)"
+role = "compact model from the vendor of o4-mini (2025)"
 max_tokens = 16000
+extra = { reasoning_effort = "low" }
 
 [models.qwen]
 served_id = "Qwen/Qwen3.8-27B"
 family = "Qwen (Alibaba)"
 licence = "Apache-2.0"
-role = "small dense reasoning model (2025 role: Gemini 2.5 Flash)"
+role = "small dense model (2025 role: Gemini 2.5 Flash)"
 max_tokens = 16000
+extra = { chat_template_kwargs = { enable_thinking = false } }
 
 [models.minimax]
 served_id = "MiniMaxAI/MiniMax-M3"
@@ -55,6 +61,7 @@ family = "MiniMax"
 licence = "MiniMax model licence (other)"
 role = "fifth family"
 max_tokens = 16000
+extra = { reasoning_effort = "low" }
 
 # The parsing model (LP2Graph v2), chosen on the 54 instrument cases (instrument/report.json)
 # and the input papers' own formulations (references/report.json), 2026-10-04. Gemma-4 with
@@ -106,7 +113,7 @@ input = "inputs/P5.md"
 [[experiments]]
 name = "exp1"
 papers = ["P1"]
-models = ["glm", "deepseek", "gptoss", "qwen", "minimax"]
+models = ["glmflash", "deepseek", "gptoss", "qwen", "minimax"]
 workflows = ["ZS", "CFC", "OE", "PS"]
 temperatures = [0.2, 0.6, 1.0]
 replicates = 15
@@ -117,7 +124,7 @@ replicates = 15
 [[experiments]]
 name = "exp2"
 papers = ["P2", "P3", "P4", "P5"]
-models = ["glm", "deepseek", "gptoss", "qwen", "minimax"]
+models = ["glmflash", "deepseek", "gptoss", "qwen", "minimax"]
 workflows = ["ZS"]
 temperatures = [0.6]
 replicates = 15

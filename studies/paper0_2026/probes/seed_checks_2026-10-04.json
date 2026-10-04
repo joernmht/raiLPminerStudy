@@ -1,0 +1,17 @@
+{
+  "why": "The one-sentence probe (probe.jsonl) showed DeepSeek-V4.1-Flash identical at T=0.0 and T=1.0 and MiniMax-M3 identical across seeds at T=1.0. Longer outputs check whether temperature and seed act.",
+  "prompt": "Write a 120-word paragraph about a regional train that is delayed by a signal failure.",
+  "checks": [
+    {"model": "deepseek-ai/DeepSeek-V4.1-Flash", "extra": {"chat_template_kwargs": {"thinking": false}}, "temperature": 1.0, "max_tokens": 1500,
+     "seed_3": {"chars": 653, "head": "The 17:42 regional service to Coldbrook sits motionless just outside the junction, its dep"},
+     "seed_4": {"chars": 608, "head": "The 17:42 regional service to Harchester sits motionless at Platform 3, its departure boar"},
+     "identical": false},
+    {"model": "MiniMaxAI/MiniMax-M3", "extra": {"reasoning_effort": "low"}, "temperature": 1.0, "max_tokens": 1500,
+     "note": "both answers empty: the low-effort reasoning used the 1,500 tokens; repeated with 8,000"},
+    {"model": "MiniMaxAI/MiniMax-M3", "extra": {"reasoning_effort": "low"}, "temperature": 1.0, "max_tokens": 8000,
+     "seed_3": {"tokens": 239, "reasoning_tokens": 95, "head": "The 8:15 regional train from Ashford slowed to a halt just outside Canterbury, its passengers settli"},
+     "seed_4": {"tokens": 1549, "reasoning_tokens": 1395, "head": "The regional train pulled out of Riverside Station at 8:15 a.m., humming with the anticipation of mo"},
+     "identical": false}
+  ],
+  "result": "Temperature and seed act for both models; the one-sentence probe was too short to show it."
+}
