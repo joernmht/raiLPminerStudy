@@ -83,15 +83,16 @@ slot: `shortlist_round1.json` (CC BY and CC BY-SA only) and `shortlist_round2.js
 
 | Key | Paper | Sub-family (pilot input it replaces) | Licence of the text used | Cites | Reference formulation |
 |---|---|---|---|---|---|
-| P1 | Shi, Yang, Zhang, Sun, Laporte 2026, *Transp. Sci.* 60:484-507 | partial segment blockage (Zhan et al. 2016) | CC BY, accepted manuscript (Univ. of Bath); version of record closed | 1 | MILP announced in the abstract; section not yet verified |
+| P1 | Shi, Yang, Zhang, Sun, Laporte 2026, *Transp. Sci.* 60:484-507 | partial segment blockage (Zhan et al. 2016) | CC BY, accepted manuscript (Univ. of Bath); version of record closed | 1 | MILP (13), App. D: linearised objective and constraints (2a)-(5b), (6i)-(6q) of Sect. 4 |
 | P2 | Versluis, Pellegrini, Quaglietta, Goverde, Rodriguez 2025, *Transportmetrica A* | junction routing and scheduling (Pellegrini et al. 2014) | CC BY 4.0 | 0 | Sect. 4.2: objective (2), constraints (3)-(18) |
 | P3 | Zhu, Dollevoet, Huisman 2025, *TR Part B* 195:103189 | network-wide disruption (Zhang et al. 2023) | CC BY 4.0 | 7 | Sect. 4.1 (1)-(21) and Sect. 4.2 (22)-(36) |
 | P4 | Liu, Oliveira da Silva, Dabiri, Wang, De Schutter 2026, *TR Part C* 191:105841 | urban network (Koniorczyk et al. 2025) | CC BY 4.0 | 1 | MILP-based MPC: Sect. 3 and 4.2-4.3 |
 | P5 | Lövétei, Lindenmaier, Aradi 2025, *JRTPM* 33:100496 | real-time reordering and rerouting (D'Ariano et al. 2008) | CC BY-NC 4.0 | 3 | Sect. 2: constraints (1)-(26), objective (72) |
 
-Cites = OpenAlex `cited_by_count` read on 2026-10-04. P1 anchors experiment 1 if its
-written-out MILP is confirmed from the accepted manuscript (the repository blocks scripted
-downloads); otherwise P2 becomes the anchor. Known weaknesses, accepted on 2026-10-04:
+Cites = OpenAlex `cited_by_count` read on 2026-10-04. P1 anchors experiment 1: its MILP was
+confirmed from the accepted manuscript on 2026-10-04 (Joern supplied the PDF; the repository
+blocks scripted downloads). Its objective (1) is printed with absolute values and a maximum and
+linearised in Appendix D. Known weaknesses, accepted on 2026-10-04:
 
 - P2 and P5 both descend from RECIFE-MILP, the model family of the excluded Pellegrini et
   al. 2014, so two of the five reference models share a lineage.

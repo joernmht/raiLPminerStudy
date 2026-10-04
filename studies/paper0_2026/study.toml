@@ -72,7 +72,7 @@ max_tokens = 8000
 # Input papers: open access under a Creative Commons licence, not MDPI, chosen by the rule in
 # docs/adr/0002; attribution in inputs/README.md. `run` refuses while an input is missing.
 [papers.P1]
-# Anchor if its MILP is confirmed (Joern checks the Bath accepted manuscript); fallback anchor: P2.
+# Anchor of experiment 1. MILP confirmed 2026-10-04: model (13), Appendix D with Section 4.
 doi = "10.1287/trsc.2025.0137"
 title = "Integrated optimization of train rescheduling and speed management during partial blockages: a decomposition approach"
 licence = "CC BY (accepted manuscript)"
