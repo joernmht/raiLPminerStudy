@@ -1,6 +1,18 @@
 {
  "google_gemma-4-26B-A4B-it.prompt": {
   "accepted": 1.0,
+  "cases": 54,
+  "coherent": 1.0,
+  "complete_struct": 1.0,
+  "contains_formulation": 1.0,
+  "counts_exact": 1.0,
+  "integral": 1.0,
+  "linear": 1.0,
+  "mean_completion_tokens": 482,
+  "unparsed": 0
+ },
+ "google_gemma-4-26B-A4B-it.prompt-2026.10.3": {
+  "accepted": 1.0,
   "cases": 48,
   "coherent": 1.0,
   "complete_struct": 1.0,
@@ -48,16 +60,16 @@
   "unparsed": 2
  },
  "meta-llama_Llama-3.3-70B-Instruct.prompt": {
-  "accepted": 0.938,
+  "accepted": 0.979,
   "cases": 48,
-  "coherent": 0.958,
-  "complete_struct": 0.938,
-  "contains_formulation": 0.958,
-  "counts_exact": 0.931,
-  "integral": 0.958,
-  "linear": 0.542,
+  "coherent": 1.0,
+  "complete_struct": 0.979,
+  "contains_formulation": 1.0,
+  "counts_exact": 0.965,
+  "integral": 0.979,
+  "linear": 0.583,
   "mean_completion_tokens": 314,
-  "unparsed": 2
+  "unparsed": 0
  },
  "meta-llama_Llama-3.3-70B-Instruct.schema-ws": {
   "accepted": 0.812,

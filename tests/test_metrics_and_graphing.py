@@ -211,3 +211,15 @@ def test_narrow_repairs_and_schema_echo():
     assert "inserted missing equation keys" in repairs
     with pytest.raises(ValueError, match="echoes the schema"):
         parse_reply(json.dumps(MODEL_SCHEMA))
+
+
+def test_raw_latex_backslashes_are_escaped_only_on_failure():
+    m = _model([_var(1)], [_eq(ObjectiveFunction, 0, [1])], [_eq(Constraint, 1, [1])])
+    good = m.model_dump_json().replace('"equation":""', '"equation":"x \\\\le 1"', 1)
+    repairs: list[str] = []
+    assert parse_reply(good, repairs).objective_functions[0].equation == "x \\le 1"
+    assert repairs == []
+    raw_latex = good.replace("\\\\le", "\\le")
+    repairs = []
+    assert parse_reply(raw_latex, repairs).objective_functions[0].equation == "x \\le 1"
+    assert repairs == ["escaped stray backslashes"]

@@ -232,6 +232,8 @@ def normalize_keys(obj: Any, level: str = "model", repairs: list[str] | None = N
     return out
 
 
+#: A lone backslash that does not start a JSON escape (LaTeX such as ``\le`` written raw).
+_STRAY_BACKSLASH = re.compile(r'(?<!\\)\\(?![\\"/bfnrtu])')
 #: A formula written without its key: ``"Number": 6, "<formula>", "description"``.
 _MISSING_EQUATION_KEY = re.compile(r'("Number": *-?\d+, *)("(?:[^"\\]|\\.)*")(, *"description")')
 
@@ -241,8 +243,9 @@ def parse_reply(content: str, repairs: list[str] | None = None) -> Model:
 
     Deterministic repairs, each recorded in ``repairs``: a code fence is removed,
     text after the first JSON object is ignored, a formula string written without
-    its ``equation`` key is given the key back, and keys are mapped onto the
-    schema's names (:func:`normalize_keys`). A reply that echoes the schema is an
+    its ``equation`` key is given the key back, lone backslashes of raw LaTeX are
+    escaped (only when the reply fails on exactly that), and keys are mapped onto
+    the schema's names (:func:`normalize_keys`). A reply that echoes the schema is an
     error, not something to repair.
     """
     log = repairs if repairs is not None else []
@@ -259,7 +262,14 @@ def parse_reply(content: str, repairs: list[str] | None = None) -> Model:
     try:
         raw, end = json.JSONDecoder().raw_decode(text)
     except json.JSONDecodeError as exc:
-        raise ValueError(f"reply is not JSON: {exc.msg}") from exc
+        if "Invalid \\escape" not in exc.msg:
+            raise ValueError(f"reply is not JSON: {exc.msg}") from exc
+        text = _STRAY_BACKSLASH.sub(r"\\\\", text)
+        log.append("escaped stray backslashes")
+        try:
+            raw, end = json.JSONDecoder().raw_decode(text)
+        except json.JSONDecodeError as exc2:
+            raise ValueError(f"reply is not JSON: {exc2.msg}") from exc2
     if text[end:].strip():
         log.append("ignored text after the JSON object")
     if isinstance(raw, dict) and "properties" in raw and "ContainsFormulation" not in raw:
