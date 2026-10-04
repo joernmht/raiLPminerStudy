@@ -9,7 +9,9 @@ import pytest
 from genstudy.config import GrapherSpec
 from genstudy.graphing import (
     MODEL_SCHEMA,
+    TEMPLATE_FORM,
     Constraint,
+    Equation,
     Model,
     ObjectiveFunction,
     Variable,
@@ -169,8 +171,24 @@ def test_grapher_modes():
     assert "response_format" not in prompt_mode
     assert content.index(json.dumps(MODEL_SCHEMA)) < content.index("THE ANSWER")
     assert content.rstrip().endswith("without code fences.")
+    template_mode = grapher_body(GrapherSpec("g", mode="template"), "THE ANSWER")
+    content = template_mode["messages"][1]["content"]
+    assert "response_format" not in template_mode
+    assert json.dumps(MODEL_SCHEMA) not in content
+    assert content.index(TEMPLATE_FORM) < content.index("THE ANSWER")
+    assert content.rstrip().endswith("without repeating the template.")
     with pytest.raises(ValueError):
         grapher_body(GrapherSpec("g", mode="nope"), "x")
+
+
+def test_template_names_every_field_and_cannot_pass_as_a_record():
+    """An echoed template must fail, and the template must not drift from the schema."""
+    for cls in (Model, Variable, Equation):
+        for name in cls.model_fields:
+            assert f'"{name}":' in TEMPLATE_FORM, name
+    template = TEMPLATE_FORM[TEMPLATE_FORM.index("{") :]
+    with pytest.raises(ValueError, match="not JSON"):
+        parse_reply(template)
 
 
 def test_key_repair_maps_case_and_drops_schema_keywords():
@@ -223,3 +241,38 @@ def test_raw_latex_backslashes_are_escaped_only_on_failure():
     repairs = []
     assert parse_reply(raw_latex, repairs).objective_functions[0].equation == "x \\le 1"
     assert repairs == ["escaped stray backslashes"]
+
+
+def test_over_long_text_fields_are_cut_not_fatal():
+    m = _model([_var(1)], [_eq(ObjectiveFunction, 0, [1])], [_eq(Constraint, 1, [1])])
+    raw = json.loads(m.model_dump_json())
+    raw["objective_functions"][0]["equation"] = "x + " * 100
+    raw["variablesInModel"][0]["Abbreviation"] = "y" * 121
+    repairs: list[str] = []
+    parsed = parse_reply(json.dumps(raw), repairs)
+    assert len(parsed.objective_functions[0].equation) == 240
+    assert len(parsed.variablesInModel[0].Abbreviation) == 120
+    assert repairs == ["cut 2 over-long text fields"]
+    assert graph_metrics(parsed) == graph_metrics(m)
+
+
+def test_an_echoed_schema_followed_by_the_record_is_skipped():
+    m = _model([_var(1)], [_eq(ObjectiveFunction, 0, [1])], [_eq(Constraint, 1, [1])])
+    repairs: list[str] = []
+    echo_then_record = json.dumps(MODEL_SCHEMA) + "\n\n" + m.model_dump_json()
+    assert parse_reply(echo_then_record, repairs) == m
+    assert repairs == ["skipped an echoed schema"]
+    with pytest.raises(ValueError, match="echoes the schema"):
+        parse_reply(json.dumps(MODEL_SCHEMA) + "\n" + json.dumps(MODEL_SCHEMA))
+    with pytest.raises(ValueError, match="echoes the schema"):
+        parse_reply(json.dumps(MODEL_SCHEMA) + "\nI hope this helps.")
+
+
+def test_equation_labels_copied_as_numbers_lose_their_letter():
+    m = _model([_var(1)], [_eq(ObjectiveFunction, 0, [1])], [_eq(Constraint, 18, [1])])
+    labelled = m.model_dump_json().replace('"Number":18', '"Number":18a')
+    with pytest.raises(json.JSONDecodeError):
+        json.loads(labelled)
+    repairs: list[str] = []
+    assert parse_reply(labelled, repairs) == m
+    assert repairs == ["dropped letters from equation numbers"]

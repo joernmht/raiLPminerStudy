@@ -7,6 +7,8 @@ Commands (all resumable; every request is logged with the body that was sent):
 * ``run``               one model's block of the design, in a fixed shuffled order
 * ``status``            progress and the workflow notes per model
 * ``validate-grapher``  score a parsing model on the instrument cases
+* ``validate-references``  parse the papers' own formulations, compare with their annotation
+* ``grapher-report``    re-score both from the stored replies with the current parser
 * ``graph``             notation gate + parsing for one model's runs
 
 The API key is read from the environment variable the spec names (default
@@ -21,7 +23,7 @@ import os
 import re
 import sys
 from collections import Counter
-from dataclasses import asdict
+from dataclasses import asdict, replace
 from pathlib import Path
 from typing import Any
 
@@ -158,19 +160,22 @@ def cmd_status(spec: StudySpec, args: argparse.Namespace) -> int:
 def _grapher(
     spec: StudySpec, served_id: str | None, mode: str | None = None, ws: str | None = None
 ) -> GrapherSpec:
-    if served_id:
-        base = spec.grapher or GrapherSpec(served_id=served_id)
-        return GrapherSpec(
-            served_id,
-            base.temperature,
-            base.seed,
-            base.max_tokens,
-            mode or base.mode,
-            ws if ws is not None else base.whitespace_pattern,
-        )
-    if spec.grapher is None:
+    """The study's grapher with the served model, mode or whitespace pattern overridden."""
+    base = spec.grapher or (GrapherSpec(served_id=served_id) if served_id else None)
+    if base is None:
         sys.exit("no [grapher] in the study spec and no --served-id given")
-    return spec.grapher
+    return replace(
+        base,
+        served_id=served_id or base.served_id,
+        mode=mode or base.mode,
+        whitespace_pattern=ws if ws is not None else base.whitespace_pattern,
+    )
+
+
+def _config(grapher: GrapherSpec) -> str:
+    """File stem of a grapher configuration's validation records."""
+    ws = "-ws" if grapher.whitespace_pattern is not None else ""
+    return f"{_slug(grapher.served_id)}.{grapher.mode}{ws}"
 
 
 def _append(path: Path, record: dict[str, Any]) -> None:
@@ -182,8 +187,7 @@ def _append(path: Path, record: dict[str, Any]) -> None:
 def cmd_validate_grapher(spec: StudySpec, args: argparse.Namespace) -> int:
     grapher = _grapher(spec, args.served_id, args.mode, args.whitespace_pattern)
     client = _client(spec)
-    config = f"{grapher.mode}{'-ws' if grapher.whitespace_pattern is not None else ''}"
-    out = spec.root / "instrument" / f"{_slug(grapher.served_id)}.{config}.jsonl"
+    out = spec.root / "instrument" / f"{_config(grapher)}.jsonl"
     done = {(r["case_id"], r["repeat"]) for r in RunStore(out).records()}
     cases = list(instrument.cases())[: args.limit] if args.limit else list(instrument.cases())
     for case in cases:
@@ -269,7 +273,59 @@ def cmd_grapher_report(spec: StudySpec, args: argparse.Namespace) -> int:
     out.write_text(
         json.dumps(report, indent=1, sort_keys=True) + "\n", encoding="utf-8", newline="\n"
     )
+    _reference_report(spec)
     return 0
+
+
+def _reference_report(spec: StudySpec) -> None:
+    """Score the stored replies on the reference formulations (``references/report.json``)."""
+    truth = {
+        p.stem: graph_metrics(Model.model_validate_json(p.read_text(encoding="utf-8")))
+        for p in sorted((spec.root / "references").glob("P*.json"))
+    }
+    report: dict[str, Any] = {}
+    for path in sorted((spec.root / "references").glob("validation.*.jsonl")):
+        per_ref: dict[str, list[dict[str, Any]]] = {}
+        for row in RunStore(path).records():
+            if row.get("call") is None or row["reference"] not in truth:
+                continue
+            expected = truth[row["reference"]]
+            repairs: list[str] = []
+            try:
+                got = graph_metrics(parse_reply(row["call"]["response"]["content"], repairs))
+            except ValueError as exc:
+                per_ref.setdefault(row["reference"], []).append({"error": str(exc)})
+                continue
+            score = instrument.score(expected, got)
+            per_ref.setdefault(row["reference"], []).append(
+                {
+                    "score": score,
+                    "repairs": repairs,
+                    "edges": f"{got.n_edges}/{expected.n_edges}",
+                    "variables": f"{got.n_variables}/{expected.n_variables}",
+                    "constraints": f"{got.n_constraints}/{expected.n_constraints}",
+                }
+            )
+        replies = [r for rs in per_ref.values() for r in rs]
+        if not replies:
+            continue
+        parsed = [r for r in replies if "score" in r]
+        right = sum(all(r["score"].values()) for r in parsed)
+        config = path.stem.removeprefix("validation.")
+        report[config] = {
+            "replies": len(replies),
+            "parsed": len(parsed),
+            "all_verdicts_right": right,
+            "per_reference": per_ref,
+        }
+        _log(
+            f"references {config:45s} replies={len(replies):3d} parsed={len(parsed):3d} "
+            f"all verdicts right={right:3d}"
+        )
+    out = spec.root / "references" / "report.json"
+    out.write_text(
+        json.dumps(report, indent=1, sort_keys=True) + "\n", encoding="utf-8", newline="\n"
+    )
 
 
 def cmd_validate_references(spec: StudySpec, args: argparse.Namespace) -> int:
@@ -279,9 +335,9 @@ def cmd_validate_references(spec: StudySpec, args: argparse.Namespace) -> int:
     its annotated structure (the ground truth). The parser's result is compared on
     counts, structural verdicts and the number of variable-equation edges.
     """
-    grapher = _grapher(spec, None)
+    grapher = _grapher(spec, args.served_id, args.mode)
     client = _client(spec)
-    out = spec.root / "references" / "validation.jsonl"
+    out = spec.root / "references" / f"validation.{_config(grapher)}.jsonl"
     done = {(r["reference"], r["repeat"]) for r in RunStore(out).records()}
     for truth_path in sorted((spec.root / "references").glob("P*.json")):
         text_path = truth_path.with_suffix(".md")
@@ -292,14 +348,21 @@ def cmd_validate_references(spec: StudySpec, args: argparse.Namespace) -> int:
         for rep in range(args.repeats):
             if (truth_path.stem, rep) in done:
                 continue
-            res = graph_answer(
-                client, grapher, text_path.read_text(encoding="utf-8"), seed_offset=rep
-            )
+            try:
+                res = graph_answer(
+                    client, grapher, text_path.read_text(encoding="utf-8"), seed_offset=rep
+                )
+            except EndpointError as exc:
+                if exc.transient:
+                    _log(f"stopped: {exc}")
+                    return 3
+                raise
             predicted = graph_metrics(res.model) if res.model else None
             row = {
                 "reference": truth_path.stem,
                 "repeat": rep,
                 "grapher": grapher.served_id,
+                "grapher_mode": grapher.mode,
                 "grapher_prompts": grapher_fingerprint(),
                 "expected": asdict(expected),
                 "predicted": asdict(predicted) if predicted else None,
@@ -378,12 +441,14 @@ def main(argv: list[str] | None = None) -> int:
     sub.add_parser("status")
     p = sub.add_parser("validate-grapher")
     p.add_argument("--served-id")
-    p.add_argument("--mode", choices=["schema", "prompt"])
+    p.add_argument("--mode", choices=["schema", "prompt", "template"])
     p.add_argument("--whitespace-pattern")
     p.add_argument("--repeats", type=int, default=2)
     p.add_argument("--limit", type=int)
     sub.add_parser("grapher-report")
     p = sub.add_parser("validate-references")
+    p.add_argument("--served-id")
+    p.add_argument("--mode", choices=["schema", "prompt", "template"])
     p.add_argument("--repeats", type=int, default=2)
     p = sub.add_parser("graph")
     p.add_argument("--model", required=True)
