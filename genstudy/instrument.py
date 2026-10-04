@@ -12,7 +12,10 @@ rate. The test cases are built here, without any other library:
   constraint fewer);
 * two **negative renderings** of each base model with no formulation in them, a
   prose description and a refusal, the two answer types the 2025 parser turned
-  into complete graphs.
+  into complete graphs;
+* one **long rendering** of each base model: the same formulation inside a long
+  answer with a notation table, explanations, assumptions and a code listing,
+  none of which may be counted (:func:`render_long`).
 
 The expected verdicts of a case are computed by :func:`genstudy.metrics.graph_metrics`
 on the case's known structure, so the parser is scored against the same

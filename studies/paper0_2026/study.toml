@@ -56,13 +56,15 @@ licence = "MiniMax model licence (other)"
 role = "fifth family"
 max_tokens = 16000
 
-# The parsing model (LP2Graph v2), chosen on the 48 validation cases (instrument/report.json,
-# 2026-10-04): Gemma-4 with the schema in the prompt parsed 48/48 with every acceptance verdict
-# right (linearity 0.98, counts 0.99); Llama-3.3 prompt 0.94, Llama-3.3 schema 0.81; Gemma
-# with server-side schema decoding looped on 2 of 5. Neither family generates.
+# The parsing model (LP2Graph v2), chosen on the 54 instrument cases (instrument/report.json)
+# and the input papers' own formulations (references/report.json), 2026-10-04. Gemma-4 with
+# the form as a JSON template: 54/54 cases with every verdict and count right, 10/10 reference
+# replies parsed. With the JSON schema in the prompt also 54/54, but only 6/10 references (the
+# long ones made it return the schema itself); server-side schema decoding looped (Gemma 2 of
+# 5); Llama-3.3 prompt 0.98 accepted but linearity 0.58. Neither family generates.
 [grapher]
 served_id = "google/gemma-4-26B-A4B-it"
-mode = "prompt"
+mode = "template"
 temperature = 0.0
 seed = 7
 max_tokens = 8000
