@@ -266,8 +266,9 @@ def normalize_keys(obj: Any, level: str = "model", repairs: list[str] | None = N
 _STRAY_BACKSLASH = re.compile(r'(?<!\\)\\(?![\\"/bfnrtu])')
 #: A formula written without its key: ``"Number": 6, "<formula>", "description"``.
 _MISSING_EQUATION_KEY = re.compile(r'("Number": *-?\d+, *)("(?:[^"\\]|\\.)*")(, *"description")')
-#: A paper's equation label copied as the number, unquoted: ``"Number": 18a``.
-_LABEL_NUMBER = re.compile(r'("Number": *-?\d+)[A-Za-z]+(?=\s*[,}])')
+#: An equation label copied as the number: ``"Number": 18a`` (not JSON) or, quoted,
+#: ``"Number": "5'"`` (not an integer). The digits are kept.
+_LABEL_NUMBER = re.compile(r'("Number": *)(?:(-?\d+)[A-Za-z]+|"(-?\d+)[^"0-9][^"]*")(?=\s*[,}])')
 
 
 #: The length cap of every capped text field, per object level (read from the schema).
@@ -337,9 +338,9 @@ def parse_reply(content: str, repairs: list[str] | None = None) -> Model:
     Deterministic repairs, each recorded in ``repairs``: a code fence is removed,
     text after the first JSON object is ignored, a formula string written without
     its ``equation`` key is given the key back, lone backslashes of raw LaTeX are
-    escaped (only when the reply fails on exactly that), the letter of an equation
-    label copied as a number is dropped (``18a``; the metrics do not use equation
-    numbers), an echoed schema that is followed by the filled record is skipped, keys are mapped onto the schema's
+    escaped (only when the reply fails on exactly that), an equation label copied as
+    a number keeps only its digits (``18a``, ``"5'"``; the metrics do not use
+    equation numbers), an echoed schema that is followed by the filled record is skipped, keys are mapped onto the schema's
     names (:func:`normalize_keys`) and over-long text fields are cut to their cap.
     A reply that only echoes the schema is an error, not something to repair.
     """
@@ -350,7 +351,7 @@ def parse_reply(content: str, repairs: list[str] | None = None) -> Model:
         text = text[text.find("{") :]
         log.append("removed code fence")
     text = text[text.find("{") :] if "{" in text else text
-    fixed = _LABEL_NUMBER.sub(r"\1", text)
+    fixed = _LABEL_NUMBER.sub(lambda m: m.group(1) + (m.group(2) or m.group(3)), text)
     if fixed != text:
         log.append("dropped letters from equation numbers")
         text = fixed

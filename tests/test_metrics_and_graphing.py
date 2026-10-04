@@ -276,3 +276,12 @@ def test_equation_labels_copied_as_numbers_lose_their_letter():
     repairs: list[str] = []
     assert parse_reply(labelled, repairs) == m
     assert repairs == ["dropped letters from equation numbers"]
+
+
+def test_quoted_equation_labels_keep_their_digits():
+    m = _model([_var(1)], [_eq(ObjectiveFunction, 0, [1])], [_eq(Constraint, 5, [1])])
+    primed = m.model_dump_json().replace('"Number":5', '"Number":"5\'"')
+    repairs: list[str] = []
+    assert parse_reply(primed, repairs) == m
+    assert repairs == ["dropped letters from equation numbers"]
+    assert parse_reply(m.model_dump_json(), []) == m  # plain numbers are untouched
