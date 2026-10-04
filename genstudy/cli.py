@@ -27,7 +27,7 @@ from typing import Any
 
 from genstudy import instrument
 from genstudy.config import GrapherSpec, StudySpec, load_study
-from genstudy.graphing import graph_answer, grapher_fingerprint, parse_reply
+from genstudy.graphing import Model, graph_answer, grapher_fingerprint, parse_reply
 from genstudy.llm import ChatClient, EndpointError
 from genstudy.metrics import graph_metrics
 from genstudy.notation import notation
@@ -272,6 +272,57 @@ def cmd_grapher_report(spec: StudySpec, args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_validate_references(spec: StudySpec, args: argparse.Namespace) -> int:
+    """Parse each reference formulation and compare with its hand annotation.
+
+    ``references/Pn.md`` is the formulation section of a paper, ``references/Pn.json``
+    its annotated structure (the ground truth). The parser's result is compared on
+    counts, structural verdicts and the number of variable-equation edges.
+    """
+    grapher = _grapher(spec, None)
+    client = _client(spec)
+    out = spec.root / "references" / "validation.jsonl"
+    done = {(r["reference"], r["repeat"]) for r in RunStore(out).records()}
+    for truth_path in sorted((spec.root / "references").glob("P*.json")):
+        text_path = truth_path.with_suffix(".md")
+        if not text_path.is_file():
+            continue
+        truth = Model.model_validate_json(truth_path.read_text(encoding="utf-8"))
+        expected = graph_metrics(truth)
+        for rep in range(args.repeats):
+            if (truth_path.stem, rep) in done:
+                continue
+            res = graph_answer(
+                client, grapher, text_path.read_text(encoding="utf-8"), seed_offset=rep
+            )
+            predicted = graph_metrics(res.model) if res.model else None
+            row = {
+                "reference": truth_path.stem,
+                "repeat": rep,
+                "grapher": grapher.served_id,
+                "grapher_prompts": grapher_fingerprint(),
+                "expected": asdict(expected),
+                "predicted": asdict(predicted) if predicted else None,
+                "parsed": res.model.model_dump() if res.model else None,
+                "repairs": list(res.repairs),
+                "error": res.error,
+                "score": instrument.score(expected, predicted),
+                "call": res.call.to_record(),
+            }
+            _append(out, row)
+            if predicted:
+                _log(
+                    f"{truth_path.stem} r{rep}: objectives {predicted.n_objectives}/"
+                    f"{expected.n_objectives}, variables {predicted.n_variables}/"
+                    f"{expected.n_variables}, constraints {predicted.n_constraints}/"
+                    f"{expected.n_constraints}, edges {predicted.n_edges}/{expected.n_edges}, "
+                    f"verdicts {instrument.score(expected, predicted)}"
+                )
+            else:
+                _log(f"{truth_path.stem} r{rep}: unparsed ({res.error})")
+    return 0
+
+
 def cmd_graph(spec: StudySpec, args: argparse.Namespace) -> int:
     grapher = _grapher(spec, None)
     client = _client(spec)
@@ -332,6 +383,8 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--repeats", type=int, default=2)
     p.add_argument("--limit", type=int)
     sub.add_parser("grapher-report")
+    p = sub.add_parser("validate-references")
+    p.add_argument("--repeats", type=int, default=2)
     p = sub.add_parser("graph")
     p.add_argument("--model", required=True)
     args = ap.parse_args(argv)
@@ -344,6 +397,7 @@ def main(argv: list[str] | None = None) -> int:
         "status": cmd_status,
         "validate-grapher": cmd_validate_grapher,
         "grapher-report": cmd_grapher_report,
+        "validate-references": cmd_validate_references,
         "graph": cmd_graph,
     }
     return commands[args.cmd](spec, args)
