@@ -16,8 +16,9 @@ exists (the 2025 harness sent neither system prompts nor temperatures).
   at a time (never two processes against the endpoint), the pacing in `study.toml` (one request
   in flight, >= 3 s gap, daily cap persisted in `studies/<id>/state/`). Run **model after
   model**. Do not raise the cap or lower the gap without asking.
-- Input papers must be **open access under CC BY** (ADR-0002); their texts and the run records
-  are published with the repo (public). Never add a paper under a more restrictive licence.
+- Input papers must be **open access under a Creative Commons licence** (CC BY, BY-SA, BY-NC,
+  BY-NC-ND) and **not from MDPI journals** (ADR-0002, Joern). Texts and run records are published
+  with the repo (public, non-commercial). Never add a paper without such a licence.
 - Production runs need a **clean, committed tree** (`run` refuses otherwise): every record
   stamps the commit that produced it.
 - Do not edit `study.toml` after the first production run of a study without a new `study_id`.

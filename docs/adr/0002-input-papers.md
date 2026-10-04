@@ -19,9 +19,10 @@ All five input papers are replaced (Joern, 2026-10-04: "public access, similar t
 other papers, relevant authors but low citation so adaptation risk is lower, only papers
 with models"). A paper qualifies if it
 
-1. is open access under a licence that permits redistribution of its text (CC BY or
-   CC BY-SA), so that the inputs and the generated answers, which quote them, are
-   published with the data;
+1. is open access under a Creative Commons licence that permits at least non-commercial
+   redistribution of its text (CC BY, CC BY-SA, CC BY-NC or CC BY-NC-ND; CC BY preferred
+   at equal fit), so that the inputs can be published with the data, and is not published
+   in an MDPI journal (Joern, 2026-10-04: "Don't do mdpi papers");
 2. addresses real-time or operational train rescheduling or dispatching under
    disruptions or perturbations, the problem family of the pilot;
 3. has at least one author with an established record in railway rescheduling;
@@ -30,7 +31,10 @@ with models"). A paper qualifies if it
 5. writes out an explicit MILP or ILP formulation (objective function and constraints),
    separate from an introduction that contains no formulation.
 
-Papers co-authored by the study's authors are excluded. Among qualifying papers we
+Papers co-authored by the study's authors are excluded. The licence rule was widened from
+CC BY/CC BY-SA to the NC variants on 2026-10-04 (Joern), because two sub-problem slots had
+only weak CC BY candidates; as a consequence the published dataset is non-commercial
+(CC BY-NC 4.0), and an ND-licensed input is redistributed verbatim only. Among qualifying papers we
 prefer a spread over the pilot's sub-problems (blocked line segments, real-time
 reordering and rerouting, urban networks, station and junction routing, network-wide
 disruptions). One paper is the anchor of experiment 1.

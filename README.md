@@ -44,5 +44,6 @@ python -m genstudy graph --model glm
 
 ## Licence
 
-Code: MIT. Input texts: the papers' own CC BY licences (attribution in each input file).
-Run records and derived data: CC BY 4.0.
+Code: MIT. Input texts: the papers' own Creative Commons licences (attribution in
+`studies/paper0_2026/inputs/README.md`). Run records and derived data: CC BY-NC 4.0, because
+some inputs carry non-commercial licences.
