@@ -39,21 +39,29 @@ role = "fast model, continuity with DeepSeek-V3 (2025)"
 max_tokens = 16000
 extra = { chat_template_kwargs = { thinking = false } }
 
+# Amended 2026-10-05, after the glmflash and deepseek blocks and before any gptoss or qwen
+# run (docs/adr/0004): these two models are served by DeepInfra via OpenRouter so that the
+# study finishes within the ScaDS budget. Their cells, seeds and run order are unchanged;
+# the reasoning settings are the same, in OpenRouter's notation.
 [models.gptoss]
 served_id = "openai/gpt-oss-120b"
 family = "gpt-oss (OpenAI)"
 licence = "Apache-2.0"
 role = "compact model from the vendor of o4-mini (2025)"
 max_tokens = 16000
-extra = { reasoning_effort = "low" }
+base_url = "https://openrouter.ai/api/v1"
+api_key_env = "OPENROUTER_API_KEY"
+extra = { reasoning = { effort = "low" }, provider = { order = ["deepinfra/bf16"], allow_fallbacks = false }, usage = { include = true } }
 
 [models.qwen]
-served_id = "Qwen/Qwen3.8-27B"
+served_id = "qwen/qwen3.8-27b"
 family = "Qwen (Alibaba)"
 licence = "Apache-2.0"
 role = "small dense model (2025 role: Gemini 2.5 Flash)"
 max_tokens = 16000
-extra = { chat_template_kwargs = { enable_thinking = false } }
+base_url = "https://openrouter.ai/api/v1"
+api_key_env = "OPENROUTER_API_KEY"
+extra = { reasoning = { enabled = false }, provider = { order = ["deepinfra/bf16"], allow_fallbacks = false }, usage = { include = true } }
 
 [models.minimax]
 served_id = "MiniMaxAI/MiniMax-M3"

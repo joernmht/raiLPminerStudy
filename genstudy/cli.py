@@ -51,12 +51,17 @@ def endpoint(spec: StudySpec, model: str | None = None) -> tuple[str, str, str]:
     """(base URL, API-key variable, request-counter file name) for a model, or the study's.
 
     A model with its own endpoint gets its own daily counter, so another service's
-    requests never use up the ScaDS budget.
+    requests never use up the ScaDS budget, and two such models running side by side
+    never share one cap.
     """
     m = spec.models.get(model) if model else None
     if m is not None and m.base_url:
         host = re.sub(r"[^A-Za-z0-9.-]+", "_", m.base_url.split("//", 1)[-1].split("/", 1)[0])
-        return m.base_url, m.api_key_env or spec.api_key_env, f"requests_per_day.{host}.json"
+        return (
+            m.base_url,
+            m.api_key_env or spec.api_key_env,
+            f"requests_per_day.{host}.{model}.json",
+        )
     return spec.base_url, spec.api_key_env, "requests_per_day.json"
 
 

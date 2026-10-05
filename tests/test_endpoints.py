@@ -36,4 +36,4 @@ def test_per_model_endpoint_key_and_counter(tmp_path: Path) -> None:
     assert b.extra["provider"] == {"order": ["vendor"], "allow_fallbacks": False}
     url, key_env, counter = endpoint(spec, "b")
     assert (url, key_env) == ("https://router.example.org/api/v1", "ROUTER_KEY")
-    assert counter == "requests_per_day.router.example.org.json"
+    assert counter == "requests_per_day.router.example.org.b.json"
