@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "The 2026 rerun of the raiLPminer experiment (Paper 0): LLM-generated railway-rescheduling MILPs, every request on the record, structure measured by a validated parser."
 readme = "README.md"
 requires-python = ">=3.11"
-license = { text = "MIT" }
+license = { text = "Apache-2.0" }
 authors = [{ name = "Jörn Maurischat", email = "joern.maurischat@tu-dresden.de" }]
 keywords = ["MILP", "LLM", "railway", "rescheduling", "optimization", "reproducibility"]
 dependencies = [
