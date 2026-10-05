@@ -39,3 +39,15 @@ model on another endpoint has its own daily request counter.
   unaffected; differences between models already include differences of serving.
 - The served model identifier changes for Qwen (`qwen/qwen3.8-27b` on OpenRouter instead of
   `Qwen/Qwen3.8-27B` on ScaDS); the analysis groups by the model key.
+
+## Amendment 2: the daily ScaDS budget is 1,700 (2026-10-05)
+
+After moving gpt-oss and Qwen, the last day's ScaDS work (the rest of DeepSeek's graphs,
+MiniMax's block and the graphs of three models, about 1,600 requests) still exceeded the
+budget by about 100 requests. MiniMax-M3 was not moved as well: on OpenRouter, DeepInfra's
+endpoint was rate-limited, and Parasail's served "low" reasoning effort with about 10,000
+reasoning tokens on the replayed coder request instead of about 3,500 on ScaDS, which would
+have changed its configuration and risked cut-off answers. Joern raised the budget instead
+("Then make a higher cap"): `max_requests_per_day = 1700` from 2026-10-05 10:30 UTC. Requests
+stay one at a time with the same pause; outputs do not depend on the budget. Records written
+afterwards carry the amended spec hash.

@@ -10,7 +10,8 @@ seed = 20261004
 # requests, a daily budget (persisted in state/, shared by all processes).
 [pacing]
 min_interval_s = 3.0
-max_requests_per_day = 1500
+# Raised from 1500 on 2026-10-05 (Joern; docs/adr/0004, amendment 2) to finish on 6 October.
+max_requests_per_day = 1700
 request_timeout_s = 900.0
 max_tries = 6
 max_tool_rounds = 4
