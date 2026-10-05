@@ -11,8 +11,11 @@ row (``graphs/<model>.jsonl``) and classifies the answer:
   reported separately, never counted as a model failure);
 * ``pending``: not graphed yet.
 
-Everything here is deterministic: the same records produce the same rows,
-tables and macros, byte for byte.
+The parser's stored reply is parsed again with the current parser
+(:func:`reparsed`), so a repair of the parsing step applies to every answer
+already graphed without a new request; the metrics stored at graphing time are
+only a cache. Everything here is deterministic: the same records produce the
+same rows, tables and macros, byte for byte.
 """
 
 from __future__ import annotations
@@ -25,6 +28,8 @@ from pathlib import Path
 from typing import Any
 
 from genstudy.config import StudySpec
+from genstudy.graphing import parse_reply
+from genstudy.metrics import graph_metrics
 from genstudy.store import RunStore
 
 CLASSES = ("accepted", "incomplete", "incoherent", "both", "no_formulation", "unparsed", "pending")
@@ -70,6 +75,18 @@ def classify(graph: Mapping[str, Any] | None) -> str:
     return "incomplete" if not complete else "incoherent"
 
 
+def reparsed(graph: Mapping[str, Any] | None) -> Mapping[str, Any] | None:
+    """The graphing row with its metrics recomputed from the stored reply."""
+    call = (graph or {}).get("call")
+    if graph is None or not graph.get("gate_passed") or not call:
+        return graph
+    try:
+        model = parse_reply(call["response"]["content"])
+    except ValueError as exc:
+        return {**graph, "metrics": None, "error": str(exc)}
+    return {**graph, "metrics": asdict(graph_metrics(model)), "error": None}
+
+
 def rows(
     records: Iterable[Mapping[str, Any]], graphs: Mapping[str, Mapping[str, Any]]
 ) -> list[Row]:
@@ -109,7 +126,8 @@ def load_rows(spec: StudySpec) -> list[Row]:
     out: list[Row] = []
     for model in spec.models:
         graphs = {
-            g["run_id"]: g for g in RunStore(spec.root / "graphs" / f"{model}.jsonl").records()
+            g["run_id"]: reparsed(g)
+            for g in RunStore(spec.root / "graphs" / f"{model}.jsonl").records()
         }
         out += rows(RunStore(spec.runs_dir / f"{model}.jsonl").records(), graphs)
     return sorted(out, key=lambda r: r.run_id)

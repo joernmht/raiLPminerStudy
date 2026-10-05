@@ -262,8 +262,9 @@ def normalize_keys(obj: Any, level: str = "model", repairs: list[str] | None = N
     return out
 
 
-#: A lone backslash that does not start a JSON escape (LaTeX such as ``\le`` written raw).
-_STRAY_BACKSLASH = re.compile(r'(?<!\\)\\(?![\\"/bfnrtu])')
+#: A lone backslash that does not start a JSON escape (LaTeX such as ``\le`` written raw);
+#: ``\u`` starts one only before four hex digits (``\underline`` does not).
+_STRAY_BACKSLASH = re.compile(r'(?<!\\)\\(?![\\"/bfnrt]|u[0-9a-fA-F]{4})')
 #: A formula written without its key: ``"Number": 6, "<formula>", "description"``.
 _MISSING_EQUATION_KEY = re.compile(r'("Number": *-?\d+, *)("(?:[^"\\]|\\.)*")(, *"description")')
 #: An equation label copied as the number: ``"Number": 18a`` (not JSON) or, quoted,
@@ -321,7 +322,7 @@ def _decode(text: str, log: list[str]) -> tuple[Any, int, str]:
         raw, end = json.JSONDecoder().raw_decode(text)
         return raw, end, text
     except json.JSONDecodeError as exc:
-        if "Invalid \\escape" not in exc.msg:
+        if "Invalid \\escape" not in exc.msg and "Invalid \\uXXXX escape" not in exc.msg:
             raise ValueError(f"reply is not JSON: {exc.msg}") from exc
     text = _STRAY_BACKSLASH.sub(r"\\\\", text)
     log.append("escaped stray backslashes")

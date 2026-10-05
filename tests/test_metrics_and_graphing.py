@@ -285,3 +285,15 @@ def test_quoted_equation_labels_keep_their_digits():
     assert parse_reply(primed, repairs) == m
     assert repairs == ["dropped letters from equation numbers"]
     assert parse_reply(m.model_dump_json(), []) == m  # plain numbers are untouched
+
+
+def test_latex_commands_starting_with_u_are_escaped_too():
+    """``\\underline`` is not a \\uXXXX escape; it failed 20 of 238 production parses."""
+    m = _model([_var(1)], [_eq(ObjectiveFunction, 0, [1])], [_eq(Constraint, 1, [1])])
+    raw = m.model_dump_json().replace('"equation":""', '"equation":"\\underline{x} \\le 1"', 1)
+    repairs: list[str] = []
+    parsed = parse_reply(raw, repairs)
+    assert parsed.objective_functions[0].equation == "\\underline{x} \\le 1"
+    assert repairs == ["escaped stray backslashes"]
+    unicode_ok = m.model_dump_json().replace('"equation":""', '"equation":"\\u00e4"', 1)
+    assert parse_reply(unicode_ok, []).objective_functions[0].equation == "\u00e4"

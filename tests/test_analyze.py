@@ -76,3 +76,32 @@ def test_rows_tables_and_macros():
 
 def test_macros_print_tbd_without_data():
     assert macros([])["resAcceptOverall"] == r"\TBD"
+
+
+def test_stored_replies_are_parsed_again_with_the_current_parser():
+    """A repair of the parsing step reaches answers that were graphed before it."""
+    from genstudy.analyze import reparsed
+    from genstudy.graphing import Constraint, Model, ObjectiveFunction, Variable
+
+    v = Variable(Number=1, Abbreviation="x", Name="", Description="", Domain="binary")
+    eq = {"Name": "", "description": "", "VariablesIncluded": [1], "Linear": True}
+    m = Model(
+        ContainsFormulation=True,
+        variablesInModel=[v],
+        objective_functions=[ObjectiveFunction(Number=0, equation="", **eq)],
+        constraints=[
+            Constraint(Number=1, equation="", **eq),
+            Constraint(Number=2, equation="", **eq),
+        ],
+    )
+    reply = m.model_dump_json().replace('"equation":""', '"equation":"\\underline{x} \\le 1"', 1)
+    stored = {
+        "run_id": "r",
+        "gate_passed": True,
+        "metrics": None,
+        "error": "old parser failed",
+        "call": {"response": {"content": reply}},
+    }
+    fresh = reparsed(stored)
+    assert fresh["error"] is None and fresh["metrics"]["complete_struct"] is True
+    assert reparsed({"run_id": "r", "gate_passed": False}) == {"run_id": "r", "gate_passed": False}
