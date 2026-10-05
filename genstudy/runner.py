@@ -135,14 +135,25 @@ def execute(
     provenance: dict[str, Any] | None = None,
     log: Callable[[str], None] = print,
     wall: Callable[[], float] = time.time,
+    shard: tuple[int, int] | None = None,
 ) -> BlockSummary:
-    """Run the model's remaining cells; returns what happened."""
+    """Run the model's remaining cells; returns what happened.
+
+    ``shard = (k, n)`` (0 <= k < n) runs every n-th cell of the model's fixed order,
+    starting at position k, so that n processes can share a block on a service that
+    allows parallel requests; the shards are disjoint and together cover the block.
+    """
     if model not in spec.models:
         raise KeyError(f"unknown model {model!r}")
     mspec = spec.models[model]
     store = store_for(spec, model)
     done = store.done_ids()
     cells = schedule(spec, plan(spec, model=model, experiment=experiment), model)
+    if shard is not None:
+        k, n = shard
+        if not 0 <= k < n:
+            raise ValueError(f"shard {k} of {n} does not exist")
+        cells = cells[k::n]
     summary = BlockSummary(model=model, planned=len(cells))
     summary.already_done = sum(1 for c in cells if c.run_id in done)
     provenance = provenance or {}

@@ -158,9 +158,18 @@ def cmd_run(spec: StudySpec, args: argparse.Namespace) -> int:
         limit=args.limit,
         provenance=prov,
         log=_log,
+        shard=_shard(args.shard),
     )
     _log(json.dumps(asdict(summary)))
     return 0 if summary.stopped is None or summary.stopped.startswith("limit") else 3
+
+
+def _shard(text: str | None) -> tuple[int, int] | None:
+    """``"2/4"`` (1-based, as typed) -> ``(1, 4)``."""
+    if not text:
+        return None
+    k, n = (int(x) for x in text.split("/"))
+    return k - 1, n
 
 
 def cmd_status(spec: StudySpec, args: argparse.Namespace) -> int:
@@ -458,6 +467,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--model", required=True)
     p.add_argument("--experiment")
     p.add_argument("--limit", type=int)
+    p.add_argument("--shard", help="k/n: run every n-th cell of the order, from position k")
     p.add_argument("--allow-dirty", action="store_true")
     sub.add_parser("status")
     p = sub.add_parser("validate-grapher")

@@ -3,7 +3,8 @@
 #
 #   scripts/run_queue.sh [study.toml] step1 step2 ...
 #
-# A step is `run:<model>` (the model's block of the design), `graph:<model>` (notation
+# A step is `run:<model>` (the model's block of the design; `run:<model>:<k>/<n>` runs shard
+# k of n, for a service that allows parallel requests), `graph:<model>` (notation
 # gate + parsing of that model's answers) or `references` (parse the papers' own
 # formulations that have no stored reply yet). Every step is resumable: a step that stops
 # on a transient fault (exit 3: overload, network, the daily request cap) is resumed
@@ -19,6 +20,7 @@ set -a; . ~/.config/raiLP/secrets.env; set +a
 cd "$(dirname "$0")/.."
 for step in "${STEPS[@]}"; do
   case "$step" in
+    run:*:*/*) rest=${step#run:}; cmd=(run --model "${rest%%:*}" --shard "${rest#*:}") ;;
     run:*) cmd=(run --model "${step#run:}") ;;
     graph:*) cmd=(graph --model "${step#graph:}") ;;
     references) cmd=(validate-references --repeats 2) ;;

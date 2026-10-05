@@ -82,3 +82,21 @@ def test_unknown_model_is_an_error(study_path):
     spec = load_study(study_path)
     with pytest.raises(KeyError):
         execute(spec, model="nope", client=ScriptedClient(_answer), log=lambda m: None)
+
+
+def test_shards_are_disjoint_and_cover_the_block_in_order(study_path):
+    spec = load_study(study_path)
+    full = [c.run_id for c in schedule(spec, plan(spec, model="a"), "a")]
+    client = ScriptedClient(_answer)
+    seen: list[list[str]] = []
+    for k in range(3):
+        before = store_for(spec, "a").done_ids()
+        execute(spec, model="a", client=client, log=lambda m: None, shard=(k, 3))
+        after = [r["run_id"] for r in store_for(spec, "a").records() if r["run_id"] not in before]
+        seen.append(after)
+    assert [rid for shard in seen for rid in shard] != full  # interleaved, not consecutive
+    assert sorted(rid for shard in seen for rid in shard) == sorted(full)
+    for k, shard in enumerate(seen):
+        assert shard == full[k::3]
+    with pytest.raises(ValueError):
+        execute(spec, model="a", client=client, log=lambda m: None, shard=(3, 3))

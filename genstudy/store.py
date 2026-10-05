@@ -4,11 +4,13 @@ A run record is written once, after its workflow finished, as one line of
 canonical JSON (sorted keys, UTF-8, ``\\n``). The file is flushed and fsynced
 after every line, so a crash loses at most the run in flight, and a resumed
 runner skips every ``run_id`` already on disk. Records are never rewritten;
-analyses read them, they do not edit them.
+analyses read them, they do not edit them. Appends hold an exclusive lock, so
+several shards of one model can write the same file.
 """
 
 from __future__ import annotations
 
+import fcntl
 import gzip
 import json
 import os
@@ -43,6 +45,10 @@ class RunStore:
         self.path.parent.mkdir(parents=True, exist_ok=True)
         line = json.dumps(record, ensure_ascii=False, sort_keys=True)
         with open(self.path, "a", encoding="utf-8", newline="\n") as fh:
-            fh.write(line + "\n")
-            fh.flush()
-            os.fsync(fh.fileno())
+            fcntl.flock(fh, fcntl.LOCK_EX)
+            try:
+                fh.write(line + "\n")
+                fh.flush()
+                os.fsync(fh.fileno())
+            finally:
+                fcntl.flock(fh, fcntl.LOCK_UN)
