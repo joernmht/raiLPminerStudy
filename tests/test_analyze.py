@@ -105,3 +105,60 @@ def test_stored_replies_are_parsed_again_with_the_current_parser():
     fresh = reparsed(stored)
     assert fresh["error"] is None and fresh["metrics"]["complete_struct"] is True
     assert reparsed({"run_id": "r", "gate_passed": False}) == {"run_id": "r", "gate_passed": False}
+
+
+def test_yield_stage_follows_the_pipeline():
+    from genstudy.analyze import STAGES, yield_stage
+
+    ok = {"status": "ok", "final_answer": "min x s.t. x >= 1"}
+    full = {"contains_formulation": True, "n_objectives": 1}
+    core = {"has_core": True, "linear": True, "integral": True}
+    assert yield_stage({"status": "request_error"}, None) == "request_error"
+    assert yield_stage({"status": "ok", "final_answer": " "}, None) == "empty_answer"
+    assert yield_stage(ok, None) == "pending"
+    assert yield_stage(ok, {"gate_passed": False}) == "no_formulation"
+    assert yield_stage(ok, {"gate_passed": True, "metrics": None}) == "unparsed"
+    no_form = {**full, "contains_formulation": False}
+    assert yield_stage(ok, {"gate_passed": True, "metrics": no_form}) == "no_formulation"
+    two = {**full, "n_objectives": 2}
+    assert yield_stage(ok, {"gate_passed": True, "metrics": two}) == "objective_count"
+    g = {"gate_passed": True, "metrics": full}
+    assert yield_stage(ok, {**g, "core": {**core, "has_core": False}}) == "no_core"
+    assert yield_stage(ok, {**g, "core": {**core, "linear": False}}) == "nonlinear"
+    assert yield_stage(ok, {**g, "core": {**core, "integral": False}}) == "no_integer"
+    assert yield_stage(ok, {**g, "core": core}) == "usable"
+    assert set(STAGES) >= {"usable", "nonlinear", "no_core", "pending"}
+
+
+def test_usable_share_and_core_macros():
+    from genstudy.analyze import stage_share
+
+    records = [
+        {**_record("r1", "ZS"), "final_answer": "a"},
+        {**_record("r2", "PS"), "final_answer": "b"},
+        {**_record("r3", "PS"), "final_answer": "c"},
+    ]
+    core = {
+        "has_core": True,
+        "linear": True,
+        "integral": True,
+        "coherent_whole": True,
+        "cut_variables": 0,
+        "cut_constraints": 0,
+        "minimal_size": 4,
+        "cv_ratio": 1.0,
+        "diameter": 2,
+    }
+    metrics = {**_metrics(), "n_objectives": 1}
+    graphs = {
+        "r1": {"gate_passed": True, "metrics": metrics, "core": core},
+        "r2": {"gate_passed": True, "metrics": metrics, "core": {**core, "coherent_whole": False, "cut_variables": 2}},
+        "r3": {"gate_passed": True, "metrics": metrics, "core": {**core, "linear": False}},
+    }  # fmt: skip
+    data = rows(records, graphs)
+    assert [r.stage for r in data] == ["usable", "usable", "nonlinear"]
+    assert abs(stage_share(data) - 2 / 3) < 1e-9
+    mac = macros(data)
+    assert mac["resUsableZS"] == "100\\,\\%" and mac["resUsableMultiStep"] == "50\\,\\%"
+    assert mac["resCores"] == "3" and mac["resCoresExtracted"] == "1"
+    assert mac["resCoreCutVariablesMedian"] == "2"

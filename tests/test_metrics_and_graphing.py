@@ -297,3 +297,42 @@ def test_latex_commands_starting_with_u_are_escaped_too():
     assert repairs == ["escaped stray backslashes"]
     unicode_ok = m.model_dump_json().replace('"equation":""', '"equation":"\\u00e4"', 1)
     assert parse_reply(unicode_ok, []).objective_functions[0].equation == "\u00e4"
+
+
+def test_the_core_keeps_the_objective_component_and_reports_the_cut():
+    from genstudy.metrics import core_metrics, core_model
+
+    m = _model(
+        [_var(1), _var(2, "binary"), _var(3), _var(4)],
+        [_eq(ObjectiveFunction, 0, [1])],
+        [_eq(Constraint, 1, [1, 2]), _eq(Constraint, 2, [2]), _eq(Constraint, 3, [3])],
+    )  # variable 3 forms a block of its own, variable 4 appears nowhere
+    core = core_model(m)
+    assert [v.Number for v in core.variablesInModel] == [1, 2]
+    assert [c.Number for c in core.constraints] == [1, 2]
+    cm = core_metrics(m)
+    assert cm.has_core and not cm.coherent_whole
+    assert (cm.cut_variables, cm.cut_constraints) == (2, 1)
+    assert cm.integral and cm.linear and cm.diameter is not None
+    coherent = _model([_var(1)], [_eq(ObjectiveFunction, 0, [1])], [_eq(Constraint, 1, [1])])
+    assert core_metrics(coherent).coherent_whole and core_metrics(coherent).cut_variables == 0
+    two_objectives = _model(
+        [_var(1)],
+        [_eq(ObjectiveFunction, 0, [1]), _eq(ObjectiveFunction, 1, [1])],
+        [_eq(Constraint, 1, [1])],
+    )
+    assert core_model(two_objectives) is None and not core_metrics(two_objectives).has_core
+    lone = _model([_var(1)], [_eq(ObjectiveFunction, 0, [1])], [_eq(Constraint, 1, [])])
+    assert not core_metrics(lone).has_core  # the objective's component holds no constraint
+
+
+def test_a_nonlinear_block_outside_the_core_does_not_count():
+    from genstudy.metrics import core_metrics
+
+    m = _model(
+        [_var(1, "binary"), _var(2)],
+        [_eq(ObjectiveFunction, 0, [1])],
+        [_eq(Constraint, 1, [1]), _eq(Constraint, 2, [2], linear=False)],
+    )
+    assert graph_metrics(m).linear is False
+    assert core_metrics(m).linear is True and core_metrics(m).cut_constraints == 1

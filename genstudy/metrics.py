@@ -22,6 +22,13 @@ least one variable is binary or integer (an LP is not a MILP).
 **Complexity** (unchanged): minimal size ``max(nV,1)*max(nC,1)``, the
 constraint-variable ratio ``nC/nV`` and the graph diameter (the longest
 shortest path), defined only for coherent graphs.
+
+**The coherent core** (decided after the runs, docs/adr/0005): the connected
+component of the objective function. A block that shares no variable with the
+objective cannot change its optimum (it can only make the whole model
+infeasible), so the core is what the answer actually optimises. Instead of
+rejecting an answer that is not connected, the analysis keeps its core and
+records what was cut away (:func:`core_metrics`).
 """
 
 from __future__ import annotations
@@ -84,6 +91,62 @@ def _component(start: Node, adj: dict[Node, set[Node]]) -> dict[Node, int]:
                 dist[w] = dist[u] + 1
                 queue.append(w)
     return dist
+
+
+@dataclass(frozen=True)
+class CoreMetrics:
+    """The objective's connected component; ``has_core`` needs one objective and a constraint."""
+
+    has_core: bool
+    coherent_whole: bool
+    core_variables: int
+    core_constraints: int
+    cut_variables: int
+    cut_constraints: int
+    linear: bool
+    integral: bool
+    minimal_size: int
+    cv_ratio: float | None
+    diameter: int | None
+
+
+def core_model(model: Model) -> Model | None:
+    """The answer reduced to the connected component of its objective (None without exactly one)."""
+    if len(model.objective_functions) != 1:
+        return None
+    _, adj, _ = build_graph(model)
+    reach = _component(("o", 0), adj)
+    n_obj = len(model.objective_functions)
+    keep_c = [c for i, c in enumerate(model.constraints) if ("c", n_obj + i) in reach]
+    keep_v = [v for v in model.variablesInModel if ("v", v.Number) in reach]
+    return Model(
+        ContainsFormulation=model.ContainsFormulation,
+        variablesInModel=keep_v,
+        objective_functions=list(model.objective_functions),
+        constraints=keep_c,
+    )
+
+
+def core_metrics(model: Model) -> CoreMetrics:
+    whole = graph_metrics(model)
+    core = core_model(model)
+    if core is None:
+        return CoreMetrics(False, whole.coherent, 0, 0, whole.n_variables, whole.n_constraints,
+                           False, False, 0, None, None)  # fmt: skip
+    m = graph_metrics(core)
+    return CoreMetrics(
+        has_core=m.n_variables > 0 and m.n_constraints > 0,
+        coherent_whole=whole.coherent,
+        core_variables=m.n_variables,
+        core_constraints=m.n_constraints,
+        cut_variables=whole.n_variables - m.n_variables,
+        cut_constraints=whole.n_constraints - m.n_constraints,
+        linear=m.linear,
+        integral=m.integral,
+        minimal_size=m.minimal_size,
+        cv_ratio=m.cv_ratio,
+        diameter=m.diameter,
+    )
 
 
 def graph_metrics(model: Model) -> GraphMetrics:
