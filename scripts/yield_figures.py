@@ -156,7 +156,7 @@ def sankey(summary: dict, out: Path, names: dict[str, str]) -> Path:
     bx.legend(ncol=3, fontsize=8.2, frameon=False, loc="upper center", bbox_to_anchor=(0.45, 1.42))
     path = out / "yield_sankey.png"
     fig.savefig(path, dpi=150)
-    fig.savefig(path.with_suffix(".pdf"))
+    fig.savefig(path.with_suffix(".pdf"), metadata={"CreationDate": None})  # byte-stable
     return path
 
 

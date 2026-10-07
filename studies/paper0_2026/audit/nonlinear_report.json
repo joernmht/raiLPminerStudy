@@ -1,0 +1,16 @@
+{
+ "sample": 40,
+ "seed": 2026,
+ "annotation": "proposed 2026-10-07 by the analysis assistant (Claude, session paper1b) from the printed answers; to be checked by J. Maurischat before the numbers are final",
+ "counts": {
+  "continuous": 10,
+  "binary": 14,
+  "logic": 3,
+  "piecewise": 5,
+  "parser": 8
+ },
+ "parser_share_wilson95": [
+  0.105,
+  0.348
+ ]
+}

@@ -96,6 +96,10 @@ def main() -> int:
     nearest_own = {
         p: round(float((nearest[own == i] == i).mean()), 3) for i, p in enumerate(papers)
     }
+    llm = np.array([r["model"] for r in meta])
+    nearest_own_by_model = {
+        m: round(float((nearest[llm == m] == own[llm == m]).mean()), 3) for m in spec.models
+    }
 
     cells = defaultdict(list)
     for k, r in enumerate(meta):
@@ -129,6 +133,7 @@ def main() -> int:
             "overall": round(float((nearest == own).mean()), 3),
             **nearest_own,
         },
+        "nearest_reference_is_own_by_model": nearest_own_by_model,
         "diversity_cells": len(cdf),
         "diversity_by_temperature": by_t,
         "diversity_by_workflow": by_wf,
@@ -214,7 +219,7 @@ def main() -> int:
                 fontsize=10, loc="left")  # fmt: skip
     fig.tight_layout()
     fig.savefig(out / "domain.png", dpi=160)
-    fig.savefig(out / "domain.pdf")
+    fig.savefig(out / "domain.pdf", metadata={"CreationDate": None})  # byte-stable
     print(
         json.dumps(
             {k: v for k, v in result.items() if k != "similarity_generated_vs_reference"}, indent=1

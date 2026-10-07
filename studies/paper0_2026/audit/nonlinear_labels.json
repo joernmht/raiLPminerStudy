@@ -1,0 +1,166 @@
+{
+ "annotation": "proposed 2026-10-07 by the analysis assistant (Claude, session paper1b) from the printed answers; to be checked by J. Maurischat before the numbers are final",
+ "rule": "scripts/audit_nonlinear.py (classes and order in its docstring)",
+ "runs": {
+  "exp1.P1.glmflash.ZS.t10.r05": {
+   "class": "piecewise",
+   "note": "M|y_fi - y_gi| in the headway: absolute value of a difference of binaries"
+  },
+  "exp1.P1.minimax.PS.t02.r08": {
+   "class": "binary",
+   "note": "r (y + y): binary times binary"
+  },
+  "exp2.P4.glmflash.ZS.t06.r15": {
+   "class": "continuous",
+   "note": "b_{i,k}(d_{i,k} - d^hat): product of two continuous variables"
+  },
+  "exp2.P4.gptoss.ZS.t06.r11": {
+   "class": "binary",
+   "note": "y_{t,k} times sums of binaries a"
+  },
+  "exp1.P1.glmflash.PS.t06.r15": {
+   "class": "binary",
+   "note": "(1 - c_t)(a - a0 + d - d0): binary times continuous"
+  },
+  "exp1.P1.gptoss.ZS.t10.r14": {
+   "class": "continuous",
+   "note": "l_s / v_bar_{t,s}, v_bar defined by the selected speed profile (a decision)"
+  },
+  "exp2.P5.minimax.ZS.t06.r04": {
+   "class": "binary",
+   "note": "z_{i,e} z_{j,e}, z = sum of binary route choices; the answer itself names the linearization"
+  },
+  "exp1.P1.qwen.ZS.t06.r11": {
+   "class": "binary",
+   "note": "(RT_nom - RT_{i,k})(x + y): continuous times binary"
+  },
+  "exp2.P5.gptoss.ZS.t06.r03": {
+   "class": "logic",
+   "note": "indicator 1{a_i <= theta < a_i + h} on a continuous variable"
+  },
+  "exp2.P4.deepseek.ZS.t06.r15": {
+   "class": "binary",
+   "note": "W_{s,k} theta_{i,s,k}, B theta: continuous times binary"
+  },
+  "exp2.P2.gptoss.ZS.t06.r12": {
+   "class": "continuous",
+   "note": "L_ij / v_{t,i} with v a continuous variable"
+  },
+  "exp1.P1.minimax.CFC.t02.r14": {
+   "class": "parser",
+   "note": "dwell_i^s z_i^s (dwell not declared as a variable) and v delta_t + a delta_t^2/2 (delta_t a declared parameter): linear as printed"
+  },
+  "exp1.P1.deepseek.CFC.t02.r05": {
+   "class": "parser",
+   "note": "v_k v_{i,p,k}: parameter v_k (speed of level k) times binary; L/v_k a parameter: linear as printed"
+  },
+  "exp1.P1.deepseek.ZS.t10.r13": {
+   "class": "logic",
+   "note": "M(1 - 1[k dt <= a_{i,s}]) indicator on a variable; also |dv/dt| <= a_max"
+  },
+  "exp1.P1.glmflash.ZS.t02.r09": {
+   "class": "binary",
+   "note": "x_{ibp}(e + gamma delta_{ibp}): binary times continuous"
+  },
+  "exp1.P1.minimax.OE.t06.r02": {
+   "class": "binary",
+   "note": "(dt/2)(v + v) x: continuous times binary"
+  },
+  "exp1.P1.glmflash.PS.t06.r03": {
+   "class": "piecewise",
+   "note": "(|a - t| + |d - t|)/M: absolute values"
+  },
+  "exp2.P3.deepseek.ZS.t06.r05": {
+   "class": "parser",
+   "note": "sum x_{t,k} 1[k can couple to k']: indicator of data, linear as printed"
+  },
+  "exp1.P1.deepseek.CFC.t06.r01": {
+   "class": "continuous",
+   "note": "(A + B v + C v_max v) v dt: quadratic in v"
+  },
+  "exp1.P1.minimax.PS.t02.r02": {
+   "class": "continuous",
+   "note": "P_max / (v + eps) with v a continuous variable"
+  },
+  "exp1.P1.gptoss.ZS.t02.r09": {
+   "class": "parser",
+   "note": "sum p q_{tep} = sum p_{tek} rho_{ek}: p an index, rho a parameter (position rank); linear as printed"
+  },
+  "exp1.P1.qwen.CFC.t10.r10": {
+   "class": "piecewise",
+   "note": "sum |a - a^pl| in the objective"
+  },
+  "exp1.P1.minimax.CFC.t06.r08": {
+   "class": "continuous",
+   "note": "f = L / v with v a continuous variable"
+  },
+  "exp1.P1.minimax.ZS.t02.r11": {
+   "class": "continuous",
+   "note": "energy a^+ v: product of continuous variables"
+  },
+  "exp1.P1.minimax.ZS.t06.r02": {
+   "class": "continuous",
+   "note": "a^+ v and |a| v p: products of continuous variables"
+  },
+  "exp1.P1.minimax.ZS.t10.r08": {
+   "class": "binary",
+   "note": "v (x + x~): continuous times binary (the marked objective is linear)"
+  },
+  "exp1.P1.deepseek.ZS.t10.r05": {
+   "class": "piecewise",
+   "note": "|d - T^dep| <= eps"
+  },
+  "exp1.P1.minimax.PS.t10.r09": {
+   "class": "binary",
+   "note": "x[t1,s] x[t2,s], r1 r2: binary times binary"
+  },
+  "exp1.P1.glmflash.CFC.t06.r03": {
+   "class": "parser",
+   "note": "|b| of a time bucket (data): linear as printed"
+  },
+  "exp2.P5.minimax.ZS.t06.r06": {
+   "class": "binary",
+   "note": "z_{i,r} z_{j,r'}: binary times binary"
+  },
+  "exp2.P4.qwen.ZS.t06.r13": {
+   "class": "binary",
+   "note": "L_{k,a} y_{k,a,i}: continuous times binary"
+  },
+  "exp1.P1.minimax.OE.t06.r08": {
+   "class": "parser",
+   "note": "v Delta + (A u - B q) Delta^2 / 2 with Delta a declared parameter: linear as printed"
+  },
+  "exp2.P3.glmflash.ZS.t06.r06": {
+   "class": "piecewise",
+   "note": "sum |x - x_bar| in the objective"
+  },
+  "exp1.P1.gptoss.CFC.t06.r04": {
+   "class": "continuous",
+   "note": "alpha v^2 t: product and power of continuous variables"
+  },
+  "exp1.P1.minimax.OE.t10.r09": {
+   "class": "binary",
+   "note": "cru_{i,b,k} v_{i,b,k}: binary times continuous"
+  },
+  "exp1.P1.deepseek.CFC.t10.r11": {
+   "class": "parser",
+   "note": "u_{p+1} - u_p <= a_max (tpos_{p+1} - tpos_p), a_max a parameter: linear as printed"
+  },
+  "exp1.P1.minimax.ZS.t10.r03": {
+   "class": "continuous",
+   "note": "Res(v) and f v: nonlinear function and product of continuous variables"
+  },
+  "exp1.P1.minimax.ZS.t06.r15": {
+   "class": "parser",
+   "note": "min alpha sum dly + beta sum e + gamma sum w C: linear as printed"
+  },
+  "exp2.P3.gptoss.ZS.t06.r06": {
+   "class": "logic",
+   "note": "'u >= z if p in [tau, tau + L]' with tau a variable; indicator sums"
+  },
+  "exp1.P1.qwen.ZS.t10.r05": {
+   "class": "binary",
+   "note": "x_{t,r} Run_{t,l,r}, Run declared a continuous variable: binary times continuous"
+  }
+ }
+}

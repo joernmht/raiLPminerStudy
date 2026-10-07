@@ -50,6 +50,10 @@ GENERIC = {
                   "max", "total", "weighted", "sum", "objective", "obj", "function", "overall",
                   "combined", "integrated", "trsmp"},
 }  # fmt: skip
+#: Input papers and models as the figure names them (Tables 1 and A.1 of the paper).
+AUTHORS = {"P1": "Shi", "P2": "Versluis", "P3": "Zhu", "P4": "Liu", "P5": "Lövétei"}
+SHORT = {"glmflash": "GLM-Flash", "deepseek": "DeepSeek", "gptoss": "gpt-oss",
+         "qwen": "Qwen", "minimax": "MiniMax"}  # fmt: skip
 _LABEL = re.compile(r"^\(\w+\)\s*(line \d+:)?\s*")
 _NUMBERING = re.compile(r"\b(c\d+|\d+[a-z]?)\b")
 
@@ -131,6 +135,8 @@ def main() -> int:
             if llm != "reference":
                 gen_owners[("llm", llm)].add(owner)
                 gen_owners[("paper", paper)].add(owner)
+                if owner.startswith("exp1."):
+                    gen_owners[("anchor", llm)].add(owner)
         table = []
         for t in sorted(range(k), key=lambda t: -sum(1 for a in assign if a == t)):
             names_t = [items[i][3] for i, a in enumerate(assign) if a == t]
@@ -142,6 +148,7 @@ def main() -> int:
                 "references": sorted(p for p in papers if f"ref:{p}" in owners_with[t]),
                 "share_by_llm": {m: round(len(owners_with[t] & gen_owners[("llm", m)]) / max(1, len(gen_owners[("llm", m)])), 3) for m in llms},
                 "share_by_paper": {p: round(len(owners_with[t] & gen_owners[("paper", p)]) / max(1, len(gen_owners[("paper", p)])), 3) for p in papers},
+                "share_by_llm_anchor": {m: round(len(owners_with[t] & gen_owners[("anchor", m)]) / max(1, len(gen_owners[("anchor", m)])), 3) for m in llms},
             })  # fmt: skip
         unassigned = sum(1 for a in assign if a < 0)
         result[kind] = {"k": k, "elements": len(items), "unassigned": unassigned, "topics": table}
@@ -154,34 +161,39 @@ def main() -> int:
                                      encoding="utf-8", newline="\n")  # fmt: skip
     (out / "topics.md").write_text("\n".join(md), encoding="utf-8", newline="\n")
 
-    # figure: constraint types x paper, share of generated models containing the type;
-    # a red dot marks the types present in the paper's own formulation
+    # figure: constraint types x paper (A) and x model on the anchor paper (B), share of
+    # usable MILPs containing the type; a red dot marks the types present in the paper's
+    # own formulation (A), and in the anchor paper's (B)
     cons = result["constraint"]["topics"]
     labels = [" / ".join(r["top_terms"][:2]) for r in cons]
-    M = np.array([[r["share_by_paper"][p] for p in papers] for r in cons])
-    fig, ax = plt.subplots(figsize=(7.2, 0.42 * len(cons) + 1.6))
-    ax.imshow(M, cmap="Greens", vmin=0, vmax=1, aspect="auto")
-    for i, r in enumerate(cons):
-        for j, p in enumerate(papers):
-            ax.text(
-                j,
-                i,
-                f"{100 * M[i, j]:.0f}",
-                ha="center",
-                va="center",
-                fontsize=8,
-                color="white" if M[i, j] > 0.6 else "black",
-            )
-            if p in r["references"]:
-                # a corner marker, not a frame: frames of neighbouring cells merge into a grid
-                ax.plot(j + 0.36, i - 0.3, marker="o", ms=4.5, color="#c0392b")
-    ax.set_xticks(range(len(papers)), papers)
-    ax.set_yticks(range(len(cons)), labels, fontsize=8.5)
-    ax.set_title("Constraint types in the usable MILPs (% of models per paper);\nred dot: the type occurs in the paper's own formulation",
-                 fontsize=10, loc="left")  # fmt: skip
+    panels = [
+        ("A  by input paper (all runs)", [AUTHORS.get(p, p) for p in papers],
+         [[r["share_by_paper"][p] for p in papers] for r in cons],
+         [[p in r["references"] for p in papers] for r in cons]),
+        ("B  by model (Experiment 1, anchor paper: Shi)", [SHORT.get(m, m) for m in llms],
+         [[r["share_by_llm_anchor"][m] for m in llms] for r in cons],
+         [["P1" in r["references"]] * len(llms) for r in cons]),
+    ]  # fmt: skip
+    fig, axes = plt.subplots(1, 2, figsize=(10.4, 0.42 * len(cons) + 1.9), sharey=True)
+    for ax, (title, cols, values, dots) in zip(axes, panels, strict=True):
+        M = np.array(values)
+        ax.imshow(M, cmap="Greens", vmin=0, vmax=1, aspect="auto")
+        for i in range(len(cons)):
+            for j in range(len(cols)):
+                ax.text(j, i, f"{100 * M[i, j]:.0f}", ha="center", va="center", fontsize=8,
+                        color="white" if M[i, j] > 0.6 else "black")  # fmt: skip
+                if dots[i][j]:
+                    # a corner marker, not a frame: frames of neighbouring cells merge
+                    ax.plot(j + 0.36, i - 0.3, marker="o", ms=4.5, color="#c0392b")
+        ax.set_xticks(range(len(cols)), cols, fontsize=8.5)
+        ax.set_title(title, fontsize=9.5, loc="left")
+    axes[0].set_yticks(range(len(cons)), labels, fontsize=8.5)
+    fig.suptitle("Constraint types in the usable MILPs (% of models containing the type); "
+                 "red dot: the type occurs in the paper's own formulation",
+                 fontsize=9.5, x=0.01, ha="left")  # fmt: skip
     fig.tight_layout()
     fig.savefig(out / "topics.png", dpi=160)
-    fig.savefig(out / "topics.pdf")
+    fig.savefig(out / "topics.pdf", metadata={"CreationDate": None})  # byte-stable
     print((out / "topics.md").read_text(encoding="utf-8"))
     return 0
 

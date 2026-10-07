@@ -44,6 +44,13 @@
   "P5": 0.63,
   "overall": 0.642
  },
+ "nearest_reference_is_own_by_model": {
+  "deepseek": 0.678,
+  "glmflash": 0.719,
+  "gptoss": 0.411,
+  "minimax": 0.634,
+  "qwen": 0.724
+ },
  "similarity_generated_vs_reference": {
   "P1": {
    "P1": 0.096,
