@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import difflib
 import json
+import math
 import sys
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -103,10 +104,19 @@ def main() -> int:
     (out / "ablation.json").write_text(json.dumps(result, indent=1) + "\n", encoding="utf-8",
                                        newline="\n")  # fmt: skip
     repeating = [NAMES[m] for m, k in by_model.items() if k > 0]
+    # Wilson 95 % interval of the yield at temperature 0 (descriptive)
+    k, n, z = sum(r["stage"] == "usable" for r in rows), len(rows), 1.959964
+    centre, half = (
+        (k + z * z / 2) / (n + z * z),
+        z * math.sqrt(k * (n - k) / n + z * z / 4) / (n + z * z),
+    )
+    low, high = centre - half, centre + half
     macros = {
         "abRuns": str(result["runs"]),
         "abYield": f"{100 * result['yield_t0']:.0f}\\,\\%",
         "abYieldRef": f"{100 * result['yield_t02_exp1']:.0f}\\,\\%",
+        "abYieldLow": f"{100 * low:.0f}",
+        "abYieldHigh": f"{100 * high:.0f}",
         "abPairs": str(result["pairs"]),
         "abIdentical": str(result["identical_pairs"]) if result["identical_pairs"] else "none",
         "abIdenticalModels": ", ".join(repeating) if repeating else "none",

@@ -1,15 +1,15 @@
 {
- "runs": 37,
- "yield_t0": 0.0,
+ "runs": 40,
+ "yield_t0": 0.8,
  "yield_t0_by_model": {
-  "glmflash": 0.0,
-  "deepseek": 0.0,
-  "gptoss": 0.0,
-  "qwen": 0.0,
-  "minimax": 0.0
+  "glmflash": 1.0,
+  "deepseek": 0.875,
+  "gptoss": 0.875,
+  "qwen": 0.875,
+  "minimax": 0.375
  },
  "yield_t02_exp1": 0.707,
- "pairs": 17,
+ "pairs": 20,
  "identical_pairs": 0,
  "identical_by_model": {
   "glmflash": 0,
@@ -19,9 +19,10 @@
   "minimax": 0
  },
  "similarity_t0_median": 0.178,
- "similarity_t02_median": 0.155,
- "shared_leading_words_median": 2,
+ "similarity_t02_median": 0.156,
+ "shared_leading_words_median": 1.5,
  "shared_leading_words_zs": [
+  0,
   8,
   20,
   22,
@@ -29,6 +30,9 @@
  ],
  "stages": {
   "empty_answer": 1,
-  "pending": 36
+  "no_formulation": 1,
+  "nonlinear": 5,
+  "objective_count": 1,
+  "usable": 32
  }
 }
