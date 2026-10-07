@@ -1,0 +1,100 @@
+# Exploratory ablation, decided after the production runs (Joern, 2026-10-07: "should we run a
+# 0 temperature experiment (one or two runs each) for ablation?"): greedy decoding on the anchor
+# paper, every model and workflow twice. Models, providers, reasoning settings, pacing and the
+# parser are copied verbatim from studies/paper0_2026/study.toml. Two runs per cell are
+# descriptive only (no tests); the second shows whether temperature 0 repeats itself.
+study_id = "ablation-t0-2026"
+base_url = "https://llm.scads.ai/v1"
+api_key_env = "SCADS_API_KEY"
+seed = 20261004
+
+[pacing]
+min_interval_s = 3.0
+# Raised from 1500 on 2026-10-05 (Joern; docs/adr/0004, amendment 2) to finish on 6 October.
+max_requests_per_day = 1700
+request_timeout_s = 900.0
+max_tries = 6
+max_tool_rounds = 4
+max_subcalls = 10
+ps_count_min = 2
+ps_count_max = 5
+
+# Five open-weight generators, one per family (probed 2026-10-04: system prompt,
+# temperature, seed and a forced named tool call are honoured). Roles mirror the 2025
+# line-up (Gemini 2.5 Pro / Flash, o4-mini, DeepSeek-V3). Every model reasons as little
+# as it allows (docs/adr/0003): thinking off where the switch works, else the lowest
+# effort; GLM-5.3 was replaced after it spent 16,000 tokens on reasoning per call.
+[models.glmflash]
+served_id = "zai-org/GLM-5.3-Flash"
+family = "GLM (Z.ai)"
+licence = "MIT"
+role = "GLM family, replaces GLM-5.3 (2025 role: Gemini 2.5 Pro)"
+max_tokens = 16000
+extra = { reasoning_effort = "low" }
+
+[models.deepseek]
+served_id = "deepseek-ai/DeepSeek-V4.1-Flash"
+family = "DeepSeek"
+licence = "MIT"
+role = "fast model, continuity with DeepSeek-V3 (2025)"
+max_tokens = 16000
+extra = { chat_template_kwargs = { thinking = false } }
+
+# Amended 2026-10-05, after the glmflash and deepseek blocks and before any gptoss or qwen
+# run (docs/adr/0004): these two models are served by DeepInfra via OpenRouter so that the
+# study finishes within the ScaDS budget. Their cells, seeds and run order are unchanged;
+# the reasoning settings are the same, in OpenRouter's notation.
+[models.gptoss]
+served_id = "openai/gpt-oss-120b"
+family = "gpt-oss (OpenAI)"
+licence = "Apache-2.0"
+role = "compact model from the vendor of o4-mini (2025)"
+max_tokens = 16000
+base_url = "https://openrouter.ai/api/v1"
+api_key_env = "OPENROUTER_API_KEY"
+extra = { reasoning = { effort = "low" }, provider = { order = ["deepinfra/bf16"], allow_fallbacks = false }, usage = { include = true } }
+
+[models.qwen]
+served_id = "qwen/qwen3.8-27b"
+family = "Qwen (Alibaba)"
+licence = "Apache-2.0"
+role = "small dense model (2025 role: Gemini 2.5 Flash)"
+max_tokens = 16000
+base_url = "https://openrouter.ai/api/v1"
+api_key_env = "OPENROUTER_API_KEY"
+extra = { reasoning = { enabled = false }, provider = { order = ["deepinfra/bf16"], allow_fallbacks = false }, usage = { include = true } }
+
+[models.minimax]
+served_id = "MiniMaxAI/MiniMax-M3"
+family = "MiniMax"
+licence = "MiniMax model licence (other)"
+role = "fifth family"
+max_tokens = 16000
+extra = { reasoning_effort = "low" }
+
+# The parsing model (LP2Graph v2), chosen on the 54 instrument cases (instrument/report.json)
+# and the input papers' own formulations (references/report.json), 2026-10-04. Gemma-4 with
+# the form as a JSON template: 54/54 cases with every verdict and count right, 10/10 reference
+# replies parsed. With the JSON schema in the prompt also 54/54, but only 6/10 references (the
+# long ones made it return the schema itself); server-side schema decoding looped (Gemma 2 of
+# 5); Llama-3.3 prompt 0.98 accepted but linearity 0.58. Neither family generates.
+[grapher]
+served_id = "google/gemma-4-26B-A4B-it"
+mode = "template"
+temperature = 0.0
+seed = 7
+max_tokens = 8000
+
+[papers.P1]
+doi = "10.1287/trsc.2025.0137"
+title = "Integrated optimization of train rescheduling and speed management during partial blockages: a decomposition approach"
+licence = "CC BY (accepted manuscript)"
+input = "../paper0_2026/inputs/P1.md"
+
+[[experiments]]
+name = "t0"
+papers = ["P1"]
+models = ["glmflash", "deepseek", "gptoss", "qwen", "minimax"]
+workflows = ["ZS", "CFC", "OE", "PS"]
+temperatures = [0.0]
+replicates = 2
