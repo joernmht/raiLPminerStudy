@@ -28,9 +28,12 @@ from genstudy.config import load_study
 GREY, LGREY, ORANGE, LORANGE, BLUE, GREEN, DGREEN, MAINC = (
     "#b9bec6", "#d9dce1", "#ef9a59", "#f6c79f", "#8fb3d9", "#4f8a3c", "#2f6b2f", "#4a6fa5",
 )  # fmt: skip
+#: Model names as the paper writes them (its Table of models).
+NAMES = {"glmflash": "GLM-5.3-Flash", "deepseek": "DeepSeek-V4.1-Flash",
+         "gptoss": "gpt-oss-120b", "qwen": "Qwen3.8-27B", "minimax": "MiniMax-M3"}  # fmt: skip
 # (check shown above the stream, stage a run leaves at, label of the exit, colour)
 CHECKS = [
-    ("answer\nnot empty", "empty_answer", "empty answer\n(reasoning cut off)", GREY),
+    ("answer\nnot empty", "empty_answer", "empty answer (mostly\nreasoning cut off)", GREY),
     ("notation\ngate", "no_formulation", "no formulation\nin the answer", GREY),
     ("parser", "unparsed", "parser failure\n(instrument error)", LGREY),
     ("one\nobjective", "objective_count", "no objective\nor several", LORANGE),
@@ -44,7 +47,7 @@ def _load(spec_path: str) -> tuple[dict, Path, dict[str, str]]:
     spec = load_study(spec_path)
     out = spec.root / "analysis"
     summary = json.loads((out / "summary.json").read_text(encoding="utf-8"))
-    names = {k: m.served_id.split("/")[-1] for k, m in spec.models.items()}
+    names = {k: NAMES.get(k, m.served_id.split("/")[-1]) for k, m in spec.models.items()}
     return summary, out, names
 
 
@@ -203,7 +206,7 @@ def flow(summary: dict, out: Path) -> Path:
         (
             "non-empty answer",
             "empty_answer",
-            "empty answer (reasoning cut off\nat the token limit)",
+            "empty answer (mostly reasoning\ncut off at the token limit)",
         ),
         (
             "formulation in the answer",

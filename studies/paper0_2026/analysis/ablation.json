@@ -1,0 +1,34 @@
+{
+ "runs": 37,
+ "yield_t0": 0.0,
+ "yield_t0_by_model": {
+  "glmflash": 0.0,
+  "deepseek": 0.0,
+  "gptoss": 0.0,
+  "qwen": 0.0,
+  "minimax": 0.0
+ },
+ "yield_t02_exp1": 0.707,
+ "pairs": 17,
+ "identical_pairs": 0,
+ "identical_by_model": {
+  "glmflash": 0,
+  "deepseek": 0,
+  "gptoss": 0,
+  "qwen": 0,
+  "minimax": 0
+ },
+ "similarity_t0_median": 0.178,
+ "similarity_t02_median": 0.155,
+ "shared_leading_words_median": 2,
+ "shared_leading_words_zs": [
+  8,
+  20,
+  22,
+  34
+ ],
+ "stages": {
+  "empty_answer": 1,
+  "pending": 36
+ }
+}
