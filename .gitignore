@@ -16,3 +16,6 @@ studies/*/logs/
 studies/*/solvecheck/**/*.log
 studies/*/solvecheck/*.log
 studies/*/solvecheck/requests_per_day.json
+# Audit forms: built PDFs, LaTeX work files and the annotated copies from the tablet (key.json and marks.json are the record).
+studies/*/audit/forms/build/
+studies/*/audit/forms/returned/

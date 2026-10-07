@@ -1,0 +1,510 @@
+{
+ "seed": 2026,
+ "drawn_from": {
+  "written": 758,
+  "warning": 81,
+  "nonlinear": "the sample of audit/nonlinear_labels.json"
+ },
+ "items": {
+  "001": {
+   "batch": 1,
+   "stratum": "written",
+   "run_id": "exp1.P1.deepseek.ZS.t02.r12"
+  },
+  "002": {
+   "batch": 1,
+   "stratum": "written",
+   "run_id": "exp1.P1.deepseek.ZS.t06.r12"
+  },
+  "003": {
+   "batch": 1,
+   "stratum": "warning",
+   "run_id": "exp1.P1.deepseek.OE.t06.r04"
+  },
+  "004": {
+   "batch": 1,
+   "stratum": "nonlinear",
+   "run_id": "exp1.P1.glmflash.ZS.t02.r09"
+  },
+  "005": {
+   "batch": 1,
+   "stratum": "written",
+   "run_id": "exp2.P2.qwen.ZS.t06.r15"
+  },
+  "006": {
+   "batch": 1,
+   "stratum": "nonlinear",
+   "run_id": "exp2.P4.gptoss.ZS.t06.r11"
+  },
+  "007": {
+   "batch": 1,
+   "stratum": "nonlinear",
+   "run_id": "exp2.P3.gptoss.ZS.t06.r06"
+  },
+  "008": {
+   "batch": 1,
+   "stratum": "written",
+   "run_id": "exp1.P1.minimax.PS.t10.r01"
+  },
+  "009": {
+   "batch": 1,
+   "stratum": "written",
+   "run_id": "exp1.P1.qwen.CFC.t02.r15"
+  },
+  "010": {
+   "batch": 1,
+   "stratum": "warning",
+   "run_id": "exp2.P2.deepseek.ZS.t06.r11"
+  },
+  "011": {
+   "batch": 1,
+   "stratum": "warning",
+   "run_id": "exp2.P3.gptoss.ZS.t06.r01"
+  },
+  "012": {
+   "batch": 1,
+   "stratum": "nonlinear",
+   "run_id": "exp1.P1.minimax.CFC.t06.r08"
+  },
+  "013": {
+   "batch": 1,
+   "stratum": "written",
+   "run_id": "exp2.P2.minimax.ZS.t06.r05"
+  },
+  "014": {
+   "batch": 1,
+   "stratum": "written",
+   "run_id": "exp1.P1.gptoss.OE.t02.r03"
+  },
+  "015": {
+   "batch": 1,
+   "stratum": "written",
+   "run_id": "exp1.P1.gptoss.PS.t02.r07"
+  },
+  "016": {
+   "batch": 1,
+   "stratum": "nonlinear",
+   "run_id": "exp1.P1.qwen.ZS.t06.r11"
+  },
+  "017": {
+   "batch": 1,
+   "stratum": "written",
+   "run_id": "exp1.P1.qwen.OE.t06.r13"
+  },
+  "018": {
+   "batch": 1,
+   "stratum": "written",
+   "run_id": "exp2.P3.minimax.ZS.t06.r01"
+  },
+  "019": {
+   "batch": 1,
+   "stratum": "nonlinear",
+   "run_id": "exp1.P1.deepseek.ZS.t10.r05"
+  },
+  "020": {
+   "batch": 1,
+   "stratum": "written",
+   "run_id": "exp2.P3.gptoss.ZS.t06.r05"
+  },
+  "021": {
+   "batch": 2,
+   "stratum": "nonlinear",
+   "run_id": "exp1.P1.qwen.ZS.t10.r05"
+  },
+  "022": {
+   "batch": 2,
+   "stratum": "warning",
+   "run_id": "exp1.P1.minimax.PS.t06.r11"
+  },
+  "023": {
+   "batch": 2,
+   "stratum": "written",
+   "run_id": "exp1.P1.gptoss.ZS.t10.r12"
+  },
+  "024": {
+   "batch": 2,
+   "stratum": "written",
+   "run_id": "exp2.P3.deepseek.ZS.t06.r10"
+  },
+  "025": {
+   "batch": 2,
+   "stratum": "nonlinear",
+   "run_id": "exp2.P3.deepseek.ZS.t06.r05"
+  },
+  "026": {
+   "batch": 2,
+   "stratum": "warning",
+   "run_id": "exp1.P1.glmflash.OE.t02.r09"
+  },
+  "027": {
+   "batch": 2,
+   "stratum": "nonlinear",
+   "run_id": "exp1.P1.minimax.OE.t06.r02"
+  },
+  "028": {
+   "batch": 2,
+   "stratum": "nonlinear",
+   "run_id": "exp2.P5.minimax.ZS.t06.r06"
+  },
+  "029": {
+   "batch": 2,
+   "stratum": "written",
+   "run_id": "exp2.P4.gptoss.ZS.t06.r07"
+  },
+  "030": {
+   "batch": 2,
+   "stratum": "nonlinear",
+   "run_id": "exp1.P1.minimax.ZS.t06.r02"
+  },
+  "031": {
+   "batch": 2,
+   "stratum": "written",
+   "run_id": "exp1.P1.minimax.OE.t02.r09"
+  },
+  "032": {
+   "batch": 2,
+   "stratum": "written",
+   "run_id": "exp2.P2.deepseek.ZS.t06.r01"
+  },
+  "033": {
+   "batch": 2,
+   "stratum": "warning",
+   "run_id": "exp1.P1.gptoss.CFC.t02.r13"
+  },
+  "034": {
+   "batch": 2,
+   "stratum": "warning",
+   "run_id": "exp1.P1.minimax.ZS.t02.r02"
+  },
+  "035": {
+   "batch": 2,
+   "stratum": "warning",
+   "run_id": "exp2.P4.glmflash.ZS.t06.r14"
+  },
+  "036": {
+   "batch": 2,
+   "stratum": "nonlinear",
+   "run_id": "exp1.P1.qwen.CFC.t10.r10"
+  },
+  "037": {
+   "batch": 2,
+   "stratum": "nonlinear",
+   "run_id": "exp1.P1.minimax.ZS.t10.r03"
+  },
+  "038": {
+   "batch": 2,
+   "stratum": "warning",
+   "run_id": "exp2.P2.deepseek.ZS.t06.r04"
+  },
+  "039": {
+   "batch": 2,
+   "stratum": "written",
+   "run_id": "exp1.P1.deepseek.PS.t06.r07"
+  },
+  "040": {
+   "batch": 2,
+   "stratum": "nonlinear",
+   "run_id": "exp1.P1.minimax.PS.t02.r02"
+  },
+  "041": {
+   "batch": 3,
+   "stratum": "warning",
+   "run_id": "exp1.P1.minimax.OE.t06.r15"
+  },
+  "042": {
+   "batch": 3,
+   "stratum": "written",
+   "run_id": "exp1.P1.qwen.PS.t02.r13"
+  },
+  "043": {
+   "batch": 3,
+   "stratum": "written",
+   "run_id": "exp2.P4.glmflash.ZS.t06.r07"
+  },
+  "044": {
+   "batch": 3,
+   "stratum": "warning",
+   "run_id": "exp1.P1.gptoss.CFC.t10.r10"
+  },
+  "045": {
+   "batch": 3,
+   "stratum": "nonlinear",
+   "run_id": "exp1.P1.gptoss.ZS.t02.r09"
+  },
+  "046": {
+   "batch": 3,
+   "stratum": "nonlinear",
+   "run_id": "exp1.P1.minimax.PS.t10.r09"
+  },
+  "047": {
+   "batch": 3,
+   "stratum": "nonlinear",
+   "run_id": "exp2.P5.gptoss.ZS.t06.r03"
+  },
+  "048": {
+   "batch": 3,
+   "stratum": "warning",
+   "run_id": "exp1.P1.minimax.PS.t06.r01"
+  },
+  "049": {
+   "batch": 3,
+   "stratum": "nonlinear",
+   "run_id": "exp1.P1.minimax.ZS.t10.r08"
+  },
+  "050": {
+   "batch": 3,
+   "stratum": "written",
+   "run_id": "exp1.P1.qwen.ZS.t02.r05"
+  },
+  "051": {
+   "batch": 3,
+   "stratum": "written",
+   "run_id": "exp1.P1.deepseek.PS.t10.r14"
+  },
+  "052": {
+   "batch": 3,
+   "stratum": "written",
+   "run_id": "exp1.P1.glmflash.ZS.t06.r07"
+  },
+  "053": {
+   "batch": 3,
+   "stratum": "nonlinear",
+   "run_id": "exp2.P4.glmflash.ZS.t06.r15"
+  },
+  "054": {
+   "batch": 3,
+   "stratum": "nonlinear",
+   "run_id": "exp1.P1.minimax.ZS.t06.r15"
+  },
+  "055": {
+   "batch": 3,
+   "stratum": "nonlinear",
+   "run_id": "exp2.P5.minimax.ZS.t06.r04"
+  },
+  "056": {
+   "batch": 3,
+   "stratum": "written",
+   "run_id": "exp2.P5.gptoss.ZS.t06.r14"
+  },
+  "057": {
+   "batch": 3,
+   "stratum": "warning",
+   "run_id": "exp2.P2.minimax.ZS.t06.r04"
+  },
+  "058": {
+   "batch": 3,
+   "stratum": "warning",
+   "run_id": "exp2.P3.minimax.ZS.t06.r11"
+  },
+  "059": {
+   "batch": 3,
+   "stratum": "written",
+   "run_id": "exp1.P1.qwen.ZS.t06.r07"
+  },
+  "060": {
+   "batch": 3,
+   "stratum": "written",
+   "run_id": "exp1.P1.qwen.OE.t10.r13"
+  },
+  "061": {
+   "batch": 4,
+   "stratum": "written",
+   "run_id": "exp1.P1.deepseek.ZS.t10.r10"
+  },
+  "062": {
+   "batch": 4,
+   "stratum": "written",
+   "run_id": "exp1.P1.glmflash.ZS.t02.r07"
+  },
+  "063": {
+   "batch": 4,
+   "stratum": "nonlinear",
+   "run_id": "exp2.P4.deepseek.ZS.t06.r15"
+  },
+  "064": {
+   "batch": 4,
+   "stratum": "written",
+   "run_id": "exp1.P1.deepseek.PS.t06.r02"
+  },
+  "065": {
+   "batch": 4,
+   "stratum": "written",
+   "run_id": "exp1.P1.deepseek.CFC.t06.r05"
+  },
+  "066": {
+   "batch": 4,
+   "stratum": "warning",
+   "run_id": "exp1.P1.qwen.ZS.t06.r06"
+  },
+  "067": {
+   "batch": 4,
+   "stratum": "nonlinear",
+   "run_id": "exp1.P1.gptoss.CFC.t06.r04"
+  },
+  "068": {
+   "batch": 4,
+   "stratum": "nonlinear",
+   "run_id": "exp1.P1.minimax.OE.t10.r09"
+  },
+  "069": {
+   "batch": 4,
+   "stratum": "nonlinear",
+   "run_id": "exp1.P1.deepseek.ZS.t10.r13"
+  },
+  "070": {
+   "batch": 4,
+   "stratum": "written",
+   "run_id": "exp1.P1.gptoss.PS.t10.r06"
+  },
+  "071": {
+   "batch": 4,
+   "stratum": "warning",
+   "run_id": "exp1.P1.qwen.CFC.t02.r11"
+  },
+  "072": {
+   "batch": 4,
+   "stratum": "written",
+   "run_id": "exp1.P1.gptoss.PS.t10.r15"
+  },
+  "073": {
+   "batch": 4,
+   "stratum": "nonlinear",
+   "run_id": "exp1.P1.glmflash.ZS.t10.r05"
+  },
+  "074": {
+   "batch": 4,
+   "stratum": "nonlinear",
+   "run_id": "exp1.P1.minimax.ZS.t02.r11"
+  },
+  "075": {
+   "batch": 4,
+   "stratum": "warning",
+   "run_id": "exp1.P1.gptoss.ZS.t06.r01"
+  },
+  "076": {
+   "batch": 4,
+   "stratum": "written",
+   "run_id": "exp2.P2.glmflash.ZS.t06.r06"
+  },
+  "077": {
+   "batch": 4,
+   "stratum": "written",
+   "run_id": "exp1.P1.glmflash.PS.t02.r15"
+  },
+  "078": {
+   "batch": 4,
+   "stratum": "nonlinear",
+   "run_id": "exp2.P3.glmflash.ZS.t06.r06"
+  },
+  "079": {
+   "batch": 4,
+   "stratum": "written",
+   "run_id": "exp1.P1.deepseek.CFC.t02.r07"
+  },
+  "080": {
+   "batch": 4,
+   "stratum": "nonlinear",
+   "run_id": "exp1.P1.deepseek.CFC.t02.r05"
+  },
+  "081": {
+   "batch": 5,
+   "stratum": "warning",
+   "run_id": "exp2.P5.qwen.ZS.t06.r04"
+  },
+  "082": {
+   "batch": 5,
+   "stratum": "nonlinear",
+   "run_id": "exp1.P1.minimax.PS.t02.r08"
+  },
+  "083": {
+   "batch": 5,
+   "stratum": "written",
+   "run_id": "exp2.P5.qwen.ZS.t06.r03"
+  },
+  "084": {
+   "batch": 5,
+   "stratum": "nonlinear",
+   "run_id": "exp2.P2.gptoss.ZS.t06.r12"
+  },
+  "085": {
+   "batch": 5,
+   "stratum": "written",
+   "run_id": "exp1.P1.glmflash.PS.t10.r02"
+  },
+  "086": {
+   "batch": 5,
+   "stratum": "written",
+   "run_id": "exp1.P1.minimax.ZS.t10.r14"
+  },
+  "087": {
+   "batch": 5,
+   "stratum": "written",
+   "run_id": "exp1.P1.gptoss.OE.t10.r14"
+  },
+  "088": {
+   "batch": 5,
+   "stratum": "nonlinear",
+   "run_id": "exp1.P1.minimax.CFC.t02.r14"
+  },
+  "089": {
+   "batch": 5,
+   "stratum": "written",
+   "run_id": "exp1.P1.qwen.PS.t02.r12"
+  },
+  "090": {
+   "batch": 5,
+   "stratum": "nonlinear",
+   "run_id": "exp1.P1.glmflash.PS.t06.r03"
+  },
+  "091": {
+   "batch": 5,
+   "stratum": "nonlinear",
+   "run_id": "exp1.P1.glmflash.CFC.t06.r03"
+  },
+  "092": {
+   "batch": 5,
+   "stratum": "nonlinear",
+   "run_id": "exp1.P1.deepseek.CFC.t06.r01"
+  },
+  "093": {
+   "batch": 5,
+   "stratum": "nonlinear",
+   "run_id": "exp1.P1.gptoss.ZS.t10.r14"
+  },
+  "094": {
+   "batch": 5,
+   "stratum": "warning",
+   "run_id": "exp1.P1.qwen.ZS.t10.r07"
+  },
+  "095": {
+   "batch": 5,
+   "stratum": "written",
+   "run_id": "exp1.P1.gptoss.ZS.t02.r14"
+  },
+  "096": {
+   "batch": 5,
+   "stratum": "nonlinear",
+   "run_id": "exp1.P1.glmflash.PS.t06.r15"
+  },
+  "097": {
+   "batch": 5,
+   "stratum": "warning",
+   "run_id": "exp1.P1.qwen.CFC.t02.r13"
+  },
+  "098": {
+   "batch": 5,
+   "stratum": "nonlinear",
+   "run_id": "exp1.P1.deepseek.CFC.t10.r11"
+  },
+  "099": {
+   "batch": 5,
+   "stratum": "nonlinear",
+   "run_id": "exp1.P1.minimax.OE.t06.r08"
+  },
+  "100": {
+   "batch": 5,
+   "stratum": "nonlinear",
+   "run_id": "exp2.P4.qwen.ZS.t06.r13"
+  }
+ }
+}
