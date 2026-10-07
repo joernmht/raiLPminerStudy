@@ -92,24 +92,36 @@ def sankey(summary: dict, out: Path, names: dict[str, str]) -> Path:
                     f"{len(kept)} answers\nnot connected:\ncore kept,\nmedian {cut[len(cut) // 2]}\nvariable cut",
                     ha="center", va="center", fontsize=6.8, color="white", fontweight="semibold",
                     linespacing=1.15)  # fmt: skip
+    # the usable MILPs: as written, and with a warning when the core cut a constraint (ADR-0007)
+    warned = sum(1 for r in rows if r["stage"] == "usable" and r["cut_constraints"])
+    written = remaining - warned
     xe = xs[-1] + 1.0
-    ax.fill_between([x_prev, xe], top, top - remaining * s, color=fs.TUERKIS, lw=0)
+    ax.fill_between([x_prev, xe], top, top - written * s, color=fs.TUERKIS, lw=0)
+    ax.fill_between([x_prev, xe], top - written * s, top - remaining * s, color=fs.LIGHTTUERKIS,
+                    lw=0)  # fmt: skip
     ax.add_patch(plt.Rectangle((xe, top - remaining * s), 0.16, remaining * s, color=fs.DUNKELBLAU,
                                lw=0))  # fmt: skip
-    ax.text(xe + 0.26, top - remaining * s / 2, f"{remaining}\nusable\nMILPs\n{100 * remaining / n:.0f}%",
+    ax.text(xe + 0.26, top - written * s / 2, f"{remaining}\nusable\nMILPs\n{100 * remaining / n:.0f}%",
             ha="left", va="center", fontsize=8, fontweight="bold", color=fs.TUERKIS)  # fmt: skip
+    ax.text(xe + 0.26, top - remaining * s - 0.05, f"of them {warned}\nwith a\nwarning",
+            ha="left", va="top", fontsize=6.8, color=fs.TUERKIS, linespacing=1.1)  # fmt: skip
     bx = fig.add_axes([0.175, 0.105, 0.8, 0.19])
     cats = [("no answer / no formulation", ("empty_answer", "no_formulation"), fs.MIDGREY),
             ("parser failure", ("unparsed",), fs.LIGHTGREY),
             ("objective count", ("objective_count",), fs.GELB),
             ("empty core", ("no_core",), fs.ORANGE),
             ("nonlinear / LP", ("nonlinear", "no_integer"), fs.ROT),
-            ("usable MILP", ("usable",), fs.TUERKIS)]  # fmt: skip
+            ("usable as written", ("usable",), fs.TUERKIS),
+            ("usable, warning", ("warning",), fs.LIGHTTUERKIS)]  # fmt: skip
+    warned_by_model = Counter(r["model"] for r in rows
+                              if r["stage"] == "usable" and r["cut_constraints"])  # fmt: skip
     # a model whose runs are mostly not graphed yet would show only its empty answers
     models = [m for m, st in summary["stages_by_model"].items()
               if st.get("pending", 0) <= sum(st.values()) / 2]  # fmt: skip
     for row, model in enumerate(models):
-        st = summary["stages_by_model"][model]
+        st = dict(summary["stages_by_model"][model])
+        st["warning"] = warned_by_model[model]
+        st["usable"] = st.get("usable", 0) - st["warning"]
         total = sum(v for k, v in st.items() if k != "pending")
         left = 0.0
         for cname, keys, col in cats:
@@ -128,11 +140,11 @@ def sankey(summary: dict, out: Path, names: dict[str, str]) -> Path:
     bx.set_xlabel("share of the model's runs (%), by the check at which a run leaves")
     bx.spines[["top", "right"]].set_visible(False)
     bx.tick_params(axis="y", length=0)
-    bx.legend(ncol=6, loc="lower center", bbox_to_anchor=(0.42, 1.02), handlelength=1.1,
+    bx.legend(ncol=7, loc="lower center", bbox_to_anchor=(0.42, 1.02), handlelength=1.1,
               columnspacing=1.0, handletextpad=0.4, borderaxespad=0)  # fmt: skip
     fig.text(0.008, 0.985, "A  Every run leaves at the first check it fails", fontsize=7.5,
              fontweight="bold", va="top")  # fmt: skip
-    fig.text(0.008, 0.345, "B  Per model", fontsize=7.5, fontweight="bold", va="top")
+    fig.text(0.008, 0.365, "B  Per model", fontsize=7.5, fontweight="bold", va="top")
     path = out / "yield_sankey.png"
     fs.save(fig, path)
     return path
