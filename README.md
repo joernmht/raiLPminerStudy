@@ -13,8 +13,9 @@ The first run of this experiment (2025) is reported in Maurischat and BeÅ¡inoviÄ
 *raiLPminer: LLM-driven optimization model mining for railway rescheduling and the
 case for deterministic structural validation*. Its code is preserved in
 [raiLPminerExperimentation](https://github.com/joernmht/raiLPminerExperimentation)
-(branch `legacy/raiLPminer-2025`) and its data on Zenodo
-([10.5281/zenodo.19165428](https://doi.org/10.5281/zenodo.19165428)). An audit of
+(branch `legacy/raiLPminer-2025`) and its records on Zenodo
+([10.5281/zenodo.19165428](https://doi.org/10.5281/zenodo.19165428); restricted access,
+because the logged conversations contain the copyrighted input papers). An audit of
 that run found that its harness sent neither the system prompts nor the
 temperatures it reported; [ADR-0001](docs/adr/0001-an-explicit-logged-harness.md)
 lists the findings and the design that answers them.

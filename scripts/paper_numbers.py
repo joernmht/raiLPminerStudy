@@ -309,7 +309,12 @@ def main() -> int:
                          f"{'; '.join(r['examples'][:3])} & {refs} \\\\")  # fmt: skip
     lines += ["\\bottomrule", "\\end{tabular}"]
     (out / "tab_types.tex").write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
-    mac |= {f"nTypes{kind.capitalize()}s": str(topics[kind]["k"]) for kind in topics}
+    for kind in topics:
+        name = kind.capitalize() + "s"
+        mac[f"nTypes{name}"] = str(topics[kind]["k"])
+        mac[f"typesNames{name}"] = num(topics[kind]["elements"])
+        mac[f"typesUnassigned{name}"] = num(topics[kind]["unassigned"])
+        mac[f"typesTerms{name}"] = num(topics[kind]["terms"])
     allcores = [cores[r["run_id"]] for r in usable]
     mac["genDiameter"] = f"{median(c['diameter'] for c in allcores if c['diameter'] is not None):g}"
 

@@ -2,6 +2,7 @@
  "constraint": {
   "elements": 13286,
   "k": 16,
+  "terms": 1320,
   "topics": [
    {
     "examples": [
@@ -708,6 +709,7 @@
  "objective": {
   "elements": 845,
   "k": 6,
+  "terms": 24,
   "topics": [
    {
     "examples": [
@@ -967,6 +969,7 @@
  "variable": {
   "elements": 8409,
   "k": 12,
+  "terms": 510,
   "topics": [
    {
     "examples": [

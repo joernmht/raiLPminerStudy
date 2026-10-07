@@ -81,6 +81,7 @@ def topics(texts: list[str], k: int, generic: set[str] = frozenset()) -> dict:
     return {
         "assign": assign.tolist(),
         "top_terms": [terms[np.argsort(-H[t])[:6]].tolist() for t in range(k)],
+        "n_terms": len(terms),
     }
 
 
@@ -153,7 +154,8 @@ def main() -> int:
                 "share_by_llm_anchor": {m: round(len(owners_with[t] & gen_owners[("anchor", m)]) / max(1, len(gen_owners[("anchor", m)])), 3) for m in llms},
             })  # fmt: skip
         unassigned = sum(1 for a in assign if a < 0)
-        result[kind] = {"k": k, "elements": len(items), "unassigned": unassigned, "topics": table}
+        result[kind] = {"k": k, "elements": len(items), "unassigned": unassigned,
+                        "terms": found["n_terms"], "topics": table}  # fmt: skip
         md += [f"## {kind}s: {len(items)} names, k = {k}, unassigned {unassigned}", "",
                "| topic | names | top terms | examples | in references |", "|---|---|---|---|---|"]  # fmt: skip
         md += [f"| {r['topic']} | {r['n']} | {', '.join(r['top_terms'])} | {'; '.join(r['examples'])} | "
