@@ -1,0 +1,162 @@
+{
+ "accepted_exp1": {
+  "events": 369,
+  "lr_tests": {
+   "model": {
+    "chi2": 42.98,
+    "df": 4,
+    "p": 1.0422328666125913e-08
+   },
+   "model:workflow": {
+    "chi2": 38.51,
+    "df": 12,
+    "p": 0.00012672646852737138
+   },
+   "temperature": {
+    "chi2": 7.06,
+    "df": 2,
+    "p": 0.02933042780435027
+   },
+   "workflow": {
+    "chi2": 23.17,
+    "df": 3,
+    "p": 3.7298374475259315e-05
+   }
+  },
+  "n": 888,
+  "odds_ratios_additive": {
+   "C(temperature)[T.0.6]": 1.09,
+   "C(temperature)[T.1.0]": 0.7,
+   "C(workflow)[T.CFC]": 2.27,
+   "C(workflow)[T.OE]": 1.46,
+   "C(workflow)[T.PS]": 2.28
+  },
+  "pseudo_r2_full": 0.091,
+  "separated_cells": []
+ },
+ "complexity_exp1": {
+  "diameter": {
+   "n": 643,
+   "r2": 0.302,
+   "wald_tests_hc3": {
+    "model": {
+     "chi2": 85.5,
+     "df": 4,
+     "p": 1.1910969117223247e-17
+    },
+    "model:workflow": {
+     "chi2": 33.35,
+     "df": 12,
+     "p": 0.0008529282233391689
+    },
+    "temperature": {
+     "chi2": 2.02,
+     "df": 2,
+     "p": 0.3645097627489151
+    },
+    "workflow": {
+     "chi2": 13.06,
+     "df": 3,
+     "p": 0.0045052580970324045
+    }
+   }
+  },
+  "log_cv": {
+   "n": 643,
+   "r2": 0.121,
+   "wald_tests_hc3": {
+    "model": {
+     "chi2": 2.0,
+     "df": 4,
+     "p": 0.7361002027239913
+    },
+    "model:workflow": {
+     "chi2": 20.41,
+     "df": 12,
+     "p": 0.05976119050660962
+    },
+    "temperature": {
+     "chi2": 18.17,
+     "df": 2,
+     "p": 0.00011332288695575779
+    },
+    "workflow": {
+     "chi2": 9.02,
+     "df": 3,
+     "p": 0.028980706313924208
+    }
+   }
+  },
+  "log_size": {
+   "n": 643,
+   "r2": 0.476,
+   "wald_tests_hc3": {
+    "model": {
+     "chi2": 123.84,
+     "df": 4,
+     "p": 8.069840199809459e-26
+    },
+    "model:workflow": {
+     "chi2": 155.01,
+     "df": 12,
+     "p": 5.4413539624490435e-27
+    },
+    "temperature": {
+     "chi2": 6.21,
+     "df": 2,
+     "p": 0.044844967090908947
+    },
+    "workflow": {
+     "chi2": 4.61,
+     "df": 3,
+     "p": 0.20285400470688367
+    }
+   }
+  }
+ },
+ "papers_zs06": {
+  "n": 368,
+  "paper": {
+   "chi2": 12.88,
+   "df": 4,
+   "p": 0.0118870572744417
+  }
+ },
+ "yield_exp1": {
+  "events": 643,
+  "lr_tests": {
+   "model": {
+    "chi2": 96.0,
+    "df": 4,
+    "p": 6.987898190058136e-20
+   },
+   "model:workflow": {
+    "chi2": 42.36,
+    "df": 12,
+    "p": 2.8918271238330875e-05
+   },
+   "temperature": {
+    "chi2": 2.94,
+    "df": 2,
+    "p": 0.22999340959007405
+   },
+   "workflow": {
+    "chi2": 25.59,
+    "df": 3,
+    "p": 1.1639827093074632e-05
+   }
+  },
+  "n": 888,
+  "odds_ratios_additive": {
+   "C(temperature)[T.0.6]": 0.93,
+   "C(temperature)[T.1.0]": 1.29,
+   "C(workflow)[T.CFC]": 0.8,
+   "C(workflow)[T.OE]": 1.76,
+   "C(workflow)[T.PS]": 2.19
+  },
+  "pseudo_r2_full": 0.156,
+  "separated_cells": [
+   "glmflashxOE 44/44"
+  ]
+ }
+}
