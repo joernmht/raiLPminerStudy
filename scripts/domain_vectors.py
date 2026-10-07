@@ -214,6 +214,7 @@ def main() -> int:
                 fontsize=10, loc="left")  # fmt: skip
     fig.tight_layout()
     fig.savefig(out / "domain.png", dpi=160)
+    fig.savefig(out / "domain.pdf")
     print(
         json.dumps(
             {k: v for k, v in result.items() if k != "similarity_generated_vs_reference"}, indent=1

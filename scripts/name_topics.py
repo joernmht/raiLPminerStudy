@@ -182,6 +182,7 @@ def main() -> int:
                  fontsize=10, loc="left")  # fmt: skip
     fig.tight_layout()
     fig.savefig(out / "topics.png", dpi=160)
+    fig.savefig(out / "topics.pdf")
     print((out / "topics.md").read_text(encoding="utf-8"))
     return 0
 
