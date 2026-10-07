@@ -26,6 +26,7 @@ from pathlib import Path
 import matplotlib
 
 matplotlib.use("Agg")
+import figstyle as fs  # scripts/figstyle.py: the paper's font, TUD colours and width
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.decomposition import NMF
@@ -37,6 +38,7 @@ from genstudy.graphing import Model, parse_reply
 from genstudy.metrics import core_model
 from genstudy.store import RunStore
 
+fs.apply()
 #: Topics per kind of element, chosen so that topics are distinct railway or modelling
 #: types (inspected for k = 8 ... 20 on the constraints; fixed before writing the paper).
 K = {"constraint": 16, "variable": 12, "objective": 6}
@@ -167,33 +169,34 @@ def main() -> int:
     cons = result["constraint"]["topics"]
     labels = [" / ".join(r["top_terms"][:2]) for r in cons]
     panels = [
-        ("A  by input paper (all runs)", [AUTHORS.get(p, p) for p in papers],
+        ("A  By input paper (all runs)", [AUTHORS.get(p, p) for p in papers],
          [[r["share_by_paper"][p] for p in papers] for r in cons],
          [[p in r["references"] for p in papers] for r in cons]),
-        ("B  by model (Experiment 1, anchor paper: Shi)", [SHORT.get(m, m) for m in llms],
+        ("B  By model (Experiment 1, anchor paper)", [SHORT.get(m, m) for m in llms],
          [[r["share_by_llm_anchor"][m] for m in llms] for r in cons],
          [["P1" in r["references"]] * len(llms) for r in cons]),
     ]  # fmt: skip
-    fig, axes = plt.subplots(1, 2, figsize=(10.4, 0.42 * len(cons) + 1.9), sharey=True)
+    fig, axes = plt.subplots(1, 2, figsize=(fs.WIDTH, 3.55), sharey=True,
+                             gridspec_kw={"wspace": 0.04})  # fmt: skip
     for ax, (title, cols, values, dots) in zip(axes, panels, strict=True):
         M = np.array(values)
-        ax.imshow(M, cmap="Greens", vmin=0, vmax=1, aspect="auto")
+        ax.imshow(M, cmap=fs.TUERKISES, vmin=0, vmax=1, aspect="auto")
         for i in range(len(cons)):
             for j in range(len(cols)):
-                ax.text(j, i, f"{100 * M[i, j]:.0f}", ha="center", va="center", fontsize=8,
-                        color="white" if M[i, j] > 0.6 else "black")  # fmt: skip
+                ax.text(j, i, f"{100 * M[i, j]:.0f}", ha="center", va="center", fontsize=6,
+                        color="white" if M[i, j] > 0.55 else "black")  # fmt: skip
                 if dots[i][j]:
                     # a corner marker, not a frame: frames of neighbouring cells merge
-                    ax.plot(j + 0.36, i - 0.3, marker="o", ms=4.5, color="#c0392b")
-        ax.set_xticks(range(len(cols)), cols, fontsize=8.5)
-        ax.set_title(title, fontsize=9.5, loc="left")
-    axes[0].set_yticks(range(len(cons)), labels, fontsize=8.5)
-    fig.suptitle("Constraint types in the usable MILPs (% of models containing the type); "
-                 "red dot: the type occurs in the paper's own formulation",
-                 fontsize=9.5, x=0.01, ha="left")  # fmt: skip
-    fig.tight_layout()
-    fig.savefig(out / "topics.png", dpi=160)
-    fig.savefig(out / "topics.pdf", metadata={"CreationDate": None})  # byte-stable
+                    ax.plot(j + 0.36, i - 0.27, marker="o", ms=2.6, color=fs.ROT, mec="white",
+                            mew=0.3)  # fmt: skip
+        ax.set_xticks(range(len(cols)), cols)
+        ax.tick_params(length=0)
+        ax.set_title(title)
+        for spine in ax.spines.values():
+            spine.set_linewidth(0.4)
+    axes[0].set_yticks(range(len(cons)), labels, fontsize=6.8)
+    fig.subplots_adjust(left=0.205, right=0.995, top=0.935, bottom=0.06)
+    fs.save(fig, out / "topics.png")
     print((out / "topics.md").read_text(encoding="utf-8"))
     return 0
 

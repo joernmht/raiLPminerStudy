@@ -41,12 +41,15 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+import figstyle as fs  # scripts/figstyle.py: the paper's font, palette and width
+
 from genstudy.config import load_study
 from genstudy.domain import names
 from genstudy.graphing import Model, parse_reply
 from genstudy.metrics import core_model, graph_metrics
 from genstudy.store import RunStore
 
+fs.apply()
 AUTHORS = {"P1": "Shi", "P2": "Versluis", "P3": "Zhu", "P4": "Liu", "P5": "Lövétei"}
 WORKFLOWS = ("ZS", "CFC", "OE", "PS")
 
@@ -194,37 +197,48 @@ def main() -> int:
     ]
     (out / "domain_macros.tex").write_text("\n".join(macros) + "\n", encoding="utf-8", newline="\n")
 
-    fig, (a, b) = plt.subplots(1, 2, figsize=(10.5, 4.3), gridspec_kw={"width_ratios": [1.05, 1]})
+    fig, (a, b) = plt.subplots(1, 2, figsize=(fs.WIDTH, 2.75),
+                               gridspec_kw={"width_ratios": [1.0, 1.0], "wspace": 0.42})  # fmt: skip
     M = np.array([[matrix[p][q] for q in papers] for p in papers])
-    im = a.imshow(M, cmap="Blues", vmin=0, vmax=max(0.3, float(M.max())))
+    vmax = max(0.3, float(M.max()))
+    im = a.imshow(M, cmap=fs.BLUES, vmin=0, vmax=vmax)
     labels = [AUTHORS.get(p, p) for p in papers]
-    a.set_xticks(range(len(papers)), labels, rotation=30, ha="right", fontsize=9)
-    a.set_yticks(range(len(papers)), labels, fontsize=9)
-    a.set_xlabel("paper's own formulation", fontsize=9)
-    a.set_ylabel("generated from the paper", fontsize=9)
+    a.set_xticks(range(len(papers)), labels, rotation=30, ha="right")
+    a.set_yticks(range(len(papers)), labels)
+    a.tick_params(length=0)
+    a.set_xlabel("published formulation of")
+    a.set_ylabel("generated from")
     for i in range(len(papers)):
         for j in range(len(papers)):
-            a.text(j, i, f"{M[i, j]:.2f}", ha="center", va="center", fontsize=8.5,
-                   color="white" if M[i, j] > 0.18 else "black", fontweight="bold" if i == j else "normal")  # fmt: skip
-    a.set_title(f"A  Similarity of the names (mean cosine)\nnearest reference = own paper for {100 * nr['overall']:.0f}%",
-                fontsize=10, loc="left")  # fmt: skip
-    fig.colorbar(im, ax=a, fraction=0.046, pad=0.04)
+            a.text(j, i, f"{M[i, j]:.2f}", ha="center", va="center", fontsize=6.8,
+                   color="white" if M[i, j] > 0.45 * vmax else "black",
+                   fontweight="bold" if i == j else "normal")  # fmt: skip
+    a.set_title("A  Similarity of the names (mean cosine)")
+    cb = fig.colorbar(im, ax=a, fraction=0.046, pad=0.03)
+    cb.outline.set_linewidth(0.5)
+    cb.ax.tick_params(labelsize=6.5, width=0.5, length=2)
     temps = ["0.2", "0.6", "1.0"]
-    for wf, marker in zip(WORKFLOWS, ("o", "s", "^", "D"), strict=True):
+    styles = {
+        "ZS": (fs.MIDBLUE, "o"),
+        "CFC": (fs.ORANGE, "s"),
+        "OE": (fs.TUERKIS, "^"),
+        "PS": (fs.VIOLETT, "D"),
+    }
+    for wf in WORKFLOWS:
+        col, marker = styles[wf]
         sub = cdf[cdf["workflow"] == wf].groupby("temperature")["diversity"].mean()
-        b.plot(temps, [sub.get(t, np.nan) for t in temps], marker=marker, label=wf, lw=1.2)
-    b.plot(temps, [by_t[t] for t in temps], color="black", lw=2.2, label="mean")
-    b.set_xlabel("temperature", fontsize=9)
-    b.set_ylabel("diversity within a cell\n(1 - mean pairwise cosine)", fontsize=9)
+        b.plot(temps, [sub.get(t, np.nan) for t in temps], marker=marker, ms=3.5, label=wf, lw=1.0,
+               color=col)  # fmt: skip
+    b.plot(temps, [by_t[t] for t in temps], color=fs.DUNKELBLAU, lw=2.0, label="mean")
+    b.set_xlabel("temperature")
+    b.set_ylabel("diversity (1 \N{MINUS SIGN} mean pairwise cosine)")
     b.spines[["top", "right"]].set_visible(False)
-    b.legend(fontsize=8, frameon=False, ncol=3)
-    pt = result["diversity_wald_hc3"]["temperature"]["p"]
-    b.set_title("B  Diversity of the 15 replicates of a cell\ntemperature: "
-                + ("p < 0.001" if pt < 0.001 else f"p = {pt:.3f}") + " (Wald, HC3)",
-                fontsize=10, loc="left")  # fmt: skip
-    fig.tight_layout()
-    fig.savefig(out / "domain.png", dpi=160)
-    fig.savefig(out / "domain.pdf", metadata={"CreationDate": None})  # byte-stable
+    b.legend(ncol=5, loc="upper left", handlelength=1.4, columnspacing=0.9, handletextpad=0.4)
+    b.set_ylim(min(0.68, float(cdf.groupby(["workflow", "temperature"])["diversity"].mean().min()) - 0.01),
+               max(0.84, float(cdf.groupby(["workflow", "temperature"])["diversity"].mean().max()) + 0.03))  # fmt: skip
+    b.set_title("B  Diversity of the replicates of a cell")
+    fig.subplots_adjust(left=0.1, right=0.98, top=0.9, bottom=0.2)
+    fs.save(fig, out / "domain.png")
     print(
         json.dumps(
             {k: v for k, v in result.items() if k != "similarity_generated_vs_reference"}, indent=1

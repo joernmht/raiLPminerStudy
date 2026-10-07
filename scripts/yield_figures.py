@@ -23,23 +23,24 @@ import numpy as np
 from matplotlib.patches import FancyBboxPatch
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+import figstyle as fs  # scripts/figstyle.py: the paper's font, palette and width
+
 from genstudy.config import load_study
 
-GREY, LGREY, ORANGE, LORANGE, BLUE, GREEN, DGREEN, MAINC = (
-    "#b9bec6", "#d9dce1", "#ef9a59", "#f6c79f", "#8fb3d9", "#4f8a3c", "#2f6b2f", "#4a6fa5",
-)  # fmt: skip
+fs.apply()
+
 #: Model names as the paper writes them (its Table of models).
 NAMES = {"glmflash": "GLM-5.3-Flash", "deepseek": "DeepSeek-V4.1-Flash",
          "gptoss": "gpt-oss-120b", "qwen": "Qwen3.8-27B", "minimax": "MiniMax-M3"}  # fmt: skip
 # (check shown above the stream, stage a run leaves at, label of the exit, colour)
 CHECKS = [
-    ("answer\nnot empty", "empty_answer", "empty answer (mostly\nreasoning cut off)", GREY),
-    ("notation\ngate", "no_formulation", "no formulation\nin the answer", GREY),
-    ("parser", "unparsed", "parser failure\n(instrument error)", LGREY),
-    ("one\nobjective", "objective_count", "no objective\nor several", LORANGE),
-    ("coherent core\nnot empty", "no_core", "objective linked\nto no constraint", ORANGE),
-    ("linear", "nonlinear", "nonlinear as written\n(products, max, abs)", BLUE),
-    ("integer\nvariables", "no_integer", "no integer\nvariable (LP)", BLUE),
+    ("answer\nnot empty", "empty_answer", "empty\nanswer", fs.MIDGREY),
+    ("notation\ngate", "no_formulation", "no\nformulation", fs.MIDGREY),
+    ("parser", "unparsed", "parser\nfailure", fs.LIGHTGREY),
+    ("one\nobjective", "objective_count", "several\nobjectives", fs.GELB),
+    ("coherent core\nnot empty", "no_core", "empty\ncore", fs.ORANGE),
+    ("linear", "nonlinear", "nonlinear\n(products, abs)", fs.ROT),
+    ("integer\nvariables", "no_integer", "no integer\nvariable", fs.ROT),
 ]
 
 
@@ -52,114 +53,88 @@ def _load(spec_path: str) -> tuple[dict, Path, dict[str, str]]:
 
 
 def sankey(summary: dict, out: Path, names: dict[str, str]) -> Path:
+    """Panel A: the stream of runs through the checks; panel B: the same per model."""
     stages = Counter(summary["stages"])
     rows = summary["rows"]
     n = sum(v for k, v in stages.items() if k != "pending")
-    extracted = sum(
-        1
-        for r in rows
-        if r["stage"] in ("nonlinear", "no_integer", "usable") and r["coherent_whole"] is False
-    )
-    cut = sorted(
-        r["cut_variables"]
-        for r in rows
-        if r["stage"] in ("nonlinear", "no_integer", "usable") and r["coherent_whole"] is False
-    )
-    accepted = sum(1 for r in rows if r["outcome"] == "accepted")
-    fig = plt.figure(figsize=(12.5, 9.4))
-    ax = fig.add_axes([0.02, 0.33, 0.96, 0.62])
-    ax.set_xlim(-0.3, 10.6), ax.set_ylim(-0.5, 6.4), ax.axis("off")
+    kept = [r for r in rows if r["stage"] in ("nonlinear", "no_integer", "usable")
+            and r["coherent_whole"] is False]  # fmt: skip
+    cut = sorted(r["cut_variables"] for r in kept)
+    fig = plt.figure(figsize=(fs.WIDTH, 4.45))
+    ax = fig.add_axes([0.0, 0.37, 1.0, 0.6])
+    ax.set_xlim(-0.55, 10.75), ax.set_ylim(-0.3, 6.0), ax.axis("off")
     s, top = 2.6 / n, 5.2
     xs = [1.25 + 1.2 * i for i in range(len(CHECKS))]
     smooth = lambda t: 3 * t**2 - 2 * t**3  # noqa: E731
-    ax.add_patch(plt.Rectangle((0.15, top - n * s), 0.18, n * s, color="#33415c"))
-    ax.text(
-        0.06,
-        top - n * s / 2,
-        f"{n:,}\nruns",
-        ha="right",
-        va="center",
-        fontsize=10,
-        fontweight="bold",
-    )
-    remaining, x_prev = n, 0.33
+    ax.add_patch(plt.Rectangle((0.15, top - n * s), 0.16, n * s, color=fs.DUNKELBLAU, lw=0))
+    ax.text(0.05, top - n * s / 2, f"{n:,}\nruns", ha="right", va="center", fontsize=8,
+            fontweight="bold")  # fmt: skip
+    remaining, x_prev = n, 0.31
     for i, ((check, stage, why, col), x) in enumerate(zip(CHECKS, xs, strict=True)):
         lost = stages.get(stage, 0)
-        ax.fill_between([x_prev, x], top, top - remaining * s, color=MAINC, alpha=0.85, lw=0)
-        ax.text(x, top + 0.18, check, ha="center", va="bottom", fontsize=8.6, color="#33415c")
-        ax.plot([x, x], [top + 0.12, top - remaining * s - 0.02], color="white", lw=1.2, alpha=0.9)
+        ax.fill_between([x_prev, x], top, top - remaining * s, color=fs.MIDBLUE, alpha=0.9, lw=0)
+        ax.text(x, top + 0.14, check, ha="center", va="bottom", fontsize=7, linespacing=1.15)
+        ax.plot([x, x], [top + 0.08, top - remaining * s], color="white", lw=0.9)
         if lost:
+            # every exit falls to the same level; its label stands under its end
             y0_top, y0_bot = top - (remaining - lost) * s, top - remaining * s
-            y1 = (0.55 if i % 2 == 0 else -0.15) + 0.75
-            th = max(lost * s, 0.012)
+            y1, dx = 1.0, 0.55
+            th = max(lost * s, 0.015)
             tt = np.linspace(0, 1, 60)
-            ax.fill_between(x + 0.8 * tt, y0_bot + (y1 - y0_bot) * smooth(tt),
-                            y0_top + (y1 + th - y0_top) * smooth(tt), color=col, alpha=0.95, lw=0)  # fmt: skip
-            ax.add_patch(plt.Rectangle((x + 0.8, y1), 0.06, th, color=col))
-            ax.text(x + 0.9, y1 + th / 2, f"{lost}  {why}", ha="left", va="center", fontsize=8.2)
+            ax.fill_between(x + dx * tt, y0_bot + (y1 - y0_bot) * smooth(tt),
+                            y0_top + (y1 + th - y0_top) * smooth(tt), color=col, lw=0)  # fmt: skip
+            ax.text(x + dx, y1 - 0.1, f"{lost}\n{why}", ha="center", va="top", fontsize=6.8,
+                    linespacing=1.1)  # fmt: skip
         remaining -= lost
         x_prev = x
-        if stage == "no_core" and extracted:
+        if stage == "no_core" and kept:
             ax.text((x + xs[i + 1]) / 2, top - remaining * s / 2,
-                    f"{extracted} answers\nnot connected:\ncore kept,\nmedian {cut[len(cut) // 2]}\nvariable cut",
-                    ha="center", va="center", fontsize=8, color="white", fontweight="bold")  # fmt: skip
+                    f"{len(kept)} answers\nnot connected:\ncore kept,\nmedian {cut[len(cut) // 2]}\nvariable cut",
+                    ha="center", va="center", fontsize=6.8, color="white", fontweight="semibold",
+                    linespacing=1.15)  # fmt: skip
     xe = xs[-1] + 1.0
-    ax.fill_between([x_prev, xe], top, top - remaining * s, color=GREEN, alpha=0.95, lw=0)
-    ax.add_patch(plt.Rectangle((xe, top - remaining * s), 0.18, remaining * s, color=DGREEN))
-    ax.text(xe + 0.25, top - remaining * s / 2, f"{remaining}\nusable\nMILPs\n{100 * remaining / n:.0f}%",
-            ha="left", va="center", fontsize=10, fontweight="bold", color=DGREEN)  # fmt: skip
-    ax.text(5.1, 6.4, "From answer to usable MILP: every run leaves the stream at the first check it fails",
-            ha="center", va="top", fontsize=12.5, fontweight="bold")  # fmt: skip
-    pending = stages.get("pending", 0)
-    sub = f"{n:,} runs with a result" + (f" ({pending} not yet graphed)" if pending else "")
-    sub += f"; the rule fixed before the runs (complete and coherent) accepts {accepted} = {100 * accepted / n:.0f}%"
-    ax.text(5.1, 6.12, sub, ha="center", va="top", fontsize=9.3, color="#55606e")
-    bx = fig.add_axes([0.22, 0.06, 0.73, 0.2])
-    cats = [("no answer / no formulation", ("empty_answer", "no_formulation"), GREY),
-            ("parser failure", ("unparsed",), LGREY), ("objective count", ("objective_count",), LORANGE),
-            ("empty core", ("no_core",), ORANGE), ("nonlinear / LP", ("nonlinear", "no_integer"), BLUE),
-            ("usable MILP", ("usable",), GREEN)]  # fmt: skip
+    ax.fill_between([x_prev, xe], top, top - remaining * s, color=fs.TUERKIS, lw=0)
+    ax.add_patch(plt.Rectangle((xe, top - remaining * s), 0.16, remaining * s, color=fs.DUNKELBLAU,
+                               lw=0))  # fmt: skip
+    ax.text(xe + 0.26, top - remaining * s / 2, f"{remaining}\nusable\nMILPs\n{100 * remaining / n:.0f}%",
+            ha="left", va="center", fontsize=8, fontweight="bold", color=fs.TUERKIS)  # fmt: skip
+    bx = fig.add_axes([0.175, 0.105, 0.8, 0.19])
+    cats = [("no answer / no formulation", ("empty_answer", "no_formulation"), fs.MIDGREY),
+            ("parser failure", ("unparsed",), fs.LIGHTGREY),
+            ("objective count", ("objective_count",), fs.GELB),
+            ("empty core", ("no_core",), fs.ORANGE),
+            ("nonlinear / LP", ("nonlinear", "no_integer"), fs.ROT),
+            ("usable MILP", ("usable",), fs.TUERKIS)]  # fmt: skip
     # a model whose runs are mostly not graphed yet would show only its empty answers
-    models = [
-        m
-        for m, st in summary["stages_by_model"].items()
-        if st.get("pending", 0) <= sum(st.values()) / 2
-    ]
+    models = [m for m, st in summary["stages_by_model"].items()
+              if st.get("pending", 0) <= sum(st.values()) / 2]  # fmt: skip
     for row, model in enumerate(models):
         st = summary["stages_by_model"][model]
         total = sum(v for k, v in st.items() if k != "pending")
         left = 0.0
         for cname, keys, col in cats:
             v = 100 * sum(st.get(k, 0) for k in keys) / total if total else 0
-            bx.barh(
-                row,
-                v,
-                left=left,
-                color=col,
-                edgecolor="white",
-                height=0.62,
-                label=cname if row == 0 else None,
-            )
-            if v >= 6:
-                bx.text(left + v / 2, row, f"{v:.0f}%", ha="center", va="center", fontsize=8.2,
-                        color="white" if col == GREEN else "black")  # fmt: skip
+            bx.barh(row, v, left=left, color=col, edgecolor="white", linewidth=0.5, height=0.66,
+                    label=cname if row == 0 else None)  # fmt: skip
+            if v >= 7:
+                bx.text(left + v / 2, row, f"{v:.0f}%", ha="center", va="center", fontsize=6.5,
+                        color="white" if col in (fs.TUERKIS, fs.ROT, fs.ORANGE) else "black")  # fmt: skip
             left += v
-    labels = [
-        names.get(m, m)
-        + (" (partly graphed)" if summary["stages_by_model"][m].get("pending") else "")
-        for m in models
-    ]
-    bx.set_yticks(range(len(models)), labels, fontsize=9.5)
+    labels = [names.get(m, m) + (" (partly graphed)" if summary["stages_by_model"][m].get("pending")
+                                 else "") for m in models]  # fmt: skip
+    bx.set_yticks(range(len(models)), labels)
     bx.invert_yaxis()
     bx.set_xlim(0, 100)
-    bx.set_xlabel(
-        "share of each model's runs with a result, by the check at which the run leaves", fontsize=9
-    )
+    bx.set_xlabel("share of the model's runs (%), by the check at which a run leaves")
     bx.spines[["top", "right"]].set_visible(False)
-    bx.legend(ncol=3, fontsize=8.2, frameon=False, loc="upper center", bbox_to_anchor=(0.45, 1.42))
+    bx.tick_params(axis="y", length=0)
+    bx.legend(ncol=6, loc="lower center", bbox_to_anchor=(0.42, 1.02), handlelength=1.1,
+              columnspacing=1.0, handletextpad=0.4, borderaxespad=0)  # fmt: skip
+    fig.text(0.008, 0.985, "A  Every run leaves at the first check it fails", fontsize=7.5,
+             fontweight="bold", va="top")  # fmt: skip
+    fig.text(0.008, 0.345, "B  Per model", fontsize=7.5, fontweight="bold", va="top")
     path = out / "yield_sankey.png"
-    fig.savefig(path, dpi=150)
-    fig.savefig(path.with_suffix(".pdf"), metadata={"CreationDate": None})  # byte-stable
+    fs.save(fig, path)
     return path
 
 
