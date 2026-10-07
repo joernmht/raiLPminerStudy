@@ -155,7 +155,7 @@ def main() -> int:
     (out / "topics.md").write_text("\n".join(md), encoding="utf-8", newline="\n")
 
     # figure: constraint types x paper, share of generated models containing the type;
-    # a frame marks the types present in the paper's own formulation
+    # a red dot marks the types present in the paper's own formulation
     cons = result["constraint"]["topics"]
     labels = [" / ".join(r["top_terms"][:2]) for r in cons]
     M = np.array([[r["share_by_paper"][p] for p in papers] for r in cons])
@@ -173,12 +173,11 @@ def main() -> int:
                 color="white" if M[i, j] > 0.6 else "black",
             )
             if p in r["references"]:
-                ax.add_patch(
-                    plt.Rectangle((j - 0.5, i - 0.5), 1, 1, fill=False, ec="#c0392b", lw=1.6)
-                )
+                # a corner marker, not a frame: frames of neighbouring cells merge into a grid
+                ax.plot(j + 0.36, i - 0.3, marker="o", ms=4.5, color="#c0392b")
     ax.set_xticks(range(len(papers)), papers)
     ax.set_yticks(range(len(cons)), labels, fontsize=8.5)
-    ax.set_title("Constraint types in the usable MILPs (% of models per paper);\nframed: the type occurs in the paper's own formulation",
+    ax.set_title("Constraint types in the usable MILPs (% of models per paper);\nred dot: the type occurs in the paper's own formulation",
                  fontsize=10, loc="left")  # fmt: skip
     fig.tight_layout()
     fig.savefig(out / "topics.png", dpi=160)
