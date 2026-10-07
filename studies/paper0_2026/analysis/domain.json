@@ -1,0 +1,112 @@
+{
+ "diversity_by_model": {
+  "deepseek": 0.752,
+  "glmflash": 0.715,
+  "gptoss": 0.752,
+  "minimax": 0.79,
+  "qwen": 0.782
+ },
+ "diversity_by_temperature": {
+  "0.2": 0.725,
+  "0.6": 0.754,
+  "1.0": 0.796
+ },
+ "diversity_by_workflow": {
+  "CFC": 0.75,
+  "OE": 0.783,
+  "PS": 0.768,
+  "ZS": 0.732
+ },
+ "diversity_cells": 60,
+ "diversity_wald_hc3": {
+  "model": {
+   "chi2": 43.12,
+   "df": 4,
+   "p": 9.79380127588088e-09
+  },
+  "temperature": {
+   "chi2": 31.98,
+   "df": 2,
+   "p": 1.137922579787783e-07
+  },
+  "workflow": {
+   "chi2": 13.64,
+   "df": 3,
+   "p": 0.003440661549459227
+  }
+ },
+ "n_models": 839,
+ "nearest_reference_is_own": {
+  "P1": 0.591,
+  "P2": 0.868,
+  "P3": 0.793,
+  "P4": 0.974,
+  "P5": 0.63,
+  "overall": 0.642
+ },
+ "similarity_generated_vs_reference": {
+  "P1": {
+   "P1": 0.096,
+   "P2": 0.067,
+   "P3": 0.045,
+   "P4": 0.064,
+   "P5": 0.067
+  },
+  "P2": {
+   "P1": 0.046,
+   "P2": 0.161,
+   "P3": 0.041,
+   "P4": 0.037,
+   "P5": 0.075
+  },
+  "P3": {
+   "P1": 0.046,
+   "P2": 0.061,
+   "P3": 0.158,
+   "P4": 0.088,
+   "P5": 0.06
+  },
+  "P4": {
+   "P1": 0.067,
+   "P2": 0.043,
+   "P3": 0.114,
+   "P4": 0.294,
+   "P5": 0.062
+  },
+  "P5": {
+   "P1": 0.048,
+   "P2": 0.073,
+   "P3": 0.03,
+   "P4": 0.063,
+   "P5": 0.109
+  }
+ },
+ "size": {
+  "generated_at_least_reference_variables": 12,
+  "generated_median_constraints": 14,
+  "generated_median_variables": 9,
+  "reference": {
+   "P1": {
+    "constraints": 38,
+    "variables": 22
+   },
+   "P2": {
+    "constraints": 16,
+    "variables": 10
+   },
+   "P3": {
+    "constraints": 24,
+    "variables": 16
+   },
+   "P4": {
+    "constraints": 24,
+    "variables": 20
+   },
+   "P5": {
+    "constraints": 26,
+    "variables": 12
+   }
+  }
+ },
+ "vocabulary": 896
+}
