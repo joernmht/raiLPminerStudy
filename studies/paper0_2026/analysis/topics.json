@@ -1,0 +1,1256 @@
+{
+ "constraint": {
+  "elements": 13286,
+  "k": 16,
+  "topics": [
+   {
+    "examples": [
+     "station capacity",
+     "track assignment",
+     "capacity",
+     "acceleration limit"
+    ],
+    "n": 1285,
+    "references": [
+     "P1",
+     "P2",
+     "P3",
+     "P4",
+     "P5"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.667,
+     "glmflash": 0.621,
+     "gptoss": 0.538,
+     "minimax": 0.688,
+     "qwen": 0.516
+    },
+    "share_by_paper": {
+     "P1": 0.568,
+     "P2": 0.623,
+     "P3": 0.845,
+     "P4": 0.974,
+     "P5": 0.391
+    },
+    "top_terms": [
+     "capacity",
+     "track",
+     "station",
+     "station capacity",
+     "track capacity",
+     "assignment"
+    ],
+    "topic": 12
+   },
+   {
+    "examples": [
+     "flow conservation",
+     "origin departure",
+     "continuity",
+     "occupancy link"
+    ],
+    "n": 1176,
+    "references": [
+     "P1",
+     "P2",
+     "P3",
+     "P4"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.523,
+     "glmflash": 0.433,
+     "gptoss": 0.69,
+     "minimax": 0.679,
+     "qwen": 0.724
+    },
+    "share_by_paper": {
+     "P1": 0.594,
+     "P2": 0.491,
+     "P3": 0.672,
+     "P4": 0.949,
+     "P5": 0.413
+    },
+    "top_terms": [
+     "departure",
+     "arrival",
+     "arrival departure",
+     "link",
+     "arrival time",
+     "origin"
+    ],
+    "topic": 13
+   },
+   {
+    "examples": [
+     "speed profile selection",
+     "profile selection",
+     "route selection",
+     "speed limits"
+    ],
+    "n": 1073,
+    "references": [
+     "P2",
+     "P4",
+     "P5"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.764,
+     "glmflash": 0.852,
+     "gptoss": 0.722,
+     "minimax": 0.723,
+     "qwen": 0.589
+    },
+    "share_by_paper": {
+     "P1": 0.764,
+     "P2": 0.925,
+     "P3": 0.224,
+     "P4": 0.641,
+     "P5": 0.783
+    },
+    "top_terms": [
+     "selection",
+     "profile",
+     "profile selection",
+     "speed",
+     "speed profile",
+     "route"
+    ],
+    "topic": 4
+   },
+   {
+    "examples": [
+     "running time bounds",
+     "running time consistency",
+     "running time",
+     "time propagation"
+    ],
+    "n": 988,
+    "references": [
+     "P1",
+     "P2",
+     "P4",
+     "P5"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.747,
+     "glmflash": 0.709,
+     "gptoss": 0.589,
+     "minimax": 0.625,
+     "qwen": 0.802
+    },
+    "share_by_paper": {
+     "P1": 0.745,
+     "P2": 0.811,
+     "P3": 0.138,
+     "P4": 0.718,
+     "P5": 0.717
+    },
+    "top_terms": [
+     "running",
+     "running time",
+     "time",
+     "time consistency",
+     "consistency",
+     "time linkage"
+    ],
+    "topic": 3
+   },
+   {
+    "examples": [
+     "headway",
+     "same direction headway",
+     "headway constraint",
+     "station headway"
+    ],
+    "n": 902,
+    "references": [
+     "P1",
+     "P3",
+     "P4"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.695,
+     "glmflash": 0.645,
+     "gptoss": 0.278,
+     "minimax": 0.643,
+     "qwen": 0.521
+    },
+    "share_by_paper": {
+     "P1": 0.616,
+     "P2": 0.321,
+     "P3": 0.069,
+     "P4": 0.846,
+     "P5": 0.391
+    },
+    "top_terms": [
+     "headway",
+     "direction",
+     "direction headway",
+     "headway constraint",
+     "constraint",
+     "station headway"
+    ],
+    "topic": 2
+   },
+   {
+    "examples": [
+     "ordering consistency",
+     "ordering",
+     "timetable consistency",
+     "headway ordering"
+    ],
+    "n": 855,
+    "references": [
+     "P3"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.69,
+     "glmflash": 0.512,
+     "gptoss": 0.405,
+     "minimax": 0.509,
+     "qwen": 0.531
+    },
+    "share_by_paper": {
+     "P1": 0.51,
+     "P2": 0.887,
+     "P3": 0.31,
+     "P4": 0.487,
+     "P5": 0.761
+    },
+    "top_terms": [
+     "ordering",
+     "consistency",
+     "ordering consistency",
+     "headway ordering",
+     "time consistency",
+     "conflict ordering"
+    ],
+    "topic": 7
+   },
+   {
+    "examples": [
+     "disruption window",
+     "disruption",
+     "disruption avoidance",
+     "disruption arrival"
+    ],
+    "n": 712,
+    "references": [
+     "P1",
+     "P2",
+     "P3",
+     "P5"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.54,
+     "glmflash": 0.557,
+     "gptoss": 0.285,
+     "minimax": 0.509,
+     "qwen": 0.438
+    },
+    "share_by_paper": {
+     "P1": 0.537,
+     "P2": 0.245,
+     "P3": 0.362,
+     "P4": 0.077,
+     "P5": 0.239
+    },
+    "top_terms": [
+     "disruption",
+     "window",
+     "disruption window",
+     "entry",
+     "avoidance",
+     "disruption avoidance"
+    ],
+    "topic": 5
+   },
+   {
+    "examples": [
+     "dwell time",
+     "dwell time bounds",
+     "minimum dwell time",
+     "min dwell time"
+    ],
+    "n": 691,
+    "references": [
+     "P1",
+     "P2",
+     "P4"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.592,
+     "glmflash": 0.616,
+     "gptoss": 0.525,
+     "minimax": 0.679,
+     "qwen": 0.651
+    },
+    "share_by_paper": {
+     "P1": 0.698,
+     "P2": 0.434,
+     "P3": 0.086,
+     "P4": 0.615,
+     "P5": 0.239
+    },
+    "top_terms": [
+     "dwell",
+     "dwell time",
+     "time",
+     "min",
+     "max",
+     "min dwell"
+    ],
+    "topic": 0
+   },
+   {
+    "examples": [
+     "cancellation logic",
+     "cancellation consistency",
+     "cancellation propagation",
+     "cancellation arrival"
+    ],
+    "n": 597,
+    "references": [
+     "P1",
+     "P2",
+     "P3"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.586,
+     "glmflash": 0.448,
+     "gptoss": 0.234,
+     "minimax": 0.464,
+     "qwen": 0.349
+    },
+    "share_by_paper": {
+     "P1": 0.479,
+     "P2": 0.189,
+     "P3": 0.259,
+     "P4": 0.103,
+     "P5": 0.261
+    },
+    "top_terms": [
+     "cancellation",
+     "cancellation logic",
+     "logic",
+     "cancellation consistency",
+     "consistency",
+     "propagation"
+    ],
+    "topic": 10
+   },
+   {
+    "examples": [
+     "delay lower bound",
+     "energy lower bound",
+     "dwell time lower bound",
+     "dwell time upper bound"
+    ],
+    "n": 584,
+    "references": [
+     "P1",
+     "P3",
+     "P4",
+     "P5"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.305,
+     "glmflash": 0.227,
+     "gptoss": 0.253,
+     "minimax": 0.455,
+     "qwen": 0.448
+    },
+    "share_by_paper": {
+     "P1": 0.291,
+     "P2": 0.34,
+     "P3": 0.638,
+     "P4": 0.462,
+     "P5": 0.348
+    },
+    "top_terms": [
+     "bound",
+     "lower",
+     "lower bound",
+     "delay lower",
+     "delay",
+     "time lower"
+    ],
+    "topic": 11
+   },
+   {
+    "examples": [
+     "delay linearization",
+     "delay non negativity",
+     "delay calculation",
+     "delay propagation"
+    ],
+    "n": 572,
+    "references": [
+     "P1",
+     "P2",
+     "P5"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.431,
+     "glmflash": 0.374,
+     "gptoss": 0.323,
+     "minimax": 0.473,
+     "qwen": 0.542
+    },
+    "share_by_paper": {
+     "P1": 0.387,
+     "P2": 0.528,
+     "P3": 0.69,
+     "P4": 0.231,
+     "P5": 0.717
+    },
+    "top_terms": [
+     "linearization",
+     "delay",
+     "delay linearization",
+     "non",
+     "negativity",
+     "non negativity"
+    ],
+    "topic": 15
+   },
+   {
+    "examples": [
+     "rerouting logic",
+     "rerouting restriction",
+     "rerouting window",
+     "rerouting feasibility"
+    ],
+    "n": 563,
+    "references": [
+     "P1"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.552,
+     "glmflash": 0.498,
+     "gptoss": 0.247,
+     "minimax": 0.438,
+     "qwen": 0.401
+    },
+    "share_by_paper": {
+     "P1": 0.515,
+     "P2": 0.075,
+     "P3": 0.276,
+     "P4": 0.231,
+     "P5": 0.043
+    },
+    "top_terms": [
+     "rerouting",
+     "logic",
+     "rerouting logic",
+     "restriction",
+     "rerouting restriction",
+     "rerouting window"
+    ],
+    "topic": 8
+   },
+   {
+    "examples": [
+     "bidirectional conflict",
+     "conflict avoidance",
+     "conflict resolution",
+     "blockage avoidance"
+    ],
+    "n": 516,
+    "references": [
+     "P5"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.379,
+     "glmflash": 0.325,
+     "gptoss": 0.342,
+     "minimax": 0.473,
+     "qwen": 0.365
+    },
+    "share_by_paper": {
+     "P1": 0.406,
+     "P2": 0.283,
+     "P3": 0.379,
+     "P4": 0.0,
+     "P5": 0.239
+    },
+    "top_terms": [
+     "conflict",
+     "bidirectional",
+     "bidirectional conflict",
+     "avoidance",
+     "conflict avoidance",
+     "resolution"
+    ],
+    "topic": 6
+   },
+   {
+    "examples": [
+     "delay definition",
+     "travel time definition",
+     "arrival delay definition",
+     "departure delay definition"
+    ],
+    "n": 430,
+    "references": [
+     "P3"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.425,
+     "glmflash": 0.512,
+     "gptoss": 0.405,
+     "minimax": 0.429,
+     "qwen": 0.292
+    },
+    "share_by_paper": {
+     "P1": 0.412,
+     "P2": 0.774,
+     "P3": 0.086,
+     "P4": 0.205,
+     "P5": 0.587
+    },
+    "top_terms": [
+     "definition",
+     "delay definition",
+     "delay",
+     "time definition",
+     "arrival delay",
+     "departure delay"
+    ],
+    "topic": 1
+   },
+   {
+    "examples": [
+     "energy consumption",
+     "energy calculation",
+     "energy definition",
+     "energy model"
+    ],
+    "n": 427,
+    "references": [
+     "P1"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.408,
+     "glmflash": 0.059,
+     "gptoss": 0.392,
+     "minimax": 0.491,
+     "qwen": 0.469
+    },
+    "share_by_paper": {
+     "P1": 0.418,
+     "P2": 0.075,
+     "P3": 0.034,
+     "P4": 0.282,
+     "P5": 0.087
+    },
+    "top_terms": [
+     "energy",
+     "consumption",
+     "energy consumption",
+     "calculation",
+     "energy calculation",
+     "energy definition"
+    ],
+    "topic": 14
+   },
+   {
+    "examples": [
+     "speed bounds",
+     "dwell bounds",
+     "mccormick",
+     "horizon bounds"
+    ],
+    "n": 366,
+    "references": [
+     "P1",
+     "P4"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.282,
+     "glmflash": 0.384,
+     "gptoss": 0.152,
+     "minimax": 0.464,
+     "qwen": 0.219
+    },
+    "share_by_paper": {
+     "P1": 0.281,
+     "P2": 0.245,
+     "P3": 0.293,
+     "P4": 0.59,
+     "P5": 0.239
+    },
+    "top_terms": [
+     "bounds",
+     "time bounds",
+     "speed bounds",
+     "speed",
+     "dwell bounds",
+     "horizon"
+    ],
+    "topic": 9
+   }
+  ],
+  "unassigned": 1549
+ },
+ "objective": {
+  "elements": 845,
+  "k": 6,
+  "topics": [
+   {
+    "examples": [
+     "total cost",
+     "minimize total cost",
+     "total weighted cost",
+     "min cost"
+    ],
+    "n": 264,
+    "references": [
+     "P3"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.305,
+     "glmflash": 0.33,
+     "gptoss": 0.19,
+     "minimax": 0.205,
+     "qwen": 0.469
+    },
+    "share_by_paper": {
+     "P1": 0.32,
+     "P2": 0.0,
+     "P3": 0.586,
+     "P4": 0.59,
+     "P5": 0.0
+    },
+    "top_terms": [
+     "cost",
+     "cancellation cost",
+     "delay route",
+     "route",
+     "deviation",
+     "operational cost"
+    ],
+    "topic": 0
+   },
+   {
+    "examples": [
+     "min delay and energy",
+     "minimize weighted delay and energy",
+     "total delay and energy",
+     "minimize delay and energy"
+    ],
+    "n": 153,
+    "references": [
+     "P1"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.103,
+     "glmflash": 0.153,
+     "gptoss": 0.487,
+     "minimax": 0.098,
+     "qwen": 0.078
+    },
+    "share_by_paper": {
+     "P1": 0.226,
+     "P2": 0.0,
+     "P3": 0.0,
+     "P4": 0.0,
+     "P5": 0.152
+    },
+    "top_terms": [
+     "energy",
+     "delay energy",
+     "cancellations",
+     "energy cancellations",
+     "trade",
+     "penalty"
+    ],
+    "topic": 1
+   },
+   {
+    "examples": [
+     "total weighted delay",
+     "minimize total weighted delay",
+     "minimize total delay",
+     "total delay"
+    ],
+    "n": 78,
+    "references": [
+     "P5"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.098,
+     "glmflash": 0.103,
+     "gptoss": 0.032,
+     "minimax": 0.134,
+     "qwen": 0.099
+    },
+    "share_by_paper": {
+     "P1": 0.006,
+     "P2": 0.925,
+     "P3": 0.0,
+     "P4": 0.0,
+     "P5": 0.522
+    },
+    "top_terms": [
+     "delay",
+     "train delay",
+     "train",
+     "penalty",
+     "trade",
+     "delay route"
+    ],
+    "topic": 2
+   },
+   {
+    "examples": [
+     "minimize weighted delay, energy, and cancellation",
+     "min delay, energy, and cancellation",
+     "min delay, energy and cancellation",
+     "minimize total weighted delay, energy, and cancellation"
+    ],
+    "n": 35,
+    "references": [
+     "P3"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.04,
+     "glmflash": 0.079,
+     "gptoss": 0.006,
+     "minimax": 0.062,
+     "qwen": 0.016
+    },
+    "share_by_paper": {
+     "P1": 0.048,
+     "P2": 0.0,
+     "P3": 0.017,
+     "P4": 0.0,
+     "P5": 0.043
+    },
+    "top_terms": [
+     "cancellation",
+     "energy cancellation",
+     "cancellation cost",
+     "penalty",
+     "rerouting",
+     "delays"
+    ],
+    "topic": 4
+   },
+   {
+    "examples": [
+     "total operational cost",
+     "minimize weighted costs",
+     "minimize total operational cost",
+     "total weighted operational cost"
+    ],
+    "n": 32,
+    "references": [
+     "P4"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.006,
+     "glmflash": 0.0,
+     "gptoss": 0.006,
+     "minimax": 0.018,
+     "qwen": 0.141
+    },
+    "share_by_paper": {
+     "P1": 0.04,
+     "P2": 0.0,
+     "P3": 0.069,
+     "P4": 0.026,
+     "P5": 0.0
+    },
+    "top_terms": [
+     "operational",
+     "operational cost",
+     "costs",
+     "cost",
+     "delay",
+     "cancellation cost"
+    ],
+    "topic": 3
+   },
+   {
+    "examples": [
+     "minimize total secondary delay",
+     "minimize weighted delay, penalty, and energy",
+     "minimize total weighted secondary delay",
+     "total weighted delay, energy, and penalty"
+    ],
+    "n": 19,
+    "references": [
+     "P2"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.0,
+     "glmflash": 0.039,
+     "gptoss": 0.032,
+     "minimax": 0.0,
+     "qwen": 0.026
+    },
+    "share_by_paper": {
+     "P1": 0.011,
+     "P2": 0.019,
+     "P3": 0.0,
+     "P4": 0.0,
+     "P5": 0.217
+    },
+    "top_terms": [
+     "secondary delay",
+     "secondary",
+     "penalty",
+     "energy penalty",
+     "route",
+     "delay route"
+    ],
+    "topic": 5
+   }
+  ],
+  "unassigned": 264
+ },
+ "variable": {
+  "elements": 8409,
+  "k": 12,
+  "topics": [
+   {
+    "examples": [
+     "occupancy",
+     "track assignment",
+     "reroute indicator",
+     "reroute"
+    ],
+    "n": 1210,
+    "references": [
+     "P1",
+     "P2",
+     "P3",
+     "P5"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.759,
+     "glmflash": 0.734,
+     "gptoss": 0.671,
+     "minimax": 0.705,
+     "qwen": 0.609
+    },
+    "share_by_paper": {
+     "P1": 0.729,
+     "P2": 0.321,
+     "P3": 0.759,
+     "P4": 0.846,
+     "P5": 0.435
+    },
+    "top_terms": [
+     "occupancy",
+     "track",
+     "disruption",
+     "track occupancy",
+     "assignment",
+     "track assignment"
+    ],
+    "topic": 11
+   },
+   {
+    "examples": [
+     "running time",
+     "entry time",
+     "dwell time",
+     "exit time"
+    ],
+    "n": 956,
+    "references": [
+     "P1",
+     "P2",
+     "P3",
+     "P4"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.753,
+     "glmflash": 0.399,
+     "gptoss": 0.576,
+     "minimax": 0.705,
+     "qwen": 0.604
+    },
+    "share_by_paper": {
+     "P1": 0.547,
+     "P2": 0.83,
+     "P3": 0.552,
+     "P4": 0.974,
+     "P5": 0.696
+    },
+    "top_terms": [
+     "running",
+     "running time",
+     "time",
+     "entry",
+     "entry time",
+     "exit"
+    ],
+    "topic": 8
+   },
+   {
+    "examples": [
+     "delay",
+     "arrival delay",
+     "departure delay",
+     "total delay"
+    ],
+    "n": 955,
+    "references": [
+     "P1",
+     "P2",
+     "P5"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.879,
+     "glmflash": 0.788,
+     "gptoss": 0.576,
+     "minimax": 0.866,
+     "qwen": 0.875
+    },
+    "share_by_paper": {
+     "P1": 0.804,
+     "P2": 0.943,
+     "P3": 0.845,
+     "P4": 0.205,
+     "P5": 0.978
+    },
+    "top_terms": [
+     "delay",
+     "arrival delay",
+     "departure delay",
+     "arrival",
+     "total delay",
+     "total"
+    ],
+    "topic": 2
+   },
+   {
+    "examples": [
+     "departure time",
+     "actual departure time",
+     "departure deviation",
+     "alighting passengers"
+    ],
+    "n": 782,
+    "references": [
+     "P1",
+     "P3",
+     "P4"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.799,
+     "glmflash": 0.813,
+     "gptoss": 0.759,
+     "minimax": 0.679,
+     "qwen": 0.776
+    },
+    "share_by_paper": {
+     "P1": 0.885,
+     "P2": 0.34,
+     "P3": 0.069,
+     "P4": 0.974,
+     "P5": 0.435
+    },
+    "top_terms": [
+     "departure",
+     "departure time",
+     "time",
+     "departure delay",
+     "entry time",
+     "entry"
+    ],
+    "topic": 1
+   },
+   {
+    "examples": [
+     "arrival time",
+     "actual arrival time",
+     "arrival deviation",
+     "rescheduled arrival time"
+    ],
+    "n": 746,
+    "references": [
+     "P1",
+     "P4"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.805,
+     "glmflash": 0.793,
+     "gptoss": 0.766,
+     "minimax": 0.705,
+     "qwen": 0.792
+    },
+    "share_by_paper": {
+     "P1": 0.891,
+     "P2": 0.358,
+     "P3": 0.086,
+     "P4": 0.795,
+     "P5": 0.543
+    },
+    "top_terms": [
+     "arrival time",
+     "arrival",
+     "time",
+     "arrival delay",
+     "entry time",
+     "entry"
+    ],
+    "topic": 0
+   },
+   {
+    "examples": [
+     "ordering",
+     "ordering variable",
+     "station ordering",
+     "segment ordering"
+    ],
+    "n": 676,
+    "references": [
+     "P4",
+     "P5"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.534,
+     "glmflash": 0.645,
+     "gptoss": 0.582,
+     "minimax": 0.482,
+     "qwen": 0.552
+    },
+    "share_by_paper": {
+     "P1": 0.565,
+     "P2": 0.792,
+     "P3": 0.155,
+     "P4": 0.564,
+     "P5": 0.87
+    },
+    "top_terms": [
+     "ordering",
+     "station ordering",
+     "station",
+     "direction",
+     "direction ordering",
+     "segment ordering"
+    ],
+    "topic": 4
+   },
+   {
+    "examples": [
+     "speed",
+     "speed level selection",
+     "speed plan selection",
+     "speed level"
+    ],
+    "n": 556,
+    "references": [
+     "P1",
+     "P2",
+     "P3",
+     "P4"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.598,
+     "glmflash": 0.222,
+     "gptoss": 0.69,
+     "minimax": 0.58,
+     "qwen": 0.302
+    },
+    "share_by_paper": {
+     "P1": 0.526,
+     "P2": 0.34,
+     "P3": 0.224,
+     "P4": 0.308,
+     "P5": 0.0
+    },
+    "top_terms": [
+     "speed",
+     "level",
+     "speed level",
+     "level selection",
+     "speed profile",
+     "speed plan"
+    ],
+    "topic": 10
+   },
+   {
+    "examples": [
+     "speed profile selection",
+     "route selection",
+     "profile selection",
+     "route choice"
+    ],
+    "n": 473,
+    "references": [
+     "P3",
+     "P5"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.437,
+     "glmflash": 0.788,
+     "gptoss": 0.519,
+     "minimax": 0.42,
+     "qwen": 0.292
+    },
+    "share_by_paper": {
+     "P1": 0.484,
+     "P2": 0.83,
+     "P3": 0.103,
+     "P4": 0.538,
+     "P5": 0.848
+    },
+    "top_terms": [
+     "profile",
+     "selection",
+     "profile selection",
+     "speed profile",
+     "route",
+     "route selection"
+    ],
+    "topic": 5
+   },
+   {
+    "examples": [
+     "energy consumption",
+     "energy",
+     "acceleration",
+     "total energy"
+    ],
+    "n": 442,
+    "references": [
+     "P1"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.506,
+     "glmflash": 0.099,
+     "gptoss": 0.449,
+     "minimax": 0.518,
+     "qwen": 0.469
+    },
+    "share_by_paper": {
+     "P1": 0.477,
+     "P2": 0.038,
+     "P3": 0.19,
+     "P4": 0.077,
+     "P5": 0.087
+    },
+    "top_terms": [
+     "energy",
+     "consumption",
+     "energy consumption",
+     "total energy",
+     "total",
+     "total delay"
+    ],
+    "topic": 7
+   },
+   {
+    "examples": [
+     "cancellation",
+     "cancellation indicator",
+     "trip cancellation",
+     "cancellation decision"
+    ],
+    "n": 393,
+    "references": [
+     "P3"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.615,
+     "glmflash": 0.66,
+     "gptoss": 0.177,
+     "minimax": 0.482,
+     "qwen": 0.312
+    },
+    "share_by_paper": {
+     "P1": 0.551,
+     "P2": 0.0,
+     "P3": 0.5,
+     "P4": 0.0,
+     "P5": 0.0
+    },
+    "top_terms": [
+     "cancellation",
+     "trip cancellation",
+     "trip",
+     "train cancellation",
+     "train",
+     "shunting cancellation"
+    ],
+    "topic": 3
+   },
+   {
+    "examples": [
+     "rerouting",
+     "rerouting indicator",
+     "rerouting decision",
+     "rerouting variable"
+    ],
+    "n": 304,
+    "references": [
+     "P1"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.379,
+     "glmflash": 0.502,
+     "gptoss": 0.101,
+     "minimax": 0.312,
+     "qwen": 0.37
+    },
+    "share_by_paper": {
+     "P1": 0.421,
+     "P2": 0.038,
+     "P3": 0.241,
+     "P4": 0.077,
+     "P5": 0.0
+    },
+    "top_terms": [
+     "rerouting",
+     "rerouting flag",
+     "flag",
+     "usage",
+     "total",
+     "track"
+    ],
+    "topic": 6
+   },
+   {
+    "examples": [
+     "precedence",
+     "precedence indicator",
+     "reordering",
+     "precedence variable"
+    ],
+    "n": 215,
+    "references": [
+     "P5"
+    ],
+    "share_by_llm": {
+     "deepseek": 0.362,
+     "glmflash": 0.232,
+     "gptoss": 0.089,
+     "minimax": 0.179,
+     "qwen": 0.182
+    },
+    "share_by_paper": {
+     "P1": 0.25,
+     "P2": 0.17,
+     "P3": 0.069,
+     "P4": 0.026,
+     "P5": 0.087
+    },
+    "top_terms": [
+     "precedence",
+     "direction",
+     "track",
+     "opposite",
+     "reroute",
+     "direction precedence"
+    ],
+    "topic": 9
+   }
+  ],
+  "unassigned": 701
+ }
+}
