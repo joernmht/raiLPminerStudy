@@ -1,0 +1,21 @@
+{
+ "disconnected": {
+  "infeasible": 1,
+  "optimal": 1
+ },
+ "nonlinear": {
+  "code_error": 1,
+  "not_expressible": 1
+ },
+ "reference": {
+  "code_error": 2,
+  "not_expressible": 2,
+  "optimal": 2
+ },
+ "usable": {
+  "code_error": 1,
+  "infeasible": 2,
+  "not_expressible": 1,
+  "optimal": 6
+ }
+}
