@@ -12,3 +12,7 @@ studies/*/state/
 # Scratch for a run in flight is the .jsonl itself; nothing else is generated here.
 # Console logs of detached runs (the records are the data, the logs are not).
 studies/*/logs/
+# Console logs and per-machine request counters of the solvability pilot (the records are rounds.jsonl).
+studies/*/solvecheck/**/*.log
+studies/*/solvecheck/*.log
+studies/*/solvecheck/requests_per_day.json
