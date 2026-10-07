@@ -4,7 +4,7 @@ The **2026 rerun of Paper 0's experiment** (raiLPminer: LLMs generate railway-re
 MILPs from a paper's introduction (the 2025 pilot also sent the abstract); LP2Graph turns each answer into a
 variable-equation graph; structural metrics filter and select). Paper 0's LaTeX lives in
 `~/6a7cb7f3670577d85a762b35` (`Main.tex` = frozen 2025 version, the rerun manuscript is the
-distributed `Main_v2.tex`). Read `docs/adr/0001-*.md` first: it records why this harness
+distributed `Main.tex`; the 2025 version is in its `archive/2025/`). Read `docs/adr/0001-*.md` first: it records why this harness
 exists (the 2025 harness sent neither system prompts nor temperatures).
 
 ## Hard rules

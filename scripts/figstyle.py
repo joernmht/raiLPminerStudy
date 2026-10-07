@@ -18,7 +18,7 @@ from pathlib import Path
 import matplotlib
 from matplotlib.colors import LinearSegmentedColormap
 
-#: \textwidth of Main_v2.tex in inches (526.376 pt / 72.27).
+#: \textwidth of Paper 0's Main.tex in inches (526.376 pt / 72.27).
 WIDTH = 7.28
 #: TU Dresden brand palette (hex as in the chair's master, tud-deck skill).
 TUERKIS, LIGHTTUERKIS = "#0A777F", "#8CE6D7"

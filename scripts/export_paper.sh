@@ -3,7 +3,7 @@
 #
 #   scripts/export_paper.sh ~/6a7cb7f3670577d85a762b35
 #
-# Macros and tables go to generated/ (\input by Main_v2.tex), figures to figures/. The
+# Macros and tables go to generated/ (\input by Main.tex), figures to figures/. The
 # files are produced by `python -m genstudy analyze` and scripts/{regression,
 # domain_vectors,name_topics,yield_figures,paper_numbers,ablation_t0}.py; nothing is
 # edited on the way.
