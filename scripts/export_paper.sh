@@ -13,7 +13,7 @@ cd "$(dirname "$0")/.."
 A=studies/paper0_2026/analysis
 mkdir -p "$PAPER/generated" "$PAPER/figures"
 for f in results_macros regression_macros domain_macros paper_macros ablation_macros \
-         tab_yield tab_fingerprint tab_types; do
+         tab_yield tab_fingerprint tab_types tab_papers; do
   cp "$A/$f.tex" "$PAPER/generated/$f.tex"
 done
 cp "$A/yield_sankey.pdf" "$PAPER/figures/fig_yield_sankey.pdf"
