@@ -16,6 +16,9 @@ for f in results_macros regression_macros domain_macros paper_macros ablation_ma
          tab_yield tab_fingerprint tab_types tab_papers; do
   cp "$A/$f.tex" "$PAPER/generated/$f.tex"
 done
+B=studies/benchmark_2026
+cp "$B/benchmark_macros.tex" "$PAPER/generated/benchmark_macros.tex"
+cp "$B/tab_benchmark.tex" "$PAPER/generated/tab_benchmark.tex"
 cp "$A/yield_sankey.pdf" "$PAPER/figures/fig_yield_sankey.pdf"
 cp "$A/domain.pdf" "$PAPER/figures/fig_domain.pdf"
 cp "$A/topics.pdf" "$PAPER/figures/fig_constraint_types.pdf"

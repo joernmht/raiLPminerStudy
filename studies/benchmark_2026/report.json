@@ -1,0 +1,136 @@
+{
+ "cells": {
+  "IndustryOR|all": {
+   "n": 500,
+   "ok_clean": 146,
+   "ok_original": 170,
+   "ok_original_loose": 177,
+   "runs": 404
+  },
+  "IndustryOR|kept": {
+   "n": 210,
+   "ok_clean": 146,
+   "ok_original": 146,
+   "ok_original_loose": 150,
+   "runs": 188
+  },
+  "IndustryOR|removed": {
+   "n": 290,
+   "ok_clean": 0,
+   "ok_original": 24,
+   "ok_original_loose": 27,
+   "runs": 216
+  },
+  "NL4Opt|all": {
+   "n": 250,
+   "ok_clean": 167,
+   "ok_original": 170,
+   "ok_original_loose": 189,
+   "runs": 243
+  },
+  "NL4Opt|corrected": {
+   "n": 115,
+   "ok_clean": 44,
+   "ok_original": 47,
+   "ok_original_loose": 57,
+   "runs": 108
+  },
+  "NL4Opt|kept": {
+   "n": 135,
+   "ok_clean": 123,
+   "ok_original": 123,
+   "ok_original_loose": 132,
+   "runs": 135
+  }
+ },
+ "consensus_against_original": {
+  "IndustryOR|kept": 4,
+  "IndustryOR|removed": 18,
+  "NL4Opt|corrected": 12,
+  "NL4Opt|corrected|equals_clean": 7,
+  "NL4Opt|kept": 2
+ },
+ "items": {
+  "IndustryOR|kept": 42,
+  "IndustryOR|removed": 58,
+  "NL4Opt|corrected": 23,
+  "NL4Opt|kept": 27
+ },
+ "models": [
+  "glmflash",
+  "deepseek",
+  "gptoss",
+  "qwen",
+  "minimax"
+ ],
+ "n_answers": 750,
+ "nl4opt_corrected_majority": {
+  "clean": 7,
+  "neither": 6,
+  "original": 10,
+  "rounding": 5
+ },
+ "per_model": {
+  "deepseek|IndustryOR": {
+   "n": 100,
+   "n_clean": 42,
+   "ok_clean": 30,
+   "ok_original": 35
+  },
+  "deepseek|NL4Opt": {
+   "n": 50,
+   "n_clean": 50,
+   "ok_clean": 33,
+   "ok_original": 34
+  },
+  "glmflash|IndustryOR": {
+   "n": 100,
+   "n_clean": 42,
+   "ok_clean": 29,
+   "ok_original": 33
+  },
+  "glmflash|NL4Opt": {
+   "n": 50,
+   "n_clean": 50,
+   "ok_clean": 33,
+   "ok_original": 34
+  },
+  "gptoss|IndustryOR": {
+   "n": 100,
+   "n_clean": 42,
+   "ok_clean": 30,
+   "ok_original": 36
+  },
+  "gptoss|NL4Opt": {
+   "n": 50,
+   "n_clean": 50,
+   "ok_clean": 32,
+   "ok_original": 32
+  },
+  "minimax|IndustryOR": {
+   "n": 100,
+   "n_clean": 42,
+   "ok_clean": 28,
+   "ok_original": 33
+  },
+  "minimax|NL4Opt": {
+   "n": 50,
+   "n_clean": 50,
+   "ok_clean": 34,
+   "ok_original": 36
+  },
+  "qwen|IndustryOR": {
+   "n": 100,
+   "n_clean": 42,
+   "ok_clean": 29,
+   "ok_original": 33
+  },
+  "qwen|NL4Opt": {
+   "n": 50,
+   "n_clean": 50,
+   "ok_clean": 35,
+   "ok_original": 34
+  }
+ },
+ "tolerance": 0.0001
+}
