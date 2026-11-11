@@ -22,3 +22,4 @@ studies/*/audit/forms/returned/
 # Benchmark check: the downloaded benchmark texts (not ours to redistribute) and request counters.
 studies/benchmark_2026/data/
 studies/benchmark_2026/requests_per_day.*.json
+studies/benchmark_workflows_2026/requests_per_day.*.json
