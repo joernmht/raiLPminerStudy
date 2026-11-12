@@ -56,3 +56,26 @@ The paper can say what the validator is good for on a task with a known answer, 
 verdict is about form unless the explicit and code levels are added. It stays small and
 descriptive; it enters no test. The explicit level was designed after seeing the first results
 and is reported as such.
+
+## Amendment (2026-11-12): benchmark against paper input, recall of labels, place in the paper
+
+Joern, 2026-11-12: "include a small study in appendix with differences between clean benchmark
+vs noisy papers as input, and explain based on that in the text (3 sentences) ... also discuss
+benchmark leakage shortly", and "propose to split up model development based on abstract
+problems and numerical validation (with randomization)".
+
+- `report` also compares the main study's runs at temperature 0.6 (600) with the benchmark runs
+  (600), both with the validator as frozen (`_inputs_comparison`, `tab_benchmark_inputs.tex`,
+  macros `bcmp*`): answer length, gate, core size of usable MILPs, nonlinear, no integer, yield
+  by workflow and model.
+- Answers that compute the optimum: a text pattern (`_SOLVED`); on samples every benchmark match
+  computes one, while on the paper answers it matched only the input papers' concept "global
+  optimum" (excluded). Reported for the benchmark only, as a lower bound.
+- Recall of labels (`_leakage`): answers that write the (wrong) original label of a removed
+  IndustryOR problem, and answers that state the original NL4Opt label although their own model
+  solves to another value. All matches were read: the removed-problem matches are data,
+  parameters or equation labels; the NL4Opt ones derive the value in the answer, mostly as the
+  LP relaxation. No sign of recalled labels; recall of the problem texts is not tested.
+- Paper 0: the benchmark material moved to an appendix (app:benchmarks); the results keep three
+  sentences; the conclusion criticizes static public benchmarks and proposes separating the
+  formulation (from an abstract description) from numerical validation on randomized instances.

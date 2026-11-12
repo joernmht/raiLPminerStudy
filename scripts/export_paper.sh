@@ -19,6 +19,7 @@ done
 B=studies/benchmark_workflows_2026  # workflows + validator (ADR-0010; replaces the model-only check in the paper)
 cp "$B/benchmark_macros.tex" "$PAPER/generated/benchmark_macros.tex"
 cp "$B/tab_benchmark.tex" "$PAPER/generated/tab_benchmark.tex"
+cp "$B/tab_benchmark_inputs.tex" "$PAPER/generated/tab_benchmark_inputs.tex"
 cp "$A/yield_sankey.pdf" "$PAPER/figures/fig_yield_sankey.pdf"
 cp "$A/domain.pdf" "$PAPER/figures/fig_domain.pdf"
 cp "$A/topics.pdf" "$PAPER/figures/fig_constraint_types.pdf"

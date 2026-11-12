@@ -1,0 +1,27 @@
+\begin{tabular}{lrr}
+\toprule
+& Paper introductions & Benchmark problems \\
+\midrule
+Runs & 600 & 600 \\
+Answer length, median words & 1{,}532 & 439 \\
+Passes the notation gate & 100\,\% & 69\,\% \\
+Core of a usable MILP, median variables & 9 & 2 \\
+\quad and constraints & 14 & 4 \\
+Nonlinear & 25\,\% & 1\,\% \\
+No integer variables & 1\,\% & 8\,\% \\
+Usable MILP (yield) & 67\,\% & 55\,\% \\
+\midrule
+\multicolumn{3}{l}{Yield by workflow} \\
+\quad Zero-Shot & 64\,\% & 61\,\% \\
+\quad Code-First-Chain & 64\,\% & 31\,\% \\
+\quad Operator-Expert & 72\,\% & 61\,\% \\
+\quad Parallelization-Selection & 79\,\% & 67\,\% \\
+\midrule
+\multicolumn{3}{l}{Yield by model} \\
+\quad GLM-5.3-Flash & 78\,\% & 42\,\% \\
+\quad DeepSeek-V4.1-Flash & 71\,\% & 62\,\% \\
+\quad gpt-oss-120b & 59\,\% & 72\,\% \\
+\quad Qwen3.8-27B & 80\,\% & 56\,\% \\
+\quad MiniMax-M3 & 47\,\% & 43\,\% \\
+\bottomrule
+\end{tabular}
