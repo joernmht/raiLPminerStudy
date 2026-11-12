@@ -7,6 +7,7 @@
     python3 scripts/benchmark_workflows.py graph <model>    # gate/explicit level + LP2Graph parser
     python3 scripts/benchmark_workflows.py codeform <model> # code level (PuLP read, not solved)
     python3 scripts/benchmark_workflows.py codecheck -      # code level on the model-only answers
+    python3 scripts/benchmark_workflows.py scrub -          # redact quoted benchmark text (before git)
     python3 scripts/benchmark_workflows.py translate <model># formulation -> PuLP -> CBC
     python3 scripts/benchmark_workflows.py report
 
@@ -242,6 +243,38 @@ def graph(spec, model_key: str) -> None:
               flush=True)  # fmt: skip
 
 
+def _sentences(text: str) -> list[str]:
+    """The benchmark text's sentences long enough to identify it (longest first)."""
+    parts = re.split(r"(?<=[.!?:;])\s+|\n+", text)
+    return sorted({p.strip() for p in parts if len(p.strip()) >= 40}, key=len, reverse=True)
+
+
+def _redact(obj, sentences: list[str]):
+    """Replace every quoted sentence of a benchmark text (also JSON-escaped) by a placeholder."""
+    if isinstance(obj, dict):
+        return {k: _redact(v, sentences) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [_redact(v, sentences) for v in obj]
+    if isinstance(obj, str):
+        for sent in sentences:
+            for form in (sent, json.dumps(sent, ensure_ascii=False)[1:-1]):
+                if form in obj:
+                    obj = obj.replace(form, "<benchmark text>")
+    return obj
+
+
+def scrub(_spec, _arg: str = "") -> None:
+    """Models quote the problem (sub-agent requests, reasoning): redact it in every record."""
+    sentences = [s for i in _sample() for s in _sentences(_texts()[i["question_sha256"]])]
+    for path in sorted(OUT.glob("*/*.jsonl")) + sorted(OUT.glob("*.jsonl")):
+        if path.parent.name == "logs":
+            continue
+        rows = [_redact(r, sentences) for r in _read(path)]
+        path.write_text("".join(json.dumps(r, ensure_ascii=False, sort_keys=True) + "\n"
+                                for r in rows), encoding="utf-8", newline="\n")  # fmt: skip
+        print(f"{path.relative_to(OUT)}: {len(rows)} records", flush=True)
+
+
 def codecheck(spec, _arg: str = "") -> None:
     """Validate the code level on the model-only check: 750 PuLP answers that were executed."""
     out = OUT / "codeform_modelonly.jsonl"
@@ -336,7 +369,7 @@ def translate(_spec, model_key: str) -> None:
 
 def main() -> int:
     steps = {"draw": draw, "generate": generate, "graph": graph, "translate": translate,
-             "codeform": codeform, "codecheck": codecheck}  # fmt: skip
+             "codeform": codeform, "codecheck": codecheck, "scrub": scrub}  # fmt: skip
     if len(sys.argv) < 2 or sys.argv[1] not in [*steps, "report"]:
         sys.exit(__doc__)
     spec = load_study(bc.STUDY)

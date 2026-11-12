@@ -1,0 +1,191 @@
+{
+ "level_stage_x_correct": {
+  "None|empty_answer|False": 16,
+  "None|no_formulation|False": 1,
+  "explicit|no_integer|False": 18,
+  "explicit|no_integer|True": 11,
+  "explicit|usable|False": 20,
+  "explicit|usable|True": 100,
+  "gate|no_integer|False": 41,
+  "gate|no_integer|True": 1,
+  "gate|nonlinear|False": 4,
+  "gate|objective_count|False": 3,
+  "gate|objective_count|True": 1,
+  "gate|usable|False": 86,
+  "gate|usable|True": 158
+ },
+ "levels": {
+  "None": 30,
+  "explicit": 178,
+  "gate": 392
+ },
+ "n_clean": 460,
+ "n_complete": 600,
+ "n_runs": 600,
+ "per_model": {
+  "deepseek": {
+   "acc_n": 71,
+   "acc_ok": 51,
+   "accepted": 93,
+   "accepted_frozen": 74,
+   "missing_data": 8,
+   "n": 120,
+   "n_clean": 92,
+   "ok_clean": 55,
+   "ok_original": 53,
+   "solved": 106
+  },
+  "glmflash": {
+   "acc_n": 77,
+   "acc_ok": 56,
+   "accepted": 99,
+   "accepted_frozen": 51,
+   "missing_data": 8,
+   "n": 120,
+   "n_clean": 92,
+   "ok_clean": 58,
+   "ok_original": 57,
+   "solved": 108
+  },
+  "gptoss": {
+   "acc_n": 77,
+   "acc_ok": 50,
+   "accepted": 101,
+   "accepted_frozen": 86,
+   "missing_data": 15,
+   "n": 120,
+   "n_clean": 92,
+   "ok_clean": 52,
+   "ok_original": 56,
+   "solved": 99
+  },
+  "minimax": {
+   "acc_n": 67,
+   "acc_ok": 52,
+   "accepted": 82,
+   "accepted_frozen": 52,
+   "missing_data": 6,
+   "n": 120,
+   "n_clean": 92,
+   "ok_clean": 54,
+   "ok_original": 53,
+   "solved": 82
+  },
+  "qwen": {
+   "acc_n": 72,
+   "acc_ok": 49,
+   "accepted": 93,
+   "accepted_frozen": 67,
+   "missing_data": 11,
+   "n": 120,
+   "n_clean": 92,
+   "ok_clean": 52,
+   "ok_original": 59,
+   "solved": 99
+  }
+ },
+ "per_workflow": {
+  "CFC": {
+   "acc_n": 89,
+   "acc_ok": 63,
+   "accepted": 113,
+   "accepted_frozen": 47,
+   "missing_data": 11,
+   "n": 150,
+   "n_clean": 115,
+   "ok_clean": 68,
+   "ok_original": 70,
+   "solved": 125
+  },
+  "OE": {
+   "acc_n": 92,
+   "acc_ok": 66,
+   "accepted": 120,
+   "accepted_frozen": 91,
+   "missing_data": 12,
+   "n": 150,
+   "n_clean": 115,
+   "ok_clean": 68,
+   "ok_original": 69,
+   "solved": 125
+  },
+  "PS": {
+   "acc_n": 98,
+   "acc_ok": 69,
+   "accepted": 126,
+   "accepted_frozen": 101,
+   "missing_data": 11,
+   "n": 150,
+   "n_clean": 115,
+   "ok_clean": 71,
+   "ok_original": 70,
+   "solved": 125
+  },
+  "ZS": {
+   "acc_n": 85,
+   "acc_ok": 60,
+   "accepted": 109,
+   "accepted_frozen": 91,
+   "missing_data": 14,
+   "n": 150,
+   "n_clean": 115,
+   "ok_clean": 64,
+   "ok_original": 69,
+   "solved": 119
+  }
+ },
+ "stage_x_correct": {
+  "empty_answer|False": 16,
+  "no_formulation|False": 1,
+  "no_integer|False": 59,
+  "no_integer|True": 12,
+  "nonlinear|False": 4,
+  "objective_count|False": 3,
+  "objective_count|True": 1,
+  "usable|False": 106,
+  "usable|True": 258
+ },
+ "stages": {
+  "empty_answer": 28,
+  "no_formulation": 2,
+  "no_integer": 90,
+  "nonlinear": 4,
+  "objective_count": 7,
+  "unparsed": 1,
+  "usable": 468
+ },
+ "translations": {
+  "code_error": 6,
+  "infeasible": 23,
+  "missing_data": 48,
+  "no_answer": 28,
+  "not_expressible": 1,
+  "optimal": 494
+ },
+ "validator": {
+  "accepted": {
+   "accepted": 364,
+   "accepted_correct": 258,
+   "correct": 271,
+   "correct_accepted": 258,
+   "rejected": 96,
+   "rejected_correct": 13
+  },
+  "accepted_frozen": {
+   "accepted": 244,
+   "accepted_correct": 158,
+   "correct": 271,
+   "correct_accepted": 158,
+   "rejected": 216,
+   "rejected_correct": 113
+  },
+  "accepted_prereg": {
+   "accepted": 286,
+   "accepted_correct": 159,
+   "correct": 271,
+   "correct_accepted": 159,
+   "rejected": 174,
+   "rejected_correct": 112
+  }
+ }
+}

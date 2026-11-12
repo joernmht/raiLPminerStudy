@@ -18,6 +18,7 @@ the cleaned label. Writes report.json, benchmark_macros.tex and tab_benchmark.te
 from __future__ import annotations
 
 import json
+import math
 from collections import Counter, defaultdict
 
 import benchmark_check as bc
@@ -31,6 +32,7 @@ WF_NAMES = {"ZS": "Zero-Shot", "CFC": "Code-First-Chain", "OE": "Operator-Expert
             "PS": "Parallelization-Selection"}  # fmt: skip
 #: Rows of the paper's table: (label, stages) in the order of the checks.
 TABLE_ROWS = (
+    ("Empty answer", ("empty_answer",)),
     ("No formulation found", ("no_formulation", "unparsed", "no_code", "other_library")),
     ("Code does not run", ("code_error",)),
     ("Nonlinear", ("nonlinear",)),
@@ -149,6 +151,7 @@ def _macros(summary: dict, done: list[dict], clean: list[dict]) -> None:
         "bwWorkflows": len(bw.WORKFLOWS), "bwModels": len({r["model"] for r in done}),
         "bwIORkept": items[("IndustryOR", "kept")], "bwIORremoved": items[("IndustryOR", "removed")],
         "bwNLkept": items[("NL4Opt", "kept")], "bwNLcorrected": items[("NL4Opt", "corrected")],
+        "bwTolerance": f"10^{{{round(math.log10(bc.TOL))}}}",
         "bwSolved": _pct(sum(r["translation"] == "optimal" for r in done), n),
         "bwMissingDataN": sum(r["translation"] == "missing_data" for r in done),
         "bwMissingDataAcceptedN": sum(r["accepted"] for r in done if r["translation"] == "missing_data"),
@@ -160,6 +163,10 @@ def _macros(summary: dict, done: list[dict], clean: list[dict]) -> None:
     m["bwGateRejectedN"] = len(frozen_rej)
     m["bwExplicitN"] = sum(r["level"] == "explicit" for r in done)
     m["bwCodeN"] = sum(r["level"] == "code" for r in done)
+    m["bwEmptyN"] = sum(r["stage"] == "empty_answer" for r in done)
+    m["bwEmptyMinimaxN"] = sum(
+        r["stage"] == "empty_answer" and r["model"] == "minimax" for r in done
+    )
     m["bwStillNoFormN"] = sum(r["stage"] in (*NO_WRITTEN, "no_code") for r in done)
     # The validator variants (truth: cleaned label).
     for key, tag in (
@@ -214,7 +221,9 @@ def _macros(summary: dict, done: list[dict], clean: list[dict]) -> None:
 
 def _table(clean: list[dict]) -> None:
     """Outcome by validator stage and level: how often answers there match the cleaned label."""
-    levels = (("gate", "Gate"), ("explicit", "Explicit"), ("code", "Code"))
+    # A level column (and a stage row) is shown only when it decides an answer.
+    levels = tuple((k, lab) for k, lab in (("gate", "Gate"), ("explicit", "Explicit"), ("code", "Code"))
+                   if k == "gate" or any(r["level"] == k for r in clean))  # fmt: skip
     head = " & ".join(f"\\multicolumn{{2}}{{c}}{{{lab}}}" for _k, lab in levels)
     rule = "".join(f"\\cmidrule(lr){{{2 + 2 * i}-{3 + 2 * i}}}" for i in range(len(levels) + 1))
     table = ["\\begin{tabular}{l" + "rr" * (len(levels) + 1) + "}", "\\toprule",
@@ -226,11 +235,14 @@ def _table(clean: list[dict]) -> None:
         for key, _lab in (*levels, (None, "All")):
             g = [r for r in clean if r["stage"] in stages and (key is None or r["level"] == key
                  or (key == "gate" and r["level"] is None))]  # fmt: skip
+            if key is None and not g:
+                break
             cells += [
                 str(len(g)) if g else "",
                 _pct(sum(r["ok_clean"] for r in g), len(g)) if g else "",
             ]
-        table.append(f"{label} & " + " & ".join(cells) + " \\\\")
+        if len(cells) == 2 * (len(levels) + 1):
+            table.append(f"{label} & " + " & ".join(cells) + " \\\\")
     table += ["\\bottomrule", "\\end{tabular}"]
     (bw.OUT / "tab_benchmark.tex").write_text("\n".join(table) + "\n", encoding="utf-8",
                                               newline="\n")  # fmt: skip

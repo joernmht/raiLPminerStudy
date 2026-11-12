@@ -46,7 +46,9 @@ Inspection showed that the rejected answers were not code but small *explicit* f
   2 of them explicit formulations), so Paper 0's main numbers are unaffected.
 - A credit stop on OpenRouter (HTTP 402) is an infrastructure failure: such records are dropped
   and retried, never counted as model failures.
-- Texts stay out of git (ADR-0009); records replace the benchmark text by a placeholder.
+- Texts stay out of git (ADR-0009). The coordinating workflows quote the problem in sub-agent
+  requests and reasoning, so `scrub` replaces every sentence of a benchmark text (also JSON-escaped)
+  in all records by a placeholder before they are committed.
 
 ## Consequences
 
