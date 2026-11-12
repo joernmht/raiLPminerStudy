@@ -35,3 +35,15 @@ those benchmarks".
 
 The check tests the generators, not Paper 0's workflows or its structural instrument, and the
 paper says so. It is small (150 problems per model) and descriptive; it enters no test.
+
+## Amendment (2026-11-12): quoted benchmark text redacted
+
+The models quote the problems they are given (code comments, data rows, MiniMax's reasoning),
+so the run records carried benchmark text after all. The cleaned sets (LLM4OR) have no licence
+(all rights reserved) and the Hugging Face originals are CC BY-NC, neither compatible with this
+Apache-2.0 repository. Every sentence of a benchmark text in the records is now replaced by
+`<benchmark text>` (`scripts/benchmark_workflows.py scrub`, same rule as ADR-0010), and the
+three benchmark commits were rewritten so that no version in the history contains it (Joern,
+2026-11-12: "remove the no redistributable things from the repo"). Scores, outcomes and the
+report are unchanged; a redacted code record no longer runs as generated, which affects only
+re-execution, not the reported results.
